@@ -132,23 +132,25 @@ public class Model extends Observable {
 		return new CollisionDetails(shortestTime, newVelo);
 	}
 
-	public Vect checkWallCollision(LineSegment lineSegment){
+	public boolean checkWallCollision(LineSegment lineSegment){
 		// Now find shortest time to hit a vertical line or a wall line
 		time = Geometry.timeUntilWallCollision(lineSegment, ballCircle, ballVelocity);
 		if (time < shortestTime) {
 			shortestTime = time;
 			newVelo = Geometry.reflectWall(lineSegment, ball.getVelo(), 1.0);
+			return true;
 		}
-		return newVelo;
+		return false;
 	}
-	public Vect checkCircleCollision(Circle circle){
+	public boolean checkCircleCollision(Circle circle){
 		// Now find shortest time to hit a vertical line or a wall line
 		time = Geometry.timeUntilCircleCollision(circle, ballCircle, ball.getVelo());
 		if (time < shortestTime) {
 			shortestTime = time;
 			newVelo = Geometry.reflectCircle(circle.getCenter(), ball.getCircle().getCenter(), ball.getVelo(), 1.0);
+			return true;
 		}
-		return newVelo;
+		return false;
 	}
 
 	public Ball getBall() {
