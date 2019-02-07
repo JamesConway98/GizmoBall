@@ -48,6 +48,7 @@ public class Model extends Observable {
 			} else {
 				// We've got a collision in tuc
 				ball = movelBallForTime(ball, tuc);
+				ball.setVelo(cd.getVelo());
 				// Post collision velocity ...
 			}
 
