@@ -39,7 +39,7 @@ public  class Board extends JPanel implements Observer {
 
 		for (Absorber a : gm.getAbsorbers()) {
 			g2.setColor(a.getColour());
-			g2.fillRect(a.getXpos1(), a.getYpos1(), a.getXpos2(), a.getYpos2());
+			g2.fillRect(a.getXpos1(), a.getYpos1(), a.getXpos2()-a.getXpos1(), a.getYpos2()- a.getYpos1());
 		}
 
 		Ball b = gm.getBall();

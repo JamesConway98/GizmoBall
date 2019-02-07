@@ -23,9 +23,9 @@ public class Main {
 
 		model.setBallSpeed(0, 0);
 		model.getBall().setExactX(250);
-		model.getBall().setExactY(480);
+		model.getBall().setExactY(250);
 
-		model.addAbsorber(new Absorber(0, 300, 500, 250));
+		model.addAbsorber(new Absorber(0, 100, 500, 125));
 
 		RunGui gui = new RunGui(model);
 		gui.createAndShowGUI();

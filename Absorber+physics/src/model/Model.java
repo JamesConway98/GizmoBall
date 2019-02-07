@@ -18,6 +18,10 @@ public class Model extends Observable {
 	private Walls gws;
 	private ArrayList<Absorber> abs;
 
+	private double shortestTime;
+	private double time = 0.0;
+	Vect newVelo = new Vect(0, 0);
+
 	public Model() {
 
 		// Ball position (25, 25) in pixels. Ball velocity (100, 100) pixels per tick
@@ -27,7 +31,7 @@ public class Model extends Observable {
 		gws = new Walls(0, 0, 500, 500);
 
 		//Absorber added in Main
-		abs = new ArrayList<Absorber>();
+		abs = new ArrayList<>();
 	}
 
 	public void moveBall() {
@@ -71,48 +75,53 @@ public class Model extends Observable {
 	private CollisionDetails timeUntilCollision() {
 		// Find Time Until Collision and also, if there is a collision, the new speed vector.
 		// Create a physics.Circle from Ball
-		Circle ballCircle = ball.getCircle();
-		Vect ballVelocity = ball.getVelo();
-		Vect newVelo = new Vect(0, 0);
+		newVelo = new Vect(0, 0);
 
 		// Now find shortest time to hit a vertical line or a wall line
-		double shortestTime = Double.MAX_VALUE;
-		double time = 0.0;
+		shortestTime = Double.MAX_VALUE;
 
 		// Time to collide with 4 walls
 		ArrayList<LineSegment> lss = gws.getLineSegments();
 		for (LineSegment wall : lss) {
-			time = Geometry.timeUntilWallCollision(wall, ballCircle, ballVelocity);
-			if (time < shortestTime) {
-				shortestTime = time;
+			if(checkWallCollision(wall)) {
 				newVelo = Geometry.reflectWall(wall, ball.getVelo(), 1.0);
+				System.out.println("Hit wall");
 			}
 		}
 
 		//Time to collide with any absorber
 		for(Absorber absorber : abs) {
-			for (LineSegment line : absorber.getEdges()) {
-				time = Geometry.timeUntilWallCollision(line, ballCircle, ballVelocity);
-				if (time < shortestTime) {
-					shortestTime = time;
-					ball.setExactX(25);
-					ball.setExactY(25);
-				}
-			}
-		}
-
-		for(Absorber absorber : abs) {
-			for (Circle circle : absorber.getVertices()) {
-				time = Geometry.timeUntilCircleCollision(circle, ballCircle, ballVelocity);
-				if (time < shortestTime) {
-					shortestTime = time;
-					ball.setExactX(25);
-					ball.setExactY(25);
+			ArrayList<LineSegment> lines = absorber.getLineSegments();
+			for (LineSegment line : lines) {
+				if(checkWallCollision(line)) {
+//					ball.setExactX(250);
+//					ball.setExactY(0);
+//					newVelo = Geometry.reflectWall(line, ball.getVelo(), 1.0);
+					System.out.println("Hit absorber");
 				}
 			}
 		}
 
 		return new CollisionDetails(shortestTime, newVelo);
+	}
+
+	public boolean checkWallCollision(LineSegment lineSegment){
+		// Now find shortest time to hit a vertical line or a wall line
+		time = Geometry.timeUntilWallCollision(lineSegment, ball.getCircle(), ball.getVelo());
+		if (time < shortestTime) {
+			shortestTime = time;
+			return true;
+		}
+		return false;
+	}
+	public boolean checkCircleCollision(Circle circle){
+		// Now find shortest time to hit a vertical line or a wall line
+		time = Geometry.timeUntilCircleCollision(circle, ball.getCircle(), ball.getVelo());
+		if (time < shortestTime) {
+			shortestTime = time;
+			return true;
+		}
+		return false;
 	}
 
 	public Ball getBall() {
