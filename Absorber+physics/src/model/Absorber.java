@@ -22,8 +22,8 @@ public class Absorber {
     private LineSegment e2;
     private LineSegment e3;
     private LineSegment e4;
-    private ArrayList<LineSegment> edgeList = new ArrayList<LineSegment>();
-    private ArrayList<Circle> vertexList = new ArrayList<Circle>();
+    private ArrayList<LineSegment> edgeList = new ArrayList<>();
+    private ArrayList<Circle> vertexList = new ArrayList<>();
 
     public Absorber(int x1, int y1, int x2, int y2) {
         xpos1 = x1;

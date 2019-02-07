@@ -81,37 +81,34 @@ public class Model extends Observable {
 
 		// Time to collide with 4 walls
 		ArrayList<LineSegment> lss = gws.getLineSegments();
-		for (LineSegment line : lss) {
-			time = Geometry.timeUntilWallCollision(line, ballCircle, ballVelocity);
+		for (LineSegment wall : lss) {
+			time = Geometry.timeUntilWallCollision(wall, ballCircle, ballVelocity);
 			if (time < shortestTime) {
 				shortestTime = time;
-				newVelo = Geometry.reflectWall(line, ball.getVelo(), 1.0);
+				newVelo = Geometry.reflectWall(wall, ball.getVelo(), 1.0);
 			}
 		}
 
 		//Time to collide with any absorber
 		for(Absorber absorber : abs) {
-			ArrayList<LineSegment> lsList = absorber.getEdges();
-			int i = 0;
-			while(i < lsList.size()) {
-				time = Geometry.timeUntilWallCollision(lsList.get(i), ballCircle, ballVelocity);
+			for (LineSegment line : absorber.getEdges()) {
+				time = Geometry.timeUntilWallCollision(line, ballCircle, ballVelocity);
 				if (time < shortestTime) {
 					shortestTime = time;
 					ball.setExactX(25);
 					ball.setExactY(25);
 				}
-				i++;
 			}
-			ArrayList<Circle> cList = absorber.getVertices();
-			i = 0;
-			while(i < cList.size()) {
-				time = Geometry.timeUntilCircleCollision(cList.get(i), ballCircle, ball.getVelo());
+		}
+
+		for(Absorber absorber : abs) {
+			for (Circle circle : absorber.getVertices()) {
+				time = Geometry.timeUntilCircleCollision(circle, ballCircle, ballVelocity);
 				if (time < shortestTime) {
 					shortestTime = time;
 					ball.setExactX(25);
 					ball.setExactY(25);
 				}
-				i++;
 			}
 		}
 

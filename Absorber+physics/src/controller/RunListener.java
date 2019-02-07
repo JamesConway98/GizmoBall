@@ -39,6 +39,6 @@ public class RunListener implements ActionListener {
 			case "Quit":
 				System.exit(0);
 				break;
-			}
+		}
 	}
 }
