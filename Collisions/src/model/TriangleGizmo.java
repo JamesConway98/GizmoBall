@@ -9,16 +9,11 @@ import physics.Vect;
 
 public class TriangleGizmo {
 	
-	private int xpos;
-	private int ypos;
+	private int xpos, ypos;
 	private int length = 40;
 	private Color colour;
-	private Vect v1;
-	private Vect v2;
-	private Vect v3;
-	private LineSegment e1;
-	private LineSegment e2;
-	private LineSegment e3;
+	private Vect v1, v2, v3;
+	private LineSegment e1, e2, e3;
 	private ArrayList<LineSegment> edgeList = new ArrayList<LineSegment>();
 	private ArrayList<Circle> vertexList = new ArrayList<Circle>();
 
