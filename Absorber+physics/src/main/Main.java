@@ -21,11 +21,12 @@ public class Main {
 
 		Model model = new Model();
 
-		model.setBallSpeed(0, 0);
-		model.getBall().setExactX(250);
-		model.getBall().setExactY(250);
+		model.getBall().stop();
+		model.setBallSpeed(0, -50*25);
+		model.getBall().setExactX(480);
+		model.getBall().setExactY(480);
 
-		model.addAbsorber(new Absorber(0, 100, 500, 125));
+		//model.addAbsorber(new Absorber(0, 490, 500, 500));
 
 		RunGui gui = new RunGui(model);
 		gui.createAndShowGUI();

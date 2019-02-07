@@ -7,6 +7,7 @@ import physics.Vect;
 
 import java.util.ArrayList;
 import java.util.Observable;
+import java.util.Vector;
 
 /**
  * @author Murray Wood Demonstration of MVC and MIT Physics Collisions 2014
@@ -39,7 +40,6 @@ public class Model extends Observable {
 		double moveTime = 0.05; // 0.05 = 20 times per second as per Gizmoball
 
 		if (ball != null && !ball.stopped()) {
-
 			CollisionDetails cd = timeUntilCollision();
 			double tuc = cd.getTuc();
 			if (tuc > moveTime) {
@@ -49,7 +49,6 @@ public class Model extends Observable {
 				// We've got a collision in tuc
 				ball = movelBallForTime(ball, tuc);
 				// Post collision velocity ...
-				ball.setVelo(cd.getVelo());
 			}
 
 			// Notify observers ... redraw updated view
@@ -85,7 +84,6 @@ public class Model extends Observable {
 		for (LineSegment wall : lss) {
 			if(checkWallCollision(wall)) {
 				newVelo = Geometry.reflectWall(wall, ball.getVelo(), 1.0);
-				System.out.println("Hit wall");
 			}
 		}
 
@@ -94,10 +92,10 @@ public class Model extends Observable {
 			ArrayList<LineSegment> lines = absorber.getLineSegments();
 			for (LineSegment line : lines) {
 				if(checkWallCollision(line)) {
-//					ball.setExactX(250);
-//					ball.setExactY(0);
-//					newVelo = Geometry.reflectWall(line, ball.getVelo(), 1.0);
-					System.out.println("Hit absorber");
+					newVelo = Geometry.reflectWall(line, ball.getVelo(), 1.0);
+					if(time < 0.1D) {
+						ball.stop();
+					}
 				}
 			}
 		}

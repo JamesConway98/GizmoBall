@@ -21,8 +21,7 @@ public class keypressListener implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         if(e.getKeyChar() == 's' || e.getKeyChar() == 'S') {
-            System.out.println("S key pressed");
-            model.setBallSpeed(0, 200);
+            model.getBall().start();
         }
     }
 
