@@ -25,9 +25,6 @@ public class Model extends Observable {
 	private double time = 0.0;
 	Vect newVelo = new Vect(0, 0);
 
-	private Circle ballCircle;
-	private Vect ballVelocity;
-
 	public Model() {
 		// Ball position (25, 25) in pixels. Ball velocity (100, 100) pixels per tick
 		ball = new Ball(25, 25, 100, 100);
@@ -85,8 +82,6 @@ public class Model extends Observable {
 		// Find Time Until Collision and also, if there is a collision, the new speed vector.
 		// Create a physics.Circle from Ball
 		newVelo = new Vect(0, 0);
-		ballCircle = ball.getCircle();
-		ballVelocity = ball.getVelo();
 		shortestTime = Double.MAX_VALUE;
 
 
@@ -134,7 +129,7 @@ public class Model extends Observable {
 
 	public boolean checkWallCollision(LineSegment lineSegment){
 		// Now find shortest time to hit a vertical line or a wall line
-		time = Geometry.timeUntilWallCollision(lineSegment, ballCircle, ballVelocity);
+		time = Geometry.timeUntilWallCollision(lineSegment, ball.getCircle(), ball.getVelo());
 		if (time < shortestTime) {
 			shortestTime = time;
 			newVelo = Geometry.reflectWall(lineSegment, ball.getVelo(), 1.0);
@@ -144,7 +139,7 @@ public class Model extends Observable {
 	}
 	public boolean checkCircleCollision(Circle circle){
 		// Now find shortest time to hit a vertical line or a wall line
-		time = Geometry.timeUntilCircleCollision(circle, ballCircle, ball.getVelo());
+		time = Geometry.timeUntilCircleCollision(circle, ball.getCircle(), ball.getVelo());
 		if (time < shortestTime) {
 			shortestTime = time;
 			newVelo = Geometry.reflectCircle(circle.getCenter(), ball.getCircle().getCenter(), ball.getVelo(), 1.0);
