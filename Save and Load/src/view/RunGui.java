@@ -76,6 +76,27 @@ public class RunGui {
 		button4.setMaximumSize(new Dimension(100, 100));
 		buttons.add(button4);
 
+		JButton button5 = new JButton("Tick");
+		button5.setFocusable(false);
+		button5.setFont(gf);
+		button5.addActionListener(listener);
+		button5.setMaximumSize(new Dimension(100, 100));
+		buttons.add(button5);
+
+		JButton button6 = new JButton("Add Square");
+		button6.setFocusable(false);
+		button6.setFont(gf);
+		button6.addActionListener(listener);
+		button6.setMaximumSize(new Dimension(100, 100));
+		buttons.add(button6);
+
+		JButton button7 = new JButton("Add Triangle");
+		button7.setFocusable(false);
+		button7.setFont(gf);
+		button7.addActionListener(listener);
+		button7.setMaximumSize(new Dimension(100, 100));
+		buttons.add(button7);
+
 		cp.add(buttons, BorderLayout.LINE_START);
 		cp.add(board, BorderLayout.CENTER);
 

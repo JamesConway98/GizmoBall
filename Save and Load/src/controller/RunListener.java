@@ -1,6 +1,7 @@
 package controller;
 
 import model.Model;
+import model.SquareGizmo;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -41,6 +42,12 @@ public class RunListener implements ActionListener {
 						break;
 				case "Load":
 					model.loadGame();
+					break;
+				case "Add Square":
+					model.addRandomSquare();
+					break;
+				case "Add Triangle":
+					model.addRandomTriangle();
 					break;
 				case "Quit":
 					System.exit(0);
