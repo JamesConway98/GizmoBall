@@ -17,6 +17,7 @@ public  class Board extends JPanel implements Observer {
 	protected int width;
 	protected int height;
 	protected Model gm;
+	private JTextField speed;
 
 	public Board(int w, int h, Model m) {
 		// Observe changes in Model
@@ -25,6 +26,9 @@ public  class Board extends JPanel implements Observer {
 		height = h;
 		gm = m;
 		this.setBorder(BorderFactory.createLineBorder(Color.black));
+		speed = new JTextField("Speed: " + gm.getSpeed() + "L/s");
+		speed.setPreferredSize(new Dimension(100, 24));
+		this.add(speed);
 	}
 
 	// Fix onscreen size
@@ -54,7 +58,8 @@ public  class Board extends JPanel implements Observer {
 
 	@Override
 	public void update(Observable arg0, Object arg1) {
-			repaint();
-		}
+		speed.setText("Speed: " + gm.getSpeed() + "L/s");
+		repaint();
+	}
 	
 }

@@ -41,9 +41,9 @@ public class Main {
         model.addCircular(new CircularGizmo(400, 100));
         model.addCircular(new CircularGizmo(200, 450));
 
-        model.addTriangle(new TriangleGizmo(200, 0));
-        model.addTriangle(new TriangleGizmo(300, 0));
-        model.addTriangle(new TriangleGizmo(0, 200));
+        model.addTriangle(new TriangleGizmo(200, 0, 1));
+        model.addTriangle(new TriangleGizmo(300, 0, 3));
+        model.addTriangle(new TriangleGizmo(400, 300, 4));
         RunGui gui = new RunGui(model);
         gui.createAndShowGUI();
     }

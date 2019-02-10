@@ -4,12 +4,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Rectangle;
-import java.awt.Shape;
-import java.awt.geom.AffineTransform;
-import java.awt.geom.PathIterator;
-import java.awt.geom.Point2D;
-import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
@@ -23,8 +17,6 @@ import model.Model;
 import model.SquareGizmo;
 import model.TriangleGizmo;
 import model.VerticalLine;
-import physics.Geometry;
-import physics.LineSegment;
 import physics.Vect;
 
 /**
@@ -76,11 +68,9 @@ public  class Board extends JPanel implements Observer {
 
 		for (TriangleGizmo t : gm.getTriangles()) {
 			g2.setColor(t.getColour());
-			int x[] = {t.getX(), t.getX() + t.getLength(), t.getX()};
-			int y[] = {t.getY(), t.getY(), t.getY() + t.getLength()};
 
-			g2.drawPolygon(x, y, 3);
-			g2.fillPolygon(x, y, 3);
+			//g2.drawPolygon(x, y, 3);
+			g2.fill(t.getOutline());
 		}
 
 
