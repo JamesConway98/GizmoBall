@@ -1,9 +1,9 @@
 package model;
 
-import java.awt.Color;
-
 import physics.Circle;
 import physics.Vect;
+
+import java.awt.*;
 
 /**
  * @author Murray Wood Demonstration of MVC and MIT Physics Collisions 2014

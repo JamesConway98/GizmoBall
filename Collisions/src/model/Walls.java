@@ -1,8 +1,8 @@
 package model;
 
-import java.util.ArrayList;
-
 import physics.LineSegment;
+
+import java.util.ArrayList;
 
 /**
  * @author Murray Wood Demonstration of MVC and MIT Physics Collisions 2014

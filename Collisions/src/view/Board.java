@@ -1,31 +1,11 @@
 package view;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Rectangle;
-import java.awt.Shape;
-import java.awt.geom.AffineTransform;
-import java.awt.geom.PathIterator;
-import java.awt.geom.Point2D;
-import java.awt.geom.Rectangle2D;
-import java.util.ArrayList;
+import model.*;
+
+import javax.swing.*;
+import java.awt.*;
 import java.util.Observable;
 import java.util.Observer;
-
-import javax.swing.BorderFactory;
-import javax.swing.JPanel;
-
-import model.Ball;
-import model.CircularGizmo;
-import model.Model;
-import model.SquareGizmo;
-import model.TriangleGizmo;
-import model.VerticalLine;
-import physics.Geometry;
-import physics.LineSegment;
-import physics.Vect;
 
 /**
  * @author Murray Wood Demonstration of MVC and MIT Physics Collisions 2014
@@ -56,34 +36,43 @@ public  class Board extends JPanel implements Observer {
 		super.paintComponent(g);
 
 		Graphics2D g2 = (Graphics2D) g;
-		
+
 		// Draw all the vertical lines
 		for (VerticalLine vl : gm.getLines()) {
 			g2.fillRect(vl.getX(), vl.getY(), vl.getWidth(), 1);
 		}
-		
-		// Draw all square gizmos
-		for (SquareGizmo s : gm.getSquares()) {
-			g2.setColor(s.getColour());
-			g2.fillRect(s.getX(), s.getY(), s.getLength(), s.getLength());
+
+		//Draw All Gizmos
+		for (Gizmo b : gm.getGizmos()) {
+			g2.setColor(b.getColour());
+			if (b instanceof SquareGizmo){
+				g2.fillRect(b.getX(), b.getY(), b.getLength(), b.getLength());
+			} else if (b instanceof TriangleGizmo){
+				int triangleRotation = b.getRotation();
+				if (triangleRotation == 0){
+					int x[] = {b.getX(), b.getX(), b.getX() + b.getLength()};
+					int y[] = {b.getY() + b.getLength(), b.getY(), b.getY()};
+					g2.fillPolygon(x, y, 3);
+				} else if (triangleRotation == 1){
+					int x[] = {b.getX(), b.getX() + b.getLength(), b.getX() + b.getLength()};
+					int y[] = {b.getY(), b.getY(), b.getY() + b.getLength()};
+					g2.fillPolygon(x, y, 3);
+				} else if (triangleRotation == 2){
+					int x[] = {b.getX() + b.getLength(), b.getX() + b.getLength(), b.getX()};
+					int y[] = {b.getY() + b.getLength(), b.getY(), b.getY() + b.getLength()};
+					g2.fillPolygon(x, y, 3);
+				} else if (triangleRotation == 3){
+					int x[] = {b.getX() + b.getLength(), b.getX(), b.getX()};
+					int y[] = {b.getY() + b.getLength(), b.getY() + b.getLength(), b.getY()};
+					g2.fillPolygon(x, y, 3);
+				}
+			} else if (b instanceof CircleGizmo){
+				g2.fillOval(b.getX(), b.getY(), b.getLength(), b.getLength());
+			} else if (b instanceof LeftFlipperGizmo){
+				g2.fillRoundRect(b.getX(), b.getY(), b.getLength()/2, b.getLength()*2, b.getLength()/2, b.getLength()/2);
+			}
 		}
-		
-		// Draw all circular gizmos
-		for (CircularGizmo c : gm.getCirculars()) {
-			g2.setColor(c.getColour());
-			g2.fillOval(c.getX(), c.getY(), c.getLength(), c.getLength());
-		}
-		
-		for (TriangleGizmo t : gm.getTriangles()) {
-			g2.setColor(t.getColour());
-			int x[] = {t.getX(), t.getX() + t.getLength(), t.getX()};
-			int y[] = {t.getY(), t.getY(), t.getY() + t.getLength()};
-			
-			g2.drawPolygon(x, y, 3);
-			g2.fillPolygon(x, y, 3);
-		}
-		
-		
+
 		Ball b = gm.getBall();
 		if (b != null) {
 			g2.setColor(b.getColour());
