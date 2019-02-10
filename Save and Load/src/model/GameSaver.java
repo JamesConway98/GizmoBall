@@ -26,7 +26,7 @@ public class GameSaver {
                         new FileOutputStream("file.txt", true), "utf-8"))) {
 
             for(int i = 0; i < triangles.size(); i++){
-                writer.append("\nTriangle" + i + " " + triangles.get(i).getX() + " " + triangles.get(i).getY());
+                writer.append("\nTriangle" + i + " " + triangles.get(i).getX() + " " + triangles.get(i).getY() + " " + triangles.get(i).getRotation());
             }
 
         } catch(IOException io){
