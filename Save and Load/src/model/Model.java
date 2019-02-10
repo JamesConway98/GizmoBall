@@ -152,6 +152,7 @@ public class Model extends Observable {
 		GameSaver gs = new GameSaver();
 		gs.saveSquareGizmos(squares);
 		gs.saveTriangleGizmos(triangles);
+		gs.saveCircleGizmos(circulars);
 	}
 
 	public void loadGame(){
@@ -159,9 +160,23 @@ public class Model extends Observable {
 		clearBoard();
 		gl.loadGame(this);
 		//this is needed to update the view
-		this.setChanged();
-		this.notifyObservers();
+		setChanged();
+		notifyObservers();
 	}
+
+	public void addRandomSquare(){
+        SquareGizmo sg = new SquareGizmo((int)(Math.random() * 400), (int)(Math.random()* 400));
+        squares.add(sg);
+        setChanged();
+        notifyObservers();
+    }
+
+    public void addRandomTriangle(){
+        TriangleGizmo tg = new TriangleGizmo((int)(Math.random() * 400), (int)(Math.random()* 400), (int)(Math.random() * 4 + 1));
+        triangles.add(tg);
+        setChanged();
+        notifyObservers();
+    }
 
 	public Ball getBall() {
 		return ball;

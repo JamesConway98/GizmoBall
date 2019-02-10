@@ -20,6 +20,9 @@ public class GameLoader {
                 if(id.contains("Square")) {
                     SquareGizmo sg = new SquareGizmo(x, y);
                     model.addSquare(sg);
+                }else if(id.contains("Circle")) {
+                    CircularGizmo cg = new CircularGizmo(x, y);
+                    model.addCircular(cg);
                 }else if(id.contains("Triangle")) {
                     rotation = Integer.parseInt(read.next());
                     TriangleGizmo tg = new TriangleGizmo(x, y, rotation);
