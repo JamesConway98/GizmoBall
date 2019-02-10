@@ -11,7 +11,7 @@ public class GameLoader {
         try {
             Scanner read = new Scanner(new File("file.txt"));
             String id;
-            int x, y;
+            int x, y, rotation = 0;
 
             while (read.hasNextLine()) {
                 id = read.next();
@@ -21,10 +21,11 @@ public class GameLoader {
                     SquareGizmo sg = new SquareGizmo(x, y);
                     model.addSquare(sg);
                 }else if(id.contains("Triangle")) {
-                    TriangleGizmo tg = new TriangleGizmo(x, y);
+                    rotation = Integer.parseInt(read.next());
+                    TriangleGizmo tg = new TriangleGizmo(x, y, rotation);
                     model.addTriangle(tg);
                 }
-                System.out.println(id + " " + x + " " + y + "\n");
+                System.out.println(id + " " + x + " " + y + " " + rotation + "\n");
             }
             read.close();
 
