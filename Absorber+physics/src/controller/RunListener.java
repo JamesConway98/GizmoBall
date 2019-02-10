@@ -1,6 +1,7 @@
 package controller;
 
 import model.Model;
+import physics.Vect;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -17,7 +18,7 @@ public class RunListener implements ActionListener {
 
 	public RunListener(Model m) {
 		model = m;
-		timer = new Timer(50, this);
+		timer = new Timer(20, this);
 	}
 
 	@Override

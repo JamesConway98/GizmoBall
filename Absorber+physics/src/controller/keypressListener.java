@@ -22,6 +22,9 @@ public class keypressListener implements KeyListener {
     public void keyPressed(KeyEvent e) {
         if(e.getKeyChar() == 's' || e.getKeyChar() == 'S') {
             model.getBall().start();
+            model.getBall().setExactX(500-model.getBall().getRadius());
+            model.getBall().setExactY(480-model.getBall().getRadius());
+            model.setBallSpeed(0, -25*50);
         }
     }
 

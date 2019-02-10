@@ -12,9 +12,12 @@ import java.awt.*;
 public class Ball {
 
 	private Vect velocity;
+	private double speed;
 	private double radius;
 	private double xpos;
 	private double ypos;
+	private double previousXPos;
+	private double previousYPos;
 	private Color colour;
 
 	private boolean stopped;
@@ -23,10 +26,13 @@ public class Ball {
 	public Ball(double x, double y, double xv, double yv) {
 		xpos = x; // Centre coordinates
 		ypos = y;
+		previousXPos = xpos;
+		previousYPos = ypos;
 		colour = Color.BLUE;
 		velocity = new Vect(xv, yv);
-		radius = 10;
+		radius = 6.25;
 		stopped = false;
+		speed = velocity.length();
 	}
 
 	public Vect getVelo() {
@@ -43,7 +49,13 @@ public class Ball {
 
 	public Circle getCircle() {
 		return new Circle(xpos, ypos, radius);
+	}
 
+	public double updateSpeed() {
+		speed = Math.round(Math.sqrt((ypos - previousYPos) * (ypos - previousYPos) + (xpos - previousXPos) * (xpos - previousXPos)));
+		previousXPos = xpos;
+		previousYPos = ypos;
+		return speed;
 	}
 
 	// Ball specific methods that deal with double precision.

@@ -18,15 +18,17 @@ public class Model extends Observable {
 	private Ball ball;
 	private Walls gws;
 	private ArrayList<Absorber> abs;
+	private double speed;
 
+	private static final int L = 25;
 	private double shortestTime;
 	private double time = 0.0;
-	Vect newVelo = new Vect(0, 0);
+	private Vect newVelo = new Vect(0, 0);
 
 	public Model() {
 
 		// Ball position (25, 25) in pixels. Ball velocity (100, 100) pixels per tick
-		ball = new Ball(25, 25, 100, 100);
+		ball = new Ball(500-6.25, 480-6.25, 0, 0);
 
 		// Wall size 500 x 500 pixels
 		gws = new Walls(0, 0, 500, 500);
@@ -38,7 +40,6 @@ public class Model extends Observable {
 	public void moveBall() {
 
 		double moveTime = 0.05; // 0.05 = 20 times per second as per Gizmoball
-
 		if (ball != null && !ball.stopped()) {
 			CollisionDetails cd = timeUntilCollision();
 			double tuc = cd.getTuc();
@@ -48,34 +49,42 @@ public class Model extends Observable {
 			} else {
 				// We've got a collision in tuc
 				ball = movelBallForTime(ball, tuc);
-				ball.setVelo(cd.getVelo());
-				// Post collision velocity ...
+				//Post collision velocity ...
+				double friction = 1 - 0.025 * tuc - 0.025 * Math.abs(ball.getVelo().length()) * tuc;
+				if(friction == 1.0) {
+					ball.setVelo(cd.getVelo().times(friction-0.025));
+				} else {
+					ball.setVelo(cd.getVelo().times(friction));
+				}
 			}
 
 			// Notify observers ... redraw updated view
 			this.setChanged();
 			this.notifyObservers();
 		}
-
 	}
 
 	private Ball movelBallForTime(Ball ball, double time) {
-
-		double newX = 0.0;
-		double newY = 0.0;
+		ball.setVelo(ball.getVelo().plus(new Vect(0, 625*time)));
+		double newX;
+		double newY;
 		double xVel = ball.getVelo().x();
 		double yVel = ball.getVelo().y();
 		newX = ball.getExactX() + (xVel * time);
 		newY = ball.getExactY() + (yVel * time);
+		if(newY < 500-ball.getRadius()) {
+			ball.setExactY(newY);
+		} else {
+			ball.setExactY(500-ball.getRadius());
+		}
 		ball.setExactX(newX);
-		ball.setExactY(newY);
+		speed = ball.updateSpeed();
 		return ball;
 	}
 
 	private CollisionDetails timeUntilCollision() {
 		// Find Time Until Collision and also, if there is a collision, the new speed vector.
 		// Create a physics.Circle from Ball
-		newVelo = new Vect(0, 0);
 
 		// Now find shortest time to hit a vertical line or a wall line
 		shortestTime = Double.MAX_VALUE;
@@ -94,7 +103,7 @@ public class Model extends Observable {
 			for (LineSegment line : lines) {
 				if(checkWallCollision(line)) {
 					newVelo = Geometry.reflectWall(line, ball.getVelo(), 1.0);
-					if(time < 0.1D) {
+					if(time < 0.05) {
 						ball.stop();
 					}
 				}
@@ -113,18 +122,13 @@ public class Model extends Observable {
 		}
 		return false;
 	}
-	public boolean checkCircleCollision(Circle circle){
-		// Now find shortest time to hit a vertical line or a wall line
-		time = Geometry.timeUntilCircleCollision(circle, ball.getCircle(), ball.getVelo());
-		if (time < shortestTime) {
-			shortestTime = time;
-			return true;
-		}
-		return false;
-	}
 
 	public Ball getBall() {
 		return ball;
+	}
+
+	public double getSpeed() {
+		return speed;
 	}
 	
 	public void setBallSpeed(int x, int y) {
