@@ -24,7 +24,7 @@ public class keypressListener implements KeyListener {
             model.getBall().start();
             model.getBall().setExactX(500-model.getBall().getRadius());
             model.getBall().setExactY(480-model.getBall().getRadius());
-            model.setBallSpeed(0, -25*50);
+            model.setBallSpeed(-25*50, -25*50);
         }
     }
 

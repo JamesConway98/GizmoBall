@@ -19,6 +19,9 @@ public class Model extends Observable {
 	private Walls gws;
 	private ArrayList<Absorber> abs;
 	private double speed;
+	private static final double mu = 0.025;
+	private static final double mu2 = 0.025;
+	private static final int gravity = 25;
 
 	private static final int L = 25;
 	private double shortestTime;
@@ -46,16 +49,15 @@ public class Model extends Observable {
 			if (tuc > moveTime) {
 				// No collision ...
 				ball = movelBallForTime(ball, moveTime);
+				double friction = 1 - (mu/moveTime) * moveTime - (mu2/L) * Math.abs(ball.getVelo().length()) * moveTime;
+				ball.setVelo(ball.getVelo().times(friction).plus(new Vect(0, gravity*L*moveTime)));
 			} else {
 				// We've got a collision in tuc
 				ball = movelBallForTime(ball, tuc);
+				ball.setVelo(cd.getVelo());
 				//Post collision velocity ...
-				double friction = 1 - 0.025 * tuc - 0.025 * Math.abs(ball.getVelo().length()) * tuc;
-				if(friction == 1.0) {
-					ball.setVelo(cd.getVelo().times(friction-0.025));
-				} else {
-					ball.setVelo(cd.getVelo().times(friction));
-				}
+				double friction = 1 - (mu/tuc) * tuc - (mu2/L) * Math.abs(ball.getVelo().length()) * tuc;
+				ball.setVelo(ball.getVelo().times(friction).plus(new Vect(0, gravity*L*tuc)));
 			}
 
 			// Notify observers ... redraw updated view
@@ -64,22 +66,17 @@ public class Model extends Observable {
 		}
 	}
 
-	private Ball movelBallForTime(Ball ball, double time) {
-		ball.setVelo(ball.getVelo().plus(new Vect(0, 625*time)));
+	private Ball movelBallForTime(Ball b, double time) {
 		double newX;
 		double newY;
-		double xVel = ball.getVelo().x();
-		double yVel = ball.getVelo().y();
-		newX = ball.getExactX() + (xVel * time);
-		newY = ball.getExactY() + (yVel * time);
-		if(newY < 500-ball.getRadius()) {
-			ball.setExactY(newY);
-		} else {
-			ball.setExactY(500-ball.getRadius());
-		}
-		ball.setExactX(newX);
-		speed = ball.updateSpeed();
-		return ball;
+		double xVel = b.getVelo().x();
+		double yVel = b.getVelo().y();
+		newX = b.getExactX() + (xVel * time);
+		newY = b.getExactY() + (yVel * time);
+		b.setExactY(newY);
+		b.setExactX(newX);
+		speed = b.updateSpeed();
+		return b;
 	}
 
 	private CollisionDetails timeUntilCollision() {

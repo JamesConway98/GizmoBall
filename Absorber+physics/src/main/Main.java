@@ -23,7 +23,7 @@ public class Main {
 
 		model.getBall().stop();
 
-		model.addAbsorber(new Absorber(0, 480, 500, 500));
+		//model.addAbsorber(new Absorber(0, 480, 500, 500));
 
 		RunGui gui = new RunGui(model);
 		gui.createAndShowGUI();

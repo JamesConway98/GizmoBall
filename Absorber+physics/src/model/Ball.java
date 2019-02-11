@@ -55,6 +55,9 @@ public class Ball {
 		speed = Math.round(Math.sqrt((ypos - previousYPos) * (ypos - previousYPos) + (xpos - previousXPos) * (xpos - previousXPos)));
 		previousXPos = xpos;
 		previousYPos = ypos;
+		if(stopped) {
+			return 0.0;
+		}
 		return speed;
 	}
 
