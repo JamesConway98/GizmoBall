@@ -20,6 +20,11 @@ public class Model extends Observable {
 	private ArrayList<SquareGizmo> squares;
 	private ArrayList<CircularGizmo> circulars;
 	private ArrayList<TriangleGizmo> triangles;
+	private ArrayList<Absorber> absorbers;
+
+	private float gravity = 25;
+	private float mu, mu2;
+
 
 	private double shortestTime;
 	private double time = 0.0;
@@ -38,6 +43,8 @@ public class Model extends Observable {
 		circulars = new ArrayList<CircularGizmo>();
 		// Triangles added in Main
 		triangles = new ArrayList<TriangleGizmo>();
+		//Absorbers added
+		absorbers = new ArrayList<>();
 	}
 
 	public void moveBall() {
@@ -153,6 +160,10 @@ public class Model extends Observable {
 		gs.saveSquareGizmos(squares);
 		gs.saveTriangleGizmos(triangles);
 		gs.saveCircleGizmos(circulars);
+		gs.saveAbsorbers(absorbers);
+		gs.saveBall(ball);
+		gs.saveFriction(mu, mu2);
+		gs.saveGravity(gravity);
 	}
 
 	public void loadGame(){
@@ -169,6 +180,8 @@ public class Model extends Observable {
         squares.add(sg);
         setChanged();
         notifyObservers();
+		System.out.println(gravity);
+		System.out.println(mu + " " + mu2);
     }
 
     public void addRandomTriangle(){
@@ -198,6 +211,10 @@ public class Model extends Observable {
 		return triangles;
 	}
 
+	public ArrayList<Absorber> getAbsorbers(){
+		return absorbers;
+	}
+
 	public void addLine(VerticalLine l) {
 		lines.add(l);
 	}
@@ -218,9 +235,28 @@ public class Model extends Observable {
 		triangles.add(t);
 	}
 
+	public void addAbsorber(Absorber a) {
+		absorbers.add(a);
+	}
+
+	public void setGravity(float grav){
+		gravity = grav;
+	}
+
+	public void setFriction(float mu1, float mu2){
+		this.mu = mu1;
+		this.mu2 = mu2;
+	}
+
+	public void addBall(Ball b) {
+		ball = b;
+	}
+
 	public void clearBoard(){
 		circulars.clear();
 		squares.clear();
 		triangles.clear();
+		absorbers.clear();
+		ball = null;
 	}
 }

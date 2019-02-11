@@ -1,10 +1,6 @@
 import javax.swing.UIManager;
 
-import model.CircularGizmo;
-import model.Model;
-import model.SquareGizmo;
-import model.TriangleGizmo;
-import model.VerticalLine;
+import model.*;
 import view.RunGui;
 
 /**
@@ -44,6 +40,9 @@ public class Main {
         model.addTriangle(new TriangleGizmo(200, 0, 1));
         model.addTriangle(new TriangleGizmo(300, 0, 3));
         model.addTriangle(new TriangleGizmo(400, 300, 4));
+
+        model.addAbsorber(new Absorber(100, 400, 400, 410));
+
         RunGui gui = new RunGui(model);
         gui.createAndShowGUI();
     }
