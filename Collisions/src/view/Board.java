@@ -4,6 +4,9 @@ import model.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.Rectangle2D;
+import java.awt.geom.RoundRectangle2D;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -37,6 +40,7 @@ public  class Board extends JPanel implements Observer {
 
 		Graphics2D g2 = (Graphics2D) g;
 
+
 		// Draw all the vertical lines
 		for (VerticalLine vl : gm.getLines()) {
 			g2.fillRect(vl.getX(), vl.getY(), vl.getWidth(), 1);
@@ -69,7 +73,19 @@ public  class Board extends JPanel implements Observer {
 			} else if (b instanceof CircleGizmo){
 				g2.fillOval(b.getX(), b.getY(), b.getLength(), b.getLength());
 			} else if (b instanceof LeftFlipperGizmo){
-				g2.fillRoundRect(b.getX(), b.getY(), b.getLength()/2, b.getLength()*2, b.getLength()/2, b.getLength()/2);
+				Graphics2D g2d;
+				g2d = (Graphics2D)g.create();
+				AffineTransform aff = g2.getTransform();
+				double x = b.getX();
+				double y = b.getY() + b.getLength() * 0.5;
+				aff.rotate(Math.toRadians(90), x, y);
+				Rectangle shape = new Rectangle(b.getX(), b.getY(), b.getLength()/2, b.getLength()*2);
+
+				g2d.rotate(Math.toRadians(270), x + b.getLength()/2, y + b.getLength()/2);
+				g2d.fill(shape);
+
+				//g2.fillRoundRect(b.getX(), b.getY(), b.getLength()/2, b.getLength()*2, b.getLength()/2, b.getLength()/2);
+				//transform.
 			}
 		}
 
