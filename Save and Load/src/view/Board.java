@@ -11,12 +11,7 @@ import java.util.Observer;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
-import model.Ball;
-import model.CircularGizmo;
-import model.Model;
-import model.SquareGizmo;
-import model.TriangleGizmo;
-import model.VerticalLine;
+import model.*;
 import physics.Vect;
 
 /**
@@ -73,6 +68,10 @@ public  class Board extends JPanel implements Observer {
 			g2.fill(t.getOutline());
 		}
 
+		for (Absorber a : gm.getAbsorbers()) {
+			g2.setColor(a.getColour());
+			g2.fillRect(a.getXpos1(), a.getYpos1(), a.getXpos2()-a.getXpos1(), a.getYpos2()- a.getYpos1());
+		}
 
 		Ball b = gm.getBall();
 		if (b != null) {
