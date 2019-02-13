@@ -1,3 +1,5 @@
+package Main;
+
 import javax.swing.UIManager;
 
 import model.*;
@@ -14,7 +16,7 @@ public class Main {
             // Use the platform look and feel
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (Exception e) {
-            System.out.println("Look and Feel error in Main");
+            System.out.println("Look and Feel error in Main.Main");
         }
 
         Model model = new Model();

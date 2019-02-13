@@ -35,13 +35,13 @@ public class Model extends Observable {
 		ball = new Ball(25, 25, 100, 100);
 		// Wall size 500 x 500 pixels
 		gws = new Walls(0, 0, 500, 500);
-		// Lines added in Main
+		// Lines added in Main.Main
 		lines = new ArrayList<VerticalLine>();
-		// Squares added in Main
+		// Squares added in Main.Main
 		squares = new ArrayList<SquareGizmo>();
-		// Circles added in Main
+		// Circles added in Main.Main
 		circulars = new ArrayList<CircularGizmo>();
-		// Triangles added in Main
+		// Triangles added in Main.Main
 		triangles = new ArrayList<TriangleGizmo>();
 		//Absorbers added
 		absorbers = new ArrayList<>();
