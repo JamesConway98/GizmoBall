@@ -8,6 +8,8 @@ import java.awt.event.KeyListener;
 public class keypressListener implements KeyListener {
 
     private Model model;
+    private static final int L = 25;
+    private static final int INITIAL_VELOCTIY = -50;
 
     public keypressListener(Model m) {
         model = m;
@@ -21,10 +23,12 @@ public class keypressListener implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         if(e.getKeyChar() == 's' || e.getKeyChar() == 'S') {
-            model.getBall().start();
-            model.getBall().setExactX(500-model.getBall().getRadius());
-            model.getBall().setExactY(480-model.getBall().getRadius());
-            model.setBallSpeed(-25*50, -25*50);
+            if(model.getBall().stopped()) {
+                model.getBall().setExactY(480 - model.getBall().getRadius());
+                model.getBall().setExactX(500 - model.getBall().getRadius());
+                model.setBallSpeed(0, L * INITIAL_VELOCTIY);
+                model.getBall().start();
+            }
         }
     }
 
