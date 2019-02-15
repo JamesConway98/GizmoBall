@@ -40,18 +40,6 @@ public class Main {
 		model.addGizmo(new SquareGizmo(50, 250));
 		model.addGizmo(new SquareGizmo(0, 250));
 
-//		model.addGizmo(new CircleGizmo(100, 0));
-//		model.addGizmo(new CircleGizmo(150, 200));
-//
-//		model.addGizmo(new TriangleGizmo(450,0));
-//		model.addGizmo(new TriangleGizmo(0,100));
-//		model.addGizmo(new TriangleGizmo(450,450));
-
-//		Gizmo t1 = new TriangleGizmo(100,90);
-//		((TriangleGizmo) t1).rotateClockwise();
-//		((TriangleGizmo) t1).rotateClockwise();
-//		model.addGizmo(t1);
-
 		model.addGizmo(new LeftFlipperGizmo(300, 300, 57));
 		//model.addGizmo(new LeftFlipperGizmo(50, 50, 15));
         model.addGizmo(new LeftFlipperGizmo(150, 150, 0));

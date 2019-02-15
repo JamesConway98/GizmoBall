@@ -101,6 +101,8 @@ public class Model extends Observable {
 					newVelo = Geometry.reflectWall(line, ball.getVelo(), 1.0);
 					if(time < 0.05) {
 						ball.stop();
+						ball.setExactX(500-ball.getRadius());
+						ball.setExactY(500-ball.getRadius());
 					}
 				}
 			}

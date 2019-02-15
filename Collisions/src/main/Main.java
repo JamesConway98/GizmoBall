@@ -23,7 +23,7 @@ public class Main {
 
 		Model model = new Model();
 
-		model.setBallSpeed(200, 300);
+		model.setBallSpeed(100, 200);
 
 		model.addGizmo(new SquareGizmo(250, 250));
 		model.addGizmo(new SquareGizmo(350, 350));

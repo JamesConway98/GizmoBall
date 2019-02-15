@@ -38,7 +38,8 @@ public class LeftFlipperGizmo implements Gizmo{
         setAngle(a);
     }
 
-    public double getAngle() { return angle;
+    public double getAngle() {
+        return angle;
     }
 
     public void setAngle(double angle) {
