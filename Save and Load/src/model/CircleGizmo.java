@@ -7,7 +7,7 @@ import physics.Vect;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class SquareGizmo implements Gizmo{
+public class CircleGizmo implements Gizmo {
     private int xpos, ypos;
     private int length = 50;
     private int rotation = 0;
@@ -15,47 +15,29 @@ public class SquareGizmo implements Gizmo{
     private ArrayList<LineSegment> edgeList = new ArrayList<LineSegment>();
     private ArrayList<Circle> vertexList = new ArrayList<Circle>();
 
-    private Vect v1, v2, v3, v4;
-    private LineSegment e1, e2, e3, e4;
-    private Circle c1, c2, c3, c4;
+    private Vect v1;
+    private Circle c1;
 
-    public SquareGizmo(int x, int y){
+
+    public CircleGizmo(int x, int y){
         xpos = x;
         ypos = y;
-        setColour(Color.YELLOW);
+        setColour(Color.GREEN);
         setHitbox();
     }
 
     public void setHitbox() {
         clearCollisions();
+
         int x = getX();
         int y = getY();
         int L = getLength();
-        //Vertices, starting from top-left, then clockwise
-        v1 = new Vect(x, y);
-        v2 = new Vect(x + L, y);
-        v3 = new Vect(x + L, y + L);
-        v4 = new Vect(x, y + L);
 
-        //Edges, starting from top, the clockwise
-        e1 = new LineSegment(v1, v2);
-        e2 = new LineSegment(v2, v3);
-        e3 = new LineSegment(v3, v4);
-        e4 = new LineSegment(v4, v1);
-        getEdges().add(e1);
-        getEdges().add(e2);
-        getEdges().add(e3);
-        getEdges().add(e4);
+        v1 = new Vect(x + L/2, y + L/2);
 
-        //0 radius circles at each vertex
-        c1 = new Circle(v1, 0);
-        c2 = new Circle(v2, 0);
-        c3 = new Circle(v3, 0);
-        c4 = new Circle(v4, 0);
+        c1 = new Circle(v1, L/2);
+
         getVertices().add(c1);
-        getVertices().add(c2);
-        getVertices().add(c3);
-        getVertices().add(c4);
     }
 
     public int getX() {
@@ -69,6 +51,8 @@ public class SquareGizmo implements Gizmo{
     public int getLength() {
         return length;
     }
+
+
 
     public ArrayList<LineSegment> getEdges() {
         return edgeList;
