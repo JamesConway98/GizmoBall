@@ -42,10 +42,10 @@ public class Main {
 		model.addGizmo(new TriangleGizmo(450,450));
 
 		//model.addGizmo(new TriangleGizmo(150,150));
-		Gizmo t1 = new TriangleGizmo(150,150);
-		((TriangleGizmo) t1).rotateClockwise();
-		((TriangleGizmo) t1).rotateClockwise();
-		model.addGizmo(t1);
+		//Gizmo t1 = new TriangleGizmo(150,150);
+		//((TriangleGizmo) t1).rotateClockwise();
+		//((TriangleGizmo) t1).rotateClockwise();
+		//model.addGizmo(t1);
 		//model.addGizmo(new LeftFlipperGizmo(150, 300));
 		//model.addGizmo(new LeftFlipperGizmo(0, 0));
 
