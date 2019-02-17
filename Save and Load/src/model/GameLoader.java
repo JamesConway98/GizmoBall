@@ -27,10 +27,10 @@ public class GameLoader {
                     y = Integer.parseInt(read.next());
                     if (type.equals("Square")) {
                         SquareGizmo sg = new SquareGizmo(x, y);
-                        model.addGizmo(sg);
+                        model.addSquare(sg);
                     } else if (type.equals("Circle")) {
-                        CircleGizmo cg = new CircleGizmo(x, y);
-                        model.addGizmo(cg);
+                        CircularGizmo cg = new CircularGizmo(x, y);
+                        model.addCircular(cg);
                     } else if (type.equals("Ball")) {
                         xVelo = Double.parseDouble(read.next());
                         yVelo = Double.parseDouble(read.next());
@@ -38,13 +38,13 @@ public class GameLoader {
                         model.addBall(ball);
                     } else if (type.equals("Triangle")) {
                         rotation = Integer.parseInt(read.next());
-                        TriangleGizmo tg = new TriangleGizmo(x, y);
-                        model.addGizmo(tg);
+                        TriangleGizmo tg = new TriangleGizmo(x, y, rotation);
+                        model.addTriangle(tg);
                     } else if (type.equals("Absorber")) {
                         x2 = Integer.parseInt(read.next());
                         y2 = Integer.parseInt(read.next());
                         Absorber abs = new Absorber(x, y, x2, y2);
-                        model.addGizmo(abs);
+                        model.addAbsorber(abs);
                     }
                     System.out.println(id + " " + x + " " + y + " " + rotation + "\n");
                 }

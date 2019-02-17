@@ -5,27 +5,43 @@ import java.util.ArrayList;
 
 public class GameSaver {
 
-    public void saveGizmos(ArrayList<Gizmo> gizmos){
+    //for each item on board, save their x and y.
+    // Could maybe use Gizmo interface as an argument to pass in all types at once
+    public void saveSquareGizmos(ArrayList<SquareGizmo> squares){
+        try (
+                Writer writer = new BufferedWriter(new OutputStreamWriter(
+                        new FileOutputStream("file.txt"), "utf-8"))) {
+
+            for(int i = 0; i < squares.size(); i++){
+                writer.write("\nSquare S" + i + " " + squares.get(i).getX() + " " + squares.get(i).getY());
+            }
+
+        } catch(IOException io){
+            io.printStackTrace();
+        }
+    }
+
+    public void saveTriangleGizmos(ArrayList<TriangleGizmo> triangles){
         try (
                 Writer writer = new BufferedWriter(new OutputStreamWriter(
                         new FileOutputStream("file.txt", true), "utf-8"))) {
 
-            int i = 0;
+            for(int i = 0; i < triangles.size(); i++){
+                writer.append("\nTriangle T" + i + " " + triangles.get(i).getX() + " " + triangles.get(i).getY() + " " + triangles.get(i).getRotation());
+            }
 
-            clearSaveFile();
+        } catch(IOException io){
+            io.printStackTrace();
+        }
+    }
 
-            for(Gizmo gizmo: gizmos){
-                if(gizmo instanceof CircleGizmo) {
-                    writer.append("\nCircle C" + i + " " + gizmo.getX() + " " + gizmo.getY());
-                }else if(gizmo instanceof TriangleGizmo){
-                    writer.append("\nTriangle T" + i + " " + gizmo.getX() + " " + gizmo.getY() + " " + gizmo.getRotation());
-                }else if(gizmo instanceof SquareGizmo){
-                    writer.append("\nSquare S" + i + " " + gizmo.getX() + " " + gizmo.getY());
-                }else if(gizmo instanceof Absorber){
-                    Absorber absorber = (Absorber)gizmo;
-                    writer.append("\nAbsorber A" + i + " " + absorber.getXpos1() + " " + absorber.getYpos1()
-                            + " " + absorber.getXpos2() + " " + absorber.getYpos2());
-                }
+    public void saveCircleGizmos(ArrayList<CircularGizmo> circles){
+        try (
+                Writer writer = new BufferedWriter(new OutputStreamWriter(
+                        new FileOutputStream("file.txt", true), "utf-8"))) {
+
+            for(int i = 0; i < circles.size(); i++){
+                writer.append("\nCircle C" + i + " " + circles.get(i).getX() + " " + circles.get(i).getY());
             }
 
         } catch(IOException io){
@@ -40,6 +56,21 @@ public class GameSaver {
 
             writer.append("\nBall B1 " + (int)ball.getExactX() + " " + (int)ball.getExactY() +
                     " " + ball.getVelo().x() + " " + ball.getVelo().y());
+
+        } catch(IOException io){
+            io.printStackTrace();
+        }
+    }
+
+    public void saveAbsorbers(ArrayList<Absorber> absorbers){
+        try (
+                Writer writer = new BufferedWriter(new OutputStreamWriter(
+                        new FileOutputStream("file.txt", true), "utf-8"))) {
+
+            for(int i = 0; i < absorbers.size(); i++) {
+                writer.append("\nAbsorber A" + i + " " + absorbers.get(i).getXpos1() + " " + absorbers.get(i).getYpos1()
+                        + " " + absorbers.get(i).getXpos2() + " " + absorbers.get(i).getYpos2());
+            }
 
         } catch(IOException io){
             io.printStackTrace();
@@ -64,18 +95,6 @@ public class GameSaver {
                         new FileOutputStream("file.txt", true), "utf-8"))) {
 
             writer.append("\nFriction " + mu + " " + mu2);
-
-        } catch(IOException io){
-            io.printStackTrace();
-        }
-    }
-
-    public void clearSaveFile(){
-        try (
-                Writer writer = new BufferedWriter(new OutputStreamWriter(
-                        new FileOutputStream("file.txt"), "utf-8"))) {
-
-            writer.write("");
 
         } catch(IOException io){
             io.printStackTrace();
