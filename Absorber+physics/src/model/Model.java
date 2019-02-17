@@ -1,13 +1,11 @@
 package model;
 
-import physics.Circle;
 import physics.Geometry;
 import physics.LineSegment;
 import physics.Vect;
 
 import java.util.ArrayList;
 import java.util.Observable;
-import java.util.Vector;
 
 /**
  * @author Murray Wood Demonstration of MVC and MIT Physics Collisions 2014
@@ -18,12 +16,13 @@ public class Model extends Observable {
 	private Ball ball;
 	private Walls gws;
 	private ArrayList<Absorber> abs;
-	private double speed;
-	private static final double mu = 0.025;
-	private static final double mu2 = 0.025;
-	private static final int gravity = 25;
 
+	private static final double MU = 0.025;
+	private static final double MU2 = 0.025;
+	private static final int GRAVITY = 25;
 	private static final int L = 25;
+
+	private double speed;
 	private double shortestTime;
 	private double time = 0.0;
 	private Vect newVelo = new Vect(0, 0);
@@ -49,16 +48,16 @@ public class Model extends Observable {
 			if (tuc > moveTime) {
 				// No collision ...
 				ball = movelBallForTime(ball, moveTime);
-				double friction = 1 - (mu/moveTime) * moveTime - (mu2/L) * Math.abs(ball.getVelo().length()) * moveTime;
-				ball.setVelo(ball.getVelo().times(friction).plus(new Vect(0, gravity*L*moveTime)));
 			} else {
 				// We've got a collision in tuc
 				ball = movelBallForTime(ball, tuc);
 				ball.setVelo(cd.getVelo());
 				//Post collision velocity ...
-				double friction = 1 - (mu/tuc) * tuc - (mu2/L) * Math.abs(ball.getVelo().length()) * tuc;
-				ball.setVelo(ball.getVelo().times(friction).plus(new Vect(0, gravity*L*tuc)));
 			}
+
+			//Apply friction and gravity
+			double friction = 1 - (MU /moveTime) * moveTime - (MU2 /L) * Math.abs(ball.getVelo().length()) * moveTime;
+			ball.setVelo(ball.getVelo().times(friction).plus(new Vect(0, GRAVITY*L*moveTime)));
 
 			// Notify observers ... redraw updated view
 			this.setChanged();
@@ -102,6 +101,8 @@ public class Model extends Observable {
 					newVelo = Geometry.reflectWall(line, ball.getVelo(), 1.0);
 					if(time < 0.05) {
 						ball.stop();
+						ball.setExactX(500-ball.getRadius());
+						ball.setExactY(500-ball.getRadius());
 					}
 				}
 			}
@@ -132,7 +133,11 @@ public class Model extends Observable {
 		ball.setVelo(new Vect(x, y));
 	}
 
-	public void addAbsorber(Absorber a) { abs.add(a); }
+	public void addAbsorber(Absorber a) {
+		abs.add(a);
+	}
 
-	public ArrayList<Absorber> getAbsorbers() { return abs; }
+	public ArrayList<Absorber> getAbsorbers() {
+		return abs;
+	}
 }

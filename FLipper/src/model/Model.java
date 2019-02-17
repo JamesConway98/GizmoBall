@@ -18,7 +18,6 @@ public class Model extends Observable {
 	private Ball ball;
 	private Walls gws;
 	private ArrayList<Gizmo> gizmos;
-	private float gravity, mu, mu2;
 
 	private double shortestTime;
 	private double time = 0.0;
@@ -29,7 +28,7 @@ public class Model extends Observable {
 		ball = new Ball(25, 25, 100, 100);
 		// Wall size 500 x 500 pixels
 		gws = new Walls(0, 0, 500, 500);
-		// Lines added in Main.Main
+		// Lines added in Main
 		lines = new ArrayList<VerticalLine>();
 		// Gizmos added in Main
 		gizmos = new ArrayList<Gizmo>();
@@ -46,13 +45,11 @@ public class Model extends Observable {
 			if (tuc > moveTime) {
 				// No collision ...
 				ball = movelBallForTime(ball, moveTime);
-				moveFlippers(moveTime);
 			} else {
 				// We've got a collision in tuc
 				ball = movelBallForTime(ball, tuc);
 				// Post collision velocity ...
 				ball.setVelo(cd.getVelo());
-				moveFlippers(tuc);
 			}
 
 
@@ -97,7 +94,7 @@ public class Model extends Observable {
 
 		// Time to collide with any gizmo
 		for (Gizmo gizmo : gizmos) {
-			if (gizmo instanceof SquareGizmo || gizmo instanceof TriangleGizmo || gizmo instanceof CircleGizmo || gizmo instanceof Absorber) {
+			if (gizmo instanceof SquareGizmo || gizmo instanceof TriangleGizmo || gizmo instanceof CircleGizmo) {
 				ArrayList<LineSegment> lsList = gizmo.getEdges();
 				for (int i = 0; i < lsList.size(); i++) {
 					checkWallCollision(lsList.get(i), 1.0);
@@ -166,81 +163,27 @@ public class Model extends Observable {
 		ball.setVelo(new Vect(x, y));
 	}
 
-	public void setGravity(float grav){
-		gravity = grav;
-	}
-
-	public void setFriction(float mu1, float mu2){
-		this.mu = mu1;
-		this.mu2 = mu2;
-	}
-
-	public void addBall(Ball b) {
-		ball = b;
-	}
-
-	public void moveFlippers(double tuc) {
-		//Rename tuc
+	public void moveFlippers() {
 		double moveTime = 0.05; // 0.05 = 20 times per second as per Gizmoball
 		for (Gizmo gizmo : gizmos) {
 			if (gizmo instanceof LeftFlipperGizmo) {
 				double ang = ((LeftFlipperGizmo) gizmo).getAngle();
 				if (((LeftFlipperGizmo) gizmo).isGizmoMoving() && ((LeftFlipperGizmo) gizmo).isGizmoActive()){
-					((LeftFlipperGizmo) gizmo).setAngle(ang - (100 * tuc));
+					((LeftFlipperGizmo) gizmo).setAngle(ang - (100 * moveTime));
 					ang = ((LeftFlipperGizmo) gizmo).getAngle();
-					if (ang <=- 90){
+					if (ang <= -90){
 						((LeftFlipperGizmo) gizmo).setAngle(-90);
 						((LeftFlipperGizmo) gizmo).setGizmoMoving(false);
 					}
 				} else if (((LeftFlipperGizmo) gizmo).isGizmoActive()){
-					((LeftFlipperGizmo) gizmo).setAngle(ang + (100 * tuc));
+					((LeftFlipperGizmo) gizmo).setAngle(ang + (100 * moveTime));
 					ang = ((LeftFlipperGizmo) gizmo).getAngle();
 					if (ang >= 0){
 						((LeftFlipperGizmo) gizmo).setAngle(0);
 						((LeftFlipperGizmo) gizmo).setGizmoMoving(true);
 					}
 				}
-
-
 			}
 		}
-	}
-
-	public void saveGame(){
-		GameSaver gs = new GameSaver();
-		gs.saveGizmos(gizmos);
-		gs.saveBall(ball);
-		gs.saveFriction(mu, mu2);
-		gs.saveGravity(gravity);
-	}
-
-	public void loadGame(){
-		GameLoader gl = new GameLoader();
-		clearBoard();
-		gl.loadGame(this);
-		//this is needed to update the view
-		setChanged();
-		notifyObservers();
-	}
-
-	public void addRandomSquare(){
-		SquareGizmo sg = new SquareGizmo((int)(Math.random() * 400), (int)(Math.random()* 400));
-		gizmos.add(sg);
-		setChanged();
-		notifyObservers();
-		System.out.println(gravity);
-		System.out.println(mu + " " + mu2);
-	}
-
-	public void addRandomTriangle(){
-		TriangleGizmo tg = new TriangleGizmo((int)(Math.random() * 400), (int)(Math.random()* 400));
-		gizmos.add(tg);
-		setChanged();
-		notifyObservers();
-	}
-
-	public void clearBoard(){
-		gizmos.clear();
-		ball = null;
 	}
 }
