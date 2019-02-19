@@ -46,11 +46,24 @@ public class Model extends Observable {
 				// No collision ...
 				ball = movelBallForTime(ball, moveTime);
 			} else {
-				// We've got a collision in tuc
-				ball = movelBallForTime(ball, tuc);
-				// Post collision velocity ...
-				ball.setVelo(cd.getVelo());
-			}
+			    // We've got a collision in tuc
+                ball = movelBallForTime(ball, tuc);
+                // Post collision velocity ...
+                ball.setVelo(cd.getVelo());
+                ball.stop();
+                Thread t = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        Thread.sleep(500);
+                        ball.start();
+                    } catch(InterruptedException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            });
+            t.start();
+        }
 
 
 			// Notify observers ... redraw updated view
