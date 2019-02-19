@@ -53,6 +53,7 @@ public class RightFlipperGizmo implements Gizmo{
         //TODO Hitbox for Right FLipper, not required for JARs
     }
 
+
     public int getX() {
         return xpos;
     }
