@@ -8,7 +8,7 @@ import physics.Vect;
 
 public class CircleGizmo implements Gizmo {
     private int xpos, ypos;
-    private int length = 50;
+    private int length = 25;
     private int rotation = 0;
     private Color colour;
     private ArrayList<LineSegment> edgeList = new ArrayList<LineSegment>();

@@ -7,7 +7,7 @@ import physics.Vect;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class LeftFlipperGizmo implements Gizmo{
+public class RightFlipperGizmo implements Gizmo{
     private int xpos, ypos;
     private int length = 25;
     private int rotation = 0;
@@ -30,11 +30,11 @@ public class LeftFlipperGizmo implements Gizmo{
 
     private double angle;
 
-    public LeftFlipperGizmo(int x, int y, double a){
+    public RightFlipperGizmo(int x, int y, double a){
         xpos = x;
         ypos = y;
         angle = a;
-        setColour(Color.MAGENTA);
+        setColour(Color.CYAN);
         setAngle(a);
     }
 
@@ -50,48 +50,7 @@ public class LeftFlipperGizmo implements Gizmo{
     public void setHitbox() {
         clearCollisions();
 
-        double angle = Math.toRadians(-getAngle());
-        double perpendicularAngle = Math.toRadians(-getAngle() - 90);
-        int x = getX();
-        int y = getY();
-        int L = getLength();
-
-        //Get location of first large Circle
-        v1 = new Vect(x + 0.25*L, y + 0.25*L);
-
-        //Get location of second large circle
-        double distX = 1.5 * L * Math.sin(angle);
-        double distY = 1.5 * L * Math.cos(angle);
-        v2 = new Vect(v1.x() + distX, v1.y() + distY);
-
-        distX = 0.25 * L * Math.sin(perpendicularAngle);
-        distY = 0.25 * L * Math.cos(perpendicularAngle);
-
-        v3 = new Vect(v1.x() + distX, v1.y() + distY);
-        v4 = new Vect(v1.x() - distX, v1.y() - distY);
-        v5 = new Vect(v2.x() + distX, v2.y() + distY);
-        v6 = new Vect(v2.x() - distX, v2.y() - distY);
-
-        c1 = new Circle(v1, 0.25*L);
-        c2 = new Circle(v2, 0.25*L);
-        c3 = new Circle(v3, 0);
-        c4 = new Circle(v4, 0);
-        c5 = new Circle(v5, 0);
-        c6 = new Circle(v6, 0);
-
-
-        e1 = new LineSegment(v3, v5);
-        e2 = new LineSegment(v4, v6);
-
-        getEdges().add(e1);
-        getEdges().add(e2);
-
-        getVertices().add(c1);
-        getVertices().add(c2);
-        getVertices().add(c3);
-        getVertices().add(c4);
-        getVertices().add(c5);
-        getVertices().add(c6);
+        //TODO Hitbox for Right FLipper, not required for JARs
     }
 
     public int getX() {
