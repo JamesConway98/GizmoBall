@@ -25,6 +25,8 @@ public class GameSaver {
                     Absorber absorber = (Absorber)gizmo;
                     writer.append("\nAbsorber A" + i + " " + absorber.getXpos1() + " " + absorber.getYpos1()
                             + " " + absorber.getXpos2() + " " + absorber.getYpos2());
+                }else if(gizmo instanceof LeftFlipperGizmo){
+                    writer.append("\nLeftFlipper L" + i + " " + gizmo.getX() + " " + gizmo.getY());
                 }
             }
 

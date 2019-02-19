@@ -12,7 +12,7 @@ public class GameLoader {
             Scanner read = new Scanner(new File("file.txt"));
             String type, id;
             int x, y, x2 = 0, y2 = 0, rotation = 0;
-            double xVelo = 0, yVelo = 0;
+            double xVelo = 0, yVelo = 0, angle;
 
             while (read.hasNextLine()) {
                 type = read.next();
@@ -20,7 +20,7 @@ public class GameLoader {
                     model.setGravity(Float.parseFloat(read.next()));
                 }else if(type.equals("Friction")){
                     model.setFriction(Float.parseFloat(read.next()), Float.parseFloat(read.next()));
-                }else {
+                }else if (type.equals("Square") || type.equals("Triangle") || type.equals("Ball") || type.equals("Absorber") || type.equals("LeftFlipper")|| type.equals("Circle")){
                     //We have a Gizmo
                     id = read.next();
                     x = Integer.parseInt(read.next());
@@ -45,6 +45,9 @@ public class GameLoader {
                         y2 = Integer.parseInt(read.next());
                         Absorber abs = new Absorber(x, y, x2, y2);
                         model.addGizmo(abs);
+                    } else if (type.equals("LeftFlipper") || type.equals("RightFlipper")) {
+                        LeftFlipperGizmo lf = new LeftFlipperGizmo(x, y, 0);
+                        model.addGizmo(lf);
                     }
                     System.out.println(id + " " + x + " " + y + " " + rotation + "\n");
                 }

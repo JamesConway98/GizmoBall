@@ -45,6 +45,8 @@ public class Main {
         model.addGizmo(new TriangleGizmo(0,100));
         model.addGizmo(new TriangleGizmo(450,450));
 
+        model.addGizmo(new LeftFlipperGizmo(200, 200, 90));
+
         model.addGizmo(new Absorber(100, 400, 400, 410));
 
         RunGui gui = new RunGui(model);

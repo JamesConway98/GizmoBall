@@ -46,13 +46,13 @@ public class Model extends Observable {
 			if (tuc > moveTime) {
 				// No collision ...
 				ball = movelBallForTime(ball, moveTime);
-				moveFlippers(moveTime);
+				moveFlippers();
 			} else {
 				// We've got a collision in tuc
 				ball = movelBallForTime(ball, tuc);
 				// Post collision velocity ...
 				ball.setVelo(cd.getVelo());
-				moveFlippers(tuc);
+				moveFlippers();
 			}
 
 
@@ -179,29 +179,26 @@ public class Model extends Observable {
 		ball = b;
 	}
 
-	public void moveFlippers(double tuc) {
-		//Rename tuc
+	public void moveFlippers() {
 		double moveTime = 0.05; // 0.05 = 20 times per second as per Gizmoball
 		for (Gizmo gizmo : gizmos) {
 			if (gizmo instanceof LeftFlipperGizmo) {
 				double ang = ((LeftFlipperGizmo) gizmo).getAngle();
 				if (((LeftFlipperGizmo) gizmo).isGizmoMoving() && ((LeftFlipperGizmo) gizmo).isGizmoActive()){
-					((LeftFlipperGizmo) gizmo).setAngle(ang - (100 * tuc));
+					((LeftFlipperGizmo) gizmo).setAngle(ang - (100 * moveTime));
 					ang = ((LeftFlipperGizmo) gizmo).getAngle();
-					if (ang <=- 90){
+					if (ang <= -90){
 						((LeftFlipperGizmo) gizmo).setAngle(-90);
 						((LeftFlipperGizmo) gizmo).setGizmoMoving(false);
 					}
 				} else if (((LeftFlipperGizmo) gizmo).isGizmoActive()){
-					((LeftFlipperGizmo) gizmo).setAngle(ang + (100 * tuc));
+					((LeftFlipperGizmo) gizmo).setAngle(ang + (100 * moveTime));
 					ang = ((LeftFlipperGizmo) gizmo).getAngle();
 					if (ang >= 0){
 						((LeftFlipperGizmo) gizmo).setAngle(0);
 						((LeftFlipperGizmo) gizmo).setGizmoMoving(true);
 					}
 				}
-
-
 			}
 		}
 	}
@@ -235,6 +232,13 @@ public class Model extends Observable {
 	public void addRandomTriangle(){
 		TriangleGizmo tg = new TriangleGizmo((int)(Math.random() * 400), (int)(Math.random()* 400));
 		gizmos.add(tg);
+		setChanged();
+		notifyObservers();
+	}
+
+	public void addRandomFlipper(){
+		LeftFlipperGizmo fl = new LeftFlipperGizmo((int)(Math.random() * 400), (int)(Math.random()* 400), (int)(Math.random()* 300));
+		gizmos.add(fl);
 		setChanged();
 		notifyObservers();
 	}

@@ -74,29 +74,13 @@ public  class Board extends JPanel implements Observer {
 			} else if (b instanceof Absorber){
 				g2.fillRect(b.getX(), b.getY(), b.getLength(), ((Absorber) b).getHeight());
 			} else if (b instanceof LeftFlipperGizmo){
-
-
 				Graphics2D g2d = (Graphics2D) g.create();
 				g2.setColor(g.getColor());
-//				g2d.rotate(Math.toRadians(270), x + b.getLength()/2, y + b.getLength()/2);
-//				g2d.fill(shape);
 				RoundRectangle2D lFlip = new RoundRectangle2D.Double(b.getX(), b.getY(), b.getLength()/2, b.getLength()*2, b.getLength()/2, b.getLength()/2);
 				g2d.rotate(Math.toRadians(((LeftFlipperGizmo) b).getAngle()), b.getX() + b.getLength() * 0.25, b.getY() + b.getLength() * 0.25);
 				g2d.draw(lFlip);
 				g2d.fill(lFlip);
-				//g2.fillRoundRect(b.getX(), b.getY(), b.getLength()/2, b.getLength()*2, b.getLength()/2, b.getLength()/2);
-				//transform.
 				g2d.dispose();
-				Graphics2D g2e = (Graphics2D) g.create();
-				g2e.setColor(Color.RED);
-				g2e.drawRect(((int) ((LeftFlipperGizmo) b).v1.x()), ((int) ((LeftFlipperGizmo) b).v1.y()), 100, 100);
-				g2e.drawRect(((int) ((LeftFlipperGizmo) b).v2.x()), ((int) ((LeftFlipperGizmo) b).v2.y()), 100, 100);
-				g2e.drawRect(((int) ((LeftFlipperGizmo) b).v3.x()), ((int) ((LeftFlipperGizmo) b).v3.y()), 100, 100);
-				g2e.drawRect(((int) ((LeftFlipperGizmo) b).v4.x()), ((int) ((LeftFlipperGizmo) b).v4.y()), 100, 100);
-				g2e.drawRect(((int) ((LeftFlipperGizmo) b).v5.x()), ((int) ((LeftFlipperGizmo) b).v5.y()), 100, 100);
-				g2e.drawRect(((int) ((LeftFlipperGizmo) b).v6.x()), ((int) ((LeftFlipperGizmo) b).v6.y()), 100, 100);
-
-				g2e.dispose();
 			}
 		}
 

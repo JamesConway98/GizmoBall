@@ -49,6 +49,9 @@ public class RunListener implements ActionListener {
 				case "Add Triangle":
 					model.addRandomTriangle();
 					break;
+				case "Add Flipper":
+					model.addRandomFlipper();
+					break;
 				case "Quit":
 					System.exit(0);
 					break;

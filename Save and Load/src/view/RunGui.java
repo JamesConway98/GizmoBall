@@ -1,7 +1,6 @@
 package view;
 
 import controller.RunListener;
-import controller.keypressListener;
 import model.Model;
 import view.Board;
 
@@ -28,7 +27,6 @@ public class RunGui {
 
 		// RunListener catches all GUI events. In reality might have many listeners.
 		listener = new RunListener(m);
-		keyListener = new keypressListener(m);
 	}
 
 	public void createAndShowGUI() {
@@ -96,6 +94,13 @@ public class RunGui {
 		button7.addActionListener(listener);
 		button7.setMaximumSize(new Dimension(100, 100));
 		buttons.add(button7);
+
+		JButton button8 = new JButton("Add Flipper");
+		button8.setFocusable(false);
+		button8.setFont(gf);
+		button8.addActionListener(listener);
+		button8.setMaximumSize(new Dimension(100, 100));
+		buttons.add(button8);
 
 		cp.add(buttons, BorderLayout.LINE_START);
 		cp.add(board, BorderLayout.CENTER);
