@@ -1,0 +1,46 @@
+
+Triangle T0 19 0
+Rotate T0
+Triangle T1 1 1
+Square S2 0 2
+Square S3 1 2
+Square S4 2 2
+Square S5 3 2
+Square S6 4 2
+Square S7 5 2
+Square S8 6 2
+Square S9 7 2
+Square S10 8 2
+Square S11 13 2
+Square S12 14 2
+Square S13 15 2
+Square S14 16 2
+Square S15 17 2
+Square S16 18 2
+Circle C17 4 3
+Circle C18 5 4
+Circle C19 6 5
+Circle C20 7 6
+Circle C21 9 9
+Circle C22 10 9
+Circle C23 11 10
+Circle C24 12 9
+Circle C25 13 9
+Circle C26 15 6
+Circle C27 16 5
+Circle C28 17 4
+Circle C29 18 3
+LeftFlipper LF30 9 2
+Rotate LF30
+Rotate LF30
+RightFlipper RF31 11 2
+LeftFlipper LF32 8 7
+Rotate LF32
+Rotate LF32
+Rotate LF32
+RightFlipper RF33 13 7
+Rotate RF33
+Absorber A34 0 19 20 20
+Ball B1 1 11 0.0 0.0
+Friction 0.0 0.0
+Gravity 0.0

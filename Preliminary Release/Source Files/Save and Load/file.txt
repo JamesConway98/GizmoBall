@@ -1,0 +1,18 @@
+
+Square S0 250 250
+Square S0 350 350
+Square S0 200 150
+Circle C0 100 0
+Circle C0 250 300
+Circle C0 400 100
+Circle C0 200 450
+Triangle T0 250 100 0
+Triangle T0 250 0 0
+Triangle T0 450 0 0
+Triangle T0 0 100 0
+Triangle T0 450 450 0
+LeftFlipper L0 200 200
+Absorber A0 100 400 400 410
+Ball B1 25 25 200.0 200.0
+Friction 0.0 0.0
+Gravity 0.0
