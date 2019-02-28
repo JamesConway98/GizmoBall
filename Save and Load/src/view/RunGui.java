@@ -31,7 +31,7 @@ public class RunGui {
 
 	public void createAndShowGUI() {
 
-		frame = new JFrame("Murray's MIT Model.Ball and VerticalLine Collision Demo");
+		frame = new JFrame("Thur 4 - Save Load");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setFocusable(true);
 		frame.setFocusTraversalKeysEnabled(false);

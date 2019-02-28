@@ -25,7 +25,7 @@ public class Ball {
 		ypos = y;
 		colour = Color.BLUE;
 		velocity = new Vect(xv, yv);
-		radius = 10;
+		radius = 7;
 		stopped = false;
 	}
 

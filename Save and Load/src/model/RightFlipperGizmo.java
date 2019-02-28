@@ -7,7 +7,7 @@ import physics.Vect;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class LeftFlipperGizmo implements Gizmo {
+public class RightFlipperGizmo implements Gizmo{
     private int xpos, ypos;
     private int length = 25;
     private int rotation = 0;
@@ -30,11 +30,11 @@ public class LeftFlipperGizmo implements Gizmo {
 
     private double angle;
 
-    public LeftFlipperGizmo(int x, int y, double a){
+    public RightFlipperGizmo(int x, int y, double a){
         xpos = x;
         ypos = y;
         angle = a;
-        setColour(Color.MAGENTA);
+        setColour(Color.CYAN);
         setAngle(a);
     }
 
@@ -57,7 +57,7 @@ public class LeftFlipperGizmo implements Gizmo {
         int L = getLength();
 
         //Get location of first large Circle
-        v1 = new Vect(x + 0.25*L, y + 0.25*L);
+        v1 = new Vect(x + 1.25*L, y + 0.25*L);
 
         //Get location of second large circle
         double distX = 1.5 * L * Math.sin(angle);

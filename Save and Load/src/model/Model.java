@@ -46,13 +46,13 @@ public class Model extends Observable {
 			if (tuc > moveTime) {
 				// No collision ...
 				ball = movelBallForTime(ball, moveTime);
-				moveFlippers();
+				//moveFlippers();
 			} else {
 				// We've got a collision in tuc
 				ball = movelBallForTime(ball, tuc);
 				// Post collision velocity ...
 				ball.setVelo(cd.getVelo());
-				moveFlippers();
+				//moveFlippers();
 			}
 
 
@@ -116,6 +116,16 @@ public class Model extends Observable {
 					checkCircleCollision(cList.get(i), 0.95);
 				}
 				double ang = ((LeftFlipperGizmo) gizmo).getAngle();
+			} else if (gizmo instanceof RightFlipperGizmo) {
+				ArrayList<LineSegment> lsList = gizmo.getEdges();
+				for (int i = 0; i < lsList.size(); i++) {
+					checkWallCollision(lsList.get(i), 0.95);
+				}
+				ArrayList<Circle> cList = gizmo.getVertices();
+				for (int i = 0; i < cList.size(); i++) {
+					checkCircleCollision(cList.get(i), 0.95);
+				}
+				double ang = ((RightFlipperGizmo) gizmo).getAngle();
 
 			}
 		}
