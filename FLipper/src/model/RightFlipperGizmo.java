@@ -96,11 +96,11 @@ public class RightFlipperGizmo implements Gizmo{
     }
 
     public void rotateClockwise() {
-        //TODO
+        setRotation(((getRotation() + 1) + 4) % 4);
     }
 
     public void rotateAnticlockwise() {
-        //TODO
+        setRotation(((getRotation() - 1) + 4) % 4);
     }
 
     public boolean isGizmoMoving() {

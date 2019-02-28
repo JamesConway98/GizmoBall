@@ -184,6 +184,25 @@ public class Model extends Observable {
 					}
 				}
 			}
+
+			if (gizmo instanceof RightFlipperGizmo) {
+				double ang = ((RightFlipperGizmo) gizmo).getAngle();
+				if (((RightFlipperGizmo) gizmo).isGizmoMoving() && ((RightFlipperGizmo) gizmo).isGizmoActive()){
+					((RightFlipperGizmo) gizmo).setAngle(ang + (100 * moveTime));
+					ang = ((RightFlipperGizmo) gizmo).getAngle();
+					if (ang >= 90){
+						((RightFlipperGizmo) gizmo).setAngle(90);
+						((RightFlipperGizmo) gizmo).setGizmoMoving(false);
+					}
+				} else if (((RightFlipperGizmo) gizmo).isGizmoActive()){
+					((RightFlipperGizmo) gizmo).setAngle(ang - (100 * moveTime));
+					ang = ((RightFlipperGizmo) gizmo).getAngle();
+					if (ang <= 0){
+						((RightFlipperGizmo) gizmo).setAngle(0);
+						((RightFlipperGizmo) gizmo).setGizmoMoving(true);
+					}
+				}
+			}
 		}
 	}
 }

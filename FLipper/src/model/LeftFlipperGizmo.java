@@ -33,9 +33,9 @@ public class LeftFlipperGizmo implements Gizmo{
     public LeftFlipperGizmo(int x, int y, double a){
         xpos = x;
         ypos = y;
-        angle = a;
+
         setColour(Color.MAGENTA);
-        setAngle(a);
+        setAngle(0);
     }
 
     public double getAngle() {
@@ -58,15 +58,42 @@ public class LeftFlipperGizmo implements Gizmo{
 
         //Get location of first large Circle
         v1 = new Vect(x + 0.25*L, y + 0.25*L);
+        if (getRotation() == 1){
+            v1 = new Vect(x + 1.75*L, y + 0.25*L);
+        }
+        if (getRotation() == 2){
+            v1 = new Vect(x + 1.75*L, y + 1.75*L);
+        }
+        if (getRotation() == 3){
+            v1 = new Vect(x + 0.25*L, y + 1.75*L);
+        }
 
         //Get location of second large circle
         double distX = 1.5 * L * Math.sin(angle);
         double distY = 1.5 * L * Math.cos(angle);
+        if (getRotation() == 1){
+            distX = 1.5 * L * Math.sin(perpendicularAngle);
+            distY = 1.5 * L * Math.cos(perpendicularAngle);
+        }
+        if (getRotation() == 2){
+            distX = -1.5 * L * Math.sin(angle);
+            distY = -1.5 * L * Math.cos(angle);
+        }
+        if (getRotation() == 3){
+            distX = -1.5 * L * Math.sin(perpendicularAngle);
+            distY = -1.5 * L * Math.cos(perpendicularAngle);
+        }
+
         v2 = new Vect(v1.x() + distX, v1.y() + distY);
 
-        distX = 0.25 * L * Math.sin(perpendicularAngle);
-        distY = 0.25 * L * Math.cos(perpendicularAngle);
-
+        if (getRotation() == 0 || getRotation() == 2){
+            distX = 0.25 * L * Math.sin(perpendicularAngle);
+            distY = 0.25 * L * Math.cos(perpendicularAngle);
+        }
+        if (getRotation() == 1 || getRotation() == 3){
+            distX = 0.25 * L * Math.sin(angle);
+            distY = 0.25 * L * Math.cos(angle);
+        }
         v3 = new Vect(v1.x() + distX, v1.y() + distY);
         v4 = new Vect(v1.x() - distX, v1.y() - distY);
         v5 = new Vect(v2.x() + distX, v2.y() + distY);
@@ -136,11 +163,11 @@ public class LeftFlipperGizmo implements Gizmo{
     }
 
     public void rotateClockwise() {
-        //TODO
+        setRotation(((getRotation() + 1) + 4) % 4);
     }
 
     public void rotateAnticlockwise() {
-        //TODO
+        setRotation(((getRotation() - 1) + 4) % 4);
     }
 
     public boolean isGizmoMoving() {
