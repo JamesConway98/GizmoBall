@@ -7,10 +7,7 @@ import java.util.ArrayList;
 
 public class Absorber {
 
-    private int xpos1;
-    private int ypos1;
-    private int ypos2;
-    private int xpos2;
+    private int xpos1, ypos1, ypos2, xpos2, width, height;
     private Color colour;
 
     // Walls are the enclosing Rectangle - defined by top left corner and bottom
@@ -21,6 +18,9 @@ public class Absorber {
         ypos1 = y1;
         xpos2 = x2;
         ypos2 = y2;
+
+        width = x2 - x1;
+        height = y2 - y1;
     }
 
     public ArrayList<LineSegment> getLineSegments() {
@@ -54,5 +54,13 @@ public class Absorber {
 
     public Color getColour() {
         return colour;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
     }
 }

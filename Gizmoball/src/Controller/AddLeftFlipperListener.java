@@ -1,28 +1,26 @@
 package Controller;
 
+import model.LeftFlipperGizmo;
 import model.Model;
-import model.SquareGizmo;
 import view.BuildBoard;
 
-import javax.swing.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class AddSquareListener implements MouseListener {
+public class AddLeftFlipperListener implements MouseListener {
 
     private Model model;
 
-    public AddSquareListener(Model m) {
+    public AddLeftFlipperListener(Model m) {
         model = m;
     }
-
 
     @Override
     public void mouseClicked(MouseEvent e) {
         int x = 0, y =0;
         x = (e.getX() - 50)/ BuildBoard.L;
         y = (e.getY() - 50)/ BuildBoard.L;
-        model.addGizmo(new SquareGizmo(x, y));
+        model.addGizmo(new LeftFlipperGizmo(x, y, 0));
     }
 
     @Override

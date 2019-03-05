@@ -2,10 +2,6 @@ package model;
 
 import physics.LineSegment;
 
-/**
- * @author Murray Wood Demonstration of MVC and MIT Physics Collisions 2014
- */
-
 public class VerticalLine {
 
 	private int xpos;
