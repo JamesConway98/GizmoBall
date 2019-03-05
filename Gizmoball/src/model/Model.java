@@ -18,7 +18,7 @@ public class Model extends Observable {
 	private static final double MU = 0.025;
 	private static final double MU2 = 0.025;
 	private static final int GRAVITY = 25;
-	public static final int L = 50;
+	public static final int L = 40;
 
 	private double speed;
 	private double shortestTime;
