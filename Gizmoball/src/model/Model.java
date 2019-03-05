@@ -6,10 +6,7 @@ import physics.Vect;
 
 import java.util.ArrayList;
 import java.util.Observable;
-
-/**
- * @author Murray Wood Demonstration of MVC and MIT Physics Collisions 2014
- */
+import java.util.Observer;
 
 public class Model extends Observable {
 
@@ -26,6 +23,7 @@ public class Model extends Observable {
 	private double shortestTime;
 	private double time = 0.0;
 	private Vect newVelo = new Vect(0, 0);
+	private ArrayList<Gizmo> gizmos;
 
 	public Model() {
 
@@ -37,6 +35,9 @@ public class Model extends Observable {
 
 		//Absorber added in Main
 		abs = new ArrayList<>();
+
+		// Gizmos added in Main
+		gizmos = new ArrayList<Gizmo>();
 	}
 
 	public void moveBall() {
@@ -133,6 +134,16 @@ public class Model extends Observable {
 		ball.setVelo(new Vect(x, y));
 	}
 
+	public void addGizmo(Gizmo g) {
+		gizmos.add(g);
+		setChanged();
+		notifyObservers();
+	}
+
+	public ArrayList<Gizmo> getGizmos(){
+		return gizmos;
+	}
+
 	public void addAbsorber(Absorber a) {
 		abs.add(a);
 	}
@@ -140,4 +151,5 @@ public class Model extends Observable {
 	public ArrayList<Absorber> getAbsorbers() {
 		return abs;
 	}
+
 }
