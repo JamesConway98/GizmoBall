@@ -4,6 +4,7 @@ import physics.Geometry;
 import physics.LineSegment;
 import physics.Vect;
 
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
@@ -17,13 +18,14 @@ public class Model extends Observable {
 	private static final double MU = 0.025;
 	private static final double MU2 = 0.025;
 	private static final int GRAVITY = 25;
-	private static final int L = 25;
+	public static final int L = 50;
 
 	private double speed;
 	private double shortestTime;
 	private double time = 0.0;
 	private Vect newVelo = new Vect(0, 0);
 	private ArrayList<Gizmo> gizmos;
+	private MouseListener activeMouseListener;
 
 	public Model() {
 
@@ -146,10 +148,27 @@ public class Model extends Observable {
 
 	public void addAbsorber(Absorber a) {
 		abs.add(a);
+		setChanged();
+		notifyObservers();
 	}
 
 	public ArrayList<Absorber> getAbsorbers() {
 		return abs;
 	}
 
+	public void rotateGizmo(Gizmo gizmo){
+		gizmo.rotateClockwise();
+		setChanged();
+		notifyObservers();
+	}
+
+	public void setMouseListener(MouseListener ml){
+		activeMouseListener = ml;
+		setChanged();
+		notifyObservers();
+	}
+
+	public MouseListener getActiveMouseListener() {
+		return activeMouseListener;
+	}
 }

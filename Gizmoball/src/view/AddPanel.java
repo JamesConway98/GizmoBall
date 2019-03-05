@@ -1,8 +1,12 @@
 package view;
 
+import Controller.BuildModeListener;
+import model.Model;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class AddPanel extends JPanel {
 
@@ -18,13 +22,19 @@ public class AddPanel extends JPanel {
     private JButton addRightFlipperButton;
     private JButton addBallButton;
     private JButton addAbsorberButton;
+    private JButton rotateButton;
 
     private JLabel addInitialVelocityLabel;
     private JLabel addInitialDirectionLabel;
     private JTextField initialVelocityField;
     private JTextField initialDirectionField;
 
-    public AddPanel(){
+    private ArrayList<JButton> buttons;
+
+    public AddPanel(Model m){
+
+        BuildModeListener buildListener = new BuildModeListener(m);
+        buttons = new ArrayList<>();
 
         Dimension dim = getPreferredSize();
         dim.width = 350;
@@ -36,12 +46,25 @@ public class AddPanel extends JPanel {
         absorberLabel = new JLabel("Absorber");
 
         addSquareButton = new JButton("Square");
+        buttons.add(addSquareButton);
         addCircleButton = new JButton("Circle");
+        buttons.add(addCircleButton);
         addTriangleButton = new JButton("Triangle");
+        buttons.add(addTriangleButton);
         addLeftFlipperButton = new JButton("Left Flipper");
+        buttons.add(addLeftFlipperButton);
         addRightFlipperButton = new JButton("Right Flipper");
+        buttons.add(addRightFlipperButton);
         addBallButton = new JButton("Ball");
+        buttons.add(addBallButton);
         addAbsorberButton = new JButton("Absorber");
+        buttons.add(addAbsorberButton);
+        rotateButton = new JButton("Rotate");
+        buttons.add(rotateButton);
+
+        for(JButton button: buttons){
+            button.addActionListener(buildListener);
+        }
 
         addInitialVelocityLabel = new JLabel("Initial Velocity: ");
         addInitialDirectionLabel = new JLabel("Initial Direction: ");
@@ -234,10 +257,13 @@ public class AddPanel extends JPanel {
         gc.weightx = 1;
         gc.weighty = 1;
 
-        gc.gridx = 1;
+        gc.gridx = 0;
         gc.anchor = GridBagConstraints.FIRST_LINE_START;
         add(addAbsorberButton, gc);
 
+        gc.gridx = 1;
+        gc.anchor = GridBagConstraints.FIRST_LINE_START;
+        add(rotateButton, gc);
 
     }
 

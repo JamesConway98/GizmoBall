@@ -5,6 +5,7 @@ import model.Model;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseListener;
 
 public class MainFrame {
 
@@ -19,9 +20,8 @@ public class MainFrame {
 
         // Board is passed the Model so it can act as Observer
         buildBoard = new BuildBoard(500, 500, m);
-        buildBoard.addMouseListener(addSquareListener);
 
-        AddPanel addPanel = new AddPanel();
+        AddPanel addPanel = new AddPanel(m);
 
         frame.setJMenuBar((createMenuBar()));
 

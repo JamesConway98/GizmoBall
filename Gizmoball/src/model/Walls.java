@@ -4,10 +4,6 @@ import physics.LineSegment;
 
 import java.util.ArrayList;
 
-/**
- * @author Murray Wood Demonstration of MVC and MIT Physics Collisions 2014
- */
-
 public class Walls {
 
 	private int xpos1;
