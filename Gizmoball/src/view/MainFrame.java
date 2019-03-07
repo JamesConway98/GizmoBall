@@ -5,10 +5,10 @@ import model.Model;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseListener;
 
 public class MainFrame {
 
+    private RunBoard runBoard;
     private BuildBoard buildBoard;
     protected AddSquareListener addSquareListener;
 
@@ -20,22 +20,10 @@ public class MainFrame {
 
         // Board is passed the Model so it can act as Observer
         buildBoard = new BuildBoard(500, 500, m);
+        runBoard = new RunBoard(500, 500, m);
 
         AddPanel addPanel = new AddPanel(m);
 
-        frame.setJMenuBar((createMenuBar()));
-
-        frame.add(addPanel, BorderLayout.WEST);
-        frame.add(buildBoard, BorderLayout.CENTER);
-
-        frame.setSize(1300, 900);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
-        frame.setResizable(false);
-
-    }
-
-    private JMenuBar createMenuBar() {
         JMenuBar menuBar = new JMenuBar();
 
         JMenu fileMenu = new JMenu("File");
@@ -43,6 +31,14 @@ public class MainFrame {
         JMenuItem saveAs = new JMenuItem("Save as");
         JMenuItem loadConfiguration = new JMenuItem("Load Configuration");
         JMenuItem runMode = new JMenuItem("Run Mode");
+        runMode.addActionListener(actionEvent -> {
+            frame.getContentPane().removeAll();
+            frame.add(new RunBoard(500, 500, m));
+            frame.validate();
+            runMode.removeAll();
+            fileMenu.remove(5);
+            fileMenu.add(new JMenuItem("Build Mode"), 5);
+        });
         JMenuItem quit = new JMenuItem("Quit");
 
         fileMenu.add(saveConfiguration);
@@ -56,6 +52,15 @@ public class MainFrame {
 
         menuBar.add(fileMenu);
 
-        return menuBar;
+        frame.setJMenuBar(menuBar);
+
+        frame.add(addPanel, BorderLayout.WEST);
+        frame.add(buildBoard, BorderLayout.CENTER);
+
+        frame.setSize(1300, 900);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+        frame.setResizable(false);
+
     }
 }
