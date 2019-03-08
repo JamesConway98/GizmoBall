@@ -7,20 +7,20 @@ import java.util.ArrayList;
 
 public class Absorber {
 
-    private int xpos1, ypos1, ypos2, xpos2, width, height;
+    private int xpos1, ypos1, ypos2, xpos2, gridX1, gridY1, gridX2, gridY2, width, height;
     private Color colour;
 
     // Walls are the enclosing Rectangle - defined by top left corner and bottom
     // right
-    public Absorber(int x1, int y1, int x2, int y2) {
+    public Absorber(int gridX1, int gridY1, int gridX2, int gridY2) {
         colour = Color.MAGENTA;
-        xpos1 = x1;
-        ypos1 = y1;
-        xpos2 = x2;
-        ypos2 = y2;
+        this.gridX1 = gridX1;
+        this.gridY1 = gridY1;
+        this.gridX2 = gridX2;
+        this.gridY2 = gridY2;
 
-        width = x2 - x1;
-        height = y2 - y1;
+        width = gridX2 - gridX1;
+        height = gridY2 - gridY1;
     }
 
     public ArrayList<LineSegment> getLineSegments() {
@@ -37,19 +37,35 @@ public class Absorber {
     }
 
     public int getXpos1() {
-        return xpos1;
+        return gridX1*Model.L+50;
     }
 
     public int getYpos1() {
-        return ypos1;
+        return gridY1*Model.L+50;
     }
 
     public int getXpos2() {
-        return xpos2;
+        return gridX2*Model.L+50;
     }
 
     public int getYpos2() {
-        return ypos2;
+        return gridY2*Model.L+50;
+    }
+
+    public int getGridX1() {
+        return gridX1;
+    }
+
+    public int getGridY1() {
+        return gridY1;
+    }
+
+    public int getGridX2() {
+        return gridX2;
+    }
+
+    public int getGridY2() {
+        return gridY2;
     }
 
     public Color getColour() {

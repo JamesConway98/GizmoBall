@@ -23,8 +23,9 @@ public class RotateGizmoListener implements MouseListener {
         y = (e.getY() - 50)/ BuildBoard.L;
 
         for(Gizmo gizmo:model.getGizmos()){
-            if(gizmo.getX()== x && gizmo.getY()== y){
+            if(gizmo.getGridX()== x && gizmo.getGridY()== y){
                 if(gizmo instanceof TriangleGizmo){
+                    System.out.println("BBOOM");
                     model.rotateGizmo(gizmo);
                 }
             }

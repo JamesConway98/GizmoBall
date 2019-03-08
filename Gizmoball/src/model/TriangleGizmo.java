@@ -8,7 +8,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class TriangleGizmo implements Gizmo{
-    private int xpos, ypos;
+    private int xpos, ypos, gridX, gridY;
     private int length = Model.L;
     private int rotation = 0;
     private Color colour;
@@ -19,9 +19,9 @@ public class TriangleGizmo implements Gizmo{
     private LineSegment e1, e2, e3;
     private Circle c1, c2, c3;
 
-    public TriangleGizmo(int x, int y){
-        xpos = x;
-        ypos = y;
+    public TriangleGizmo(int gridX, int gridY){
+        this.gridX = gridX;
+        this.gridY = gridY;
         setColour(Color.RED);
         setHitbox();
     }
@@ -83,11 +83,19 @@ public class TriangleGizmo implements Gizmo{
     }
 
     public int getX() {
-        return xpos;
+        return gridX*Model.L+50;
     }
 
     public int getY() {
-        return ypos;
+        return gridY*Model.L+50;
+    }
+
+    public int getGridX() {
+        return gridX;
+    }
+
+    public int getGridY() {
+        return gridY;
     }
 
     public int getLength() {

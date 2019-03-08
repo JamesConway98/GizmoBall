@@ -8,7 +8,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class RightFlipperGizmo implements Gizmo{
-    private int xpos, ypos;
+    private int xpos, ypos, gridX, gridY;
     private int length = Model.L;
     private int rotation = 0;
     private Color colour;
@@ -30,9 +30,9 @@ public class RightFlipperGizmo implements Gizmo{
 
     private double angle;
 
-    public RightFlipperGizmo(int x, int y, double a){
-        xpos = x;
-        ypos = y;
+    public RightFlipperGizmo(int gridX, int gridY, double a){
+        this.gridX = gridX;
+        this.gridY = gridY;
         angle = a;
         setColour(Color.CYAN);
         setAngle(a);
@@ -55,11 +55,19 @@ public class RightFlipperGizmo implements Gizmo{
 
 
     public int getX() {
-        return xpos;
+        return gridX*Model.L +50;
     }
 
     public int getY() {
-        return ypos;
+        return gridY*Model.L +50;
+    }
+
+    public int getGridX() {
+        return gridX;
+    }
+
+    public int getGridY() {
+        return gridY;
     }
 
     public int getLength() {

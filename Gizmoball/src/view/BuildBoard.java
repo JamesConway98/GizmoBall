@@ -47,7 +47,7 @@ public class BuildBoard extends JPanel implements Observer {
 
         for (Gizmo b : model.getGizmos()) {
             g2.setColor(b.getColour());
-            int xPos = b.getX() * L + 50, yPos = b.getY() * L + 50;
+            int xPos = b.getX(), yPos = b.getY();
             if (b instanceof SquareGizmo) {
                 g2.fillRect(xPos, yPos, L, L);
             } else if (b instanceof CircleGizmo) {
@@ -79,7 +79,7 @@ public class BuildBoard extends JPanel implements Observer {
             } else if (b instanceof LeftFlipperGizmo) {
                 Graphics2D g2d = (Graphics2D) g.create();
                 g2.setColor(g.getColor());
-                RoundRectangle2D lFlip = new RoundRectangle2D.Double(xPos,yPos, L / 4, L, L / 4, L / 4);
+                RoundRectangle2D lFlip = new RoundRectangle2D.Double(xPos,yPos, L / 2, L, L / 2, L / 2);
                 g2d.rotate(Math.toRadians(((LeftFlipperGizmo) b).getAngle()), xPos + L * 0.25, yPos + L * 0.25);
                 g2d.draw(lFlip);
                 g2d.fill(lFlip);
@@ -89,7 +89,7 @@ public class BuildBoard extends JPanel implements Observer {
                 Graphics2D g2d = (Graphics2D) g.create();
                 g2.setColor(g.getColor());
                 int width = 10;
-                RoundRectangle2D lFlip = new RoundRectangle2D.Double(xPos + L - width , yPos, L / 4, L, L / 4, L / 4);
+                RoundRectangle2D lFlip = new RoundRectangle2D.Double(xPos + L - width , yPos, L / 2, L, L / 2, L / 2);
                 g2d.rotate(Math.toRadians(((RightFlipperGizmo) b).getAngle()), xPos + L * 1.25, yPos + L * 0.25);
                 g2d.draw(lFlip);
                 g2d.fill(lFlip);
@@ -99,7 +99,7 @@ public class BuildBoard extends JPanel implements Observer {
 
         for(Absorber abs: model.getAbsorbers()){
             g2.setColor(abs.getColour());
-            g2.fillRect(abs.getXpos1()*L+50, abs.getYpos1()*L+50,
+            g2.fillRect(abs.getXpos1(), abs.getYpos1(),
                     abs.getWidth()*L+L,   abs.getHeight()*L+L);
         }
 

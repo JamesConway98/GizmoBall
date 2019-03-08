@@ -10,6 +10,8 @@ public interface Gizmo {
     public void setHitbox();
     public int getX();
     public int getY();
+    public int getGridX();
+    public int getGridY();
     public int getLength();
     public ArrayList<LineSegment> getEdges();
     public ArrayList<Circle> getVertices();
@@ -20,5 +22,6 @@ public interface Gizmo {
     public void setRotation(int rotation);
     public void rotateClockwise();
     public void rotateAnticlockwise();
+
 
 }
