@@ -27,18 +27,24 @@ public class RunListener implements ActionListener {
 			model.moveBall();
 		} else
 			switch (e.getActionCommand()) {
-			case "Start":
-				timer.start();
-				break;
-			case "Stop":
-				timer.stop();
-				break;
-			case "Tick":
-				model.moveBall();
-				break;
-			case "Quit":
-				System.exit(0);
-				break;
+				case "Start":
+					timer.start();
+					break;
+				case "Stop":
+					timer.stop();
+					break;
+				case "Tick":
+					model.moveBall();
+					break;
+				case "Save":
+					model.saveGame();
+					break;
+				case "Load":
+					model.loadGame();
+					break;
+				case "Quit":
+					System.exit(0);
+					break;
 			}
 	}
 }

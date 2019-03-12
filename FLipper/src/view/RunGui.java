@@ -3,11 +3,14 @@ package view;
 import controller.RunListener;
 import controller.keypressListener;
 import model.Model;
+import view.Board;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyListener;
+
+
 
 /**
  * @author Murray Wood Demonstration of MVC and MIT Physics Collisions 2014
@@ -31,15 +34,14 @@ public class RunGui {
 
 	public void createAndShowGUI() {
 
-		frame = new JFrame("Murray's MIT Ball and VerticalLine Collision Demo");
+		frame = new JFrame("Thur 4 - Save Load");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setFocusable(true);
 		frame.setFocusTraversalKeysEnabled(false);
 		frame.addKeyListener(keyListener);
 
-		// Board is passed the Model so it can act as Observer
+		// Board is passed the Model.Model so it can act as Observer
 		board = new Board(500, 500, model);
-
 		Container cp = frame.getContentPane();
 
 		Font gf = new Font("Arial", Font.BOLD, 12);
@@ -61,19 +63,47 @@ public class RunGui {
 		button2.setMaximumSize(new Dimension(100, 100));
 		buttons.add(button2);
 
-		JButton button4 = new JButton("Tick");
+		JButton button3 = new JButton("Load");
+		button3.setFocusable(false);
+		button3.setFont(gf);
+		button3.addActionListener(listener);
+		button3.setMaximumSize(new Dimension(100, 100));
+		buttons.add(button3);
+
+		JButton button4 = new JButton("Save");
 		button4.setFocusable(false);
 		button4.setFont(gf);
 		button4.addActionListener(listener);
 		button4.setMaximumSize(new Dimension(100, 100));
 		buttons.add(button4);
 
-		JButton button3 = new JButton("Quit");
-		button3.setFocusable(false);
-		button3.setFont(gf);
-		button3.addActionListener(listener);
-		button3.setMaximumSize(new Dimension(100, 100));
-		buttons.add(button3);
+		JButton button5 = new JButton("Tick");
+		button5.setFocusable(false);
+		button5.setFont(gf);
+		button5.addActionListener(listener);
+		button5.setMaximumSize(new Dimension(100, 100));
+		buttons.add(button5);
+
+		JButton button6 = new JButton("Add Square");
+		button6.setFocusable(false);
+		button6.setFont(gf);
+		button6.addActionListener(listener);
+		button6.setMaximumSize(new Dimension(100, 100));
+		buttons.add(button6);
+
+		JButton button7 = new JButton("Add Triangle");
+		button7.setFocusable(false);
+		button7.setFont(gf);
+		button7.addActionListener(listener);
+		button7.setMaximumSize(new Dimension(100, 100));
+		buttons.add(button7);
+
+		JButton button8 = new JButton("Add Flipper");
+		button8.setFocusable(false);
+		button8.setFont(gf);
+		button8.addActionListener(listener);
+		button8.setMaximumSize(new Dimension(100, 100));
+		buttons.add(button8);
 
 		cp.add(buttons, BorderLayout.LINE_START);
 		cp.add(board, BorderLayout.CENTER);
