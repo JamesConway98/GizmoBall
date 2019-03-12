@@ -15,6 +15,9 @@ public class AddPanel extends JPanel {
     private JLabel ballLabel;
     private JLabel absorberLabel;
 
+    private JButton addTabButton;
+    private JButton editTabButton;
+    private JButton settingsTabButton;
     private JButton addSquareButton;
     private JButton addCircleButton;
     private JButton addTriangleButton;
@@ -23,6 +26,8 @@ public class AddPanel extends JPanel {
     private JButton addBallButton;
     private JButton addAbsorberButton;
     private JButton rotateButton;
+    private JButton rotateLeftButton;
+    private JButton rotateRightButton;
 
     private JLabel addInitialVelocityLabel;
     private JLabel addInitialDirectionLabel;
