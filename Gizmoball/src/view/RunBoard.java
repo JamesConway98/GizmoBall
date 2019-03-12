@@ -10,6 +10,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 public class RunBoard extends JPanel implements Observer {
+
     protected int width;
     protected int height;
     public static final int L = 40;
@@ -36,7 +37,7 @@ public class RunBoard extends JPanel implements Observer {
 
         for (Gizmo b : model.getGizmos()) {
             g2.setColor(b.getColour());
-            int xPos = b.getX() * L + 50, yPos = b.getY() * L + 50;
+            int xPos = b.getX(), yPos = b.getY();
             if (b instanceof SquareGizmo) {
                 g2.fillRect(xPos, yPos, L, L);
             } else if (b instanceof CircleGizmo) {
@@ -64,6 +65,7 @@ public class RunBoard extends JPanel implements Observer {
                 }
                 g2.fillPolygon(x, y, 3);
 
+                //The 2 Flippers have been changed to draw in grid cells, so they might not act correctly for collisions
             } else if (b instanceof LeftFlipperGizmo){
                 Graphics2D g2d = (Graphics2D) g.create();
                 g2.setColor(g.getColor());
@@ -121,8 +123,7 @@ public class RunBoard extends JPanel implements Observer {
 
         for(Absorber abs: model.getAbsorbers()){
             g2.setColor(abs.getColour());
-            g2.fillRect(abs.getXpos1()*L+50, abs.getYpos1()*L+50,
-                    abs.getWidth()*L+L,   abs.getHeight()*L+L);
+            g2.fillRect(abs.getXpos1(), abs.getYpos1(),abs.getWidth()*L+L,   abs.getHeight()*L+L);
         }
 
     }
