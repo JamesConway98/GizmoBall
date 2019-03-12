@@ -30,14 +30,26 @@ public class MainFrame {
         JMenuItem saveConfiguration = new JMenuItem("Save Configuration");
         JMenuItem saveAs = new JMenuItem("Save as");
         JMenuItem loadConfiguration = new JMenuItem("Load Configuration");
-        JMenuItem runMode = new JMenuItem("Run Mode");
-        runMode.addActionListener(actionEvent -> {
+        JMenuItem addRunMode = new JMenuItem("Run Mode");
+        JMenuItem addBuildMode = new JMenuItem("Build Mode");
+        addRunMode.addActionListener(actionEvent -> {
             frame.getContentPane().removeAll();
-            frame.add(new RunBoard(500, 500, m));
-            frame.validate();
-            runMode.removeAll();
+            frame.add(runBoard);
+            frame.revalidate();
+            addRunMode.removeAll();
             fileMenu.remove(5);
-            fileMenu.add(new JMenuItem("Build Mode"), 5);
+            fileMenu.add(addBuildMode,5);
+            runBoard.update(null, null);
+        });
+        addBuildMode.addActionListener(actionEvent -> {
+            frame.getContentPane().removeAll();
+            frame.add(addPanel, BorderLayout.WEST);
+            frame.add(buildBoard, BorderLayout.CENTER);
+            frame.revalidate();
+            addRunMode.removeAll();
+            fileMenu.remove(5);
+            fileMenu.add(addRunMode,5);
+            buildBoard.update(null, null);
         });
         JMenuItem quit = new JMenuItem("Quit");
 
@@ -46,7 +58,7 @@ public class MainFrame {
         fileMenu.addSeparator();
         fileMenu.add(loadConfiguration);
         fileMenu.addSeparator();
-        fileMenu.add(runMode);
+        fileMenu.add(addRunMode);
         fileMenu.addSeparator();
         fileMenu.add(quit);
 
