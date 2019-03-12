@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class RightFlipperGizmo implements Gizmo{
     private int xpos, ypos, gridX, gridY;
-    private int length = Model.L;
+    private int length = Model.L*2;
     private int rotation = 0;
     private Color colour;
     private ArrayList<LineSegment> edgeList = new ArrayList<LineSegment>();
