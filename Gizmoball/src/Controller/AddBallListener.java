@@ -19,11 +19,10 @@ public class AddBallListener implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        int x = 0, y =0;
+        int x = 0, y = 0;
         x = e.getX();
         y = e.getY();
-        System.out.println(x + " " + y);
-        model.addBall(new Ball(x, y, 50, 50));
+        model.addBall(new Ball(x, y, -50, -50));
     }
 
     @Override

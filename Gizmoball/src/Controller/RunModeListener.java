@@ -2,31 +2,40 @@ package Controller;
 
 import model.Model;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class RunModeListener implements ActionListener {
 
+    private Timer timer;
     private Model model;
 
     public RunModeListener(Model m) {
         model = m;
+        timer = new Timer(20, this);
     }
 
     @Override
     public final void actionPerformed(final ActionEvent e) {
-        switch (e.getActionCommand()) {
-            case "Start":
-                model.getBall().start();
-                break;
-            case "Stop":
-                model.getBall().stop();
-                break;
-            case "Tick":
-                model.getBall().start();
-                model.getBall().stop();
-                break;
-        }
+
+        if (e.getSource() == timer) {
+            model.moveBall();
+        } else
+            switch (e.getActionCommand()) {
+                case "Start":
+                    timer.start();
+                    break;
+                case "Stop":
+                    timer.stop();
+                    break;
+                case "Tick":
+                    model.moveBall();
+                    break;
+                case "Quit":
+                    System.exit(0);
+                    break;
+            }
     }
 
 }

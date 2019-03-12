@@ -1,5 +1,6 @@
 package main;
 
+import model.Ball;
 import model.CircleGizmo;
 import model.Model;
 import model.SquareGizmo;

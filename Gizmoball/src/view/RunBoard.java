@@ -126,6 +126,16 @@ public class RunBoard extends JPanel implements Observer {
             g2.fillRect(abs.getXpos1(), abs.getYpos1(),abs.getWidth()*L+L,   abs.getHeight()*L+L);
         }
 
+        Ball ball = model.getBall();
+
+        if(ball!=null){
+            g2.setColor(ball.getColour());
+            int x = (int) (ball.getExactX() - ball.getRadius());
+            int y = (int) (ball.getExactY() - ball.getRadius());
+            int width = (int) (2 * ball.getRadius());
+            g2.fillOval(x, y, width, width);
+        }
+
     }
 
     public void setActiveMouseListener(MouseListener ml){
