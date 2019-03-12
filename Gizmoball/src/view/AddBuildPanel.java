@@ -8,7 +8,7 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class AddPanel extends JPanel {
+public class AddBuildPanel extends JPanel {
 
     private JLabel bumperLabel;
     private JLabel flipperLabel;
@@ -31,7 +31,7 @@ public class AddPanel extends JPanel {
 
     private ArrayList<JButton> buttons;
 
-    public AddPanel(Model m){
+    public AddBuildPanel(Model m){
 
         BuildModeListener buildListener = new BuildModeListener(m);
         buttons = new ArrayList<>();

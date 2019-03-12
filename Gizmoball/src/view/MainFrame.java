@@ -10,19 +10,17 @@ public class MainFrame {
 
     private RunBoard runBoard;
     private BuildBoard buildBoard;
-    protected AddSquareListener addSquareListener;
 
     public MainFrame(Model m){
         JFrame frame = new JFrame("Gizmoball");
         frame.setLayout(new BorderLayout());
 
-        addSquareListener = new AddSquareListener(m);
-
         // Board is passed the Model so it can act as Observer
         buildBoard = new BuildBoard(500, 500, m);
         runBoard = new RunBoard(500, 500, m);
 
-        AddPanel addPanel = new AddPanel(m);
+        AddBuildPanel addBuildPanel = new AddBuildPanel(m);
+        AddRunPanel addRunPanel = new AddRunPanel(m);
 
         JMenuBar menuBar = new JMenuBar();
 
@@ -34,7 +32,8 @@ public class MainFrame {
         JMenuItem addBuildMode = new JMenuItem("Build Mode");
         addRunMode.addActionListener(actionEvent -> {
             frame.getContentPane().removeAll();
-            frame.add(runBoard);
+            frame.add(addRunPanel, BorderLayout.WEST);
+            frame.add(runBoard, BorderLayout.CENTER);
             frame.revalidate();
             addRunMode.removeAll();
             fileMenu.remove(5);
@@ -43,7 +42,7 @@ public class MainFrame {
         });
         addBuildMode.addActionListener(actionEvent -> {
             frame.getContentPane().removeAll();
-            frame.add(addPanel, BorderLayout.WEST);
+            frame.add(addBuildPanel, BorderLayout.WEST);
             frame.add(buildBoard, BorderLayout.CENTER);
             frame.revalidate();
             addRunMode.removeAll();
@@ -66,7 +65,7 @@ public class MainFrame {
 
         frame.setJMenuBar(menuBar);
 
-        frame.add(addPanel, BorderLayout.WEST);
+        frame.add(addBuildPanel, BorderLayout.WEST);
         frame.add(buildBoard, BorderLayout.CENTER);
 
         frame.setSize(1300, 900);
