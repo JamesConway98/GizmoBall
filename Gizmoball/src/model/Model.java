@@ -30,7 +30,7 @@ public class Model extends Observable {
 	public Model() {
 
 		// Ball position (25, 25) in pixels. Ball velocity (100, 100) pixels per tick
-		ball = new Ball(500-6.25, 480-6.25, 0, 0);
+		//ball = new Ball(500-6.25, 480-6.25, 0, 0);
 
 		// Wall size 500 x 500 pixels
 		gws = new Walls(0, 0, 500, 500);
@@ -137,13 +137,30 @@ public class Model extends Observable {
 	}
 
 	public void addGizmo(Gizmo g) {
+		removeGizmo(g.getGridX(), g.getGridY());
 		gizmos.add(g);
+		setChanged();
+		notifyObservers();
+	}
+
+	public void removeGizmo(int x, int y) {
+		for(Gizmo gizmo: gizmos){
+			if(gizmo.getGridX()==x && gizmo.getGridY()==y){
+				gizmos.remove(gizmo);
+			}
+		}
 		setChanged();
 		notifyObservers();
 	}
 
 	public ArrayList<Gizmo> getGizmos(){
 		return gizmos;
+	}
+
+	public void addBall(Ball b) {
+		ball = b;
+		setChanged();
+		notifyObservers();
 	}
 
 	public void addAbsorber(Absorber a) {
