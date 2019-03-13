@@ -1,6 +1,5 @@
 package view;
 
-import Controller.AddSquareListener;
 import model.Model;
 
 import javax.swing.*;
@@ -22,6 +21,10 @@ public class MainFrame {
         AddBuildPanel addBuildPanel = new AddBuildPanel(m);
         AddRunPanel addRunPanel = new AddRunPanel(m);
 
+
+        JTabbedPane tabbedPane = new JTabbedPane();
+        tabbedPane.addTab("Add",addBuildPanel);
+
         JMenuBar menuBar = new JMenuBar();
 
         JMenu fileMenu = new JMenu("File");
@@ -42,7 +45,7 @@ public class MainFrame {
         });
         addBuildMode.addActionListener(actionEvent -> {
             frame.getContentPane().removeAll();
-            frame.add(addBuildPanel, BorderLayout.WEST);
+            frame.add(tabbedPane, BorderLayout.WEST);
             frame.add(buildBoard, BorderLayout.CENTER);
             frame.revalidate();
             addRunMode.removeAll();
@@ -65,7 +68,10 @@ public class MainFrame {
 
         frame.setJMenuBar(menuBar);
 
-        frame.add(addBuildPanel, BorderLayout.WEST);
+//        tabbedPane.addTab("Edit",addPanel2);
+//        tabbedPane.addTab("Setting",addPanel3);
+
+        frame.add(tabbedPane, BorderLayout.WEST);
         frame.add(buildBoard, BorderLayout.CENTER);
 
         frame.setSize(1300, 900);
