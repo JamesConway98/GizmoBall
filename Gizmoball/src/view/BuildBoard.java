@@ -1,7 +1,7 @@
 package view;
 
-import Controller.AddSquareListener;
 import model.*;
+import model.Gizmos.*;
 
 import javax.swing.*;
 import java.awt.*;

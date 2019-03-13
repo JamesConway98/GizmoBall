@@ -1,6 +1,7 @@
 package view;
 
 import model.*;
+import model.Gizmos.*;
 
 import javax.swing.*;
 import java.awt.*;

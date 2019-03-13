@@ -1,7 +1,7 @@
 package Controller;
 
 import model.Model;
-import model.TriangleGizmo;
+import model.Gizmos.*;
 import view.BuildBoard;
 
 import java.awt.event.MouseEvent;
@@ -20,7 +20,7 @@ public class AddTriangleListener implements MouseListener {
         int x = 0, y =0;
         x = (e.getX() - 50)/ BuildBoard.L;
         y = (e.getY() - 50)/ BuildBoard.L;
-        model.addGizmo(new TriangleGizmo(x, y));
+        model.addGizmo(new TriangleGizmo("T1", x, y));
     }
 
     @Override

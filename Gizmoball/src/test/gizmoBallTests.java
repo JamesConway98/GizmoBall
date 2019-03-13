@@ -1,6 +1,7 @@
 package test;
 
 import model.*;
+import model.Gizmos.*;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -19,15 +20,15 @@ public class gizmoBallTests {
     public void addGizmoTest(){
         assertEquals(model.getGizmo().size(), 0);
 
-        Gizmo square = new SquareGizmo(5,5);
+        Gizmo square = new SquareGizmo("S1",5,5);
         model.addGizmo(square);
         assertEquals(model.getGizmo().size(), 1);
 
-        Gizmo triangle = new TriangleGizmo(7,7);
+        Gizmo triangle = new TriangleGizmo("T1",7,7);
         model.addGizmo(triangle);
         assertEquals(model.getGizmo().size(), 2);
 
-        Gizmo circle = new CircleGizmo(9,9);
+        Gizmo circle = new CircleGizmo("C1",9,9);
         model.addGizmo(circle);
         assertEquals(model.getGizmo().size(), 3);
 
@@ -35,8 +36,8 @@ public class gizmoBallTests {
 
     @org.junit.Test
     public void addGizmoToOccupiedLocationTest(){
-        Gizmo square = new SquareGizmo(5,5);
-        Gizmo triangle = new SquareGizmo(5,5);
+        Gizmo square = new SquareGizmo("S1",5,5);
+        Gizmo triangle = new SquareGizmo("S2",5,5);
         assertEquals(model.getGizmo().size(), 0);
 
         model.addGizmo(square);
@@ -50,7 +51,7 @@ public class gizmoBallTests {
 
     @org.junit.Test
     public void addGizmoToLocationOutsideOfBoardTest(){
-        Gizmo square = new SquareGizmo(-5,-5);
+        Gizmo square = new SquareGizmo("S1",-5,-5);
         assertEquals(model.getGizmo().size(), 0);
         model.addGizmo(square);
         assertEquals(model.getGizmo().size(), 0);
@@ -59,7 +60,7 @@ public class gizmoBallTests {
     @org.junit.Test
     public void moveGizmoTest() {
         assertEquals(model.getGizmo().size(), 0);
-        Gizmo square = new SquareGizmo(5,5);
+        Gizmo square = new SquareGizmo("S1",5,5);
         model.addGizmo(square);
         assertEquals(model.getGizmo().size(), 1);
         //model.moveGizmoMethod(square, NewXCoord, NewYCoord);
@@ -71,8 +72,8 @@ public class gizmoBallTests {
     @org.junit.Test
     public void moveGizmoToOccupiedLocationTest() {
         assertEquals(model.getGizmo().size(), 0);
-        Gizmo square = new SquareGizmo(5,5);
-        Gizmo square2 = new SquareGizmo(7,7);
+        Gizmo square = new SquareGizmo("S1",5,5);
+        Gizmo square2 = new SquareGizmo("S2",7,7);
         model.addGizmo(square);
         model.addGizmo(square2);
         assertEquals(model.getGizmo().size(), 2);
@@ -89,7 +90,7 @@ public class gizmoBallTests {
     @org.junit.Test
     public void moveGizmoToLocationOutsideOfBoardTest() {
         assertEquals(model.getGizmo().size(), 0);
-        Gizmo square = new SquareGizmo(5,5);
+        Gizmo square = new SquareGizmo("S1",5,5);
         model.addGizmo(square);
         assertEquals(model.getGizmo().size(), 1);
         //model.moveGizmoMethod(square, -5, -5);
@@ -102,7 +103,7 @@ public class gizmoBallTests {
     @org.junit.Test
     public void deleteGizmoTest() {
         assertEquals(model.getGizmo().size(), 0);
-        Gizmo square = new SquareGizmo(5,5);
+        Gizmo square = new SquareGizmo("S2",5,5);
         model.addGizmo(square);
         assertEquals(model.getGizmo().size(), 1);
         //model.removeGizmoMethod(identifierForGizmo);
@@ -113,7 +114,7 @@ public class gizmoBallTests {
     @org.junit.Test
     public void deleteNonExistingGizmoTest() {
         assertEquals(model.getGizmo().size(), 0);
-        Gizmo square = new SquareGizmo(5,5);
+        Gizmo square = new SquareGizmo("S1",5,5);
         model.addGizmo(square);
         assertEquals(model.getGizmo().size(), 1);
         //model.removeGizmoMethod(BogusGizmo);
@@ -123,7 +124,7 @@ public class gizmoBallTests {
 
     @org.junit.Test
     public void rotateGizmoTest() {
-        Gizmo triangle = new TriangleGizmo(5,5);
+        Gizmo triangle = new TriangleGizmo("T1",5,5);
         model.addGizmo(triangle);
         assertEquals(triangle.getRotation(), 0);
         triangle.rotateClockwise();
@@ -138,7 +139,7 @@ public class gizmoBallTests {
 
     @org.junit.Test
     public void rotateGizmoAntiClockWiseTest() {
-        Gizmo triangle = new TriangleGizmo(5,5);
+        Gizmo triangle = new TriangleGizmo("T1",5,5);
         model.addGizmo(triangle);
         assertEquals(triangle.getRotation(), 0);
         triangle.rotateAnticlockwise();
@@ -153,8 +154,8 @@ public class gizmoBallTests {
 
     @org.junit.Test
     public void addConnectionTest() {
-        Gizmo square = new SquareGizmo(5,5);
-        Gizmo square2 = new SquareGizmo(10,10);
+        Gizmo square = new SquareGizmo("S1",5,5);
+        Gizmo square2 = new SquareGizmo("S2",10,10);
         model.addGizmo(square);
         model.addGizmo(square2);
         //assertFalse(square.hasConnection());
@@ -165,8 +166,8 @@ public class gizmoBallTests {
 
     @org.junit.Test
     public void removeConnectionTest() {
-        Gizmo square = new SquareGizmo(5,5);
-        Gizmo square2 = new SquareGizmo(10,10);
+        Gizmo square = new SquareGizmo("S1",5,5);
+        Gizmo square2 = new SquareGizmo("S2",10,10);
         model.addGizmo(square);
         model.addGizmo(square2);
         //assertFalse(square.hasConnection());
@@ -179,7 +180,7 @@ public class gizmoBallTests {
 
     @org.junit.Test
     public void addkeyConnectionTest() {
-        Gizmo square = new SquareGizmo(5,5);
+        Gizmo square = new SquareGizmo("S1",5,5);
         model.addGizmo(square);
         //assertFalse(square.hasKeyConnection());
         //model.addKeyConnectionMethod(square, key);
@@ -189,7 +190,7 @@ public class gizmoBallTests {
 
     @org.junit.Test
     public void removeKeyConnectionTest() {
-        Gizmo square = new SquareGizmo(5,5);
+        Gizmo square = new SquareGizmo("S1",5,5);
         model.addGizmo(square);
         //assertFalse(square.hasKeyConnection());
         //model.addKeyConnectionMethod(square, key);
@@ -208,7 +209,7 @@ public class gizmoBallTests {
 
     @org.junit.Test
     public void addBallToOccupiedLocationTest() {
-        Gizmo square = new SquareGizmo(5 , 5);
+        Gizmo square = new SquareGizmo("S1",5 , 5);
         // assertNull(model.getBall());
         // model.addBallMethod(x , y, )
         // assertNotNull(model.getBall());

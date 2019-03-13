@@ -1,6 +1,6 @@
 package Controller;
 
-import model.CircleGizmo;
+import model.Gizmos.CircleGizmo;
 import model.Model;
 import view.BuildBoard;
 
@@ -20,7 +20,8 @@ public class AddCircleListener implements MouseListener {
         int x = 0, y =0;
         x = (e.getX() - 50)/ BuildBoard.L;
         y = (e.getY() - 50)/ BuildBoard.L;
-        model.addGizmo(new CircleGizmo(x, y));
+        //TODO unique ids
+        model.addGizmo(new CircleGizmo("C1", x, y));
     }
 
     @Override
