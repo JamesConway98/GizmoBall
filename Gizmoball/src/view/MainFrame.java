@@ -1,5 +1,6 @@
 package view;
 
+import Controller.FileMenuListener;
 import model.Model;
 
 import javax.swing.*;
@@ -9,6 +10,7 @@ public class MainFrame {
 
     private RunBoard runBoard;
     private BuildBoard buildBoard;
+    private FileMenuListener menuListener;
 
     public MainFrame(Model m){
         JFrame frame = new JFrame("Gizmoball");
@@ -17,6 +19,8 @@ public class MainFrame {
         // Board is passed the Model so it can act as Observer
         buildBoard = new BuildBoard(500, 500, m);
         runBoard = new RunBoard(500, 500, m);
+
+        menuListener = new FileMenuListener(m);
 
         AddBuildPanel addBuildPanel = new AddBuildPanel(m);
         EditBuildPanel editBuildPanel = new EditBuildPanel(m);
@@ -33,8 +37,11 @@ public class MainFrame {
 
         JMenu fileMenu = new JMenu("File");
         JMenuItem saveConfiguration = new JMenuItem("Save Configuration");
+        saveConfiguration.addActionListener(menuListener);
         JMenuItem saveAs = new JMenuItem("Save as");
+        saveAs.addActionListener(menuListener);
         JMenuItem loadConfiguration = new JMenuItem("Load Configuration");
+        loadConfiguration.addActionListener(menuListener);
         JMenuItem changeToRunMode = new JMenuItem("Run Mode");
         JMenuItem changeToBuildMode = new JMenuItem("Build Mode");
         changeToRunMode.addActionListener(actionEvent -> {
@@ -55,7 +62,7 @@ public class MainFrame {
             changeToRunMode.removeAll();
             fileMenu.remove(5);
             fileMenu.add(changeToRunMode,5);
-            addRunPanel.getRunListener().stopTimer();
+            //addRunPanel.getRunListener().stopTimer();
             //m.getBall().setExactX(ballXCoordinate);
             //m.getBall().setExactY(ballYCoordinate);
             buildBoard.update(null, null);
