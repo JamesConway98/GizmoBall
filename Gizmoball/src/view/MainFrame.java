@@ -35,26 +35,29 @@ public class MainFrame {
         JMenuItem saveConfiguration = new JMenuItem("Save Configuration");
         JMenuItem saveAs = new JMenuItem("Save as");
         JMenuItem loadConfiguration = new JMenuItem("Load Configuration");
-        JMenuItem addRunMode = new JMenuItem("Run Mode");
-        JMenuItem addBuildMode = new JMenuItem("Build Mode");
-        addRunMode.addActionListener(actionEvent -> {
+        JMenuItem changeToRunMode = new JMenuItem("Run Mode");
+        JMenuItem changeToBuildMode = new JMenuItem("Build Mode");
+        changeToRunMode.addActionListener(actionEvent -> {
             frame.getContentPane().removeAll();
             frame.add(addRunPanel, BorderLayout.WEST);
             frame.add(runBoard, BorderLayout.CENTER);
             frame.revalidate();
-            addRunMode.removeAll();
+            changeToRunMode.removeAll();
             fileMenu.remove(5);
-            fileMenu.add(addBuildMode,5);
+            fileMenu.add(changeToBuildMode,5);
             runBoard.update(null, null);
         });
-        addBuildMode.addActionListener(actionEvent -> {
+        changeToBuildMode.addActionListener(actionEvent -> {
             frame.getContentPane().removeAll();
             frame.add(tabbedPane, BorderLayout.WEST);
             frame.add(buildBoard, BorderLayout.CENTER);
             frame.revalidate();
-            addRunMode.removeAll();
+            changeToRunMode.removeAll();
             fileMenu.remove(5);
-            fileMenu.add(addRunMode,5);
+            fileMenu.add(changeToRunMode,5);
+            addRunPanel.getRunListener().stopTimer();
+            //m.getBall().setExactX(ballXCoordinate);
+            //m.getBall().setExactY(ballYCoordinate);
             buildBoard.update(null, null);
         });
         JMenuItem quit = new JMenuItem("Quit");
@@ -64,7 +67,7 @@ public class MainFrame {
         fileMenu.addSeparator();
         fileMenu.add(loadConfiguration);
         fileMenu.addSeparator();
-        fileMenu.add(addRunMode);
+        fileMenu.add(changeToRunMode);
         fileMenu.addSeparator();
         fileMenu.add(quit);
 
