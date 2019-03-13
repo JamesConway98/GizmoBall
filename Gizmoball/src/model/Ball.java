@@ -30,7 +30,7 @@ public class Ball {
 		previousYPos = ypos;
 		colour = Color.BLUE;
 		velocity = new Vect(xv, yv);
-		radius = 20;
+		radius = Model.L/3;
 		stopped = false;
 		speed = velocity.length();
 	}
