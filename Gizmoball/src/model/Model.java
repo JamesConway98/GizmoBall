@@ -7,7 +7,6 @@ import physics.Vect;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Observable;
-import java.util.Observer;
 
 public class Model extends Observable {
 
@@ -155,6 +154,28 @@ public class Model extends Observable {
 
 	public ArrayList<Gizmo> getGizmos(){
 		return gizmos;
+	}
+
+	public ArrayList<String> getGizmo(){
+		ArrayList<String> a = new ArrayList<>();
+		if (gizmos.size() == 0){
+			return a;
+		} else {
+			for (Gizmo b : gizmos){
+				if (b instanceof SquareGizmo) {
+					a.add("SquareGizmo" + String.valueOf(b.getX()) + String.valueOf(b.getY()));
+				} else if (b instanceof CircleGizmo) {
+					a.add( "CircleGizmo" + String.valueOf(b.getX()) + String.valueOf(b.getY()));
+				} else if (b instanceof TriangleGizmo) {
+					a.add("TriangleGizmo" + String.valueOf(b.getX()) + String.valueOf(b.getY()));
+				} else if (b instanceof  LeftFlipperGizmo){
+					a.add("LeftFlipper" + String.valueOf(b.getX()) + String.valueOf(b.getY()));
+				} else if (b instanceof  RightFlipperGizmo){
+					a.add("RightFlipper" + String.valueOf(b.getX()) + String.valueOf(b.getY()));
+				}
+			}
+			return a;
+		}
 	}
 
 	public void addBall(Ball b) {
