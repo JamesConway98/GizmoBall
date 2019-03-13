@@ -31,8 +31,8 @@ public class GameSaver {
                     writer.append("\nSquare S" + i + " " + gizmo.getX() / 25 + " " + gizmo.getY() / 25);
                 }else if(gizmo instanceof Absorber){
                     Absorber absorber = (Absorber)gizmo;
-                    writer.append("\nAbsorber A" + i + " " + absorber.getXpos1() / 25 + " " + absorber.getYpos1() / 25
-                            + " " + absorber.getXpos2() / 25 + " " + absorber.getYpos2() / 25);
+                    writer.append("\nAbsorber A" + i + " " + absorber.getGridX1() / 25 + " " + absorber.getGridY1() / 25
+                            + " " + absorber.getGridX2() / 25 + " " + absorber.getGridY2() / 25);
                 }else if(gizmo instanceof LeftFlipperGizmo){
                     writer.append("\nLeftFlipper LF" + i + " " + gizmo.getX() / 25 + " " + gizmo.getY() / 25);
                     int index = 0;

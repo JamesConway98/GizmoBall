@@ -13,7 +13,7 @@ public class RunModeListener implements ActionListener {
 
     public RunModeListener(Model m) {
         model = m;
-        timer = new Timer(20, this);
+        timer = new Timer(30, this);
     }
 
     @Override
@@ -21,8 +21,7 @@ public class RunModeListener implements ActionListener {
 
         if (e.getSource() == timer) {
             model.moveBall();
-        } else
-            switch (e.getActionCommand()) {
+        } else switch (e.getActionCommand()) {
                 case "Start":
                     timer.start();
                     break;
@@ -35,7 +34,13 @@ public class RunModeListener implements ActionListener {
                 case "Quit":
                     System.exit(0);
                     break;
-            }
+                case "Build Mode":
+                    timer.stop();
+                    break;
+        }
     }
 
+    public void stopTimer() {
+        timer.stop();
+    }
 }

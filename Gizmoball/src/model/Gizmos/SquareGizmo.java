@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class SquareGizmo implements Gizmo{
     private String ID;
-    private int xpos, ypos, gridX, gridY;
+    private int gridX, gridY;
     private int length = Model.L;
     private int rotation = 0;
     private Color colour;
@@ -35,7 +35,7 @@ public class SquareGizmo implements Gizmo{
     }
 
     public void setHitbox() {
-        clearCollisions();;
+        clearCollisions();
         int x = getX();
         int y = getY();
         int L = getLength();
