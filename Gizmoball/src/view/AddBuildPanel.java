@@ -23,6 +23,8 @@ public class AddBuildPanel extends JPanel {
     private JButton addBallButton;
     private JButton addAbsorberButton;
     private JButton rotateButton;
+    private JButton deleteButton;
+    private JButton addKeyTriggerButton;
 
     private JLabel addInitialVelocityLabel;
     private JLabel addInitialDirectionLabel;
@@ -61,6 +63,10 @@ public class AddBuildPanel extends JPanel {
         buttons.add(addAbsorberButton);
         rotateButton = new JButton("Rotate");
         buttons.add(rotateButton);
+        deleteButton = new JButton("Delete");
+        buttons.add(deleteButton);
+        addKeyTriggerButton = new JButton("Add Key Trigger");
+        buttons.add(deleteButton);
 
         for(JButton button: buttons){
             button.addActionListener(buildListener);
@@ -157,6 +163,11 @@ public class AddBuildPanel extends JPanel {
         gc.anchor = GridBagConstraints.LINE_END;
         gc.insets = new Insets(0,0,0,0);
         add(addRightFlipperButton, gc);
+
+        gc.gridx = 1;
+        gc.gridy = 10;
+        gc.anchor = GridBagConstraints.FIRST_LINE_END;
+        add(addKeyTriggerButton, gc);
 
 
         /////////////////// Next (Spacing) Row ////////////////////////////
@@ -264,6 +275,10 @@ public class AddBuildPanel extends JPanel {
         gc.gridx = 1;
         gc.anchor = GridBagConstraints.FIRST_LINE_START;
         add(rotateButton, gc);
+
+        gc.gridx = 2;
+        gc.anchor = GridBagConstraints.FIRST_LINE_START;
+        add(deleteButton, gc);
 
     }
 

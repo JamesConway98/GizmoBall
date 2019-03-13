@@ -9,7 +9,7 @@ import java.awt.event.MouseListener;
 
 public class AddAbsorberListener implements MouseListener {
 
-    private int initialGridX, initialGridY, finalGridX, finalGridY;
+    private int initialGridX, initialGridY, finalGridX, finalGridY, leftX, rightX, topY, bottomY;
     private Model model;
 
     public AddAbsorberListener(Model m) {
@@ -31,7 +31,12 @@ public class AddAbsorberListener implements MouseListener {
     public void mouseReleased(MouseEvent e) {
         finalGridX = (e.getX()- 50)/ BuildBoard.L;
         finalGridY = (e.getY()- 50)/ BuildBoard.L;
-        model.addAbsorber(new Absorber(initialGridX, initialGridY, finalGridX, finalGridY));
+        leftX = Math.min(initialGridX, finalGridX);
+        rightX = Math.max(initialGridX, finalGridX);
+        topY = Math.min(initialGridY, finalGridY);
+        bottomY = Math.max(initialGridY, finalGridY);
+
+        model.addAbsorber(new Absorber(leftX, topY, rightX, bottomY));
     }
 
     @Override

@@ -137,20 +137,26 @@ public class Model extends Observable {
 	}
 
 	public void addGizmo(Gizmo g) {
-		removeGizmo(g.getGridX(), g.getGridY());
+		removeGizmo(g);
 		gizmos.add(g);
 		setChanged();
 		notifyObservers();
 	}
 
-	public void removeGizmo(int x, int y) {
-		for(Gizmo gizmo: gizmos){
-			if(gizmo.getGridX()==x && gizmo.getGridY()==y){
-				gizmos.remove(gizmo);
-			}
-		}
+	public void removeGizmo(Gizmo gizmo) {
+		gizmos.remove(gizmo);
 		setChanged();
 		notifyObservers();
+	}
+
+	public void clearGridSpace(int x, int y){
+		Gizmo gizmoInBox = null;
+		for(Gizmo gizmo: gizmos){
+			if(gizmo.getGridX()==x && gizmo.getGridY()==y){
+				gizmoInBox = gizmo;
+			}
+		}
+		removeGizmo(gizmoInBox);
 	}
 
 	public ArrayList<Gizmo> getGizmos(){
