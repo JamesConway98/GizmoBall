@@ -19,11 +19,15 @@ public class MainFrame {
         runBoard = new RunBoard(500, 500, m);
 
         AddBuildPanel addBuildPanel = new AddBuildPanel(m);
+        EditBuildPanel editBuildPanel = new EditBuildPanel(m);
         AddRunPanel addRunPanel = new AddRunPanel(m);
+        SettingsBuildPanel settingsBuildPanel = new SettingsBuildPanel(m);
 
 
         JTabbedPane tabbedPane = new JTabbedPane();
         tabbedPane.addTab("Add",addBuildPanel);
+        tabbedPane.addTab("Edit", editBuildPanel);
+        tabbedPane.addTab("Settings", settingsBuildPanel);
 
         JMenuBar menuBar = new JMenuBar();
 
