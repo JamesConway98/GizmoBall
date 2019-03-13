@@ -12,12 +12,16 @@ public class AddRunPanel extends JPanel {
     private JButton start;
     private JButton tick;
     private JButton stop;
-
+    private RunModeListener runListener;
     private ArrayList<JButton> buttons;
+
+    public RunModeListener getRunListener() {
+        return runListener;
+    }
 
     public AddRunPanel(Model m){
 
-        RunModeListener runListener = new RunModeListener(m);
+        runListener = new RunModeListener(m);
         buttons = new ArrayList<>();
 
         Dimension dim = getPreferredSize();

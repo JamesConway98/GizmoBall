@@ -18,6 +18,10 @@ public class Absorber {
         this.gridY1 = gridY1;
         this.gridX2 = gridX2;
         this.gridY2 = gridY2;
+        this.xpos1 = gridX1*Model.L+50;
+        this.ypos1 = gridY1*Model.L+50;
+        this.xpos2 = gridX2*Model.L+50;
+        this.ypos2 = gridY2*Model.L+50;
 
         width = gridX2 - gridX1;
         height = gridY2 - gridY1;
@@ -37,19 +41,19 @@ public class Absorber {
     }
 
     public int getXpos1() {
-        return gridX1*Model.L+50;
+        return xpos1;
     }
 
     public int getYpos1() {
-        return gridY1*Model.L+50;
+        return ypos1;
     }
 
     public int getXpos2() {
-        return gridX2*Model.L+50;
+        return xpos2;
     }
 
     public int getYpos2() {
-        return gridY2*Model.L+50;
+        return ypos2;
     }
 
     public int getGridX1() {

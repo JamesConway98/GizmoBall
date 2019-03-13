@@ -65,19 +65,6 @@ public class Model extends Observable {
 				ball = movelBallForTime(ball, tuc);
 				// Post collision velocity ...
 				ball.setVelo(cd.getVelo());
-				ball.stop();
-				Thread t = new Thread(new Runnable() {
-					@Override
-					public void run() {
-						try {
-							Thread.sleep(400);
-							ball.start();
-						} catch(InterruptedException ex) {
-							ex.printStackTrace();
-						}
-					}
-				});
-				t.start();
 			}
 			if (tuc > moveTime) {
 				moveFlippers(moveTime);
@@ -86,8 +73,8 @@ public class Model extends Observable {
 			}
 
 			//Apply friction and gravity
-			double friction = 1 - (MU /moveTime) * moveTime - (MU2 /L) * Math.abs(ball.getVelo().length()) * moveTime;
-			ball.setVelo(ball.getVelo().times(friction).plus(new Vect(0, GRAVITY*L*moveTime)));
+			double friction = 1 - (MU /moveTime) * moveTime - (MU2 / L) * Math.abs(ball.getVelo().length()) * moveTime;
+			ball.setVelo(ball.getVelo().times(friction).plus(new Vect(0, GRAVITY * L * moveTime)));
 
 
 			// Notify observers ... redraw updated view
@@ -128,12 +115,10 @@ public class Model extends Observable {
 			ArrayList<LineSegment> lines = absorber.getLineSegments();
 			for (LineSegment line : lines) {
 				if(checkWallCollision(line, 0)) {
-					newVelo = Geometry.reflectWall(line, ball.getVelo(), 0);
 					if(time < 0.05) {
-						ball.stop();
-						ball.setExactX(absorber.getXpos1() + absorber.getXpos2() -ball.getRadius());
-						//TODO change yPos variables
-						ball.setExactY(absorber.getYpos2() -ball.getRadius());
+					    ball.stop();
+                        ball.setExactX(absorber.getXpos2());
+                        ball.setExactY(absorber.getYpos1());
 					}
 				}
 			}
