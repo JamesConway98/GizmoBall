@@ -298,6 +298,12 @@ public class Model extends Observable {
 		notifyObservers();
 	}
 
+	public void clearAbsorbers() {
+		abs.clear();
+		setChanged();
+		notifyObservers();
+	}
+
 	public ArrayList<Absorber> getAbsorbers() {
 		return abs;
 	}
@@ -378,6 +384,7 @@ public class Model extends Observable {
 		GameSaver gs = new GameSaver();
 		File file = new File("boardSave.txt");
 		gs.saveGizmos(gizmos, file);
+        gs.saveAbsorbers(abs, file);
 		gs.saveBall(ball, file);
 		gs.saveFriction(mu, mu2, file);
 		gs.saveGravity(gravity, file);
@@ -388,11 +395,10 @@ public class Model extends Observable {
 		if (fileChooser.showSaveDialog(saveFile) == JFileChooser.APPROVE_OPTION) {
 			File file = fileChooser.getSelectedFile();
 			file = new File(file.toString() + ".txt");
-			GameSaver gs = new GameSaver();
-			gs.saveGizmos(gizmos, file);
-			gs.saveBall(ball, file);
-			gs.saveFriction(mu, mu2, file);
-			gs.saveGravity(gravity, file);
+			GameSaver gs = new GameSaver();gs.saveGizmos(gizmos, file);
+		gs.saveAbsorbers(abs);gs.saveBall(ball, file);
+		gs.saveFriction(mu, mu2, file);
+		gs.saveGravity(gravity, file);
 		}
 	}
 

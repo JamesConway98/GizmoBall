@@ -18,9 +18,9 @@ public class AddRightFlipperListener implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         int x = 0, y = 0;
-        x = (e.getX() - 50)/ BuildBoard.L;
+        x = ((e.getX() - 50)/ BuildBoard.L) - 1;
         y = (e.getY() - 50)/ BuildBoard.L;
-        if(x >= 0 && x <= 18 && y >= 0 && y <= 18) {
+        if(x >= 0 && x <= 17 && y >= 0 && y <= 18) {
             //TODO unique ids
             model.addGizmo(new RightFlipperGizmo("RF1", x, y));
         }

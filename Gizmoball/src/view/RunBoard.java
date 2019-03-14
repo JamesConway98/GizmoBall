@@ -97,36 +97,27 @@ public class RunBoard extends JPanel implements Observer {
                 g2d.draw(lFlip);
                 g2d.fill(lFlip);
                 g2d.dispose();
-                Graphics2D g2e = (Graphics2D) g.create();
-                g2e.setColor(Color.RED);
-                g2e.drawRect(((int) ((LeftFlipperGizmo) b).v1.x()), ((int) ((LeftFlipperGizmo) b).v1.y()), 100, 100);
-                g2e.drawRect(((int) ((LeftFlipperGizmo) b).v2.x()), ((int) ((LeftFlipperGizmo) b).v2.y()), 100, 100);
-                g2e.drawRect(((int) ((LeftFlipperGizmo) b).v3.x()), ((int) ((LeftFlipperGizmo) b).v3.y()), 100, 100);
-                g2e.drawRect(((int) ((LeftFlipperGizmo) b).v4.x()), ((int) ((LeftFlipperGizmo) b).v4.y()), 100, 100);
-                g2e.drawRect(((int) ((LeftFlipperGizmo) b).v5.x()), ((int) ((LeftFlipperGizmo) b).v5.y()), 100, 100);
-                g2e.drawRect(((int) ((LeftFlipperGizmo) b).v6.x()), ((int) ((LeftFlipperGizmo) b).v6.y()), 100, 100);
-                g2e.dispose();
 
             } else if (b instanceof RightFlipperGizmo){
                 Graphics2D g2d = (Graphics2D) g.create();
                 g2.setColor(g.getColor());
                 int rfr = b.getRotation();
-                RoundRectangle2D lFlip = new RoundRectangle2D.Double(b.getX() + 1.5 * b.getLength(), b.getY(), b.getLength()/2, b.getLength()*2, b.getLength()/2, b.getLength()/2);
+                RoundRectangle2D rFlip = new RoundRectangle2D.Double(b.getX() + 1.5 * b.getLength(), b.getY(), b.getLength()/2, b.getLength()*2, b.getLength()/2, b.getLength()/2);
                 if (rfr == 2) {
-                    lFlip = new RoundRectangle2D.Double(b.getX(), b.getY(), b.getLength()/2, b.getLength()*2, b.getLength()/2, b.getLength()/2);
+                    rFlip = new RoundRectangle2D.Double(b.getX(), b.getY(), b.getLength()/2, b.getLength()*2, b.getLength()/2, b.getLength()/2);
                     g2d.rotate(Math.toRadians(((RightFlipperGizmo) b).getAngle()), b.getX() + b.getLength() * 0.25, b.getY() + b.getLength() * 1.75);
                 } else if(rfr == 3) {
-                    lFlip = new RoundRectangle2D.Double(b.getX(), b.getY(), b.getLength()*2, b.getLength()/2, b.getLength()/2, b.getLength()/2);
+                    rFlip = new RoundRectangle2D.Double(b.getX(), b.getY(), b.getLength()*2, b.getLength()/2, b.getLength()/2, b.getLength()/2);
                     g2d.rotate(Math.toRadians(((RightFlipperGizmo) b).getAngle()), b.getX() + b.getLength() * 0.25, b.getY() + b.getLength() * 0.25);
                 } else if(rfr == 0) {
-                    lFlip = new RoundRectangle2D.Double(b.getX() + (1.5 * b.getLength()), b.getY() , b.getLength()/2, b.getLength()*2, b.getLength()/2, b.getLength()/2);
+                    rFlip = new RoundRectangle2D.Double(b.getX() + (1.5 * b.getLength()), b.getY() , b.getLength()/2, b.getLength()*2, b.getLength()/2, b.getLength()/2);
                     g2d.rotate(Math.toRadians(((RightFlipperGizmo) b).getAngle()), b.getX() + b.getLength() * 1.75, b.getY() + b.getLength() * 0.25);
                 } else if(rfr == 1) {
-                    lFlip = new RoundRectangle2D.Double(b.getX(), b.getY() + (1.5 * b.getLength()), b.getLength()*2, b.getLength()/2, b.getLength()/2, b.getLength()/2);
+                    rFlip = new RoundRectangle2D.Double(b.getX(), b.getY() + (1.5 * b.getLength()), b.getLength()*2, b.getLength()/2, b.getLength()/2, b.getLength()/2);
                     g2d.rotate(Math.toRadians(((RightFlipperGizmo) b).getAngle()), b.getX() + b.getLength() * 1.75, b.getY() + b.getLength() * 1.75);
                 }
-                g2d.draw(lFlip);
-                g2d.fill(lFlip);
+                g2d.draw(rFlip);
+                g2d.fill(rFlip);
                 g2d.dispose();
             }
         }
