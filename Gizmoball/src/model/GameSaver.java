@@ -7,14 +7,14 @@ import java.util.ArrayList;
 
 public class GameSaver {
 
-    public void saveGizmos(ArrayList<Gizmo> gizmos){
+    public void saveGizmos(ArrayList<Gizmo> gizmos, File file){
         try (
                 Writer writer = new BufferedWriter(new OutputStreamWriter(
-                        new FileOutputStream("file.txt", true), "utf-8"))) {
+                        new FileOutputStream(file, true), "utf-8"))) {
 
             int i = 0;
 
-            clearSaveFile();
+            clearSaveFile(file);
 
             for(Gizmo gizmo: gizmos){
                 if(gizmo instanceof CircleGizmo) {
@@ -55,12 +55,12 @@ public class GameSaver {
         }
     }
 
-    public void saveBall(Ball ball){
+    public void saveBall(Ball ball, File file){
         if(ball == null)
             return;
         try (
                 Writer writer = new BufferedWriter(new OutputStreamWriter(
-                        new FileOutputStream("file.txt", true), "utf-8"))) {
+                        new FileOutputStream(file, true), "utf-8"))) {
 
         	double bx = ball.getExactX() / 25;
         	double by = ball.getExactY() / 25;
@@ -73,10 +73,10 @@ public class GameSaver {
         }
     }
 
-    public void saveGravity(Float grav){
+    public void saveGravity(Float grav, File file){
         try (
                 Writer writer = new BufferedWriter(new OutputStreamWriter(
-                        new FileOutputStream("file.txt", true), "utf-8"))) {
+                        new FileOutputStream(file, true), "utf-8"))) {
 
             writer.append("\nGravity " + grav);
 
@@ -85,10 +85,10 @@ public class GameSaver {
         }
     }
 
-    public void saveFriction(Float mu, Float mu2){
+    public void saveFriction(Float mu, Float mu2, File file){
         try (
                 Writer writer = new BufferedWriter(new OutputStreamWriter(
-                        new FileOutputStream("file.txt", true), "utf-8"))) {
+                        new FileOutputStream(file, true), "utf-8"))) {
 
             writer.append("\nFriction " + mu + " " + mu2);
 
@@ -97,10 +97,10 @@ public class GameSaver {
         }
     }
 
-    public void clearSaveFile(){
+    public void clearSaveFile(File file){
         try (
                 Writer writer = new BufferedWriter(new OutputStreamWriter(
-                        new FileOutputStream("file.txt"), "utf-8"))) {
+                        new FileOutputStream(file), "utf-8"))) {
 
             writer.write("");
 

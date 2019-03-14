@@ -24,7 +24,9 @@ public class FileMenuListener implements ActionListener {
                 System.out.println("HIUHIHUI");
                 model.saveGame();
                 break;
-
+            case "Save as":
+                model.saveAs();
+                break;
         }
     }
 

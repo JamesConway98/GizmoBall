@@ -6,7 +6,10 @@ import physics.Geometry;
 import physics.LineSegment;
 import physics.Vect;
 
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseListener;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
@@ -30,6 +33,7 @@ public class Model extends Observable {
 	private Vect newVelo = new Vect(0, 0);
 	private GameLoader loader;
 	private GameSaver saver;
+	final JFileChooser saveFile = new JFileChooser();
 
 	private MouseListener activeMouseListener;
 
@@ -372,10 +376,24 @@ public class Model extends Observable {
 
 	public void saveGame(){
 		GameSaver gs = new GameSaver();
-		gs.saveGizmos(gizmos);
-		gs.saveBall(ball);
-		gs.saveFriction(mu, mu2);
-		gs.saveGravity(gravity);
+		File file = new File("boardSave.txt");
+		gs.saveGizmos(gizmos, file);
+		gs.saveBall(ball, file);
+		gs.saveFriction(mu, mu2, file);
+		gs.saveGravity(gravity, file);
+	}
+
+	public void saveAs(){
+		JFileChooser fileChooser = new JFileChooser();
+		if (fileChooser.showSaveDialog(saveFile) == JFileChooser.APPROVE_OPTION) {
+			File file = fileChooser.getSelectedFile();
+			file = new File(file.toString() + ".txt");
+			GameSaver gs = new GameSaver();
+			gs.saveGizmos(gizmos, file);
+			gs.saveBall(ball, file);
+			gs.saveFriction(mu, mu2, file);
+			gs.saveGravity(gravity, file);
+		}
 	}
 
 	public void loadGame(){
