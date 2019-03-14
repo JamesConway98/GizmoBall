@@ -39,7 +39,7 @@ public class Model extends Observable {
 		//ball = new Ball(500-6.25, 480-6.25, 0, 0);
 		// Wall size 500 x 500 pixels
 		//TODO change walls to match new L
-		gws = new Walls(50, 50, (L*20) + 50, (L*20) + 50);
+		gws = new Walls(50, 50, (L*19) + 50, (L*19) + 50);
 		// Lines added in Main
 		lines = new ArrayList<>();
 		// Gizmos added in Main
@@ -113,10 +113,10 @@ public class Model extends Observable {
 			ArrayList<LineSegment> lines = absorber.getLineSegments();
 			for (LineSegment line : lines) {
 				if(checkWallCollision(line, 0)) {
-					if(time < 0.05) {
-						ball.stop();
+					if(time < 0.01) {
 						ball.setExactY(ball.getExactY() + (ball.getRadius() * 2));
 						ball.setExactX(absorber.getXpos2() + L - ball.getRadius());
+						ball.stop();
 					}
 				}
 			}
