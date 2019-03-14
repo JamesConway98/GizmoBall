@@ -31,7 +31,8 @@ public class EditBuildPanel extends JPanel {
         dim.width = 350;
         setPreferredSize(dim);
 
-        rotateLabel = new JLabel("Rotate");
+        rotateLabel = new JLabel("Rotate", SwingConstants.CENTER);
+        rotateLabel.setFont(new Font(rotateLabel.getFont().getName(), rotateLabel.getFont().getStyle(), 15));
 
         moveButton = new JButton("Move");
         buttons.add(moveButton);
@@ -85,12 +86,12 @@ public class EditBuildPanel extends JPanel {
 
         /////////////////// Next Row ////////////////////////////
         gc.gridy++;
-        gc.gridwidth = 1;
+        gc.gridwidth = 2;
 
         gc.weightx = 0.5;
         gc.weighty = 0;
 
-        gc.gridx = 1;
+        gc.gridx = 0;
         gc.anchor = GridBagConstraints.LINE_START;
         gc.insets = new Insets(25,0,0,0);
         add(rotateLabel, gc);
@@ -99,6 +100,7 @@ public class EditBuildPanel extends JPanel {
         /////////////////// Next Row ////////////////////////////
         gc.gridy++;
         gc.ipady = 100;
+        gc.gridwidth = 1;
 
         gc.weightx = 0.5;
         gc.weighty = 0;

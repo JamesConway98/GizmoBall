@@ -36,8 +36,11 @@ public class SettingsBuildPanel extends JPanel {
         friction2 = new Scrollbar(Scrollbar.HORIZONTAL, 0, 64, 0,255);
 
         gravityLabel = new JLabel("Gravity:          25L/sec" + '\u00B2');
+        gravityLabel.setFont(new Font(gravityLabel.getFont().getName(), gravityLabel.getFont().getStyle(), 15));
         friction1Label = new JLabel("Friction1:          0.025 per sec");
+        friction1Label.setFont(new Font(friction1Label.getFont().getName(), friction1Label.getFont().getStyle(), 15));
         friction2Label = new JLabel("Friction2:          0.025 per L");
+        friction2Label.setFont(new Font(friction2Label.getFont().getName(), friction2Label.getFont().getStyle(), 15));
 
         applySettingButton = new JButton("Apply Settings");
         buttons.add(applySettingButton);
