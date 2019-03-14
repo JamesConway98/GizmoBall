@@ -49,6 +49,10 @@ public class BuildModeListener implements ActionListener {
                 DeleteGizmoListener deleteListener = new DeleteGizmoListener(model);
                 model.setMouseListener(deleteListener);
                 break;
+            case "Rotate":
+                RotateGizmoListener rotateListener = new RotateGizmoListener(model);
+                model.setMouseListener(rotateListener);
+                break;
             case "Add Key Trigger":
                 AddKeyTriggerListener addKeyListener = new AddKeyTriggerListener(model);
                 model.setMouseListener(addKeyListener);

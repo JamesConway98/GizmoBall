@@ -18,10 +18,8 @@ public class FileMenuListener implements ActionListener {
         switch (e.getActionCommand()) {
             case "Load Configuration":
                 model.loadGame();
-                System.out.println("UIIHIHIH");
                 break;
             case "Save Configuration":
-                System.out.println("HIUHIHUI");
                 model.saveGame();
                 break;
 
