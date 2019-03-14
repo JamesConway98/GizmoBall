@@ -7,6 +7,7 @@ import model.Model;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 
 public class MainFrame {
 
@@ -22,7 +23,9 @@ public class MainFrame {
         runBoard = new RunBoard(500, 500, m);
 
         GameLoader loader = new GameLoader();
-        loader.loadGame(m, null);
+        File file = new File("BoardSave.txt");
+        loader.loadGame(m, file);
+
 
         FileMenuListener menuListener = new FileMenuListener(m);
 
@@ -68,7 +71,7 @@ public class MainFrame {
             fileMenu.remove(5);
             fileMenu.add(changeToRunMode,5);
             addRunPanel.getRunListener().stopTimer();
-            loader.loadGame(m, null);
+            loader.loadGame(m, file);
             buildBoard.update(null, null);
         });
         JMenuItem quit = new JMenuItem("Quit");
