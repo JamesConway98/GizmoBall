@@ -384,7 +384,6 @@ public class Model extends Observable {
 		GameSaver gs = new GameSaver();
 		File file = new File("boardSave.txt");
 		gs.saveGizmos(gizmos, file);
-        gs.saveAbsorbers(abs, file);
 		gs.saveBall(ball, file);
 		gs.saveFriction(mu, mu2, file);
 		gs.saveGravity(gravity, file);
