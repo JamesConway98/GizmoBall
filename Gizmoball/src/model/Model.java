@@ -413,4 +413,9 @@ public class Model extends Observable {
 			return a;
 		}
 	}
+
+
+	public Walls getGws() {
+		return gws;
+	}
 }

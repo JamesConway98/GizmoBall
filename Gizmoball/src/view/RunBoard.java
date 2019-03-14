@@ -3,6 +3,7 @@ package view;
 import Controller.AbsorberActivateListener;
 import model.*;
 import model.Gizmos.*;
+import physics.LineSegment;
 
 import javax.swing.*;
 import java.awt.*;
@@ -35,6 +36,14 @@ public class RunBoard extends JPanel implements Observer {
         super.paintComponent(g);
 
         Graphics2D g2 = (Graphics2D) g;
+
+        for (LineSegment vl : model.getGws().getLineSegments()) {
+            if(vl.p1().x() == vl.p2().x()) {
+                g2.fillRect((int) vl.p1().x(), (int) vl.p1().y(), 1, (int) vl.length());
+            } else {
+                g2.fillRect((int) vl.p1().x(), (int) vl.p1().y(), (int) vl.length(), 1);
+            }
+        }
 
         for (Gizmo b : model.getGizmos()) {
             g2.setColor(b.getColour());
