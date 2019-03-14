@@ -295,6 +295,10 @@ public class Model extends Observable {
 		notifyObservers();
 	}
 
+	public void clearAbsorbers(){
+		abs.clear();
+	}
+
 	public ArrayList<Absorber> getAbsorbers() {
 		return abs;
 	}

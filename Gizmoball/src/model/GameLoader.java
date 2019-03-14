@@ -25,7 +25,7 @@ public class GameLoader {
 			double xVelo = 0, yVelo = 0, angle;
 			int L = Model.L;
 
-			//model.clearAbsorbers();
+			model.clearAbsorbers();
 
 			while (read.hasNextLine()) {
 				type = read.next();
