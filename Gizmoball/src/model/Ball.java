@@ -12,20 +12,22 @@ import java.awt.*;
 public class Ball {
 
 	private Vect velocity;
-	private double radius;
+	public static final double R = 10;
 	private double xpos;
 	private double ypos;
+	private int gridX, gridY;
 	private Color colour;
 
 	private boolean stopped;
 
 	// x, y coordinates and x,y velocity
 	public Ball(double x, double y, double xv, double yv) {
-		xpos = x * Model.L + 70; // Centre coordinates
-		ypos = y * Model.L + 70;
+		gridX = (int)x;
+		gridY = (int)y;
+		xpos = x * Model.L + 50 + (R*2); // Centre coordinates
+		ypos = y * Model.L + 50 + (R*2);
 		colour = Color.BLUE;
 		velocity = new Vect(xv, yv);
-		radius = 10;
 		stopped = false;
 	}
 
@@ -38,11 +40,11 @@ public class Ball {
 	}
 
 	public double getRadius() {
-		return radius;
+		return R;
 	}
 
 	public Circle getCircle() {
-		return new Circle(xpos, ypos, radius);
+		return new Circle(xpos, ypos, R);
 	}
 
 	public double getExactX() {
@@ -59,6 +61,14 @@ public class Ball {
 
 	public void setExactY(double y) {
 		ypos = y;
+	}
+
+	public int getGridX() {
+		return gridX;
+	}
+
+	public int getGridY() {
+		return gridY;
 	}
 
 	public void stop() {

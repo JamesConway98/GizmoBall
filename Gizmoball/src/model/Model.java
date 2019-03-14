@@ -294,6 +294,12 @@ public class Model extends Observable {
 		notifyObservers();
 	}
 
+	public void clearAbsorbers() {
+		abs.clear();
+		setChanged();
+		notifyObservers();
+	}
+
 	public ArrayList<Absorber> getAbsorbers() {
 		return abs;
 	}
@@ -373,6 +379,7 @@ public class Model extends Observable {
 	public void saveGame(){
 		GameSaver gs = new GameSaver();
 		gs.saveGizmos(gizmos);
+		gs.saveAbsorbers(abs);
 		gs.saveBall(ball);
 		gs.saveFriction(mu, mu2);
 		gs.saveGravity(gravity);
