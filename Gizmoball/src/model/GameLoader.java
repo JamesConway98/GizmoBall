@@ -11,6 +11,7 @@ public class GameLoader {
 
     public void loadGame(Model model, File file) {
 
+		//if null passed in then use default file
 		if(file == null){
 			file = new File("DefaultSave.txt");
 		}
