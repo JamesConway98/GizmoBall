@@ -34,10 +34,6 @@ public class GameSaver {
 					}
                 }else if(gizmo instanceof SquareGizmo){
                     writer.append("\nSquare S" + i + " " + gizmo.getGridX() + " " + gizmo.getGridY());
-                }else if(gizmo instanceof Absorber){
-                    Absorber absorber = (Absorber)gizmo;
-                    writer.append("\nAbsorber A" + i + " " + absorber.getGridX1() + " " + absorber.getGridY1()
-                            + " " + absorber.getGridX2() + " " + absorber.getGridY2());
                 }else if(gizmo instanceof LeftFlipperGizmo){
                     writer.append("\nLeftFlipper LF" + i + " " + gizmo.getGridX()+ " " + gizmo.getGridY());
                     int index = 0;
@@ -61,6 +57,23 @@ public class GameSaver {
         }
     }
 
+    public void saveAbsorbers(ArrayList<Absorber> absorbers, File file){
+        try (
+                Writer writer = new BufferedWriter(new OutputStreamWriter(
+                        new FileOutputStream(file, true), "utf-8"))) {
+
+            for(int i = 0; i<absorbers.size(); i++) {
+                writer.append("\nAbsorber A" + i + " " + absorbers.get(i).getGridX1() + " " + absorbers.get(i).getGridY1()
+                        + " " + absorbers.get(i).getGridX2() + " " + absorbers.get(i).getGridY2());
+            }
+
+        } catch(IOException io){
+            io.printStackTrace();
+        }
+
+
+    }
+
     public void saveBall(Ball ball, File file){
         if(ball == null)
             return;
@@ -72,8 +85,8 @@ public class GameSaver {
                 Writer writer = new BufferedWriter(new OutputStreamWriter(
                         new FileOutputStream(file, true), "utf-8"))) {
 
-        	double bx = ball.getExactX() / 25;
-        	double by = ball.getExactY() / 25;
+        	double bx = ball.getGridX();
+        	double by = ball.getGridY();
         	
             writer.append("\nBall B1 " + bx + " " + by +
                     " " + ball.getVelo().x() + " " + ball.getVelo().y());

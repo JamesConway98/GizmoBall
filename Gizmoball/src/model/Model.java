@@ -391,9 +391,6 @@ public class Model extends Observable {
 		}
 	}
 
-	/////////// I am Passing in null to save and load which will make it use default file
-	/////////// This is so I can run program as its not fully implemented, James xxx
-
 	public void saveGame(){
 		GameSaver gs = new GameSaver();
 		File file = new File("BoardSave.txt");
@@ -414,6 +411,7 @@ public class Model extends Observable {
 			gs.saveBall(ball, file);
 			gs.saveFriction(mu, mu2, file);
 			gs.saveGravity(gravity, file);
+			gs.saveAbsorbers(abs, file);
 		}
 	}
 
@@ -434,6 +432,7 @@ public class Model extends Observable {
 
 		public void clearBoard(){
 		gizmos.clear();
+		abs.clear();
 		ball = null;
 	}
 
