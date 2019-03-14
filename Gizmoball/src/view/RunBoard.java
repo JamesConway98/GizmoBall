@@ -1,6 +1,9 @@
 package view;
 
+import Controller.AbsorberActivateListener;
 import model.*;
+import model.Gizmos.*;
+import physics.LineSegment;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,11 +13,11 @@ import java.util.Observable;
 import java.util.Observer;
 
 public class RunBoard extends JPanel implements Observer {
+
     protected int width;
     protected int height;
     public static final int L = 40;
     protected Model model;
-    private MouseListener activeMouseListener;
 
     public RunBoard(int w, int h, Model m) {
         width = w;
@@ -34,9 +37,17 @@ public class RunBoard extends JPanel implements Observer {
 
         Graphics2D g2 = (Graphics2D) g;
 
+        for (LineSegment vl : model.getGws().getLineSegments()) {
+            if(vl.p1().x() == vl.p2().x()) {
+                g2.fillRect((int) vl.p1().x(), (int) vl.p1().y(), 1, (int) vl.length());
+            } else {
+                g2.fillRect((int) vl.p1().x(), (int) vl.p1().y(), (int) vl.length(), 1);
+            }
+        }
+
         for (Gizmo b : model.getGizmos()) {
             g2.setColor(b.getColour());
-            int xPos = b.getX() * L + 50, yPos = b.getY() * L + 50;
+            int xPos = b.getX(), yPos = b.getY();
             if (b instanceof SquareGizmo) {
                 g2.fillRect(xPos, yPos, L, L);
             } else if (b instanceof CircleGizmo) {
@@ -64,6 +75,7 @@ public class RunBoard extends JPanel implements Observer {
                 }
                 g2.fillPolygon(x, y, 3);
 
+                //The 2 Flippers have been changed to draw in grid cells, so they might not act correctly for collisions
             } else if (b instanceof LeftFlipperGizmo){
                 Graphics2D g2d = (Graphics2D) g.create();
                 g2.setColor(g.getColor());
@@ -85,57 +97,53 @@ public class RunBoard extends JPanel implements Observer {
                 g2d.draw(lFlip);
                 g2d.fill(lFlip);
                 g2d.dispose();
-                Graphics2D g2e = (Graphics2D) g.create();
-                g2e.setColor(Color.RED);
-                g2e.drawRect(((int) ((LeftFlipperGizmo) b).v1.x()), ((int) ((LeftFlipperGizmo) b).v1.y()), 100, 100);
-                g2e.drawRect(((int) ((LeftFlipperGizmo) b).v2.x()), ((int) ((LeftFlipperGizmo) b).v2.y()), 100, 100);
-                g2e.drawRect(((int) ((LeftFlipperGizmo) b).v3.x()), ((int) ((LeftFlipperGizmo) b).v3.y()), 100, 100);
-                g2e.drawRect(((int) ((LeftFlipperGizmo) b).v4.x()), ((int) ((LeftFlipperGizmo) b).v4.y()), 100, 100);
-                g2e.drawRect(((int) ((LeftFlipperGizmo) b).v5.x()), ((int) ((LeftFlipperGizmo) b).v5.y()), 100, 100);
-                g2e.drawRect(((int) ((LeftFlipperGizmo) b).v6.x()), ((int) ((LeftFlipperGizmo) b).v6.y()), 100, 100);
-                g2e.dispose();
 
             } else if (b instanceof RightFlipperGizmo){
                 Graphics2D g2d = (Graphics2D) g.create();
                 g2.setColor(g.getColor());
                 int rfr = b.getRotation();
-                RoundRectangle2D lFlip = new RoundRectangle2D.Double(b.getX() + 1.5 * b.getLength(), b.getY(), b.getLength()/2, b.getLength()*2, b.getLength()/2, b.getLength()/2);
+                RoundRectangle2D rFlip = new RoundRectangle2D.Double(b.getX() + 1.5 * b.getLength(), b.getY(), b.getLength()/2, b.getLength()*2, b.getLength()/2, b.getLength()/2);
                 if (rfr == 2) {
-                    lFlip = new RoundRectangle2D.Double(b.getX(), b.getY(), b.getLength()/2, b.getLength()*2, b.getLength()/2, b.getLength()/2);
+                    rFlip = new RoundRectangle2D.Double(b.getX(), b.getY(), b.getLength()/2, b.getLength()*2, b.getLength()/2, b.getLength()/2);
                     g2d.rotate(Math.toRadians(((RightFlipperGizmo) b).getAngle()), b.getX() + b.getLength() * 0.25, b.getY() + b.getLength() * 1.75);
                 } else if(rfr == 3) {
-                    lFlip = new RoundRectangle2D.Double(b.getX(), b.getY(), b.getLength()*2, b.getLength()/2, b.getLength()/2, b.getLength()/2);
+                    rFlip = new RoundRectangle2D.Double(b.getX(), b.getY(), b.getLength()*2, b.getLength()/2, b.getLength()/2, b.getLength()/2);
                     g2d.rotate(Math.toRadians(((RightFlipperGizmo) b).getAngle()), b.getX() + b.getLength() * 0.25, b.getY() + b.getLength() * 0.25);
                 } else if(rfr == 0) {
-                    lFlip = new RoundRectangle2D.Double(b.getX() + (1.5 * b.getLength()), b.getY() , b.getLength()/2, b.getLength()*2, b.getLength()/2, b.getLength()/2);
+                    rFlip = new RoundRectangle2D.Double(b.getX() + (1.5 * b.getLength()), b.getY() , b.getLength()/2, b.getLength()*2, b.getLength()/2, b.getLength()/2);
                     g2d.rotate(Math.toRadians(((RightFlipperGizmo) b).getAngle()), b.getX() + b.getLength() * 1.75, b.getY() + b.getLength() * 0.25);
                 } else if(rfr == 1) {
-                    lFlip = new RoundRectangle2D.Double(b.getX(), b.getY() + (1.5 * b.getLength()), b.getLength()*2, b.getLength()/2, b.getLength()/2, b.getLength()/2);
+                    rFlip = new RoundRectangle2D.Double(b.getX(), b.getY() + (1.5 * b.getLength()), b.getLength()*2, b.getLength()/2, b.getLength()/2, b.getLength()/2);
                     g2d.rotate(Math.toRadians(((RightFlipperGizmo) b).getAngle()), b.getX() + b.getLength() * 1.75, b.getY() + b.getLength() * 1.75);
                 }
-                g2d.draw(lFlip);
-                g2d.fill(lFlip);
+                g2d.draw(rFlip);
+                g2d.fill(rFlip);
                 g2d.dispose();
             }
         }
 
         for(Absorber abs: model.getAbsorbers()){
             g2.setColor(abs.getColour());
-            g2.fillRect(abs.getXpos1()*L+50, abs.getYpos1()*L+50,
-                    abs.getWidth()*L+L,   abs.getHeight()*L+L);
+            g2.fillRect(abs.getXpos1(), abs.getYpos1(),abs.getWidth()*L+L,   abs.getHeight()*L+L);
         }
 
-    }
+        Ball ball = model.getBall();
 
-    public void setActiveMouseListener(MouseListener ml){
-        this.removeMouseListener(activeMouseListener);
-        this.activeMouseListener = ml;
-        this.addMouseListener(ml);
+        if(ball!=null){
+            g2.setColor(ball.getColour());
+            int x = (int) (ball.getExactX() - ball.getRadius());
+            int y = (int) (ball.getExactY() - ball.getRadius());
+            int width = (int) (2 * ball.getRadius());
+            g2.fillOval(x, y, width, width);
+        }
+
+        this.setFocusable(true);
+        this.requestFocus();
+        this.addKeyListener(new AbsorberActivateListener(model));
     }
 
     @Override
     public void update(Observable o, Object arg) {
         repaint();
-        setActiveMouseListener(model.getActiveMouseListener());
     }
 }

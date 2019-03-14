@@ -1,10 +1,9 @@
 package Controller;
 
 import model.Model;
-import model.SquareGizmo;
+import model.Gizmos.SquareGizmo;
 import view.BuildBoard;
 
-import javax.swing.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -19,10 +18,13 @@ public class AddSquareListener implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        int x = 0, y =0;
+        int x = 0, y = 0;
         x = (e.getX() - 50)/ BuildBoard.L;
         y = (e.getY() - 50)/ BuildBoard.L;
-        model.addGizmo(new SquareGizmo(x, y));
+        if(x >= 0 && x <= 18 && y >= 0 && y <= 18) {
+            //TODO unique ids
+            model.addGizmo(new SquareGizmo("S1", x, y));
+        }
     }
 
     @Override

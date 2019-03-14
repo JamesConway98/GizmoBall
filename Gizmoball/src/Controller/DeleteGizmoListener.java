@@ -1,29 +1,27 @@
 package Controller;
 
 import model.Model;
-import model.Gizmos.*;
 import view.BuildBoard;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class AddTriangleListener implements MouseListener {
+public class DeleteGizmoListener implements MouseListener {
 
     private Model model;
 
-    public AddTriangleListener(Model m){
+    public DeleteGizmoListener(Model m) {
         model = m;
     }
 
+
     @Override
     public void mouseClicked(MouseEvent e) {
-        int x = 0, y = 0;
+
+        int x = 0, y =0;
         x = (e.getX() - 50)/ BuildBoard.L;
         y = (e.getY() - 50)/ BuildBoard.L;
-        if(x >= 0 && x <= 18 && y >= 0 && y <= 18) {
-            //TODO unique ids
-            model.addGizmo(new TriangleGizmo("T1", x, y));
-        }
+        model.clearGridSpace(x, y);
     }
 
     @Override

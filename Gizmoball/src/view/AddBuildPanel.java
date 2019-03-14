@@ -8,16 +8,13 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class AddPanel extends JPanel {
+public class AddBuildPanel extends JPanel {
 
     private JLabel bumperLabel;
     private JLabel flipperLabel;
     private JLabel ballLabel;
     private JLabel absorberLabel;
 
-    private JButton addTabButton;
-    private JButton editTabButton;
-    private JButton settingsTabButton;
     private JButton addSquareButton;
     private JButton addCircleButton;
     private JButton addTriangleButton;
@@ -26,8 +23,8 @@ public class AddPanel extends JPanel {
     private JButton addBallButton;
     private JButton addAbsorberButton;
     private JButton rotateButton;
-    private JButton rotateLeftButton;
-    private JButton rotateRightButton;
+    private JButton deleteButton;
+    private JButton addKeyTriggerButton;
 
     private JLabel addInitialVelocityLabel;
     private JLabel addInitialDirectionLabel;
@@ -36,7 +33,7 @@ public class AddPanel extends JPanel {
 
     private ArrayList<JButton> buttons;
 
-    public AddPanel(Model m){
+    public AddBuildPanel(Model m){
 
         BuildModeListener buildListener = new BuildModeListener(m);
         buttons = new ArrayList<>();
@@ -66,6 +63,10 @@ public class AddPanel extends JPanel {
         buttons.add(addAbsorberButton);
         rotateButton = new JButton("Rotate");
         buttons.add(rotateButton);
+        deleteButton = new JButton("Delete");
+        buttons.add(deleteButton);
+        addKeyTriggerButton = new JButton("Add Key Trigger");
+        buttons.add(addKeyTriggerButton);
 
         for(JButton button: buttons){
             button.addActionListener(buildListener);
@@ -76,7 +77,7 @@ public class AddPanel extends JPanel {
         initialVelocityField = new JTextField(10);
         initialDirectionField = new JTextField(10);
 
-        Border innerBorder = BorderFactory.createTitledBorder("Add Settings");
+        Border innerBorder = BorderFactory.createTitledBorder("Add");
         Border outerBorder = BorderFactory.createEmptyBorder(5, 5, 5, 5);
         setBorder(BorderFactory.createCompoundBorder(outerBorder, innerBorder));
 
@@ -97,7 +98,7 @@ public class AddPanel extends JPanel {
         gc.weighty = 0.1;
 
         gc.gridx = 1;
-        gc.fill = GridBagConstraints.NONE;
+        gc.fill = GridBagConstraints.HORIZONTAL;
 
         gc.anchor = GridBagConstraints.FIRST_LINE_START;
         gc.insets = new Insets(25,0,0,0);
@@ -162,7 +163,6 @@ public class AddPanel extends JPanel {
         gc.anchor = GridBagConstraints.LINE_END;
         gc.insets = new Insets(0,0,0,0);
         add(addRightFlipperButton, gc);
-
 
         /////////////////// Next (Spacing) Row ////////////////////////////
         gc.gridy++;
@@ -269,6 +269,7 @@ public class AddPanel extends JPanel {
         gc.gridx = 1;
         gc.anchor = GridBagConstraints.FIRST_LINE_START;
         add(rotateButton, gc);
+
 
     }
 

@@ -1,5 +1,6 @@
-package model;
+package model.Gizmos;
 
+import model.Model;
 import physics.Circle;
 import physics.LineSegment;
 import physics.Vect;
@@ -8,22 +9,31 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class TriangleGizmo implements Gizmo{
+    private String ID;
     private int xpos, ypos, gridX, gridY;
     private int length = Model.L;
     private int rotation = 0;
     private Color colour;
+    private char key;
     private ArrayList<LineSegment> edgeList = new ArrayList<LineSegment>();
     private ArrayList<Circle> vertexList = new ArrayList<Circle>();
+    private boolean gizmoActive = false;
 
     private Vect v1, v2, v3, v4;
     private LineSegment e1, e2, e3;
     private Circle c1, c2, c3;
 
-    public TriangleGizmo(int gridX, int gridY){
+
+    public TriangleGizmo(String id, int gridX, int gridY){
         this.gridX = gridX;
         this.gridY = gridY;
+        ID = id;
         setColour(Color.RED);
         setHitbox();
+    }
+
+    public String getID() {
+        return ID;
     }
 
     public void setHitbox() {
@@ -139,5 +149,21 @@ public class TriangleGizmo implements Gizmo{
     public void rotateAnticlockwise() {
         setRotation(((getRotation() + 1) - 4) % 4);
         setHitbox();
+    }
+
+    public char getKey() {
+        return key;
+    }
+
+    public void setKey(char key) {
+        this.key = key;
+    }
+
+    public boolean isGizmoActive() {
+        return gizmoActive;
+    }
+
+    public void setGizmoActive(boolean gizmoActive) {
+        this.gizmoActive = gizmoActive;
     }
 }

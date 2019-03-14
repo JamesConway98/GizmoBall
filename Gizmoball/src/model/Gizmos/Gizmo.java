@@ -1,4 +1,4 @@
-package model;
+package model.Gizmos;
 
 import physics.Circle;
 import physics.LineSegment;
@@ -7,9 +7,14 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public interface Gizmo {
+    public String getID();
+    public char getKey();
+    public void setKey(char key);
     public void setHitbox();
     public int getX();
     public int getY();
+    public int getGridX();
+    public int getGridY();
     public int getLength();
     public ArrayList<LineSegment> getEdges();
     public ArrayList<Circle> getVertices();
@@ -20,5 +25,6 @@ public interface Gizmo {
     public void setRotation(int rotation);
     public void rotateClockwise();
     public void rotateAnticlockwise();
-
+    public boolean isGizmoActive();
+    public void setGizmoActive(boolean gizmoActive);
 }

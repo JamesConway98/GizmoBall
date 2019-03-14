@@ -1,6 +1,8 @@
 package view;
 
-import Controller.AddSquareListener;
+import Controller.FileMenuListener;
+import model.GameLoader;
+import model.GameSaver;
 import model.Model;
 
 import javax.swing.*;
@@ -10,34 +12,64 @@ public class MainFrame {
 
     private RunBoard runBoard;
     private BuildBoard buildBoard;
-    protected AddSquareListener addSquareListener;
 
     public MainFrame(Model m){
         JFrame frame = new JFrame("Gizmoball");
         frame.setLayout(new BorderLayout());
 
-        addSquareListener = new AddSquareListener(m);
-
         // Board is passed the Model so it can act as Observer
         buildBoard = new BuildBoard(500, 500, m);
         runBoard = new RunBoard(500, 500, m);
 
-        AddPanel addPanel = new AddPanel(m);
+        GameLoader loader = new GameLoader();
+        loader.loadGame(m, null);
+
+        FileMenuListener menuListener = new FileMenuListener(m);
+
+        AddBuildPanel addBuildPanel = new AddBuildPanel(m);
+        EditBuildPanel editBuildPanel = new EditBuildPanel(m);
+        AddRunPanel addRunPanel = new AddRunPanel(m);
+        SettingsBuildPanel settingsBuildPanel = new SettingsBuildPanel(m);
+
+
+        JTabbedPane tabbedPane = new JTabbedPane();
+        tabbedPane.addTab("Add",addBuildPanel);
+        tabbedPane.addTab("Edit", editBuildPanel);
+        tabbedPane.addTab("Settings", settingsBuildPanel);
 
         JMenuBar menuBar = new JMenuBar();
 
         JMenu fileMenu = new JMenu("File");
+        fileMenu.setFocusable(false);
         JMenuItem saveConfiguration = new JMenuItem("Save Configuration");
+        saveConfiguration.addActionListener(menuListener);
         JMenuItem saveAs = new JMenuItem("Save as");
+        saveAs.addActionListener(menuListener);
         JMenuItem loadConfiguration = new JMenuItem("Load Configuration");
-        JMenuItem runMode = new JMenuItem("Run Mode");
-        runMode.addActionListener(actionEvent -> {
+        loadConfiguration.addActionListener(menuListener);
+        JMenuItem changeToRunMode = new JMenuItem("Run Mode");
+        JMenuItem changeToBuildMode = new JMenuItem("Build Mode");
+        changeToRunMode.addActionListener(actionEvent -> {
             frame.getContentPane().removeAll();
-            frame.add(new RunBoard(500, 500, m));
-            frame.validate();
-            runMode.removeAll();
+            frame.add(addRunPanel, BorderLayout.WEST);
+            frame.add(runBoard, BorderLayout.CENTER);
+            frame.revalidate();
+            changeToRunMode.removeAll();
             fileMenu.remove(5);
-            fileMenu.add(new JMenuItem("Build Mode"), 5);
+            fileMenu.add(changeToBuildMode,5);
+            runBoard.update(null, null);
+        });
+        changeToBuildMode.addActionListener(actionEvent -> {
+            frame.getContentPane().removeAll();
+            frame.add(tabbedPane, BorderLayout.WEST);
+            frame.add(buildBoard, BorderLayout.CENTER);
+            frame.revalidate();
+            changeToRunMode.removeAll();
+            fileMenu.remove(5);
+            fileMenu.add(changeToRunMode,5);
+            addRunPanel.getRunListener().stopTimer();
+            loader.loadGame(m, null);
+            buildBoard.update(null, null);
         });
         JMenuItem quit = new JMenuItem("Quit");
 
@@ -46,7 +78,7 @@ public class MainFrame {
         fileMenu.addSeparator();
         fileMenu.add(loadConfiguration);
         fileMenu.addSeparator();
-        fileMenu.add(runMode);
+        fileMenu.add(changeToRunMode);
         fileMenu.addSeparator();
         fileMenu.add(quit);
 
@@ -54,11 +86,11 @@ public class MainFrame {
 
         frame.setJMenuBar(menuBar);
 
-        frame.add(addPanel, BorderLayout.WEST);
+        frame.add(tabbedPane, BorderLayout.WEST);
         frame.add(buildBoard, BorderLayout.CENTER);
 
         frame.setSize(1300, 900);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setVisible(true);
         frame.setResizable(false);
 

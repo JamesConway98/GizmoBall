@@ -32,20 +32,30 @@ public class BuildModeListener implements ActionListener {
             case "Left Flipper":
                 AddLeftFlipperListener leftFlipperListener = new AddLeftFlipperListener(model);
                 model.setMouseListener(leftFlipperListener);
-                System.out.println("BOOF");
                 break;
             case "Right Flipper":
                 AddRightFlipperListener rightFlipperListener = new AddRightFlipperListener(model);
                 model.setMouseListener(rightFlipperListener);
-                System.out.println("BOOF");
+                break;
+            case "Ball":
+                AddBallListener ballListener = new AddBallListener(model);
+                model.setMouseListener(ballListener);
                 break;
             case "Absorber":
                 AddAbsorberListener absorberListener = new AddAbsorberListener(model);
                 model.setMouseListener(absorberListener);
                 break;
+            case "Delete":
+                DeleteGizmoListener deleteListener = new DeleteGizmoListener(model);
+                model.setMouseListener(deleteListener);
+                break;
             case "Rotate":
                 RotateGizmoListener rotateListener = new RotateGizmoListener(model);
                 model.setMouseListener(rotateListener);
+                break;
+            case "Add Key Connection":
+                AddKeyTriggerListener addKeyListener = new AddKeyTriggerListener(model);
+                model.setMouseListener(addKeyListener);
                 break;
             case "Quit":
                 System.exit(0);

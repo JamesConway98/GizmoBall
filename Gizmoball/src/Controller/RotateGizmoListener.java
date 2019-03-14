@@ -1,8 +1,8 @@
 package Controller;
 
-import model.Gizmo;
+import model.Gizmos.*;
 import model.Model;
-import model.TriangleGizmo;
+import model.Gizmos.TriangleGizmo;
 import view.BuildBoard;
 
 import java.awt.event.MouseEvent;
@@ -24,10 +24,8 @@ public class RotateGizmoListener implements MouseListener {
 
         for(Gizmo gizmo:model.getGizmos()){
             if(gizmo.getGridX()== x && gizmo.getGridY()== y){
-                if(gizmo instanceof TriangleGizmo){
-                    System.out.println("BBOOM");
-                    model.rotateGizmo(gizmo);
-                }
+                model.rotateGizmo(gizmo);
+
             }
         }
 

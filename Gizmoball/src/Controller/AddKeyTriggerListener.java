@@ -1,28 +1,31 @@
 package Controller;
 
+import model.Gizmos.Gizmo;
 import model.Model;
-import model.Gizmos.*;
 import view.BuildBoard;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class AddTriangleListener implements MouseListener {
+public class AddKeyTriggerListener implements MouseListener {
 
     private Model model;
 
-    public AddTriangleListener(Model m){
+    public AddKeyTriggerListener(Model m) {
         model = m;
     }
 
+
     @Override
     public void mouseClicked(MouseEvent e) {
-        int x = 0, y = 0;
+        int x = 0, y =0;
         x = (e.getX() - 50)/ BuildBoard.L;
         y = (e.getY() - 50)/ BuildBoard.L;
-        if(x >= 0 && x <= 18 && y >= 0 && y <= 18) {
-            //TODO unique ids
-            model.addGizmo(new TriangleGizmo("T1", x, y));
+        for(Gizmo gizmo:model.getGizmos()){
+            if(gizmo.getGridX()== x && gizmo.getGridY()== y){
+                model.setSelectedGizmo(gizmo);
+                System.out.println("key = " + gizmo.getKey());
+            }
         }
     }
 

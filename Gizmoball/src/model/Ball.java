@@ -12,27 +12,23 @@ import java.awt.*;
 public class Ball {
 
 	private Vect velocity;
-	private double speed;
-	private double radius;
+	public static final double R = 10;
 	private double xpos;
 	private double ypos;
-	private double previousXPos;
-	private double previousYPos;
+	private int gridX, gridY;
 	private Color colour;
 
 	private boolean stopped;
 
 	// x, y coordinates and x,y velocity
 	public Ball(double x, double y, double xv, double yv) {
-		xpos = x; // Centre coordinates
-		ypos = y;
-		previousXPos = xpos;
-		previousYPos = ypos;
+		gridX = (int)x;
+		gridY = (int)y;
+		xpos = x * Model.L + 50 + (R*2); // Centre coordinates
+		ypos = y * Model.L + 50 + (R*2);
 		colour = Color.BLUE;
 		velocity = new Vect(xv, yv);
-		radius = 6.25;
 		stopped = false;
-		speed = velocity.length();
 	}
 
 	public Vect getVelo() {
@@ -44,24 +40,13 @@ public class Ball {
 	}
 
 	public double getRadius() {
-		return radius;
+		return R;
 	}
 
 	public Circle getCircle() {
-		return new Circle(xpos, ypos, radius);
+		return new Circle(xpos, ypos, R);
 	}
 
-	public double updateSpeed() {
-		speed = Math.round(Math.sqrt((ypos - previousYPos) * (ypos - previousYPos) + (xpos - previousXPos) * (xpos - previousXPos)));
-		previousXPos = xpos;
-		previousYPos = ypos;
-		if(stopped) {
-			return 0.0;
-		}
-		return speed;
-	}
-
-	// Ball specific methods that deal with double precision.
 	public double getExactX() {
 		return xpos;
 	}
@@ -76,6 +61,14 @@ public class Ball {
 
 	public void setExactY(double y) {
 		ypos = y;
+	}
+
+	public int getGridX() {
+		return gridX;
+	}
+
+	public int getGridY() {
+		return gridY;
 	}
 
 	public void stop() {
