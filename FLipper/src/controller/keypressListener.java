@@ -6,14 +6,14 @@
 //import java.awt.event.KeyListener;
 //import java.util.concurrent.locks.ReentrantLock;
 //
-//public class keypressListener implements KeyListener {
+//public class AbsorberActivateListener implements KeyListener {
 //
 //    private Model model;
 //    private static final int L = 25;
 //    private static final int INITIAL_VELOCTIY = -50;
 //    private ReentrantLock lock = new ReentrantLock();
 //
-//    public keypressListener(Model m) {
+//    public AbsorberActivateListener(Model m) {
 //        model = m;
 //    }
 //
