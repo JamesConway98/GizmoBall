@@ -9,12 +9,12 @@ import java.util.Scanner;
 
 public class GameLoader {
 
-    public void loadGame(Model model){
+    public void loadGame(Model model, File file) {
 
-        InputStream is = getClass().getResourceAsStream("file.txt");
+        InputStream is = getClass().getResourceAsStream(file.getName());
 		//Scanner read = new Scanner(is);
 		try {
-			Scanner read = new Scanner(new File("file.txt"));
+            Scanner read = new Scanner(file);
 			String type, id;
 			int x, y, x2 = 0, y2 = 0, rotation = 0;
 			Float bx, by;

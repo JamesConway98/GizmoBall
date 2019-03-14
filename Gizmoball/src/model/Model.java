@@ -7,12 +7,10 @@ import physics.LineSegment;
 import physics.Vect;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.MouseListener;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Observable;
-import java.util.Observer;
 
 public class Model extends Observable {
 
@@ -382,7 +380,7 @@ public class Model extends Observable {
 
 	public void saveGame(){
 		GameSaver gs = new GameSaver();
-		File file = new File("boardSave.txt");
+		File file = new File("BoardSave.txt");
 		gs.saveGizmos(gizmos, file);
 		gs.saveBall(ball, file);
 		gs.saveFriction(mu, mu2, file);
@@ -390,21 +388,27 @@ public class Model extends Observable {
 	}
 
 	public void saveAs(){
-		JFileChooser fileChooser = new JFileChooser();
-		if (fileChooser.showSaveDialog(saveFile) == JFileChooser.APPROVE_OPTION) {
-			File file = fileChooser.getSelectedFile();
-			file = new File(file.toString() + ".txt");
-			GameSaver gs = new GameSaver();gs.saveGizmos(gizmos, file);
-		gs.saveAbsorbers(abs);gs.saveBall(ball, file);
-		gs.saveFriction(mu, mu2, file);
-		gs.saveGravity(gravity, file);
+		File file;
+		JFileChooser fileChooser = new JFileChooser(System.getProperty("user.home") + "\\Documents");
+		fileChooser.setSelectedFile(new File("BoardSave.txt"));
+		if (fileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+			file = fileChooser.getSelectedFile();
+			GameSaver gs = new GameSaver();
+			gs.saveGizmos(gizmos, file);
+			gs.saveBall(ball, file);
+			gs.saveFriction(mu, mu2, file);
+			gs.saveGravity(gravity, file);
 		}
 	}
 
 	public void loadGame(){
 		GameLoader gl = new GameLoader();
 		clearBoard();
-		gl.loadGame(this);
+		JFileChooser fileChooser = new JFileChooser(System.getProperty("user.home") + "\\Documents");
+		if (fileChooser.showOpenDialog(saveFile) == JFileChooser.APPROVE_OPTION) {
+			File file = fileChooser.getSelectedFile();
+			gl.loadGame(this, file);
+		}
 		//this is needed to update the view
 		setChanged();
 		notifyObservers();
