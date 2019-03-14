@@ -28,12 +28,17 @@ public class AddRunPanel extends JPanel {
         dim.width = 350;
         setPreferredSize(dim);
 
+        this.setFocusable(false);
+
         start = new JButton("Start");
         buttons.add(start);
+        start.setFocusable(false);
         tick = new JButton("Tick");
         buttons.add(tick);
+        tick.setFocusable(false);
         stop = new JButton("Stop");
         buttons.add(stop);
+        stop.setFocusable(false);
 
         for(JButton button: buttons){
             button.addActionListener(runListener);

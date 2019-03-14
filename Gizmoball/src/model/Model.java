@@ -25,7 +25,6 @@ public class Model extends Observable {
 	private static final int GRAVITY = 25;
 	public static final int L = 40;
 
-	private double speed;
 	private double shortestTime;
 	private double time = 0.0;
 	private Vect newVelo = new Vect(0, 0);
@@ -93,7 +92,6 @@ public class Model extends Observable {
 		newY = b.getExactY() + (yVel * time);
 		b.setExactY(newY);
 		b.setExactX(newX);
-		speed = b.updateSpeed();
 		return b;
 	}
 
@@ -116,9 +114,9 @@ public class Model extends Observable {
 			for (LineSegment line : lines) {
 				if(checkWallCollision(line, 0)) {
 					if(time < 0.05) {
-					    ball.stop();
-                        ball.setExactX(absorber.getXpos2());
-                        ball.setExactY(absorber.getYpos1());
+						ball.stop();
+						ball.setExactY(ball.getExactY() + (ball.getRadius() * 2));
+						ball.setExactX(absorber.getXpos2() + L - ball.getRadius());
 					}
 				}
 			}
@@ -213,10 +211,6 @@ public class Model extends Observable {
 		return ball;
 	}
 
-	public double getSpeed() {
-		return speed;
-	}
-	
 	public void setBallSpeed(int x, int y) {
 		ball.setVelo(new Vect(x, y));
 	}

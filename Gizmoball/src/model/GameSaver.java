@@ -8,7 +8,6 @@ import java.util.ArrayList;
 public class GameSaver {
 
     public void saveGizmos(ArrayList<Gizmo> gizmos){
-        System.out.println("Saving...");
         try (
                 Writer writer = new BufferedWriter(new OutputStreamWriter(
                         new FileOutputStream("file.txt", true), "utf-8"))) {
@@ -99,7 +98,6 @@ public class GameSaver {
     }
 
     public void clearSaveFile(){
-        System.out.println("Clearing Save File");
         try (
                 Writer writer = new BufferedWriter(new OutputStreamWriter(
                         new FileOutputStream("file.txt"), "utf-8"))) {

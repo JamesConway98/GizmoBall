@@ -1,5 +1,6 @@
 package view;
 
+import Controller.AbsorberActivateListener;
 import model.*;
 import model.Gizmos.*;
 
@@ -16,7 +17,6 @@ public class RunBoard extends JPanel implements Observer {
     protected int height;
     public static final int L = 40;
     protected Model model;
-    private MouseListener activeMouseListener;
 
     public RunBoard(int w, int h, Model m) {
         width = w;
@@ -137,17 +137,13 @@ public class RunBoard extends JPanel implements Observer {
             g2.fillOval(x, y, width, width);
         }
 
-    }
-
-    public void setActiveMouseListener(MouseListener ml){
-        this.removeMouseListener(activeMouseListener);
-        this.activeMouseListener = ml;
-        this.addMouseListener(ml);
+        this.setFocusable(true);
+        this.requestFocus();
+        this.addKeyListener(new AbsorberActivateListener(model));
     }
 
     @Override
     public void update(Observable o, Object arg) {
         repaint();
-        setActiveMouseListener(model.getActiveMouseListener());
     }
 }

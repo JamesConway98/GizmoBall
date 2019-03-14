@@ -1,6 +1,8 @@
 package view;
 
 import Controller.FileMenuListener;
+import model.GameLoader;
+import model.GameSaver;
 import model.Model;
 
 import javax.swing.*;
@@ -10,7 +12,6 @@ public class MainFrame {
 
     private RunBoard runBoard;
     private BuildBoard buildBoard;
-    private FileMenuListener menuListener;
 
     public MainFrame(Model m){
         JFrame frame = new JFrame("Gizmoball");
@@ -20,7 +21,10 @@ public class MainFrame {
         buildBoard = new BuildBoard(500, 500, m);
         runBoard = new RunBoard(500, 500, m);
 
-        menuListener = new FileMenuListener(m);
+        GameLoader loader = new GameLoader();
+        loader.loadGame(m);
+
+        FileMenuListener menuListener = new FileMenuListener(m);
 
         AddBuildPanel addBuildPanel = new AddBuildPanel(m);
         EditBuildPanel editBuildPanel = new EditBuildPanel(m);
@@ -36,6 +40,7 @@ public class MainFrame {
         JMenuBar menuBar = new JMenuBar();
 
         JMenu fileMenu = new JMenu("File");
+        fileMenu.setFocusable(false);
         JMenuItem saveConfiguration = new JMenuItem("Save Configuration");
         saveConfiguration.addActionListener(menuListener);
         JMenuItem saveAs = new JMenuItem("Save as");
@@ -62,9 +67,8 @@ public class MainFrame {
             changeToRunMode.removeAll();
             fileMenu.remove(5);
             fileMenu.add(changeToRunMode,5);
-            //addRunPanel.getRunListener().stopTimer();
-            //m.getBall().setExactX(ballXCoordinate);
-            //m.getBall().setExactY(ballYCoordinate);
+            addRunPanel.getRunListener().stopTimer();
+            loader.loadGame(m);
             buildBoard.update(null, null);
         });
         JMenuItem quit = new JMenuItem("Quit");
@@ -82,14 +86,11 @@ public class MainFrame {
 
         frame.setJMenuBar(menuBar);
 
-//        tabbedPane.addTab("Edit",addPanel2);
-//        tabbedPane.addTab("Setting",addPanel3);
-
         frame.add(tabbedPane, BorderLayout.WEST);
         frame.add(buildBoard, BorderLayout.CENTER);
 
         frame.setSize(1300, 900);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setVisible(true);
         frame.setResizable(false);
 

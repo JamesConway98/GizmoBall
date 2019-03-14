@@ -37,12 +37,12 @@ public class BuildBoard extends JPanel implements Observer {
         Graphics2D g2 = (Graphics2D) g;
 
         //Draw vertical lines
-        for (int i = 0; i < 21; i++) {
-            g.drawLine(i * L + 50, 50, i * L + 50, 815);
+        for (int i = 0; i < 20; i++) {
+            g.drawLine(i * L + 50, 50, i * L + 50, 810);
         }
         //Draw horizontal lines
-        for (int i = 0; i < 21; i++) {
-            g.drawLine(50, i * L + 50, 850, i * L + 50);
+        for (int i = 0; i < 20; i++) {
+            g.drawLine(50, i * L + 50, 810, i * L + 50);
         }
 
         for (Gizmo b : model.getGizmos()) {

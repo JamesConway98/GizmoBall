@@ -47,7 +47,6 @@ public class GameLoader {
 					} else if (type.equals("Circle")) {
 						CircleGizmo cg = new CircleGizmo(id, x, y);
 						model.addGizmo(cg);
-						System.out.println("Adding Circle");
 					} else if (type.equals("Triangle")) {
 						//rotation = Integer.parseInt(read.next());
 						TriangleGizmo tg = new TriangleGizmo(id, x, y);
@@ -82,7 +81,6 @@ public class GameLoader {
 						}
 						model.addGizmo(rf);
 					}
-					System.out.println(id + " " + x + " " + y + " " + rotation + "\n");
 				} else {
 
 				}

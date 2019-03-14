@@ -16,10 +16,10 @@ public class RightFlipperGizmo implements Gizmo{
     private Color colour;
     private ArrayList<LineSegment> edgeList = new ArrayList<LineSegment>();
     private ArrayList<Circle> vertexList = new ArrayList<Circle>();
-    boolean gizmoMoving = false;
+
+    private boolean gizmoMoving = false;
     private boolean gizmoActive = false;
     private boolean toggle = true;
-
 
     public Vect v1, v2, v3, v4, v5, v6;
     private LineSegment e1, e2;
