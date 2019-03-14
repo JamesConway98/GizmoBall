@@ -77,7 +77,7 @@ public class AddBuildPanel extends JPanel {
         initialVelocityField = new JTextField(10);
         initialDirectionField = new JTextField(10);
 
-        Border innerBorder = BorderFactory.createTitledBorder("Add Settings");
+        Border innerBorder = BorderFactory.createTitledBorder("Add");
         Border outerBorder = BorderFactory.createEmptyBorder(5, 5, 5, 5);
         setBorder(BorderFactory.createCompoundBorder(outerBorder, innerBorder));
 
@@ -98,7 +98,7 @@ public class AddBuildPanel extends JPanel {
         gc.weighty = 0.1;
 
         gc.gridx = 1;
-        gc.fill = GridBagConstraints.NONE;
+        gc.fill = GridBagConstraints.HORIZONTAL;
 
         gc.anchor = GridBagConstraints.FIRST_LINE_START;
         gc.insets = new Insets(25,0,0,0);
@@ -163,12 +163,6 @@ public class AddBuildPanel extends JPanel {
         gc.anchor = GridBagConstraints.LINE_END;
         gc.insets = new Insets(0,0,0,0);
         add(addRightFlipperButton, gc);
-
-        gc.gridx = 1;
-        gc.gridy = 10;
-        gc.anchor = GridBagConstraints.FIRST_LINE_END;
-        add(addKeyTriggerButton, gc);
-
 
         /////////////////// Next (Spacing) Row ////////////////////////////
         gc.gridy++;
@@ -276,9 +270,6 @@ public class AddBuildPanel extends JPanel {
         gc.anchor = GridBagConstraints.FIRST_LINE_START;
         add(rotateButton, gc);
 
-        gc.gridx = 2;
-        gc.anchor = GridBagConstraints.FIRST_LINE_START;
-        add(deleteButton, gc);
 
     }
 

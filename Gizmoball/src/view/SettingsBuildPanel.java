@@ -35,7 +35,7 @@ public class SettingsBuildPanel extends JPanel {
         friction1 = new Scrollbar(Scrollbar.HORIZONTAL, 0, 64, 0,255);
         friction2 = new Scrollbar(Scrollbar.HORIZONTAL, 0, 64, 0,255);
 
-        gravityLabel = new JLabel("Gravity:          25L/sec" + '\u2072');
+        gravityLabel = new JLabel("Gravity:          25L/sec" + '\u00B2');
         friction1Label = new JLabel("Friction1:          0.025 per sec");
         friction2Label = new JLabel("Friction2:          0.025 per L");
 
@@ -46,7 +46,7 @@ public class SettingsBuildPanel extends JPanel {
             button.addActionListener(buildListener);
         }
 
-        Border innerBorder = BorderFactory.createTitledBorder("Add Settings");
+        Border innerBorder = BorderFactory.createTitledBorder("Settings");
         Border outerBorder = BorderFactory.createEmptyBorder(5, 5, 5, 5);
         setBorder(BorderFactory.createCompoundBorder(outerBorder, innerBorder));
 
@@ -62,70 +62,75 @@ public class SettingsBuildPanel extends JPanel {
         //---------------- ROW 1 ------------------------------------------------>
         gc.gridy = 0;
 
-        gc.weightx = 0;
+        gc.weightx = 0.5;
         gc.weighty = 0.1;
 
         gc.gridx = 0;
-        gc.fill = GridBagConstraints.NONE;
+        gc.fill = GridBagConstraints.HORIZONTAL;
 
-        gc.anchor = GridBagConstraints.FIRST_LINE_START;
+        gc.anchor = GridBagConstraints.LINE_END;
         gc.insets = new Insets(25,0,0,0);
         add(gravityLabel, gc);
 
         /////////////////// Next Row ////////////////////////////
         gc.gridy++;
 
-        gc.weightx = 0;
-        gc.weighty = 0.5;
+        gc.weightx = 0.5;
+        gc.weighty = 0;
 
         gc.gridx = 0;
+        gc.fill = GridBagConstraints.HORIZONTAL;
+
         gc.anchor = GridBagConstraints.LINE_START;
-        gc.insets = new Insets(0,10,0,0);
+        gc.insets = new Insets(10,0,0,0);
         add(gravity, gc);
 
 
         /////////////////// Next Row ////////////////////////////
         gc.gridy++;
 
-        gc.weightx = 0;
-        gc.weighty = 1;
+        gc.weightx = 0.5;
+        gc.weighty = 0.1;
 
         gc.gridx = 0;
-        gc.anchor = GridBagConstraints.LINE_START;
-        gc.insets = new Insets(0,0,0,0);
+        gc.anchor = GridBagConstraints.LINE_END;
+
+        gc.insets = new Insets(25,0,0,0);
         add(friction1Label, gc);
 
 
         /////////////////// Next Row ////////////////////////////
         gc.gridy++;
 
-        gc.weightx = 0;
-        gc.weighty = 0.2;
+        gc.weightx = 0.5;
+        gc.weighty = 0.1;
 
         gc.gridx = 0;
         gc.anchor = GridBagConstraints.LINE_START;
-        add(friction2Label, gc);
-
-        /////////////////// Next Row ////////////////////////////
-        gc.gridy++;
-
-        gc.weightx = 1;
-        gc.weighty = 1;
-
-        gc.gridx = 0;
-        gc.anchor = GridBagConstraints.LINE_START;
+        gc.insets = new Insets(10,0,0,0);
         add(friction1, gc);
 
+        /////////////////// Next Row ////////////////////////////
+        gc.gridy++;
+
+        gc.weightx = 0.5;
+        gc.weighty = 0.1;
+
+        gc.gridx = 0;
+        gc.anchor = GridBagConstraints.LINE_END;
+        gc.insets = new Insets(25,0,0,0);
+        add(friction2Label, gc);
+
 
         /////////////////// Next Row ////////////////////////////
         gc.gridy++;
 
-        gc.weightx = 0;
-        gc.weighty = 0.2;
+        gc.weightx = 0.5;
+        gc.weighty = 0.1;
 
         gc.gridx = 0;
         gc.anchor = GridBagConstraints.LINE_START;
-        gc.insets = new Insets(0,0,0,5);
+        gc.insets = new Insets(10,0,0,0);
         add(friction2, gc);
 
 
@@ -135,8 +140,11 @@ public class SettingsBuildPanel extends JPanel {
         gc.weightx = 0;
         gc.weighty = 0.05;
 
+        gc.ipady = 40;
+
         gc.gridx = 0;
-        gc.anchor = GridBagConstraints.FIRST_LINE_START;
+        gc.anchor = GridBagConstraints.LINE_START;
+        gc.insets = new Insets(10,75,50,75);
         add(applySettingButton, gc);
 
 

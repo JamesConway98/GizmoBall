@@ -54,7 +54,7 @@ public class EditBuildPanel extends JPanel {
             button.addActionListener(buildListener);
         }
 
-        Border innerBorder = BorderFactory.createTitledBorder("Edit Settings");
+        Border innerBorder = BorderFactory.createTitledBorder("Edit");
         Border outerBorder = BorderFactory.createEmptyBorder(5, 5, 5, 5);
         setBorder(BorderFactory.createCompoundBorder(outerBorder, innerBorder));
 
@@ -70,134 +70,100 @@ public class EditBuildPanel extends JPanel {
 
         //---------------- ROW 1 ------------------------------------------------>
         gc.gridy = 0;
+        gc.ipady = 40;
 
-        gc.weightx = 1;
+        gc.weightx = 0.5;
         gc.weighty = 0.1;
 
-        gc.gridx = 1;
-        gc.fill = GridBagConstraints.NONE;
+        gc.gridx = 0;
+        gc.fill = GridBagConstraints.HORIZONTAL;
 
-        gc.anchor = GridBagConstraints.FIRST_LINE_START;
-        gc.insets = new Insets(25,0,0,0);
+        gc.anchor = GridBagConstraints.LINE_START;
+        gc.gridwidth = 2;
+        gc.insets = new Insets(25,75,0,75);
         add(moveButton, gc);
 
         /////////////////// Next Row ////////////////////////////
         gc.gridy++;
+        gc.gridwidth = 1;
 
-        gc.weightx = 1;
-        gc.weighty = 0.5;
-
-
-        gc.gridx = 2;
-        gc.anchor = GridBagConstraints.LINE_START;
-        gc.insets = new Insets(0,0,0,10);
-        add(new JLabel(), gc);
-
-        /////////////////// Next Row ////////////////////////////
-        gc.gridy++;
-
-        gc.weightx = 1;
-        gc.weighty = 1;
+        gc.weightx = 0.5;
+        gc.weighty = 0;
 
         gc.gridx = 1;
         gc.anchor = GridBagConstraints.LINE_START;
-        gc.insets = new Insets(0,0,0,0);
+        gc.insets = new Insets(25,0,0,0);
         add(rotateLabel, gc);
 
 
         /////////////////// Next Row ////////////////////////////
         gc.gridy++;
+        gc.ipady = 100;
 
-        gc.weightx = 1;
-        gc.weighty = 0.2;
+        gc.weightx = 0.5;
+        gc.weighty = 0;
 
         gc.gridx = 0;
-        gc.anchor = GridBagConstraints.LINE_END;
+        gc.anchor = GridBagConstraints.LINE_START;
+        gc.insets = new Insets(0,0,0,0);
         add(leftRotateButton, gc);
 
         gc.gridx = 1;
-        gc.anchor = GridBagConstraints.LINE_END;
-        gc.insets = new Insets(0,0,0,0);
+        gc.anchor = GridBagConstraints.LINE_START;
+        gc.insets = new Insets(0, 0,0,0);
         add(rightRotateButton, gc);
 
 
-        /////////////////// Next Row ////////////////////////////
+//        /////////////////// Next Row ////////////////////////////
+
         gc.gridy++;
+        gc.ipady = 40;
 
-        gc.weightx = 1;
-        gc.weighty = 0.5;
-
-
-        gc.gridx = 2;
-        gc.anchor = GridBagConstraints.LINE_START;
-        gc.insets = new Insets(0,0,0,10);
-        add(new JLabel(), gc);
-
-
-        /////////////////// Next Row ////////////////////////////
-        gc.gridy++;
-
-        gc.weightx = 1;
+        gc.weightx = 0.5;
         gc.weighty = 0.1;
 
-        gc.gridx = 1;
-        gc.anchor = GridBagConstraints.FIRST_LINE_START;
-        gc.insets = new Insets(10,0,0,5);
+        gc.gridx = 0;
+
+        gc.anchor = GridBagConstraints.LINE_START;
+        gc.gridwidth = 2;
+        gc.insets = new Insets(25,75,0,75);
         add(deleteButton, gc);
 
         /////////////////// Next Row ////////////////////////////
         gc.gridy++;
+        gc.ipady = 50;
+        gc.gridwidth = 1;
 
-        gc.weightx = 1;
-        gc.weighty = 0.5;
-
-
-        gc.gridx = 2;
-        gc.anchor = GridBagConstraints.LINE_START;
-        gc.insets = new Insets(0,0,0,10);
-        add(new JLabel(), gc);
-
-
-        /////////////////// Next Row ////////////////////////////
-        gc.gridy++;
-
-        gc.weightx = 1;
-        gc.weighty = 1;
+        gc.weightx = 0.5;
+        gc.weighty = 0.1;
 
         gc.gridx = 0;
-        gc.anchor = GridBagConstraints.FIRST_LINE_START;
+        gc.anchor = GridBagConstraints.LINE_START;
+        gc.insets = new Insets(0,0,0,0);
         add(addConnectionButton, gc);
 
         gc.gridx = 1;
-        gc.anchor = GridBagConstraints.FIRST_LINE_START;
+        gc.anchor = GridBagConstraints.LINE_START;
+        gc.insets = new Insets(0, 0,0,0);
         add(removeConnectionButton, gc);
 
         /////////////////// Next Row ////////////////////////////
         gc.gridy++;
+        gc.ipady = 50;
+        gc.gridwidth = 1;
 
-        gc.weightx = 1;
-        gc.weighty = 0.5;
-
-
-        gc.gridx = 2;
-        gc.anchor = GridBagConstraints.LINE_START;
-        gc.insets = new Insets(0,0,0,10);
-        add(new JLabel(), gc);
-
-        /////////////////// Next Row ////////////////////////////
-        gc.gridy++;
-
-        gc.weightx = 1;
-        gc.weighty = 1;
+        gc.weightx = 0.5;
+        gc.weighty = 0.1;
 
         gc.gridx = 0;
-        gc.anchor = GridBagConstraints.FIRST_LINE_START;
+        gc.anchor = GridBagConstraints.LINE_START;
+        gc.insets = new Insets(0,0,0,0);
         add(addKeyConnectionButton, gc);
 
         gc.gridx = 1;
-        gc.anchor = GridBagConstraints.FIRST_LINE_START;
+        gc.anchor = GridBagConstraints.LINE_START;
+        gc.insets = new Insets(0, 0,0,0);
         add(removeKeyConnectionButton, gc);
-
 
     }
 
