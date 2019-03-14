@@ -16,7 +16,6 @@ public class AddKeyListener implements KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) {
-        System.out.println(e.getKeyChar());
         model.setKeyToSelectedGizmo(e.getKeyChar());
     }
 

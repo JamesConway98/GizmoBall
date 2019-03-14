@@ -12,6 +12,7 @@ public class AddKeyTriggerListener implements MouseListener {
     private Model model;
 
     public AddKeyTriggerListener(Model m) {
+        System.out.println("Click a gizmo to add key or check its current key.");
         model = m;
     }
 
@@ -24,7 +25,7 @@ public class AddKeyTriggerListener implements MouseListener {
         for(Gizmo gizmo:model.getGizmos()){
             if(gizmo.getGridX()== x && gizmo.getGridY()== y){
                 model.setSelectedGizmo(gizmo);
-                System.out.println("key = " + gizmo.getKey());
+                System.out.println("Gizmo " + gizmo.getID() + " key = '" + gizmo.getKey() + "'. Press a key to change this.");
             }
         }
     }
