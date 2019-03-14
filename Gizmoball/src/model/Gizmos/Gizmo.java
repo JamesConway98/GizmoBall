@@ -8,6 +8,8 @@ import java.util.ArrayList;
 
 public interface Gizmo {
     public String getID();
+    public char getKey();
+    public void setKey(char key);
     public void setHitbox();
     public int getX();
     public int getY();

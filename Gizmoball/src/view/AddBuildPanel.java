@@ -66,7 +66,7 @@ public class AddBuildPanel extends JPanel {
         deleteButton = new JButton("Delete");
         buttons.add(deleteButton);
         addKeyTriggerButton = new JButton("Add Key Trigger");
-        buttons.add(deleteButton);
+        buttons.add(addKeyTriggerButton);
 
         for(JButton button: buttons){
             button.addActionListener(buildListener);

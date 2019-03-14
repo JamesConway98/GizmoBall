@@ -14,6 +14,7 @@ public class RightFlipperGizmo implements Gizmo{
     private int length = Model.L;
     private int rotation = 0;
     private Color colour;
+    private char key;
     private ArrayList<LineSegment> edgeList = new ArrayList<LineSegment>();
     private ArrayList<Circle> vertexList = new ArrayList<Circle>();
 
@@ -36,6 +37,14 @@ public class RightFlipperGizmo implements Gizmo{
 
     public String getID() {
         return ID;
+    }
+
+    public char getKey() {
+        return key;
+    }
+
+    public void setKey(char key) {
+        this.key = key;
     }
 
     public void setHitbox() {

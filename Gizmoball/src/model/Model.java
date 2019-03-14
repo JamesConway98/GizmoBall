@@ -6,11 +6,10 @@ import physics.Geometry;
 import physics.LineSegment;
 import physics.Vect;
 
-import javax.swing.*;
 import java.awt.event.MouseListener;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Observable;
+import java.util.Observer;
 
 public class Model extends Observable {
 
@@ -31,7 +30,7 @@ public class Model extends Observable {
 	private Vect newVelo = new Vect(0, 0);
 	private GameLoader loader;
 	private GameSaver saver;
-	final JFileChooser saveFile = new JFileChooser();
+	private Gizmo selectedGizmo;
 
 	private MouseListener activeMouseListener;
 
@@ -296,12 +295,6 @@ public class Model extends Observable {
 		notifyObservers();
 	}
 
-	public void clearAbsorbers() {
-		abs.clear();
-		setChanged();
-		notifyObservers();
-	}
-
 	public ArrayList<Absorber> getAbsorbers() {
 		return abs;
 	}
@@ -313,6 +306,8 @@ public class Model extends Observable {
 	}
 
 	public void setMouseListener(MouseListener ml){
+		//deselect gizmo
+		selectedGizmo = null;
 		activeMouseListener = ml;
 		setChanged();
 		notifyObservers();
@@ -320,6 +315,17 @@ public class Model extends Observable {
 
 	public MouseListener getActiveMouseListener() {
 		return activeMouseListener;
+	}
+
+	public void setSelectedGizmo(Gizmo selectedGizmo) {
+		this.selectedGizmo = selectedGizmo;
+	}
+
+	public void setKeyToSelectedGizmo(char key){
+		if(selectedGizmo != null) {
+			selectedGizmo.setKey(key);
+		}
+		selectedGizmo = null;
 	}
 
 	public void moveFlippers(double time) {
@@ -378,37 +384,21 @@ public class Model extends Observable {
 		}
 	}
 
+	/////////// I am Passing in null to save and load which will make it use default file
+	/////////// This is so I can run program as its not fully implemented, James xxx
+
 	public void saveGame(){
 		GameSaver gs = new GameSaver();
-		File file = new File("BoardSave.txt");
-		gs.saveGizmos(gizmos, file);
-		gs.saveBall(ball, file);
-		gs.saveFriction(mu, mu2, file);
-		gs.saveGravity(gravity, file);
-	}
-
-	public void saveAs(){
-		File file;
-		JFileChooser fileChooser = new JFileChooser(System.getProperty("user.home") + "\\Documents");
-		fileChooser.setSelectedFile(new File("BoardSave.txt"));
-		if (fileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
-			file = fileChooser.getSelectedFile();
-			GameSaver gs = new GameSaver();
-			gs.saveGizmos(gizmos, file);
-			gs.saveBall(ball, file);
-			gs.saveFriction(mu, mu2, file);
-			gs.saveGravity(gravity, file);
-		}
+		gs.saveGizmos(gizmos, null);
+		gs.saveBall(ball, null);
+		gs.saveFriction(mu, mu2, null);
+		gs.saveGravity(gravity, null);
 	}
 
 	public void loadGame(){
 		GameLoader gl = new GameLoader();
 		clearBoard();
-		JFileChooser fileChooser = new JFileChooser(System.getProperty("user.home") + "\\Documents");
-		if (fileChooser.showOpenDialog(saveFile) == JFileChooser.APPROVE_OPTION) {
-			File file = fileChooser.getSelectedFile();
-			gl.loadGame(this, file);
-		}
+		gl.loadGame(this, null);
 		//this is needed to update the view
 		setChanged();
 		notifyObservers();

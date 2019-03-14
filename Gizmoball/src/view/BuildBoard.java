@@ -1,10 +1,13 @@
 package view;
 
+import Controller.AbsorberActivateListener;
+import Controller.AddKeyListener;
 import model.*;
 import model.Gizmos.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
 import java.awt.geom.RoundRectangle2D;
 import java.util.Observable;
@@ -17,6 +20,7 @@ public class BuildBoard extends JPanel implements Observer {
     public static final int L = 40;
     protected Model model;
     private MouseListener activeMouseListener;
+    private KeyListener keyListener;
 
     public BuildBoard(int w, int h, Model m) {
         width = w;
@@ -137,6 +141,11 @@ public class BuildBoard extends JPanel implements Observer {
             int width = (int) (2 * ball.getRadius());
             g2.fillOval(x, y, width, width);
         }
+
+        keyListener = new AddKeyListener(model);
+        this.setFocusable(true);
+        this.requestFocus();
+        this.addKeyListener(keyListener);
 
     }
 

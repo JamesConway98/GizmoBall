@@ -23,7 +23,7 @@ public class FileMenuListener implements ActionListener {
                 model.saveGame();
                 break;
             case "Save as":
-                model.saveAs();
+                //model.saveAs();
                 break;
         }
     }

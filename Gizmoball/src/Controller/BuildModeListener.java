@@ -53,7 +53,7 @@ public class BuildModeListener implements ActionListener {
                 RotateGizmoListener rotateListener = new RotateGizmoListener(model);
                 model.setMouseListener(rotateListener);
                 break;
-            case "Add Key Trigger":
+            case "Add Key Connection":
                 AddKeyTriggerListener addKeyListener = new AddKeyTriggerListener(model);
                 model.setMouseListener(addKeyListener);
                 break;

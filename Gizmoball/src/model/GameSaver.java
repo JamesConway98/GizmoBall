@@ -8,6 +8,11 @@ import java.util.ArrayList;
 public class GameSaver {
 
     public void saveGizmos(ArrayList<Gizmo> gizmos, File file){
+
+        if(file == null){
+            file = new File("DefaultSave.txt");
+        }
+
         try (
                 Writer writer = new BufferedWriter(new OutputStreamWriter(
                         new FileOutputStream(file, true), "utf-8"))) {
