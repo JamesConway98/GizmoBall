@@ -57,7 +57,7 @@ public class GameLoader {
 					} else if (type.equals("Triangle")) {
 						//rotation = Integer.parseInt(read.next());
 						TriangleGizmo tg = new TriangleGizmo(id, x, y);
-						int rotationCount = countRotations(id);
+						int rotationCount = countRotations(id, file);
 						int i = 0;
 						while (i < rotationCount) {
 							tg.rotateClockwise();
@@ -71,7 +71,7 @@ public class GameLoader {
 						model.addAbsorber(abs);
 					} else if (type.equals("LeftFlipper")) {
 						LeftFlipperGizmo lf = new LeftFlipperGizmo(id, x, y);
-						int rotationCount = countRotations(id);
+						int rotationCount = countRotations(id, file);
 						int i = 0;
 						while (i < rotationCount) {
 							lf.rotateClockwise();
@@ -80,7 +80,7 @@ public class GameLoader {
 						model.addGizmo(lf);
 					} else if (type.equals("RightFlipper")) {
 						RightFlipperGizmo rf = new RightFlipperGizmo(id, x, y);
-						int rotationCount = countRotations(id);
+						int rotationCount = countRotations(id, file);
 						int i = 0;
 						while (i < rotationCount) {
 							rf.rotateClockwise();
@@ -98,11 +98,11 @@ public class GameLoader {
 		}
     }
     
-    public int countRotations(String name) {
+    public int countRotations(String name, File file) {
 		int count = 0;
-        InputStream is = getClass().getResourceAsStream("file.txt");
+        InputStream is = getClass().getResourceAsStream(file.getName());
 		try {
-			Scanner read = new Scanner(new File("file.txt"));
+			Scanner read = new Scanner(file);
 			String type, id;
 			int x, y, x2 = 0, y2 = 0, rotation = 0;
 			Float bx, by;
