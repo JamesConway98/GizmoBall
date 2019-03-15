@@ -74,14 +74,14 @@ public class EditBuildPanel extends JPanel {
         gc.ipady = 40;
 
         gc.weightx = 0.5;
-        gc.weighty = 0.1;
+        gc.weighty = 0;
 
         gc.gridx = 0;
         gc.fill = GridBagConstraints.HORIZONTAL;
 
         gc.anchor = GridBagConstraints.LINE_START;
         gc.gridwidth = 2;
-        gc.insets = new Insets(25,75,0,75);
+        gc.insets = new Insets(30,75,0,75);
         add(moveButton, gc);
 
         /////////////////// Next Row ////////////////////////////
