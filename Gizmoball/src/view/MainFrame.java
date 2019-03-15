@@ -2,7 +2,6 @@ package view;
 
 import Controller.FileMenuListener;
 import model.GameLoader;
-import model.GameSaver;
 import model.Model;
 
 import javax.swing.*;
@@ -23,9 +22,8 @@ public class MainFrame {
         runBoard = new RunBoard(500, 500, m);
 
         GameLoader loader = new GameLoader();
-        File file = new File("BoardSave.txt");
+        File file = new File(System.getProperty("user.home") + "\\Documents\\BoardSave.txt");
         loader.loadGame(m, file);
-
 
         FileMenuListener menuListener = new FileMenuListener(m);
 
@@ -60,6 +58,7 @@ public class MainFrame {
             changeToRunMode.removeAll();
             fileMenu.remove(5);
             fileMenu.add(changeToBuildMode,5);
+            m.saveGame();
             runBoard.update(null, null);
         });
         changeToBuildMode.addActionListener(actionEvent -> {

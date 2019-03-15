@@ -22,9 +22,9 @@ public class Model extends Observable {
 	private ArrayList<Absorber> abs;
 
 	private float gravity, mu, mu2;
-	private static final double MU = 0.025;
-	private static final double MU2 = 0.025;
-	private static final int GRAVITY = 25;
+//	private static final double MU = 0.025;
+//	private static final double MU2 = 0.025;
+//	private static final int GRAVITY = 25;
 	public static final int L = 40;
 
 	private double shortestTime;
@@ -76,8 +76,8 @@ public class Model extends Observable {
 			}
 
 			//Apply friction and gravity
-			double friction = 1 - (MU /moveTime) * moveTime - (MU2 / L) * Math.abs(ball.getVelo().length()) * moveTime;
-			ball.setVelo(ball.getVelo().times(friction).plus(new Vect(0, GRAVITY * L * moveTime)));
+			double friction = 1 - (mu /moveTime) * moveTime - (mu2 / L) * Math.abs(ball.getVelo().length()) * moveTime;
+			ball.setVelo(ball.getVelo().times(friction).plus(new Vect(0, gravity * L * moveTime)));
 
 
 			// Notify observers ... redraw updated view
@@ -219,8 +219,20 @@ public class Model extends Observable {
 		ball.setVelo(new Vect(x, y));
 	}
 
+	public float getGravity() {
+		return gravity;
+	}
+
 	public void setGravity(float grav){
 		gravity = grav;
+	}
+
+	public float getMu() {
+		return mu;
+	}
+
+	public float getMu2() {
+		return mu2;
 	}
 
 	public void setFriction(float mu1, float mu2){
