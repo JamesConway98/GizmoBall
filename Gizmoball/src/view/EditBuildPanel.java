@@ -36,10 +36,21 @@ public class EditBuildPanel extends JPanel {
 
         moveButton = new JButton("Move");
         buttons.add(moveButton);
-        leftRotateButton = new JButton("Rotate left");
+
+        ImageIcon leftRotate = new ImageIcon("Gizmoball/src/view/icons/rotateLeft.png");
+        leftRotateButton = new JButton(leftRotate);
+        leftRotateButton.setOpaque(false);
+        leftRotateButton.setContentAreaFilled(false);
+        leftRotateButton.setBorderPainted(false);
         buttons.add(leftRotateButton);
-        rightRotateButton = new JButton("Rotate Right");
+
+        ImageIcon rightRotate = new ImageIcon("Gizmoball/src/view/icons/rotateRight.png");
+        rightRotateButton = new JButton(rightRotate);
+        rightRotateButton.setOpaque(false);
+        rightRotateButton.setContentAreaFilled(false);
+        rightRotateButton.setBorderPainted(false);
         buttons.add(rightRotateButton);
+
         deleteButton = new JButton("Delete");
         buttons.add(deleteButton);
         addConnectionButton = new JButton("Add Connection");
