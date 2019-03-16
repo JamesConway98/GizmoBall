@@ -338,13 +338,20 @@ public class Model extends Observable {
 
 	public void setSelectedGizmo(Gizmo selectedGizmo) {
 		this.selectedGizmo = selectedGizmo;
+		setChanged();
+		notifyObservers();
+	}
+
+	public Gizmo getSelectedGizmo() {
+		return selectedGizmo;
 	}
 
 	public void setKeyToSelectedGizmo(char key){
 		if(selectedGizmo != null) {
 			selectedGizmo.setKey(key);
 		}
-		selectedGizmo = null;
+		setChanged();
+		notifyObservers();
 	}
 
 	public void moveFlippers(double time) {

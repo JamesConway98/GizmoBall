@@ -61,6 +61,10 @@ public class BuildModeListener implements ActionListener {
                 AddKeyTriggerListener addKeyListener = new AddKeyTriggerListener(model);
                 model.setMouseListener(addKeyListener);
                 break;
+            case "Back":
+                model.setMouseListener(null);
+                model.setSelectedGizmo(null);
+                break;
             case "Quit":
                 System.exit(0);
                 break;

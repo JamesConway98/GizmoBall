@@ -1,5 +1,6 @@
 package view;
 
+import Controller.AddKeyTriggerListener;
 import Controller.FileMenuListener;
 import model.GameLoader;
 import model.Model;
@@ -7,14 +8,24 @@ import model.Model;
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
+import java.util.Observable;
+import java.util.Observer;
 
-public class MainFrame {
+public class MainFrame implements Observer {
 
     private RunBoard runBoard;
     private BuildBoard buildBoard;
+    private Model model;
+    private JTabbedPane tabbedPane;
+    private AddKeyPanel addKeyPanel;
+    private EditBuildPanel editBuildPanel;
+    private JFrame frame;
 
     public MainFrame(Model m){
-        JFrame frame = new JFrame("Gizmoball");
+
+        model = m;
+
+        frame = new JFrame("Gizmoball");
         frame.setLayout(new BorderLayout());
 
         // Board is passed the Model so it can act as Observer
@@ -28,12 +39,13 @@ public class MainFrame {
         FileMenuListener menuListener = new FileMenuListener(m);
 
         AddBuildPanel addBuildPanel = new AddBuildPanel(m);
-        EditBuildPanel editBuildPanel = new EditBuildPanel(m);
+        editBuildPanel = new EditBuildPanel(m);
+        addKeyPanel = new AddKeyPanel(m);
         AddRunPanel addRunPanel = new AddRunPanel(m);
         SettingsBuildPanel settingsBuildPanel = new SettingsBuildPanel(m);
 
 
-        JTabbedPane tabbedPane = new JTabbedPane();
+        tabbedPane = new JTabbedPane();
         tabbedPane.addTab("Add",addBuildPanel);
         tabbedPane.addTab("Edit", editBuildPanel);
         tabbedPane.addTab("Settings", settingsBuildPanel);
@@ -96,5 +108,28 @@ public class MainFrame {
         frame.setVisible(true);
         frame.setResizable(false);
 
+        model.addObserver(this);
+
+    }
+
+    public void setAddKeyPanel(){
+        tabbedPane.setComponentAt(1, addKeyPanel);
+        frame.revalidate();
+        frame.repaint();
+    }
+
+    public void setDefaultEditPanel(){
+        tabbedPane.setComponentAt(1, editBuildPanel);
+        frame.revalidate();
+        frame.repaint();
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        if(model.getActiveMouseListener() instanceof AddKeyTriggerListener){
+            setAddKeyPanel();
+        }else{
+            setDefaultEditPanel();
+        }
     }
 }
