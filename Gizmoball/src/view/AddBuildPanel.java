@@ -48,50 +48,57 @@ public class AddBuildPanel extends JPanel {
         absorberLabel = new JLabel("Absorbers", SwingConstants.CENTER);
         absorberLabel.setFont(new Font(absorberLabel.getFont().getName(), absorberLabel.getFont().getStyle(), 15));
 
-        ImageIcon square = new ImageIcon("Gizmoball/src/view/icons/square.png");
+        ImageIcon square = new ImageIcon("src/view/icons/square.png");
         addSquareButton = new JButton(square);
+        addSquareButton.setActionCommand("Square");
         addSquareButton.setOpaque(false);
         addSquareButton.setContentAreaFilled(false);
         addSquareButton.setBorderPainted(false);
         buttons.add(addSquareButton);
 
-        ImageIcon circle = new ImageIcon("Gizmoball/src/view/icons/circle.png");
+        ImageIcon circle = new ImageIcon("src/view/icons/circle.png");
         addCircleButton = new JButton(circle);
+        addCircleButton.setActionCommand("Circle");
         addCircleButton.setOpaque(false);
         addCircleButton.setContentAreaFilled(false);
         addCircleButton.setBorderPainted(false);
         buttons.add(addCircleButton);
 
-        ImageIcon triangle = new ImageIcon("Gizmoball/src/view/icons/triangle.png");
+        ImageIcon triangle = new ImageIcon("src/view/icons/triangle.png");
         addTriangleButton = new JButton(triangle);
+        addTriangleButton.setActionCommand("Triangle");
         addTriangleButton.setOpaque(false);
         addTriangleButton.setContentAreaFilled(false);
         addTriangleButton.setBorderPainted(false);
         buttons.add(addTriangleButton);
 
-        ImageIcon leftFlipper = new ImageIcon("Gizmoball/src/view/icons/leftFlipper.png");
+        ImageIcon leftFlipper = new ImageIcon("src/view/icons/leftFlipper.png");
         addLeftFlipperButton = new JButton(leftFlipper);
+        addLeftFlipperButton.setActionCommand("Left Flipper");
         addLeftFlipperButton.setOpaque(false);
         addLeftFlipperButton.setContentAreaFilled(false);
         addLeftFlipperButton.setBorderPainted(false);
         buttons.add(addLeftFlipperButton);
 
-        ImageIcon rightFlipper = new ImageIcon("Gizmoball/src/view/icons/rightFlipper.png");
+        ImageIcon rightFlipper = new ImageIcon("src/view/icons/rightFlipper.png");
         addRightFlipperButton = new JButton(rightFlipper);
+        addRightFlipperButton.setActionCommand("Right Flipper");
         addRightFlipperButton.setOpaque(false);
         addRightFlipperButton.setContentAreaFilled(false);
         addRightFlipperButton.setBorderPainted(false);
         buttons.add(addRightFlipperButton);
 
-        ImageIcon ball = new ImageIcon("Gizmoball/src/view/icons/ball.png");
+        ImageIcon ball = new ImageIcon("src/view/icons/ball.png");
         addBallButton = new JButton(ball);
+        addBallButton.setActionCommand("Ball");
         addBallButton.setOpaque(false);
         addBallButton.setContentAreaFilled(false);
         addBallButton.setBorderPainted(false);
         buttons.add(addBallButton);
 
-        ImageIcon absorber = new ImageIcon("Gizmoball/src/view/icons/absorber.png");
+        ImageIcon absorber = new ImageIcon("src/view/icons/absorber.png");
         addAbsorberButton = new JButton(absorber);
+        addAbsorberButton.setActionCommand("Absorber");
         addAbsorberButton.setOpaque(false);
         addAbsorberButton.setContentAreaFilled(false);
         addAbsorberButton.setBorderPainted(false);
