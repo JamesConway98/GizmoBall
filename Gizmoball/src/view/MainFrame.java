@@ -20,6 +20,7 @@ public class MainFrame implements Observer {
     private JTabbedPane tabbedPane;
     private ChangeKeyPanel changeKeyPanel;
     private EditBuildPanel editBuildPanel;
+    private SettingsBuildPanel settingsBuildPanel;
     private JFrame frame;
 
     public MainFrame(Model m){
@@ -36,6 +37,7 @@ public class MainFrame implements Observer {
         GameLoader loader = new GameLoader();
         File file = new File(System.getProperty("user.home") + "\\Documents\\BoardSave.txt");
         loader.loadGame(m, file);
+        buildBoard.update(null, null);
 
         FileMenuListener menuListener = new FileMenuListener(m);
         TabChangeListener tabListener = new TabChangeListener(m);
@@ -44,7 +46,7 @@ public class MainFrame implements Observer {
         editBuildPanel = new EditBuildPanel(m);
         changeKeyPanel = new ChangeKeyPanel(m);
         AddRunPanel addRunPanel = new AddRunPanel(m);
-        SettingsBuildPanel settingsBuildPanel = new SettingsBuildPanel(m);
+        settingsBuildPanel = new SettingsBuildPanel(m);
 
 
         tabbedPane = new JTabbedPane();

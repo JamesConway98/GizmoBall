@@ -19,6 +19,6 @@ public class GravityListener implements AdjustmentListener {
     @Override
     public void adjustmentValueChanged(AdjustmentEvent adjustmentEvent) {
         model.setGravity(adjustmentEvent.getValue());
-        gravityLabel.setText("Gravity:          " + adjustmentEvent.getValue() + "L/sec" + '\u00B2');
+        gravityLabel.setText("Gravity:          " + (int) model.getGravity() + "L/sec" + '\u00B2');
     }
 }

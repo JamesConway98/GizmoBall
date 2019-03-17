@@ -22,8 +22,8 @@ public class EditBuildPanel extends JPanel {
 
     private ArrayList<JButton> buttons;
 
-    public EditBuildPanel(Model m){
 
+    public EditBuildPanel(Model m){
         BuildModeListener buildListener = new BuildModeListener(m);
         buttons = new ArrayList<>();
 
@@ -72,7 +72,6 @@ public class EditBuildPanel extends JPanel {
 
         formatLayout();
     }
-
 
     public void formatLayout() {
 
@@ -179,5 +178,4 @@ public class EditBuildPanel extends JPanel {
 
 
     }
-
 }

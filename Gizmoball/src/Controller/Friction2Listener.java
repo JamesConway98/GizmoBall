@@ -18,7 +18,7 @@ public class Friction2Listener implements AdjustmentListener {
 
     @Override
     public void adjustmentValueChanged(AdjustmentEvent adjustmentEvent) {
-        model.setFriction(model.getMu(), adjustmentEvent.getValue() / 100);
-        friction1Label.setText("Friction2:          " + adjustmentEvent.getValue() + " per L");
+        model.setMu2(adjustmentEvent.getValue());
+        friction1Label.setText("Friction2:          " + (int) model.getMu2() + " per L");
     }
 }
