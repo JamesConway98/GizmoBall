@@ -76,36 +76,8 @@ public class Absorber {
         return gridY2;
     }
 
-    public void setXpos1(int xpos1) {
-        this.xpos1 = xpos1;
-    }
-
-    public void setYpos1(int ypos1) {
-        this.ypos1 = ypos1;
-    }
-
-    public void setYpos2(int ypos2) {
-        this.ypos2 = ypos2;
-    }
-
-    public void setXpos2(int xpos2) {
-        this.xpos2 = xpos2;
-    }
-
-    public void setGridX1(int gridX1) {
-        this.gridX1 = gridX1;
-    }
-
-    public void setGridY1(int gridY1) {
-        this.gridY1 = gridY1;
-    }
-
-    public void setGridX2(int gridX2) {
-        this.gridX2 = gridX2;
-    }
-
-    public void setGridY2(int gridY2) {
-        this.gridY2 = gridY2;
+    public void setColour(Color colour){
+        this.colour = colour;
     }
 
     public void setNewGridX(int x){

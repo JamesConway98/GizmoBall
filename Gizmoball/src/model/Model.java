@@ -7,6 +7,7 @@ import physics.LineSegment;
 import physics.Vect;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseListener;
 import java.io.File;
 import java.util.ArrayList;
@@ -312,6 +313,11 @@ public class Model extends Observable {
 	}
 
 	public void addAbsorber(Absorber a) {
+		for(int i =0; i<=a.getWidth(); i++){
+			for(int j =0;j<=a.getHeight();j++){
+				clearGridSpace(a.getGridX1()+i, a.getGridY1()+j);
+			}
+		}
 		abs.add(a);
 		setChanged();
 		notifyObservers();
@@ -328,8 +334,15 @@ public class Model extends Observable {
 		previewAbs.setNewGridX(x);
 		previewAbs.setNewGridY(y);
 		previewAbs.updateXY();
+		previewAbs.setColour(new Color(1f,0f,.4f,.5f ));
 		setChanged();
 		notifyObservers();
+	}
+
+	public void finishPreviewAbsorber(){
+		Absorber absorber = abs.remove(abs.size()-1);
+		absorber.setColour(Color.MAGENTA);
+		addAbsorber(absorber);
 	}
 
 	public void clearAbsorbers(){

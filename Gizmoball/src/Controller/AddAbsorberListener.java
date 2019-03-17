@@ -46,6 +46,7 @@ public class AddAbsorberListener implements MouseListener, Observer {
             Absorber absorber = new Absorber(initialGridX, initialGridY, initialGridX, initialGridY);
             model.addPreviewAbsorber(absorber);
         }
+        model.finishPreviewAbsorber();
     }
 
     @Override
