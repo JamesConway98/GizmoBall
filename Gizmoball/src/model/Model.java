@@ -11,7 +11,6 @@ import java.awt.event.MouseListener;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Observable;
-import java.util.Observer;
 
 public class Model extends Observable {
 
