@@ -269,7 +269,22 @@ public class Model extends Observable {
 	}
 
 	public void addGizmo(Gizmo g) {
+
+		//TODO Make method in flipper that returns its area, all grid positions
 		clearGridSpace(g.getGridX(), g.getGridY());
+		if(g instanceof LeftFlipperGizmo){
+			for(int i =0; i<=1; i++){
+				for(int j =0;j<=1;j++){
+					clearGridSpace(g.getGridX()+i, g.getGridY()+j);
+				}
+			}
+		}if(g instanceof RightFlipperGizmo){
+			for(int i =0; i<=1; i++){
+				for(int j =0;j<=1;j++){
+					clearGridSpace(g.getGridX()+i, g.getGridY()+j);
+				}
+			}
+		}
 		gizmos.add(g);
 		setChanged();
 		notifyObservers();
@@ -360,6 +375,17 @@ public class Model extends Observable {
 	}
 
 	public void moveGizmo(Gizmo gizmo, int x, int y){
+
+		if (x < 0) {
+			x = 0;
+		}if (x > 18) {
+			x = 18;
+		}if (y < 0) {
+			y = 0;
+		}if (y > 18) {
+			y = 18;
+		}
+
 		if(gizmo!= null) {
 			gizmo.setGridX(x);
 			gizmo.setGridY(y);
@@ -470,6 +496,7 @@ public class Model extends Observable {
 		gs.saveBall(ball, file);
 		gs.saveFriction(mu, mu2, file);
 		gs.saveGravity(gravity, file);
+		gs.saveAbsorbers(abs, file);
 	}
 
 	public void saveAs(){

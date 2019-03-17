@@ -9,11 +9,6 @@ public class GameSaver {
 
     public void saveGizmos(ArrayList<Gizmo> gizmos, File file){
 
-        //if null passed in then use default file
-        if(file == null){
-            file = new File("DefaultSave.txt");
-        }
-
         try (
                 Writer writer = new BufferedWriter(new OutputStreamWriter(
                         new FileOutputStream(file, true), "utf-8"))) {
@@ -78,9 +73,6 @@ public class GameSaver {
         if(ball == null)
             return;
 
-        if(file == null){
-            file = new File("DefaultSave.txt");
-        }
         try (
                 Writer writer = new BufferedWriter(new OutputStreamWriter(
                         new FileOutputStream(file, true), "utf-8"))) {
@@ -98,10 +90,6 @@ public class GameSaver {
 
     public void saveGravity(Float grav, File file){
 
-        if(file == null){
-            file = new File("DefaultSave.txt");
-        }
-
         try (
                 Writer writer = new BufferedWriter(new OutputStreamWriter(
                         new FileOutputStream(file, true), "utf-8"))) {
@@ -115,10 +103,6 @@ public class GameSaver {
 
     public void saveFriction(Float mu, Float mu2, File file){
 
-        if(file == null){
-            file = new File("DefaultSave.txt");
-        }
-
         try (
                 Writer writer = new BufferedWriter(new OutputStreamWriter(
                         new FileOutputStream(file, true), "utf-8"))) {
@@ -131,10 +115,6 @@ public class GameSaver {
     }
 
     public void clearSaveFile(File file){
-
-        if(file == null){
-            file = new File("DefaultSave.txt");
-        }
 
         try (
                 Writer writer = new BufferedWriter(new OutputStreamWriter(

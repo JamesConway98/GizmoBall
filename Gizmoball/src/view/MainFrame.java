@@ -34,7 +34,7 @@ public class MainFrame implements Observer {
         runBoard = new RunBoard(500, 500, m);
 
         GameLoader loader = new GameLoader();
-        File file = new File(System.getProperty("user.home") + "\\Documents\\BoardSave.txt");
+        File file = new File("BoardSave.txt");
         loader.loadGame(m, file);
         buildBoard.update(null, null);
 
