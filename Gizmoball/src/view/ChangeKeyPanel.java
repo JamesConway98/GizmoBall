@@ -1,7 +1,5 @@
 package view;
 
-import Controller.AddKeyListener;
-import Controller.AddKeyTriggerListener;
 import Controller.BuildModeListener;
 import model.Gizmos.Gizmo;
 import model.Model;
@@ -13,14 +11,14 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
-public class AddKeyPanel extends JPanel implements Observer {
+public class ChangeKeyPanel extends JPanel implements Observer {
 
-    private JButton backButton;
+    private JButton backButton, removeButton;
     private JLabel instructions, currentGizmoKey;
     private ArrayList<JButton> buttons;
     private Model model;
 
-    public AddKeyPanel(Model m){
+    public ChangeKeyPanel(Model m){
 
         model = m;
         m.addObserver(this);
@@ -37,6 +35,8 @@ public class AddKeyPanel extends JPanel implements Observer {
 
         backButton = new JButton("Back");
         buttons.add(backButton);
+        removeButton = new JButton("Remove");
+        buttons.add(removeButton);
 
         for(JButton button: buttons){
             button.addActionListener(buildListener);
@@ -94,6 +94,19 @@ public class AddKeyPanel extends JPanel implements Observer {
         gc.gridx = 0;
         gc.anchor = GridBagConstraints.LINE_START;
         gc.insets = new Insets(0,10,0,10);
+        add(removeButton, gc);
+
+        /////////////////// Next Row ////////////////////////////
+        gc.gridy++;
+        gc.ipady = 40;
+        gc.gridwidth = 1;
+
+        gc.weightx = 0.5;
+        gc.weighty = 0.5;
+
+        gc.gridx = 0;
+        gc.anchor = GridBagConstraints.LINE_START;
+        gc.insets = new Insets(0,10,0,10);
         add(backButton, gc);
 
     }
@@ -104,9 +117,13 @@ public class AddKeyPanel extends JPanel implements Observer {
             Gizmo gizmo = model.getSelectedGizmo();
             instructions.setText("You have selected Gizmo " + gizmo.getID());
             currentGizmoKey.setText("Gizmo " + gizmo.getID() + " key = \"" + gizmo.getKey() + "\". Press a key to change this.");
+        }else{
+            instructions.setText("Click on a Gizmo to select it.");
+            currentGizmoKey.setText("");
         }
 
         revalidate();
         repaint();
     }
+
 }

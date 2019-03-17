@@ -2,7 +2,6 @@ package Controller;
 
 import model.Model;
 
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -57,9 +56,12 @@ public class BuildModeListener implements ActionListener {
                 RotateGizmoListener rotateAntiListener = new RotateGizmoListener(model, false);
                 model.setMouseListener(rotateAntiListener);
                 break;
-            case "Add Key Connection":
-                AddKeyTriggerListener addKeyListener = new AddKeyTriggerListener(model);
+            case "Edit Key Connections":
+                EditKeyTriggerListener addKeyListener = new EditKeyTriggerListener(model);
                 model.setMouseListener(addKeyListener);
+                break;
+            case "Remove":
+                model.removeKey(model.getSelectedGizmo());
                 break;
             case "Back":
                 model.setMouseListener(null);

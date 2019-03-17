@@ -7,12 +7,11 @@ import view.BuildBoard;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class AddKeyTriggerListener implements MouseListener {
+public class EditKeyTriggerListener implements MouseListener {
 
     private Model model;
 
-    public AddKeyTriggerListener(Model m) {
-        System.out.println("Click a gizmo to add key or check its current key.");
+    public EditKeyTriggerListener(Model m) {
         model = m;
     }
 
@@ -25,7 +24,6 @@ public class AddKeyTriggerListener implements MouseListener {
         for(Gizmo gizmo:model.getGizmos()){
             if(gizmo.getGridX()== x && gizmo.getGridY()== y){
                 model.setSelectedGizmo(gizmo);
-                System.out.println("Gizmo " + gizmo.getID() + " key = '" + gizmo.getKey() + "'. Press a key to change this.");
             }
         }
     }

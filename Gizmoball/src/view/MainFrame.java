@@ -1,7 +1,8 @@
 package view;
 
-import Controller.AddKeyTriggerListener;
+import Controller.EditKeyTriggerListener;
 import Controller.FileMenuListener;
+import Controller.TabChangeListener;
 import model.GameLoader;
 import model.Model;
 
@@ -17,7 +18,7 @@ public class MainFrame implements Observer {
     private BuildBoard buildBoard;
     private Model model;
     private JTabbedPane tabbedPane;
-    private AddKeyPanel addKeyPanel;
+    private ChangeKeyPanel changeKeyPanel;
     private EditBuildPanel editBuildPanel;
     private JFrame frame;
 
@@ -37,10 +38,11 @@ public class MainFrame implements Observer {
         loader.loadGame(m, file);
 
         FileMenuListener menuListener = new FileMenuListener(m);
+        TabChangeListener tabListener = new TabChangeListener(m);
 
         AddBuildPanel addBuildPanel = new AddBuildPanel(m);
         editBuildPanel = new EditBuildPanel(m);
-        addKeyPanel = new AddKeyPanel(m);
+        changeKeyPanel = new ChangeKeyPanel(m);
         AddRunPanel addRunPanel = new AddRunPanel(m);
         SettingsBuildPanel settingsBuildPanel = new SettingsBuildPanel(m);
 
@@ -49,6 +51,7 @@ public class MainFrame implements Observer {
         tabbedPane.addTab("Add",addBuildPanel);
         tabbedPane.addTab("Edit", editBuildPanel);
         tabbedPane.addTab("Settings", settingsBuildPanel);
+        tabbedPane.addChangeListener(tabListener);
 
         JMenuBar menuBar = new JMenuBar();
 
@@ -112,8 +115,8 @@ public class MainFrame implements Observer {
 
     }
 
-    public void setAddKeyPanel(){
-        tabbedPane.setComponentAt(1, addKeyPanel);
+    public void setEditKeyPanel(){
+        tabbedPane.setComponentAt(1, changeKeyPanel);
         frame.revalidate();
         frame.repaint();
     }
@@ -126,8 +129,8 @@ public class MainFrame implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        if(model.getActiveMouseListener() instanceof AddKeyTriggerListener){
-            setAddKeyPanel();
+        if(model.getActiveMouseListener() instanceof EditKeyTriggerListener){
+            setEditKeyPanel();
         }else{
             setDefaultEditPanel();
         }

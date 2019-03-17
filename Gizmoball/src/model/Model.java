@@ -354,6 +354,13 @@ public class Model extends Observable {
 		notifyObservers();
 	}
 
+	public void removeKey(Gizmo gizmo){
+		//this sets it to null basically
+		gizmo.setKey(Character.MIN_VALUE);
+		setChanged();
+		notifyObservers();
+	}
+
 	public void moveFlippers(double time) {
 		double moveTime = 0.05;
 		for (Gizmo gizmo : gizmos) {
