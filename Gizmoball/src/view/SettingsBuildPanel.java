@@ -36,6 +36,10 @@ public class SettingsBuildPanel extends JPanel implements Observer {
         friction1 = new Scrollbar(Scrollbar.HORIZONTAL, (int) model.getMu() * 1000, 64, 0, 164);
         friction2 = new Scrollbar(Scrollbar.HORIZONTAL, (int) model.getMu2() * 1000, 64, 0, 164);
 
+        gravity.setBackground(Color.darkGray);
+        friction1.setBackground(Color.darkGray);
+        friction2.setBackground(Color.darkGray);
+
         gravityLabel = new JLabel("Gravity:          " + model.getGravity() + "/sec" + '\u00B2');
         gravityLabel.setFont(new Font(gravityLabel.getFont().getName(), gravityLabel.getFont().getStyle(), 15));
         friction1Label = new JLabel("Friction one:          " + model.getMu() + " per sec");

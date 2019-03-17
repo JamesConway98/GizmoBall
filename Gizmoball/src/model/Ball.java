@@ -22,10 +22,15 @@ public class Ball {
 
 	// x, y coordinates and x,y velocity
 	public Ball(double x, double y, double xv, double yv) {
-		gridX = (int)x;
+
+		xpos = x;
+		ypos = y;
+		gridX = (int)(x / Model.L - 50 - (R*2));
+		gridY = (int)(y / Model.L - 50 - (R*2));
+		/*gridX = (int)x;
 		gridY = (int)y;
 		xpos = x * Model.L + 50 + (R*2); // Centre coordinates
-		ypos = y * Model.L + 50 + (R*2);
+		ypos = y * Model.L + 50 + (R*2);*/
 		colour = Color.BLUE;
 		velocity = new Vect(xv, yv);
 		stopped = false;

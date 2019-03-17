@@ -8,6 +8,8 @@ import view.BuildBoard;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import static model.Model.L;
+
 public class AddBallListener implements MouseListener {
 
     private Model model;
@@ -19,9 +21,9 @@ public class AddBallListener implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         int x = 0, y = 0;
-        x = (e.getX() - 50)/ BuildBoard.L;
-        y = (e.getY() - 50)/ BuildBoard.L;
-        if(x >= 0 && x <= 18 && y >= 0 && y <= 18) {
+        x = (e.getX());// - 50)/ BuildBoard.L;
+        y = (e.getY());// - 50)/ BuildBoard.L;
+        if(x >= 0 && x <= 18*L && y >= 0 && y <= 18*L) {
             model.addBall(new Ball(x, y, -50, -50));
         }
     }

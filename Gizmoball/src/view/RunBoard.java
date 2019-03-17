@@ -37,6 +37,12 @@ public class RunBoard extends JPanel implements Observer {
 
         Graphics2D g2 = (Graphics2D) g;
 
+        g.setColor(Color.LIGHT_GRAY);
+
+        g.fillRect(50, 50, 19*L, 19*L);
+
+        g.setColor(Color.BLACK);
+
         for (LineSegment vl : model.getGws().getLineSegments()) {
             if(vl.p1().x() == vl.p2().x()) {
                 g2.fillRect((int) vl.p1().x(), (int) vl.p1().y(), 1, (int) vl.length());
