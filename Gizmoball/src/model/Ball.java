@@ -25,8 +25,8 @@ public class Ball {
 
 		xpos = x;
 		ypos = y;
-		gridX = (int)(x / Model.L - 50 - (R*2));
-		gridY = (int)(y / Model.L - 50 - (R*2));
+		gridX = (int)(x / Model.L -1);
+		gridY = (int)(y / Model.L -1);
 		/*gridX = (int)x;
 		gridY = (int)y;
 		xpos = x * Model.L + 50 + (R*2); // Centre coordinates

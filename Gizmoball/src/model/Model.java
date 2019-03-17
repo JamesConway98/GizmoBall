@@ -235,14 +235,6 @@ public class Model extends Observable {
 		return mu2;
 	}
 
-    public void setMu1(float mu1) {
-        this.mu = mu1;
-    }
-
-    public void setMu2(float mu2) {
-        this.mu2 = mu2;
-    }
-
 	public void setFriction(float mu1, float mu2){
 		this.mu = mu1;
 		this.mu2 = mu2;
@@ -314,7 +306,6 @@ public class Model extends Observable {
 					absorberInBox = absorber;
 			}
 		}
-
 		removeGizmo(gizmoInBox);
 		removeAbsorber(absorberInBox);
 	}
@@ -322,6 +313,7 @@ public class Model extends Observable {
 
 
 	public void addBall(Ball b) {
+		clearGridSpace(b.getGridX(), b.getGridY());
 		ball = b;
 		setChanged();
 		notifyObservers();
