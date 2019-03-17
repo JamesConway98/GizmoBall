@@ -1,14 +1,17 @@
 package view;
 
-import Controller.BuildModeListener;
+import Controller.*;
 import model.Model;
 
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 
-public class AddBuildPanel extends JPanel {
+public class AddBuildPanel extends JPanel implements Observer {
 
     private JLabel bumperLabel;
     private JLabel flipperLabel;
@@ -28,9 +31,14 @@ public class AddBuildPanel extends JPanel {
     private JTextField initialVelocityField;
     private JTextField initialDirectionField;
 
+    private Model model;
+
     private ArrayList<JButton> buttons;
 
     public AddBuildPanel(Model m){
+
+        model = m;
+        model.addObserver(this);
 
         BuildModeListener buildListener = new BuildModeListener(m);
         buttons = new ArrayList<>();
@@ -58,6 +66,7 @@ public class AddBuildPanel extends JPanel {
 
         ImageIcon circle = new ImageIcon("src/view/icons/circle.png");
         addCircleButton = new JButton(circle);
+        addCircleButton.setBackground(Color.BLUE);
         addCircleButton.setActionCommand("Circle");
         addCircleButton.setOpaque(false);
         addCircleButton.setContentAreaFilled(false);
@@ -291,4 +300,33 @@ public class AddBuildPanel extends JPanel {
     }
 
 
+    @Override
+    public void update(Observable o, Object arg) {
+        for(JButton button: buttons){
+            button.setBorderPainted(false);
+        }
+
+        MouseListener l = model.getActiveMouseListener();
+
+        //this highlights the current button
+        if(l instanceof AddTriangleListener){
+            addTriangleButton.setBorderPainted(true);
+        }else if(l instanceof  AddCircleListener){
+            addCircleButton.setBorderPainted(true);
+        }else if(l instanceof  AddSquareListener){
+            addSquareButton.setBorderPainted(true);
+        }else if(l instanceof AddLeftFlipperListener){
+            addLeftFlipperButton.setBorderPainted(true);
+        }else if(l instanceof  AddRightFlipperListener){
+            addRightFlipperButton.setBorderPainted(true);
+        }else if(l instanceof  AddBallListener){
+            addBallButton.setBorderPainted(true);
+        }else if(l instanceof  AddAbsorberListener){
+            addAbsorberButton.setBorderPainted(true);
+        }
+
+        revalidate();
+        repaint();
+
+    }
 }

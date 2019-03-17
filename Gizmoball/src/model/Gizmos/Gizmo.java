@@ -15,6 +15,10 @@ public interface Gizmo {
     public int getY();
     public int getGridX();
     public int getGridY();
+    public void setGridX(int gridX);
+    public void setGridY(int gridY);
+    public void setXpos(int x);
+    public void setYpos(int y);
     public int getLength();
     public ArrayList<LineSegment> getEdges();
     public ArrayList<Circle> getVertices();

@@ -1,14 +1,17 @@
 package view;
 
-import Controller.BuildModeListener;
+import Controller.*;
 import model.Model;
 
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 
-public class EditBuildPanel extends JPanel {
+public class EditBuildPanel extends JPanel implements Observer {
     private JLabel rotateLabel;
 
     private JButton moveButton;
@@ -20,10 +23,16 @@ public class EditBuildPanel extends JPanel {
     private JButton editKeyConnectionButton;
     private JButton removeKeyConnectionButton;
 
+    private Model model;
+
     private ArrayList<JButton> buttons;
 
 
     public EditBuildPanel(Model m){
+
+        model = m;
+        model.addObserver(this);
+
         BuildModeListener buildListener = new BuildModeListener(m);
         buttons = new ArrayList<>();
 
@@ -176,6 +185,37 @@ public class EditBuildPanel extends JPanel {
 
         add(editKeyConnectionButton, gc);
 
+    }
 
+
+    @Override
+    public void update(Observable o, Object arg) {
+
+        //Un highlighting buttons
+
+        rightRotateButton.setBorderPainted(false);
+        leftRotateButton.setBorderPainted(false);
+
+        for(JButton button:buttons){
+            button.setForeground(Color.BLACK);
+        }
+
+        //green
+        Color colour = new Color(0f,.8f,0f,1f );
+
+        MouseListener l = model.getActiveMouseListener();
+
+        //this highlights the current button
+        if(l instanceof DeleteGizmoListener){
+            deleteButton.setForeground(colour);
+        }else if(l instanceof MoveGizmoListener){
+            moveButton.setForeground(colour);
+        } else if(l instanceof RotateGizmoListener){
+            if(((RotateGizmoListener) l).getClockwise()) {
+                rightRotateButton.setBorderPainted(true);
+            }else{
+                leftRotateButton.setBorderPainted(true);
+            }
+        }
     }
 }

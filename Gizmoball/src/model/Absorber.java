@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public class Absorber {
 
     private int xpos1, ypos1, ypos2, xpos2, gridX1, gridY1, gridX2, gridY2, width, height;
+    private int initX, initY;
     private Color colour;
 
     // Walls are the enclosing Rectangle - defined by top left corner and bottom
@@ -22,6 +23,9 @@ public class Absorber {
         this.ypos1 = gridY1*Model.L+50;
         this.xpos2 = gridX2*Model.L+50;
         this.ypos2 = gridY2*Model.L+50;
+
+        initX = gridX1;
+        initY = gridY1;
 
         width = gridX2 - gridX1;
         height = gridY2 - gridY1;
@@ -70,6 +74,75 @@ public class Absorber {
 
     public int getGridY2() {
         return gridY2;
+    }
+
+    public void setXpos1(int xpos1) {
+        this.xpos1 = xpos1;
+    }
+
+    public void setYpos1(int ypos1) {
+        this.ypos1 = ypos1;
+    }
+
+    public void setYpos2(int ypos2) {
+        this.ypos2 = ypos2;
+    }
+
+    public void setXpos2(int xpos2) {
+        this.xpos2 = xpos2;
+    }
+
+    public void setGridX1(int gridX1) {
+        this.gridX1 = gridX1;
+    }
+
+    public void setGridY1(int gridY1) {
+        this.gridY1 = gridY1;
+    }
+
+    public void setGridX2(int gridX2) {
+        this.gridX2 = gridX2;
+    }
+
+    public void setGridY2(int gridY2) {
+        this.gridY2 = gridY2;
+    }
+
+    public void setNewGridX(int x){
+        if(x>initX){
+            gridX1 = initX;
+            gridX2 = x;
+        }if(x< initX){
+            gridX2 = initX;
+            gridX1 = x;
+        }if(x==initX){
+            gridX2 = initX;
+            gridX1 = initX;
+        }
+    }
+
+    public void setNewGridY(int y){
+        if(y>initY){
+            gridY1 = initY;
+            gridY2 = y;
+        }if(y< initY){
+            gridY2 = initY;
+            gridY1 = y;
+        }if(y==initY){
+            gridY2 = initY;
+            gridY1 = initY;
+        }
+    }
+
+    public void updateXY(){
+
+        xpos1 = gridX1*Model.L+50;
+        ypos1 = gridY1*Model.L+50;
+        xpos2 = gridX2*Model.L+50;
+        ypos2 = gridY2*Model.L+50;
+
+        width = gridX2 - gridX1;
+        height = gridY2 - gridY1;
     }
 
     public Color getColour() {

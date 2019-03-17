@@ -317,6 +317,21 @@ public class Model extends Observable {
 		notifyObservers();
 	}
 
+	public void addPreviewAbsorber(Absorber a) {
+		abs.add(a);
+		setChanged();
+		notifyObservers();
+	}
+
+	public void editPreviewAbsorber(int x, int y){
+		Absorber previewAbs = abs.get(abs.size()-1);
+		previewAbs.setNewGridX(x);
+		previewAbs.setNewGridY(y);
+		previewAbs.updateXY();
+		setChanged();
+		notifyObservers();
+	}
+
 	public void clearAbsorbers(){
 		abs.clear();
 	}
@@ -327,6 +342,15 @@ public class Model extends Observable {
 
 	public void rotateGizmo(Gizmo gizmo){
 		gizmo.rotateClockwise();
+		setChanged();
+		notifyObservers();
+	}
+
+	public void moveGizmo(Gizmo gizmo, int x, int y){
+		if(gizmo!= null) {
+			gizmo.setGridX(x);
+			gizmo.setGridY(y);
+		}
 		setChanged();
 		notifyObservers();
 	}
@@ -362,8 +386,10 @@ public class Model extends Observable {
 	}
 
 	public void removeKey(Gizmo gizmo){
-		//this sets it to null basically
-		gizmo.setKey(Character.MIN_VALUE);
+		if(gizmo!=null) {
+			//this sets it to null basically
+			gizmo.setKey(Character.MIN_VALUE);
+		}
 		setChanged();
 		notifyObservers();
 	}

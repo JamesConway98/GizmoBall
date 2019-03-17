@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class SquareGizmo implements Gizmo{
     private String ID;
-    private int gridX, gridY;
+    private int gridX, gridY, xpos, ypos;
     private int length = Model.L;
     private int rotation = 0;
     private Color colour;
@@ -83,6 +83,26 @@ public class SquareGizmo implements Gizmo{
         return gridY;
     }
 
+    @Override
+    public void setGridX(int gridX) {
+        this.gridX = gridX;
+    }
+
+    @Override
+    public void setGridY(int gridY) {
+        this.gridY = gridY;
+    }
+
+    @Override
+    public void setXpos(int xpos) {
+        this.xpos = xpos;
+    }
+
+    @Override
+    public void setYpos(int ypos) {
+        this.ypos = ypos;
+    }
+
     public int getLength() {
         return length;
     }
@@ -117,6 +137,7 @@ public class SquareGizmo implements Gizmo{
     }
 
     public void rotateClockwise() {
+
     }
 
     public void rotateAnticlockwise() {
