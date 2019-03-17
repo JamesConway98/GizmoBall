@@ -77,7 +77,6 @@ public class MainFrame implements Observer {
             changeToRunMode.removeAll();
             fileMenu.remove(5);
             fileMenu.add(changeToBuildMode,5);
-            m.saveGame();
             runBoard.update(null, null);
         });
         changeToBuildMode.addActionListener(actionEvent -> {

@@ -1,9 +1,6 @@
 package view;
 
-import Controller.BuildModeListener;
-import Controller.Friction1Listener;
-import Controller.Friction2Listener;
-import Controller.GravityListener;
+import Controller.*;
 import model.Model;
 
 import javax.swing.*;
@@ -21,20 +18,15 @@ public class SettingsBuildPanel extends JPanel implements Observer {
 
     private JButton applySettingButton;
 
-    Scrollbar gravity ;
-    Scrollbar friction1;
-    Scrollbar friction2;
+    private Scrollbar gravity;
+    private Scrollbar friction1;
+    private Scrollbar friction2;
 
-    private ArrayList<JButton> buttons;
-
-    Model model;
+    private Model model;
 
     public SettingsBuildPanel(Model m){
         this.model = m;
         this.model.addObserver(this);
-
-        BuildModeListener buildListener = new BuildModeListener(model);
-        buttons = new ArrayList<>();
 
         Dimension dim = getPreferredSize();
         dim.width = 350;
@@ -46,21 +38,18 @@ public class SettingsBuildPanel extends JPanel implements Observer {
 
         gravityLabel = new JLabel("Gravity:          " + model.getGravity() + "/sec" + '\u00B2');
         gravityLabel.setFont(new Font(gravityLabel.getFont().getName(), gravityLabel.getFont().getStyle(), 15));
-        friction1Label = new JLabel("Friction1:          " + model.getMu() + " per sec");
+        friction1Label = new JLabel("Friction one:          " + model.getMu() + " per sec");
         friction1Label.setFont(new Font(friction1Label.getFont().getName(), friction1Label.getFont().getStyle(), 15));
-        friction2Label = new JLabel("Friction2:          " + model.getMu2() + " per L");
+        friction2Label = new JLabel("Friction two:          " + model.getMu2() + " per L");
         friction2Label.setFont(new Font(friction2Label.getFont().getName(), friction2Label.getFont().getStyle(), 15));
 
         applySettingButton = new JButton("Apply Settings");
-        buttons.add(applySettingButton);
 
-        gravity.addAdjustmentListener(new GravityListener(model, gravityLabel));
-        friction1.addAdjustmentListener(new Friction1Listener(model, friction1Label));
-        friction2.addAdjustmentListener(new Friction2Listener(model, friction2Label));
+        gravity.addAdjustmentListener(new GravityListener(gravityLabel));
+        friction1.addAdjustmentListener(new Friction1Listener(friction1Label));
+        friction2.addAdjustmentListener(new Friction2Listener(friction2Label));
 
-        for(JButton button: buttons){
-            button.addActionListener(buildListener);
-        }
+        applySettingButton.addActionListener(new BuildModeSettingsListener(model, gravityLabel, friction1Label, friction2Label));
 
         Border innerBorder = BorderFactory.createTitledBorder("Settings");
         Border outerBorder = BorderFactory.createEmptyBorder(5, 5, 5, 5);
@@ -169,13 +158,11 @@ public class SettingsBuildPanel extends JPanel implements Observer {
     @Override
     public void update(Observable o, Object arg) {
         gravity.setValue((int) model.getGravity());
-        friction1.setValue((int) model.getMu());
-        friction2.setValue((int) model.getMu2());
-
-        gravityLabel.setText("Gravity:          " + (int) model.getGravity() + "/sec" + '\u00B2');
-        friction1Label.setText("Friction1:          " + (int) model.getMu() + " per sec");
-        friction2Label.setText("Friction2:          " + (int) model.getMu2() + " per L");
+        friction1.setValue((int) model.getMu() * 1000);
+        friction2.setValue((int) model.getMu2() * 1000);
+        gravityLabel.setText("Gravity:          " + model.getGravity() + "/sec" + '\u00B2');
+        friction1Label.setText("Friction one:          " + model.getMu() + " per sec");
+        friction2Label.setText("Friction two:          " + model.getMu2() + " per L");
         repaint();
     }
-
 }
