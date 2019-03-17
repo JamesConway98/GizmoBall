@@ -22,9 +22,9 @@ public class Model extends Observable {
 	private ArrayList<Absorber> abs;
 
 	private float gravity, mu, mu2;
-	private static final double MU = 0.025;
-	private static final double MU2 = 0.025;
-	private static final int GRAVITY = 25;
+//	private static final double MU = 0.025;
+//	private static final double MU2 = 0.025;
+//	private static final int GRAVITY = 25;
 	public static final int L = 40;
 
 	private double shortestTime;
@@ -76,8 +76,8 @@ public class Model extends Observable {
 			}
 
 			//Apply friction and gravity
-			double friction = 1 - (MU /moveTime) * moveTime - (MU2 / L) * Math.abs(ball.getVelo().length()) * moveTime;
-			ball.setVelo(ball.getVelo().times(friction).plus(new Vect(0, GRAVITY * L * moveTime)));
+			double friction = 1 - (mu /moveTime) * moveTime - (mu2 / L) * Math.abs(ball.getVelo().length()) * moveTime;
+			ball.setVelo(ball.getVelo().times(friction).plus(new Vect(0, gravity * L * moveTime)));
 
 
 			// Notify observers ... redraw updated view
@@ -219,8 +219,20 @@ public class Model extends Observable {
 		ball.setVelo(new Vect(x, y));
 	}
 
+	public float getGravity() {
+		return gravity;
+	}
+
 	public void setGravity(float grav){
 		gravity = grav;
+	}
+
+	public float getMu() {
+		return mu;
+	}
+
+	public float getMu2() {
+		return mu2;
 	}
 
 	public void setFriction(float mu1, float mu2){
@@ -326,13 +338,27 @@ public class Model extends Observable {
 
 	public void setSelectedGizmo(Gizmo selectedGizmo) {
 		this.selectedGizmo = selectedGizmo;
+		setChanged();
+		notifyObservers();
+	}
+
+	public Gizmo getSelectedGizmo() {
+		return selectedGizmo;
 	}
 
 	public void setKeyToSelectedGizmo(char key){
 		if(selectedGizmo != null) {
 			selectedGizmo.setKey(key);
 		}
-		selectedGizmo = null;
+		setChanged();
+		notifyObservers();
+	}
+
+	public void removeKey(Gizmo gizmo){
+		//this sets it to null basically
+		gizmo.setKey(Character.MIN_VALUE);
+		setChanged();
+		notifyObservers();
 	}
 
 	public void moveFlippers(double time) {
@@ -391,9 +417,6 @@ public class Model extends Observable {
 		}
 	}
 
-	/////////// I am Passing in null to save and load which will make it use default file
-	/////////// This is so I can run program as its not fully implemented, James xxx
-
 	public void saveGame(){
 		GameSaver gs = new GameSaver();
 		File file = new File("BoardSave.txt");
@@ -414,6 +437,7 @@ public class Model extends Observable {
 			gs.saveBall(ball, file);
 			gs.saveFriction(mu, mu2, file);
 			gs.saveGravity(gravity, file);
+			gs.saveAbsorbers(abs, file);
 		}
 	}
 
@@ -434,6 +458,7 @@ public class Model extends Observable {
 
 		public void clearBoard(){
 		gizmos.clear();
+		abs.clear();
 		ball = null;
 	}
 

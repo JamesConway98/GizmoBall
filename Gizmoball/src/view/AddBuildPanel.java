@@ -22,9 +22,6 @@ public class AddBuildPanel extends JPanel {
     private JButton addRightFlipperButton;
     private JButton addBallButton;
     private JButton addAbsorberButton;
-    private JButton rotateButton;
-    private JButton deleteButton;
-    private JButton addKeyTriggerButton;
 
     private JLabel addInitialVelocityLabel;
     private JLabel addInitialDirectionLabel;
@@ -42,38 +39,80 @@ public class AddBuildPanel extends JPanel {
         dim.width = 350;
         setPreferredSize(dim);
 
-        bumperLabel = new JLabel("Bumpers");
-        flipperLabel = new JLabel("Flippers");
-        ballLabel = new JLabel("Ball");
-        absorberLabel = new JLabel("Absorber");
+        bumperLabel = new JLabel("Bumpers", SwingConstants.CENTER);
+        bumperLabel.setFont(new Font(bumperLabel.getFont().getName(), bumperLabel.getFont().getStyle(), 15));
+        flipperLabel = new JLabel("Flippers", SwingConstants.CENTER);
+        flipperLabel.setFont(new Font(flipperLabel.getFont().getName(), flipperLabel.getFont().getStyle(), 15));
+        ballLabel = new JLabel("Ball", SwingConstants.CENTER);
+        ballLabel.setFont(new Font(ballLabel.getFont().getName(), ballLabel.getFont().getStyle(), 15));
+        absorberLabel = new JLabel("Absorbers", SwingConstants.CENTER);
+        absorberLabel.setFont(new Font(absorberLabel.getFont().getName(), absorberLabel.getFont().getStyle(), 15));
 
-        addSquareButton = new JButton("Square");
+        ImageIcon square = new ImageIcon("src/view/icons/square.png");
+        addSquareButton = new JButton(square);
+        addSquareButton.setActionCommand("Square");
+        addSquareButton.setOpaque(false);
+        addSquareButton.setContentAreaFilled(false);
+        addSquareButton.setBorderPainted(false);
         buttons.add(addSquareButton);
-        addCircleButton = new JButton("Circle");
+
+        ImageIcon circle = new ImageIcon("src/view/icons/circle.png");
+        addCircleButton = new JButton(circle);
+        addCircleButton.setActionCommand("Circle");
+        addCircleButton.setOpaque(false);
+        addCircleButton.setContentAreaFilled(false);
+        addCircleButton.setBorderPainted(false);
         buttons.add(addCircleButton);
-        addTriangleButton = new JButton("Triangle");
+
+        ImageIcon triangle = new ImageIcon("src/view/icons/triangle.png");
+        addTriangleButton = new JButton(triangle);
+        addTriangleButton.setActionCommand("Triangle");
+        addTriangleButton.setOpaque(false);
+        addTriangleButton.setContentAreaFilled(false);
+        addTriangleButton.setBorderPainted(false);
         buttons.add(addTriangleButton);
-        addLeftFlipperButton = new JButton("Left Flipper");
+
+        ImageIcon leftFlipper = new ImageIcon("src/view/icons/leftFlipper.png");
+        addLeftFlipperButton = new JButton(leftFlipper);
+        addLeftFlipperButton.setActionCommand("Left Flipper");
+        addLeftFlipperButton.setOpaque(false);
+        addLeftFlipperButton.setContentAreaFilled(false);
+        addLeftFlipperButton.setBorderPainted(false);
         buttons.add(addLeftFlipperButton);
-        addRightFlipperButton = new JButton("Right Flipper");
+
+        ImageIcon rightFlipper = new ImageIcon("src/view/icons/rightFlipper.png");
+        addRightFlipperButton = new JButton(rightFlipper);
+        addRightFlipperButton.setActionCommand("Right Flipper");
+        addRightFlipperButton.setOpaque(false);
+        addRightFlipperButton.setContentAreaFilled(false);
+        addRightFlipperButton.setBorderPainted(false);
         buttons.add(addRightFlipperButton);
-        addBallButton = new JButton("Ball");
+
+        ImageIcon ball = new ImageIcon("src/view/icons/ball.png");
+        addBallButton = new JButton(ball);
+        addBallButton.setActionCommand("Ball");
+        addBallButton.setOpaque(false);
+        addBallButton.setContentAreaFilled(false);
+        addBallButton.setBorderPainted(false);
         buttons.add(addBallButton);
-        addAbsorberButton = new JButton("Absorber");
+
+        ImageIcon absorber = new ImageIcon("src/view/icons/absorber.png");
+        addAbsorberButton = new JButton(absorber);
+        addAbsorberButton.setActionCommand("Absorber");
+        addAbsorberButton.setOpaque(false);
+        addAbsorberButton.setContentAreaFilled(false);
+        addAbsorberButton.setBorderPainted(false);
         buttons.add(addAbsorberButton);
-        rotateButton = new JButton("Rotate");
-        buttons.add(rotateButton);
-        deleteButton = new JButton("Delete");
-        buttons.add(deleteButton);
-        addKeyTriggerButton = new JButton("Add Key Trigger");
-        buttons.add(addKeyTriggerButton);
 
         for(JButton button: buttons){
             button.addActionListener(buildListener);
         }
 
-        addInitialVelocityLabel = new JLabel("Initial Velocity: ");
-        addInitialDirectionLabel = new JLabel("Initial Direction: ");
+        addInitialVelocityLabel = new JLabel("Initial Velocity:", SwingConstants.CENTER);
+        addInitialVelocityLabel.setFont(new Font(addInitialVelocityLabel.getFont().getName(), addInitialVelocityLabel.getFont().getStyle(), 15));
+        addInitialDirectionLabel = new JLabel("Initial Direction:", SwingConstants.CENTER);
+        addInitialDirectionLabel.setFont(new Font(addInitialDirectionLabel.getFont().getName(), addInitialDirectionLabel.getFont().getStyle(), 15));
+
         initialVelocityField = new JTextField(10);
         initialDirectionField = new JTextField(10);
 
@@ -94,7 +133,7 @@ public class AddBuildPanel extends JPanel {
         //---------------- ROW 1 ------------------------------------------------>
         gc.gridy = 0;
 
-        gc.weightx = 1;
+        gc.weightx = 0.5;
         gc.weighty = 0.1;
 
         gc.gridx = 1;
@@ -106,42 +145,32 @@ public class AddBuildPanel extends JPanel {
 
         /////////////////// Next Row ////////////////////////////
         gc.gridy++;
+        gc.ipady = 40;
+        gc.gridwidth = 1;
 
-        gc.weightx = 1;
+        gc.weightx = 0.5;
         gc.weighty = 0.5;
 
         gc.gridx = 0;
         gc.anchor = GridBagConstraints.LINE_START;
-        gc.insets = new Insets(0,10,0,0);
+        gc.insets = new Insets(0,10,0,10);
         add(addSquareButton, gc);
 
         gc.gridx = 1;
         gc.anchor = GridBagConstraints.LINE_START;
-        gc.insets = new Insets(0,10,0,0);
+        gc.insets = new Insets(0,0,0,0);
         add(addCircleButton, gc);
 
         gc.gridx = 2;
         gc.anchor = GridBagConstraints.LINE_START;
-        gc.insets = new Insets(0,0,0,10);
+        gc.insets = new Insets(0,10,0,10);
         add(addTriangleButton, gc);
-
-        /////////////////// Next (Spacing) Row ////////////////////////////
-        gc.gridy++;
-
-        gc.weightx = 1;
-        gc.weighty = 3;
-
-        gc.gridx = 1;
-        gc.anchor = GridBagConstraints.LINE_START;
-        gc.insets = new Insets(0,0,0,0);
-        add(new JLabel(), gc);
-
 
         /////////////////// Next Row ////////////////////////////
         gc.gridy++;
 
-        gc.weightx = 1;
-        gc.weighty = 1;
+        gc.weightx = 0.5;
+        gc.weighty = 0.1;
 
         gc.gridx = 1;
         gc.anchor = GridBagConstraints.LINE_START;
@@ -151,35 +180,26 @@ public class AddBuildPanel extends JPanel {
 
         /////////////////// Next Row ////////////////////////////
         gc.gridy++;
+        gc.gridwidth = 1;
 
-        gc.weightx = 1;
-        gc.weighty = 0.2;
+        gc.weightx = 0.5;
+        gc.weighty = 0.1;
 
         gc.gridx = 0;
-        gc.anchor = GridBagConstraints.LINE_END;
+        gc.anchor = GridBagConstraints.LINE_START;
+        gc.insets = new Insets(0,10,0,0);
         add(addLeftFlipperButton, gc);
 
-        gc.gridx = 1;
-        gc.anchor = GridBagConstraints.LINE_END;
-        gc.insets = new Insets(0,0,0,0);
-        add(addRightFlipperButton, gc);
-
-        /////////////////// Next (Spacing) Row ////////////////////////////
-        gc.gridy++;
-
-        gc.weightx = 1;
-        gc.weighty = 3;
-
-        gc.gridx = 1;
+        gc.gridx = 2;
         gc.anchor = GridBagConstraints.LINE_START;
-        gc.insets = new Insets(0,0,0,0);
-        add(new JLabel(), gc);
+        gc.insets = new Insets(0,0,0,10);
+        add(addRightFlipperButton, gc);
 
         /////////////////// Next Row ////////////////////////////
         gc.gridy++;
 
-        gc.weightx = 1;
-        gc.weighty = 1;
+        gc.weightx = 0.5;
+        gc.weighty = 0.1;
 
         gc.gridx = 1;
         gc.anchor = GridBagConstraints.LINE_START;
@@ -190,85 +210,82 @@ public class AddBuildPanel extends JPanel {
         gc.gridy++;
 
         gc.weightx = 1;
-        gc.weighty = 0.2;
+        gc.weighty = 0;
 
         gc.gridx = 0;
         gc.anchor = GridBagConstraints.LINE_START;
-        gc.insets = new Insets(0,0,0,5);
+        gc.insets = new Insets(0,0,0,0);
         add(addInitialVelocityLabel, gc);
+
+        gc.ipady = 20;
+        gc.gridwidth = 2;
 
         gc.gridx = 1;
         gc.anchor = GridBagConstraints.LINE_START;
-        gc.insets = new Insets(0,0,0,5);
+        gc.insets = new Insets(0,0,0,0);
         add(initialVelocityField, gc);
 
 
 
         /////////////////// Next Row ////////////////////////////
         gc.gridy++;
+        gc.ipady = 40;
+        gc.gridwidth = 1;
 
-        gc.weightx = 1;
-        gc.weighty = 0.05;
+        gc.weightx = 0.5;
+        gc.weighty = 0;
 
         gc.gridx = 0;
-        gc.anchor = GridBagConstraints.FIRST_LINE_START;
+        gc.anchor = GridBagConstraints.LINE_START;
+        gc.insets = new Insets(0,0,0,0);
         add(addInitialDirectionLabel, gc);
 
-        gc.gridx = 1;
-        gc.anchor = GridBagConstraints.FIRST_LINE_START;
-        gc.insets = new Insets(0,0,0,5);
-        add(initialDirectionField, gc);
-
-
-        /////////////////// Next Row ////////////////////////////
-        gc.gridy++;
-
-        gc.weightx = 1;
-        gc.weighty = 0.1;
-
-        gc.gridx = 1;
-        gc.anchor = GridBagConstraints.FIRST_LINE_START;
-        gc.insets = new Insets(10,0,0,5);
-        add(addBallButton, gc);
-
-
-        /////////////////// Next (Spacing) Row ////////////////////////////
-        gc.gridy++;
-
-        gc.weightx = 1;
-        gc.weighty = 3;
+        gc.ipady = 20;
+        gc.gridwidth = 2;
 
         gc.gridx = 1;
         gc.anchor = GridBagConstraints.LINE_START;
         gc.insets = new Insets(0,0,0,0);
-        add(new JLabel(), gc);
+        add(initialDirectionField, gc);
+
+
+
+        /////////////////// Next Row ////////////////////////////
+        gc.gridy++;
+        gc.gridwidth = 1;
+        gc.ipady = 40;
+
+        gc.weightx = 0.5;
+        gc.weighty = 0.1;
+
+        gc.gridx = 1;
+        gc.anchor = GridBagConstraints.LINE_START;
+        gc.insets = new Insets(0,0,0,0);
+        add(addBallButton, gc);
 
 
         /////////////////// Next Row ////////////////////////////
         gc.gridy++;
 
-        gc.weightx = 1;
+        gc.weightx = 0.5;
         gc.weighty = 0.1;
 
         gc.gridx = 1;
-        gc.anchor = GridBagConstraints.FIRST_LINE_START;
-        gc.insets = new Insets(30,0,0,5);
+        gc.anchor = GridBagConstraints.LINE_START;
+        gc.insets = new Insets(0,0,0,0);
         add(absorberLabel, gc);
 
 
         /////////////////// Next Row ////////////////////////////
         gc.gridy++;
 
-        gc.weightx = 1;
-        gc.weighty = 1;
-
-        gc.gridx = 0;
-        gc.anchor = GridBagConstraints.FIRST_LINE_START;
-        add(addAbsorberButton, gc);
+        gc.weightx = 0.5;
+        gc.weighty = 0.1;
 
         gc.gridx = 1;
-        gc.anchor = GridBagConstraints.FIRST_LINE_START;
-        add(rotateButton, gc);
+        gc.anchor = GridBagConstraints.LINE_START;
+        gc.insets = new Insets(0,0,0,0);
+        add(addAbsorberButton, gc);
 
 
     }

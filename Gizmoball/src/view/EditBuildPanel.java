@@ -17,7 +17,7 @@ public class EditBuildPanel extends JPanel {
     private JButton deleteButton;
     private JButton addConnectionButton;
     private JButton removeConnectionButton;
-    private JButton addKeyConnectionButton;
+    private JButton editKeyConnectionButton;
     private JButton removeKeyConnectionButton;
 
     private ArrayList<JButton> buttons;
@@ -36,20 +36,31 @@ public class EditBuildPanel extends JPanel {
 
         moveButton = new JButton("Move");
         buttons.add(moveButton);
-        leftRotateButton = new JButton("Rotate left");
+
+        ImageIcon leftRotate = new ImageIcon("src/view/icons/rotateLeft.png");
+        leftRotateButton = new JButton(leftRotate);
+        leftRotateButton.setActionCommand("Rotate Anti Clockwise");
+        leftRotateButton.setOpaque(false);
+        leftRotateButton.setContentAreaFilled(false);
+        leftRotateButton.setBorderPainted(false);
         buttons.add(leftRotateButton);
-        rightRotateButton = new JButton("Rotate Right");
+
+        ImageIcon rightRotate = new ImageIcon("src/view/icons/rotateRight.png");
+        rightRotateButton = new JButton(rightRotate);
+        rightRotateButton.setActionCommand("Rotate Clockwise");
+        rightRotateButton.setOpaque(false);
+        rightRotateButton.setContentAreaFilled(false);
+        rightRotateButton.setBorderPainted(false);
         buttons.add(rightRotateButton);
+
         deleteButton = new JButton("Delete");
         buttons.add(deleteButton);
         addConnectionButton = new JButton("Add Connection");
         buttons.add(addConnectionButton);
         removeConnectionButton = new JButton("Remove Connection");
         buttons.add(removeConnectionButton);
-        addKeyConnectionButton = new JButton("Add Key Connection");
-        buttons.add(addKeyConnectionButton);
-        removeKeyConnectionButton = new JButton("Remove Key Connection");
-        buttons.add(removeConnectionButton);
+        editKeyConnectionButton = new JButton("Edit Key Connections");
+        buttons.add(editKeyConnectionButton);
 
         for(JButton button: buttons){
             button.addActionListener(buildListener);
@@ -74,14 +85,14 @@ public class EditBuildPanel extends JPanel {
         gc.ipady = 40;
 
         gc.weightx = 0.5;
-        gc.weighty = 0.1;
+        gc.weighty = 0;
 
         gc.gridx = 0;
         gc.fill = GridBagConstraints.HORIZONTAL;
 
         gc.anchor = GridBagConstraints.LINE_START;
         gc.gridwidth = 2;
-        gc.insets = new Insets(25,75,0,75);
+        gc.insets = new Insets(30,75,0,75);
         add(moveButton, gc);
 
         /////////////////// Next Row ////////////////////////////
@@ -155,17 +166,17 @@ public class EditBuildPanel extends JPanel {
         gc.gridwidth = 1;
 
         gc.weightx = 0.5;
-        gc.weighty = 0.1;
+        gc.weighty = 0;
 
         gc.gridx = 0;
-        gc.anchor = GridBagConstraints.LINE_START;
-        gc.insets = new Insets(0,0,0,0);
-        add(addKeyConnectionButton, gc);
+        gc.fill = GridBagConstraints.HORIZONTAL;
 
-        gc.gridx = 1;
         gc.anchor = GridBagConstraints.LINE_START;
-        gc.insets = new Insets(0, 0,0,0);
-        add(removeKeyConnectionButton, gc);
+        gc.gridwidth = 2;
+        gc.insets = new Insets(30,75,0,75);
+
+        add(editKeyConnectionButton, gc);
+
 
     }
 

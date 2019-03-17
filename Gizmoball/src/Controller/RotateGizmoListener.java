@@ -11,9 +11,11 @@ import java.awt.event.MouseListener;
 public class RotateGizmoListener implements MouseListener {
 
     private Model model;
+    private boolean clockwise;
 
-    public RotateGizmoListener(Model m){
+    public RotateGizmoListener(Model m, boolean clockwise){
         model = m;
+        this.clockwise = clockwise;
     }
 
     @Override
@@ -24,7 +26,13 @@ public class RotateGizmoListener implements MouseListener {
 
         for(Gizmo gizmo:model.getGizmos()){
             if(gizmo.getGridX()== x && gizmo.getGridY()== y){
-                model.rotateGizmo(gizmo);
+                if(clockwise) {
+                    model.rotateGizmo(gizmo);
+                }else{
+                    for(int i=0; i<3; i++) {
+                        model.rotateGizmo(gizmo);
+                    }
+                }
 
             }
         }

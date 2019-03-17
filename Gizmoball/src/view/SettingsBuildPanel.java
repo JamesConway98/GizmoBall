@@ -1,6 +1,9 @@
 package view;
 
 import Controller.BuildModeListener;
+import Controller.Friction1Listener;
+import Controller.Friction2Listener;
+import Controller.GravityListener;
 import model.Model;
 
 import javax.swing.*;
@@ -31,19 +34,23 @@ public class SettingsBuildPanel extends JPanel {
         dim.width = 350;
         setPreferredSize(dim);
 
-        gravity = new Scrollbar(Scrollbar.HORIZONTAL, 0, 64, 0,255);
-        friction1 = new Scrollbar(Scrollbar.HORIZONTAL, 0, 64, 0,255);
-        friction2 = new Scrollbar(Scrollbar.HORIZONTAL, 0, 64, 0,255);
+        gravity = new Scrollbar(Scrollbar.HORIZONTAL, (int) m.getGravity(), 64, 0,164);
+        friction1 = new Scrollbar(Scrollbar.HORIZONTAL, (int) m.getMu() * 100, 64, 0,164);
+        friction2 = new Scrollbar(Scrollbar.HORIZONTAL, (int) m.getMu2() * 100, 64, 0,164);
 
-        gravityLabel = new JLabel("Gravity:          25L/sec" + '\u00B2');
+        gravityLabel = new JLabel("Gravity:          " + m.getGravity() + "/sec" + '\u00B2');
         gravityLabel.setFont(new Font(gravityLabel.getFont().getName(), gravityLabel.getFont().getStyle(), 15));
-        friction1Label = new JLabel("Friction1:          0.025 per sec");
+        friction1Label = new JLabel("Friction1:          "  + m.getMu() * 100 + " per sec");
         friction1Label.setFont(new Font(friction1Label.getFont().getName(), friction1Label.getFont().getStyle(), 15));
-        friction2Label = new JLabel("Friction2:          0.025 per L");
+        friction2Label = new JLabel("Friction2:          " + m.getMu2() * 100 + " per L");
         friction2Label.setFont(new Font(friction2Label.getFont().getName(), friction2Label.getFont().getStyle(), 15));
 
         applySettingButton = new JButton("Apply Settings");
         buttons.add(applySettingButton);
+
+        gravity.addAdjustmentListener(new GravityListener(m, gravityLabel));
+        friction1.addAdjustmentListener(new Friction1Listener(m, friction1Label));
+        friction2.addAdjustmentListener(new Friction2Listener(m, friction2Label));
 
         for(JButton button: buttons){
             button.addActionListener(buildListener);
