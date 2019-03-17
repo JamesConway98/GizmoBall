@@ -138,6 +138,26 @@ public class RightFlipperGizmo implements Gizmo{
         return gridY;
     }
 
+    @Override
+    public void setXpos(int xpos) {
+        this.xpos = xpos;
+    }
+
+    @Override
+    public void setYpos(int ypos) {
+        this.ypos = ypos;
+    }
+
+    @Override
+    public void setGridX(int gridX) {
+        this.gridX = gridX;
+    }
+
+    @Override
+    public void setGridY(int gridY) {
+        this.gridY = gridY;
+    }
+
     public int getLength() {
         return length;
     }

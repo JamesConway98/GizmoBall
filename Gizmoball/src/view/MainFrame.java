@@ -1,8 +1,6 @@
 package view;
 
-import Controller.EditKeyTriggerListener;
-import Controller.FileMenuListener;
-import Controller.TabChangeListener;
+import Controller.*;
 import model.GameLoader;
 import model.Model;
 
@@ -22,6 +20,7 @@ public class MainFrame implements Observer {
     private EditBuildPanel editBuildPanel;
     private SettingsBuildPanel settingsBuildPanel;
     private JFrame frame;
+    private MoveMouseListener moveMouseListener;
 
     public MainFrame(Model m){
 
@@ -41,6 +40,9 @@ public class MainFrame implements Observer {
 
         FileMenuListener menuListener = new FileMenuListener(m);
         TabChangeListener tabListener = new TabChangeListener(m);
+        moveMouseListener = new MoveMouseListener(m);
+
+        buildBoard.addMouseMotionListener(moveMouseListener);
 
         AddBuildPanel addBuildPanel = new AddBuildPanel(m);
         editBuildPanel = new EditBuildPanel(m);
@@ -135,6 +137,12 @@ public class MainFrame implements Observer {
             setEditKeyPanel();
         }else{
             setDefaultEditPanel();
+        }
+
+        if(model.getActiveMouseListener() instanceof MoveGizmoListener){
+            moveMouseListener.addObserver((MoveGizmoListener)model.getActiveMouseListener());
+        }else if(model.getActiveMouseListener() instanceof AddAbsorberListener){
+            moveMouseListener.addObserver((AddAbsorberListener)model.getActiveMouseListener());
         }
     }
 }

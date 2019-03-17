@@ -58,4 +58,8 @@ public class RotateGizmoListener implements MouseListener {
     public void mouseExited(MouseEvent e) {
 
     }
+
+    public boolean getClockwise(){
+        return clockwise;
+    }
 }

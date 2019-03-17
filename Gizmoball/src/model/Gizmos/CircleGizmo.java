@@ -61,6 +61,22 @@ public class CircleGizmo implements Gizmo {
         return gridY;
     }
 
+    public void setXpos(int xpos) {
+        this.xpos = xpos;
+    }
+
+    public void setYpos(int ypos) {
+        this.ypos = ypos;
+    }
+
+    public void setGridX(int gridX) {
+        this.gridX = gridX;
+    }
+
+    public void setGridY(int gridY) {
+        this.gridY = gridY;
+    }
+
     public int getLength() {
         return length;
     }

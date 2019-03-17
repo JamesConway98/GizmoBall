@@ -7,6 +7,7 @@ import physics.LineSegment;
 import physics.Vect;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseListener;
 import java.io.File;
 import java.util.ArrayList;
@@ -312,9 +313,36 @@ public class Model extends Observable {
 	}
 
 	public void addAbsorber(Absorber a) {
+		for(int i =0; i<=a.getWidth(); i++){
+			for(int j =0;j<=a.getHeight();j++){
+				clearGridSpace(a.getGridX1()+i, a.getGridY1()+j);
+			}
+		}
 		abs.add(a);
 		setChanged();
 		notifyObservers();
+	}
+
+	public void addPreviewAbsorber(Absorber a) {
+		abs.add(a);
+		setChanged();
+		notifyObservers();
+	}
+
+	public void editPreviewAbsorber(int x, int y){
+		Absorber previewAbs = abs.get(abs.size()-1);
+		previewAbs.setNewGridX(x);
+		previewAbs.setNewGridY(y);
+		previewAbs.updateXY();
+		previewAbs.setColour(new Color(1f,0f,.4f,.5f ));
+		setChanged();
+		notifyObservers();
+	}
+
+	public void finishPreviewAbsorber(){
+		Absorber absorber = abs.remove(abs.size()-1);
+		absorber.setColour(Color.MAGENTA);
+		addAbsorber(absorber);
 	}
 
 	public void clearAbsorbers(){
@@ -327,6 +355,15 @@ public class Model extends Observable {
 
 	public void rotateGizmo(Gizmo gizmo){
 		gizmo.rotateClockwise();
+		setChanged();
+		notifyObservers();
+	}
+
+	public void moveGizmo(Gizmo gizmo, int x, int y){
+		if(gizmo!= null) {
+			gizmo.setGridX(x);
+			gizmo.setGridY(y);
+		}
 		setChanged();
 		notifyObservers();
 	}
@@ -362,8 +399,10 @@ public class Model extends Observable {
 	}
 
 	public void removeKey(Gizmo gizmo){
-		//this sets it to null basically
-		gizmo.setKey(Character.MIN_VALUE);
+		if(gizmo!=null) {
+			//this sets it to null basically
+			gizmo.setKey(Character.MIN_VALUE);
+		}
 		setChanged();
 		notifyObservers();
 	}
