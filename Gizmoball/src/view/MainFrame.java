@@ -92,6 +92,7 @@ public class MainFrame implements Observer {
             buildBoard.update(null, null);
         });
         JMenuItem quit = new JMenuItem("Quit");
+        quit.addActionListener(menuListener);
 
         fileMenu.add(saveConfiguration);
         fileMenu.add(saveAs);

@@ -25,6 +25,9 @@ public class FileMenuListener implements ActionListener {
             case "Save as":
                 model.saveAs();
                 break;
+            case "Quit":
+                System.exit(0);
+                break;
         }
     }
 
