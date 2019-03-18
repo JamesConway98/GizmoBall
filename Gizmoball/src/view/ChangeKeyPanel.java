@@ -35,7 +35,7 @@ public class ChangeKeyPanel extends JPanel implements Observer {
 
         backButton = new JButton("Back");
         buttons.add(backButton);
-        removeButton = new JButton("Remove");
+        removeButton = new JButton("Remove Connection");
         buttons.add(removeButton);
 
         for(JButton button: buttons){

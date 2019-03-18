@@ -271,6 +271,15 @@ public class Model extends Observable {
 		return gizmos;
 	}
 
+	public Gizmo getGizmoByGrid(int x, int y){
+		for(Gizmo gizmo: gizmos){
+			if(gizmo.getGridX()==x && gizmo.getGridY()==y){
+				return gizmo;
+			}
+		}
+		return null;
+	}
+
 	//Used for mapping triggers etc
 	public int findGizmoIndex(String id){
 		int index = 0;
@@ -422,6 +431,7 @@ public class Model extends Observable {
 	}
 
 	public void setSelectedGizmo(Gizmo selectedGizmo) {
+		System.out.println(selectedGizmo);
 		this.selectedGizmo = selectedGizmo;
 		setChanged();
 		notifyObservers();
@@ -446,6 +456,16 @@ public class Model extends Observable {
 		}
 		setChanged();
 		notifyObservers();
+	}
+
+	public void addConnection(int x, int y){
+		for(Gizmo gizmo:gizmos){
+			if(gizmo instanceof Flipper) {
+				if (gizmo.getGridX() == x && gizmo.getGridY() == y) {
+					selectedGizmo.setConnection(gizmo.getID());
+				}
+			}
+		}
 	}
 
 	public void moveFlippers(double time) {
