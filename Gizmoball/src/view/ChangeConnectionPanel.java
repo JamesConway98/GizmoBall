@@ -115,8 +115,8 @@ public class ChangeConnectionPanel extends JPanel implements Observer {
         if(model.getSelectedGizmo()!=null) {
             Gizmo gizmo = model.getSelectedGizmo();
             instructions.setText("You have selected Gizmo " + gizmo.getID());
-            currentGizmoConnection.setText("<html>Gizmo " + gizmo.getID() + " connection = \"" + gizmo.getConnection() +
-                    "\".<br> Click on a flipper to change this," +
+            currentGizmoConnection.setText("<html>Gizmo " + gizmo.getID() + " connection = \"" + gizmo.getConnection() + "\"." +
+                    "<br> Click on a flipper to change this," +
                     "<br>Or click another gizmo to select it.</html>");
         }else{
             instructions.setText("Click on a Gizmo to select it.");

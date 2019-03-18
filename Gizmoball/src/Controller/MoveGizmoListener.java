@@ -13,7 +13,7 @@ public class MoveGizmoListener implements MouseListener, Observer {
 
     private Model model;
     private Gizmo movingGizmo;
-    private boolean dropped = true;
+    private boolean dropped = false;
 
     public MoveGizmoListener(Model m){
         model = m;
@@ -26,26 +26,23 @@ public class MoveGizmoListener implements MouseListener, Observer {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        //This flips between true and false
-        dropped^= true;
 
         int x = 0, y = 0;
         x = (e.getX() - 50) / BuildBoard.L;
         y = (e.getY() - 50) / BuildBoard.L;
 
-        if(!dropped) {
-            for (Gizmo gizmo : model.getGizmos()) {
-                if (gizmo.getGridX() == x && gizmo.getGridY() == y) {
-                    movingGizmo = gizmo;
-                    System.out.println(movingGizmo.getID());
-                }
-            }
+        if(!dropped && model.getGizmoByGrid(x, y)!=null) {
+            movingGizmo = model.getGizmoByGrid(x, y);
             model.moveGizmo(movingGizmo, x, y);
-        }else{
+            //This flips between true and false
+            dropped^= true;
+        }else if(movingGizmo!=null){
             model.moveGizmo(movingGizmo, 100, 100); //need this to clear grid space without clearing this gizmo
             model.clearGridSpace(x, y);
             model.moveGizmo(movingGizmo, x, y);
             movingGizmo = null;
+            //This flips between true and false
+            dropped^= true;
         }
 
     }

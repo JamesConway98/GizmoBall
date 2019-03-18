@@ -456,6 +456,19 @@ public class Model extends Observable {
 		notifyObservers();
 	}
 
+	//this is whenn key is pressed in run mode
+	public void keyPressed(char key){
+		for(Gizmo gizmo:gizmos){
+			if(gizmo.getKey()==key){
+				if(gizmo instanceof Flipper){
+					gizmo.setGizmoActive(true);
+				}else {
+					gizmo.toggleColour();
+				}
+			}
+		}
+	}
+
 	public void addConnection(int x, int y){
 		for(Gizmo gizmo:gizmos){
 			if(gizmo instanceof Flipper) {
