@@ -23,6 +23,7 @@ public class TriangleGizmo implements Gizmo{
     private LineSegment e1, e2, e3;
     private Circle c1, c2, c3;
 
+    private String connectionId = null;
 
     public TriangleGizmo(String id, int gridX, int gridY){
         this.gridX = gridX;
@@ -153,6 +154,15 @@ public class TriangleGizmo implements Gizmo{
         this.colour = colour;
     }
 
+    public void toggleColour() {
+        if (getColour() == Color.RED){
+            setColour(Color.BLUE);
+        }
+        else if (getColour() == Color.BLUE){
+            setColour(Color.RED);
+        }
+    }
+
     public int getRotation() {
         return rotation;
     }
@@ -185,5 +195,14 @@ public class TriangleGizmo implements Gizmo{
 
     public void setGizmoActive(boolean gizmoActive) {
         this.gizmoActive = gizmoActive;
+    }
+
+
+    public void setConnection(String id) {
+        connectionId = id;
+    }
+
+    public String getConnection() {
+        return connectionId;
     }
 }

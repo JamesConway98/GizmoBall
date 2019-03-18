@@ -27,6 +27,8 @@ public class RightFlipperGizmo implements Gizmo{
     private Circle c1, c2, c3, c4, c5, c6;
     private double angle;
 
+    private String connectionId = null;
+
     public RightFlipperGizmo(String id, int gridX, int gridY){
         this.gridX = gridX;
         this.gridY = gridY;
@@ -183,6 +185,10 @@ public class RightFlipperGizmo implements Gizmo{
         this.colour = colour;
     }
 
+    public void toggleColour() {
+
+    }
+
     public int getRotation() {
         return rotation;
     }
@@ -228,5 +234,13 @@ public class RightFlipperGizmo implements Gizmo{
 
     public void flipMoveToggle() {
         toggle = !toggle;
+    }
+
+    public void setConnection(String id) {
+        connectionId = id;
+    }
+
+    public String getConnection() {
+        return connectionId;
     }
 }
