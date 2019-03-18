@@ -150,6 +150,19 @@ public class Model extends Observable {
 				}
 			}
 		}
+
+		//Time to collide with any absorber
+        for(Absorber absorber : abs) {
+            ArrayList<LineSegment> lsList = absorber.getLineSegments();
+            for(int i = 0; i < lsList.size(); i++) {
+                if(checkWallCollision(lsList.get(i), 0.0, null)) {
+                    if(shortestTime == 0.0) {
+                        hitAbsorber(absorber);
+                    }
+                }
+            }
+        }
+
 		if (collisionGizmo != null && shortestTime < 0.05 && shortestTime > 0.00){
 			String id = collisionGizmo.getID();
 			collisionGizmo.toggleColour();

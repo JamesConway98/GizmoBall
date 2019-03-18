@@ -1,6 +1,5 @@
 package view;
 
-import Controller.AbsorberActivateListener;
 import Controller.KeyPressedListener;
 import model.*;
 import model.Gizmos.*;
@@ -8,7 +7,6 @@ import physics.LineSegment;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseListener;
 import java.awt.geom.RoundRectangle2D;
 import java.util.Observable;
 import java.util.Observer;
