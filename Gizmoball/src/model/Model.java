@@ -482,14 +482,19 @@ public class Model extends Observable {
 		}
 	}
 
-	public void addConnection(int x, int y){
+	public ArrayList<Gizmo> getAllGizmoByKey(char key){
+
+		ArrayList<Gizmo> allKeyGizmos = new ArrayList<>();
 		for(Gizmo gizmo:gizmos){
-			if(gizmo instanceof Flipper) {
-				if (gizmo.getGridX() == x && gizmo.getGridY() == y) {
-					selectedGizmo.setConnection(gizmo.getID());
-				}
+			if(gizmo.getKey()==key){
+				allKeyGizmos.add(gizmo);
 			}
 		}
+		return allKeyGizmos;
+	}
+
+	public void addConnection(Gizmo gizmo){
+		selectedGizmo.setConnection(gizmo.getID());
 		setChanged();
 		notifyObservers();
 	}

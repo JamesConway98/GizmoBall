@@ -1,5 +1,7 @@
 package Controller;
 
+import model.Gizmos.Flipper;
+import model.Gizmos.Gizmo;
 import model.Model;
 
 import java.awt.event.KeyEvent;
@@ -20,12 +22,23 @@ public class KeyPressedListener implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        model.keyPressed(e.getKeyChar());
+        //model.keyPressed(e.getKeyChar());
+        for(Gizmo gizmo:model.getAllGizmoByKey(e.getKeyChar())){
+            if(gizmo instanceof Flipper){
+                gizmo.setGizmoActive(true);
+            }else {
+                gizmo.toggleColour();
+            }
+        }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-
+        for(Gizmo gizmo:model.getAllGizmoByKey(e.getKeyChar())){
+            if(gizmo instanceof Flipper) {
+                ((Flipper) gizmo).flipMoveToggle();
+            }
+        }
     }
 }
 

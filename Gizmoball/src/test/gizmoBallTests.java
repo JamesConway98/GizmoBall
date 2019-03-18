@@ -154,27 +154,27 @@ public class gizmoBallTests {
     @org.junit.Test
     public void addConnectionTest() {
         Gizmo square = new SquareGizmo("S1",5,5);
-        Gizmo square2 = new SquareGizmo("S2",10,10);
+        Gizmo leftFlip = new LeftFlipperGizmo("LF2",10,10);
         model.addGizmo(square);
-        model.addGizmo(square2);
-        //assertFalse(square.hasConnection());
-        //model.connectGizmoMethod(square, square2);
-        //assertTrue(square.hasConnection());
-        fail();
+        model.addGizmo(leftFlip);
+        assertTrue(square.getConnection()==null);
+        model.setSelectedGizmo(square);
+        model.addConnection(leftFlip);
+        assertEquals(square.getConnection(), "LF2");
     }
 
     @org.junit.Test
     public void removeConnectionTest() {
         Gizmo square = new SquareGizmo("S1",5,5);
-        Gizmo square2 = new SquareGizmo("S2",10,10);
+        Gizmo leftFlip = new LeftFlipperGizmo("LF2",10,10);
         model.addGizmo(square);
-        model.addGizmo(square2);
-        //assertFalse(square.hasConnection());
-        //model.connectGizmoMethod(square, square2);
-        //assertTrue(square.hasConnection());
-        //model.removeConnectionMethod(square, square2);
-        //assertFalse(square.hasConnection());
-        fail();
+        model.addGizmo(leftFlip);
+        assertTrue(square.getConnection()==null);
+        model.setSelectedGizmo(square);
+        model.addConnection(leftFlip);
+        assertEquals(square.getConnection(), "LF2");
+        model.removeConnection(square);
+        assertTrue(square.getConnection() == null);
     }
 
     @org.junit.Test
