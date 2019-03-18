@@ -25,10 +25,13 @@ public interface Gizmo {
     public void clearCollisions();
     public Color getColour();
     public void setColour(Color colour);
+    public void toggleColour();
     public int getRotation();
     public void setRotation(int rotation);
     public void rotateClockwise();
     public void rotateAnticlockwise();
     public boolean isGizmoActive();
     public void setGizmoActive(boolean gizmoActive);
+    public void setConnection(String id);
+    public String getConnection();
 }

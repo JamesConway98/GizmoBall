@@ -22,6 +22,8 @@ public class CircleGizmo implements Gizmo {
     private Vect v1;
     private Circle c1;
 
+    private String connectionId = null;
+
     public CircleGizmo(String id, int gridX, int gridY){
         ID = id;
         this.gridX = gridX;
@@ -102,6 +104,14 @@ public class CircleGizmo implements Gizmo {
         this.colour = colour;
     }
 
+    public void toggleColour() {
+        if (getColour() == Color.GREEN){
+            setColour(Color.RED);
+        }
+        else if (getColour() == Color.RED){
+            setColour(Color.GREEN);
+        }
+    }
     public int getRotation() {
         return rotation;
     }
@@ -132,5 +142,13 @@ public class CircleGizmo implements Gizmo {
 
     public void setGizmoActive(boolean gizmoActive) {
         this.gizmoActive = gizmoActive;
+    }
+
+    public void setConnection(String id) {
+        connectionId = id;
+    }
+
+    public String getConnection() {
+        return connectionId;
     }
 }
