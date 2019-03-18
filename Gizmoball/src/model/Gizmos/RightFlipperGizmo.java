@@ -59,9 +59,7 @@ public class RightFlipperGizmo implements Flipper{
         int r = getRotation();
 
         //Get location of first large Circle
-        if (r == 0){
-            v1 = new Vect(x + 1.75*L, y + 0.25*L);
-        }
+        v1 = new Vect(x + 1.75*L, y + 0.25*L);
         if (r == 1){
             v1 = new Vect(x + 1.75*L, y + 1.75*L);
         }
@@ -114,9 +112,6 @@ public class RightFlipperGizmo implements Flipper{
 
         getEdges().add(e1);
         getEdges().add(e2);
-
-        getEdges().add(e1);
-        getEdges().add(e2);
         getVertices().add(c1);
         getVertices().add(c2);
         getVertices().add(c3);
@@ -124,38 +119,26 @@ public class RightFlipperGizmo implements Flipper{
         getVertices().add(c5);
     }
 
-    public int getX() {
-        return gridX*Model.L +50;
-    }
+    public int getX() { return gridX*Model.L +50; }
 
-    public int getY() {
-        return gridY*Model.L +50;
-    }
+    public int getY() { return gridY*Model.L +50; }
 
-    public int getGridX() {
-        return gridX;
-    }
+    public int getGridX() { return gridX; }
 
-    public int getGridY() {
-        return gridY;
-    }
+    public int getGridY() { return gridY; }
 
-    @Override
     public void setXpos(int xpos) {
         this.xpos = xpos;
     }
 
-    @Override
     public void setYpos(int ypos) {
         this.ypos = ypos;
     }
 
-    @Override
     public void setGridX(int gridX) {
         this.gridX = gridX;
     }
 
-    @Override
     public void setGridY(int gridY) {
         this.gridY = gridY;
     }

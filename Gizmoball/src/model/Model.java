@@ -98,9 +98,7 @@ public class Model extends Observable {
 		b.setExactX(newX);
 		return b;
 	}
-
-	private Gizmo collisionGizmo;
-
+	public Gizmo collisionGizmo;
 	private CollisionDetails timeUntilCollision() {
 		// Find Time Until Collision and also, if there is a collision, the new speed vector.
 		// Create a physics.Circle from Ball
@@ -154,19 +152,10 @@ public class Model extends Observable {
 		}
 		if (collisionGizmo != null && shortestTime < 0.05 && shortestTime > 0.00){
 			String id = collisionGizmo.getID();
-			//collisionGizmo.toggleColour();
-			//getGizmos().get(findGizmoIndex(id)).toggleColour();
-		}
-
-		//Time to collide with any absorber
-		for(Absorber absorber : abs) {
-			ArrayList<LineSegment> lines = absorber.getLineSegments();
-			for (LineSegment line : lines) {
-				if(checkWallCollision(line,0.0, null)) {
-					if(shortestTime == 0.0) {
-						hitAbsorber(absorber);
-					}
-				}
+			collisionGizmo.toggleColour();
+			if (collisionGizmo.getConnection() != null){
+				String id2 = gizmos.get(findGizmoIndex(collisionGizmo.getID())).getConnection();
+				gizmos.get(findGizmoIndex(id2)).setGizmoActive(true);
 			}
 		}
 
@@ -441,7 +430,6 @@ public class Model extends Observable {
 	}
 
 	public void setSelectedGizmo(Gizmo selectedGizmo) {
-		System.out.println(selectedGizmo);
 		this.selectedGizmo = selectedGizmo;
 		setChanged();
 		notifyObservers();
@@ -476,6 +464,16 @@ public class Model extends Observable {
 				}
 			}
 		}
+		setChanged();
+		notifyObservers();
+	}
+
+	public void removeConnection(Gizmo gizmo){
+		if(gizmo!=null) {
+			gizmo.setConnection(null);
+		}
+		setChanged();
+		notifyObservers();
 	}
 
 	public void moveFlippers(double time) {
