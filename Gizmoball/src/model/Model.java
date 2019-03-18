@@ -273,7 +273,7 @@ public class Model extends Observable {
 	public int findGizmoIndex(String id){
 		int index = 0;
 		for (Gizmo gizmo : gizmos) {
-			if (gizmo.getID() == id) {
+			if (gizmo.getID().equals(id)) {
 				return index;
 			}
 			index++;
