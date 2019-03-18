@@ -8,7 +8,7 @@ import physics.Vect;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class RightFlipperGizmo implements Gizmo{
+public class RightFlipperGizmo implements Flipper{
     private String ID;
     private int xpos, ypos, gridX, gridY;
     private int length = Model.L;

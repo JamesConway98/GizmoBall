@@ -274,6 +274,7 @@ public class Model extends Observable {
 	public Gizmo getGizmoByGrid(int x, int y){
 		for(Gizmo gizmo: gizmos){
 			if(gizmo.getGridX()==x && gizmo.getGridY()==y){
+				System.out.println(gizmo.getID().getClass());
 				return gizmo;
 			}
 		}
@@ -463,9 +464,12 @@ public class Model extends Observable {
 			if(gizmo instanceof Flipper) {
 				if (gizmo.getGridX() == x && gizmo.getGridY() == y) {
 					selectedGizmo.setConnection(gizmo.getID());
+					System.out.println(selectedGizmo.getConnection());
 				}
 			}
 		}
+		setChanged();
+		notifyObservers();
 	}
 
 	public void moveFlippers(double time) {
