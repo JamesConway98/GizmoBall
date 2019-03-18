@@ -30,13 +30,9 @@ public class AddAbsorberListener implements MouseListener, Observer {
         //This flips between true and false
         dropped^= true;
 
-        int x = 0, y = 0;
-        x = (e.getX() - 50) / BuildBoard.L;
-        y = (e.getY() - 50) / BuildBoard.L;
-
         if(!dropped) {
            // if (x >= 0 && x <= 18 && y >= 0 && y <= 18) {
-                initialGridX = (e.getX() - 50) / BuildBoard.L;
+                initialGridX = ((e.getX() - 50) / BuildBoard.L);
                 initialGridY = (e.getY() - 50) / BuildBoard.L;
             /*} else {
                 initialGridX = -1;
@@ -103,7 +99,7 @@ public class AddAbsorberListener implements MouseListener, Observer {
                 x = 18;
             }if (y < 0) {
                 y = 0;
-            }if (y> 18) {
+            }if (y > 18) {
                 y = 18;
             }
             model.editPreviewAbsorber(x, y);

@@ -60,6 +60,10 @@ public class BuildModeListener implements ActionListener {
                 RotateGizmoListener rotateAntiListener = new RotateGizmoListener(model, false);
                 model.setMouseListener(rotateAntiListener);
                 break;
+            case "Edit Connections":
+                EditConnectionListener editConnectionListener = new EditConnectionListener(model);
+                model.setMouseListener(editConnectionListener);
+                break;
             case "Edit Key Connections":
                 EditKeyTriggerListener addKeyListener = new EditKeyTriggerListener(model);
                 model.setMouseListener(addKeyListener);

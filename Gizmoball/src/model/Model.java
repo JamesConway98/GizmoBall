@@ -62,6 +62,7 @@ public class Model extends Observable {
 			if (tuc > moveTime) {
 				// No collision ...
 				ball = movelBallForTime(ball, moveTime);
+				//moveFlippers(moveTime);
 			} else {
 				// We've got a collision in tuc
 				ball = movelBallForTime(ball, tuc);
@@ -171,6 +172,19 @@ public class Model extends Observable {
 				gizmos.get(findGizmoIndex(id2)).setGizmoActive(true);
 			}
 		}
+
+		//Time to collide with any absorber
+		for(Absorber absorber : abs) {
+			ArrayList<LineSegment> lines = absorber.getLineSegments();
+			for (LineSegment line : lines) {
+				if(checkWallCollision(line,0.0, null)) {
+					if(shortestTime == 0.0) {
+						hitAbsorber(absorber);
+					}
+				}
+			}
+		}
+
 		return new CollisionDetails(shortestTime, newVelo);
 	}
 
@@ -267,11 +281,10 @@ public class Model extends Observable {
 	}
 
 	//Used for mapping triggers etc
-	//TODO Change this for when id is not present, defaults to 0
 	public int findGizmoIndex(String id){
 		int index = 0;
 		for (Gizmo gizmo : gizmos) {
-			if (gizmo.getID().equals(id)) {
+			if (gizmo.getID() == id) {
 				return index;
 			}
 			index++;

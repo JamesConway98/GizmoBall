@@ -20,6 +20,7 @@ public class ChangeConnectionPanel extends JPanel implements Observer {
     public ChangeConnectionPanel(Model m){
 
         model = m;
+        model.addObserver(this);
 
         BuildModeListener buildListener = new BuildModeListener(m);
         buttons = new ArrayList<>();
@@ -112,14 +113,14 @@ public class ChangeConnectionPanel extends JPanel implements Observer {
     @Override
     public void update(Observable o, Object arg) {
         if(model.getSelectedGizmo()!=null) {
+            System.out.println("TTTT");
             Gizmo gizmo = model.getSelectedGizmo();
             instructions.setText("You have selected Gizmo " + gizmo.getID());
-            currentGizmoConnection.setText("Gizmo " + gizmo.getID() + " key = \"" + gizmo.getKey() + "\". Press a key to change this.");
+            currentGizmoConnection.setText("Gizmo " + gizmo.getID() + " connection = \"" + gizmo.getConnection() + "\". Click on a flipper to change this.");
         }else{
             instructions.setText("Click on a Gizmo to select it.");
             currentGizmoConnection.setText("");
         }
-
         revalidate();
         repaint();
     }

@@ -181,22 +181,21 @@ public class gizmoBallTests {
     public void addkeyConnectionTest() {
         Gizmo square = new SquareGizmo("S1",5,5);
         model.addGizmo(square);
-        //assertFalse(square.hasKeyConnection());
-        //model.addKeyConnectionMethod(square, key);
-        //assertTrue(square.hasKeyConnection());
-        fail();
+        assertTrue(square.getKey()== Character.MIN_VALUE); //char equals null
+        model.setSelectedGizmo(square);
+        model.setKeyToSelectedGizmo('k');
+        assertEquals(square.getKey(), 'k');
     }
 
     @org.junit.Test
     public void removeKeyConnectionTest() {
         Gizmo square = new SquareGizmo("S1",5,5);
         model.addGizmo(square);
-        //assertFalse(square.hasKeyConnection());
-        //model.addKeyConnectionMethod(square, key);
-        //assertTrue(square.hasKeyConnection());
-        //model/removeKeyConnectionMethod(square);
-        //assertFalse(triangle.hasKeyConnections());
-        fail();
+        assertTrue(square.getKey()== Character.MIN_VALUE); //char equals null
+        model.setSelectedGizmo(square);
+        model.setKeyToSelectedGizmo('k');
+        model.removeKey(square);
+        assertTrue(square.getKey()== Character.MIN_VALUE); //char equals null
     }
 
     @org.junit.Test

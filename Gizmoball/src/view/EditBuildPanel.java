@@ -19,7 +19,7 @@ public class EditBuildPanel extends JPanel implements Observer {
     private JButton rightRotateButton;
     private JButton deleteButton;
     private JButton addConnectionButton;
-    private JButton removeConnectionButton;
+    private JButton editConnectionButton;
     private JButton editKeyConnectionButton;
     private JButton removeKeyConnectionButton;
 
@@ -46,7 +46,7 @@ public class EditBuildPanel extends JPanel implements Observer {
         moveButton = new JButton("Move");
         buttons.add(moveButton);
 
-        ImageIcon leftRotate = new ImageIcon("icons/rotateLeft.png");
+        ImageIcon leftRotate = new ImageIcon("Gizmoball/src/icons/rotateLeft.png");
         leftRotateButton = new JButton(leftRotate);
         leftRotateButton.setActionCommand("Rotate Anti Clockwise");
         leftRotateButton.setOpaque(false);
@@ -54,7 +54,7 @@ public class EditBuildPanel extends JPanel implements Observer {
         leftRotateButton.setBorderPainted(false);
         buttons.add(leftRotateButton);
 
-        ImageIcon rightRotate = new ImageIcon("icons/rotateRight.png");
+        ImageIcon rightRotate = new ImageIcon("Gizmoball/src/icons/rotateRight.png");
         rightRotateButton = new JButton(rightRotate);
         rightRotateButton.setActionCommand("Rotate Clockwise");
         rightRotateButton.setOpaque(false);
@@ -64,10 +64,8 @@ public class EditBuildPanel extends JPanel implements Observer {
 
         deleteButton = new JButton("Delete");
         buttons.add(deleteButton);
-        addConnectionButton = new JButton("Add Connection");
-        buttons.add(addConnectionButton);
-        removeConnectionButton = new JButton("Remove Connection");
-        buttons.add(removeConnectionButton);
+        editConnectionButton = new JButton("Edit Connections");
+        buttons.add(editConnectionButton);
         editKeyConnectionButton = new JButton("Edit Key Connections");
         buttons.add(editKeyConnectionButton);
 
@@ -156,17 +154,19 @@ public class EditBuildPanel extends JPanel implements Observer {
         gc.gridwidth = 1;
 
         gc.weightx = 0.5;
-        gc.weighty = 0.1;
+        gc.weighty = 0;
 
         gc.gridx = 0;
+        gc.fill = GridBagConstraints.HORIZONTAL;
+
         gc.anchor = GridBagConstraints.LINE_START;
-        gc.insets = new Insets(0,0,0,0);
-        add(addConnectionButton, gc);
+        gc.gridwidth = 2;
+        gc.insets = new Insets(30,75,0,75);
 
         gc.gridx = 1;
         gc.anchor = GridBagConstraints.LINE_START;
         gc.insets = new Insets(0, 0,0,0);
-        add(removeConnectionButton, gc);
+        add(editConnectionButton, gc);
 
         /////////////////// Next Row ////////////////////////////
         gc.gridy++;
