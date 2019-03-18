@@ -273,8 +273,17 @@ public class Model extends Observable {
 
 	public Gizmo getGizmoByGrid(int x, int y){
 		for(Gizmo gizmo: gizmos){
-			if(gizmo.getGridX()==x && gizmo.getGridY()==y){
+			if(gizmo.getGridX() == x && gizmo.getGridY() == y){
 				return gizmo;
+			}
+			if(gizmo instanceof Flipper) {
+				if(gizmo.getGridX() == x && gizmo.getGridY() + 1 == y) {
+					return gizmo;
+				} else if(gizmo.getGridX() == x - 1 && gizmo.getGridY() + 1 == y) {
+					return gizmo;
+				} else if(gizmo.getGridX() == x - 1 && gizmo.getGridY() == y) {
+					return gizmo;
+				}
 			}
 		}
 		return null;
@@ -284,7 +293,7 @@ public class Model extends Observable {
 	public int findGizmoIndex(String id){
 		int index = 0;
 		for (Gizmo gizmo : gizmos) {
-			if (gizmo.getID() == id) {
+			if (gizmo.getID().equals(id)) {
 				return index;
 			}
 			index++;
@@ -295,19 +304,19 @@ public class Model extends Observable {
 	public void addGizmo(Gizmo g) {
 
 		//TODO Make method in flipper that returns its area, all grid positions
-		clearGridSpace(g.getGridX(), g.getGridY());
-		if(g instanceof LeftFlipperGizmo){
+		if(g instanceof Flipper){
 			for(int i = 0; i <= 1; i++){
 				for(int j = 0; j <= 1; j++){
 					clearGridSpace(g.getGridX() + i, g.getGridY() + j);
 				}
 			}
-		}if(g instanceof RightFlipperGizmo){
-			for(int i = -1; i <= 1; i++){
-				for(int j = 0; j <= 1; j++){
-					clearGridSpace(g.getGridX() - i, g.getGridY() + j);
-				}
-			}
+		} else {
+			clearGridSpace(g.getGridX(), g.getGridY());
+		}
+		Gizmo checkForFlippersToRemove = getGizmoByGrid(g.getGridX(), g.getGridY());
+		while(checkForFlippersToRemove instanceof Flipper) {
+			clearGridSpace(checkForFlippersToRemove.getGridX(), checkForFlippersToRemove.getGridY());
+			checkForFlippersToRemove = getGizmoByGrid(g.getGridX(), g.getGridY());
 		}
 		gizmos.add(g);
 		setChanged();
@@ -334,8 +343,9 @@ public class Model extends Observable {
 		Absorber absorberInBox= null;
 		for(Absorber absorber: abs){
 			if(x>=absorber.getGridX1() && x<=absorber.getGridX2()){
-				if(y>=absorber.getGridY1() && y<=absorber.getGridY2())
+				if(y>=absorber.getGridY1() && y<=absorber.getGridY2()) {
 					absorberInBox = absorber;
+				}
 			}
 		}
 		removeGizmo(gizmoInBox);
