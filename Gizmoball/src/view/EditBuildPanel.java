@@ -46,7 +46,7 @@ public class EditBuildPanel extends JPanel implements Observer {
         moveButton = new JButton("Move");
         buttons.add(moveButton);
 
-        ImageIcon leftRotate = new ImageIcon("src/view/icons/rotateLeft.png");
+        ImageIcon leftRotate = new ImageIcon("icons/rotateLeft.png");
         leftRotateButton = new JButton(leftRotate);
         leftRotateButton.setActionCommand("Rotate Anti Clockwise");
         leftRotateButton.setOpaque(false);
@@ -54,7 +54,7 @@ public class EditBuildPanel extends JPanel implements Observer {
         leftRotateButton.setBorderPainted(false);
         buttons.add(leftRotateButton);
 
-        ImageIcon rightRotate = new ImageIcon("src/view/icons/rotateRight.png");
+        ImageIcon rightRotate = new ImageIcon("icons/rotateRight.png");
         rightRotateButton = new JButton(rightRotate);
         rightRotateButton.setActionCommand("Rotate Clockwise");
         rightRotateButton.setOpaque(false);

@@ -56,7 +56,7 @@ public class AddBuildPanel extends JPanel implements Observer {
         absorberLabel = new JLabel("Absorbers", SwingConstants.CENTER);
         absorberLabel.setFont(new Font(absorberLabel.getFont().getName(), absorberLabel.getFont().getStyle(), 15));
 
-        ImageIcon square = new ImageIcon("src/view/icons/square.png");
+        ImageIcon square = new ImageIcon("icons/square.png");
         addSquareButton = new JButton(square);
         addSquareButton.setActionCommand("Square");
         addSquareButton.setOpaque(false);
@@ -64,7 +64,7 @@ public class AddBuildPanel extends JPanel implements Observer {
         addSquareButton.setBorderPainted(false);
         buttons.add(addSquareButton);
 
-        ImageIcon circle = new ImageIcon("src/view/icons/circle.png");
+        ImageIcon circle = new ImageIcon("icons/circle.png");
         addCircleButton = new JButton(circle);
         addCircleButton.setBackground(Color.BLUE);
         addCircleButton.setActionCommand("Circle");
@@ -73,7 +73,7 @@ public class AddBuildPanel extends JPanel implements Observer {
         addCircleButton.setBorderPainted(false);
         buttons.add(addCircleButton);
 
-        ImageIcon triangle = new ImageIcon("src/view/icons/triangle.png");
+        ImageIcon triangle = new ImageIcon("icons/triangle.png");
         addTriangleButton = new JButton(triangle);
         addTriangleButton.setActionCommand("Triangle");
         addTriangleButton.setOpaque(false);
@@ -81,7 +81,7 @@ public class AddBuildPanel extends JPanel implements Observer {
         addTriangleButton.setBorderPainted(false);
         buttons.add(addTriangleButton);
 
-        ImageIcon leftFlipper = new ImageIcon("src/view/icons/leftFlipper.png");
+        ImageIcon leftFlipper = new ImageIcon("icons/leftFlipper.png");
         addLeftFlipperButton = new JButton(leftFlipper);
         addLeftFlipperButton.setActionCommand("Left Flipper");
         addLeftFlipperButton.setOpaque(false);
@@ -89,7 +89,7 @@ public class AddBuildPanel extends JPanel implements Observer {
         addLeftFlipperButton.setBorderPainted(false);
         buttons.add(addLeftFlipperButton);
 
-        ImageIcon rightFlipper = new ImageIcon("src/view/icons/rightFlipper.png");
+        ImageIcon rightFlipper = new ImageIcon("icons/rightFlipper.png");
         addRightFlipperButton = new JButton(rightFlipper);
         addRightFlipperButton.setActionCommand("Right Flipper");
         addRightFlipperButton.setOpaque(false);
@@ -97,7 +97,7 @@ public class AddBuildPanel extends JPanel implements Observer {
         addRightFlipperButton.setBorderPainted(false);
         buttons.add(addRightFlipperButton);
 
-        ImageIcon ball = new ImageIcon("src/view/icons/ball.png");
+        ImageIcon ball = new ImageIcon("icons/ball.png");
         addBallButton = new JButton(ball);
         addBallButton.setActionCommand("Ball");
         addBallButton.setOpaque(false);
@@ -105,7 +105,7 @@ public class AddBuildPanel extends JPanel implements Observer {
         addBallButton.setBorderPainted(false);
         buttons.add(addBallButton);
 
-        ImageIcon absorber = new ImageIcon("src/view/icons/absorber.png");
+        ImageIcon absorber = new ImageIcon("icons/absorber.png");
         addAbsorberButton = new JButton(absorber);
         addAbsorberButton.setActionCommand("Absorber");
         addAbsorberButton.setOpaque(false);
