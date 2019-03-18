@@ -62,7 +62,6 @@ public class Model extends Observable {
 			if (tuc > moveTime) {
 				// No collision ...
 				ball = movelBallForTime(ball, moveTime);
-				//moveFlippers(moveTime);
 			} else {
 				// We've got a collision in tuc
 				ball = movelBallForTime(ball, tuc);
@@ -167,7 +166,10 @@ public class Model extends Observable {
 		if (collisionGizmo != null && shortestTime < 0.05 && shortestTime > 0.00){
 			String id = collisionGizmo.getID();
 			collisionGizmo.toggleColour();
-			//getGizmos().get(findGizmoIndex(id)).toggleColour();
+			if (collisionGizmo.getConnection() != null){
+				String id2 = gizmos.get(findGizmoIndex(collisionGizmo.getID())).getConnection();
+				gizmos.get(findGizmoIndex(id2)).setGizmoActive(true);
+			}
 		}
 		return new CollisionDetails(shortestTime, newVelo);
 	}
@@ -265,10 +267,11 @@ public class Model extends Observable {
 	}
 
 	//Used for mapping triggers etc
+	//TODO Change this for when id is not present, defaults to 0
 	public int findGizmoIndex(String id){
 		int index = 0;
 		for (Gizmo gizmo : gizmos) {
-			if (gizmo.getID() == id) {
+			if (gizmo.getID().equals(id)) {
 				return index;
 			}
 			index++;
