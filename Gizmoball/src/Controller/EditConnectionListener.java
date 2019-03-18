@@ -1,5 +1,7 @@
 package Controller;
 
+import model.Gizmos.Flipper;
+import model.Gizmos.LeftFlipperGizmo;
 import model.Gizmos.RightFlipperGizmo;
 import model.Model;
 import view.BuildBoard;
@@ -23,9 +25,11 @@ public class EditConnectionListener implements MouseListener {
 
         if(model.getSelectedGizmo()!= null) {
             if (x >= 0 && x <= 19 && y >= 0 && y <= 19) {
-                model.addConnection(x, y);
+                if(model.getGizmoByGrid(x, y)instanceof Flipper) {
+                    model.addConnection(x, y);
+                }
             }
-        }else{
+        }else if(!(model.getGizmoByGrid(x, y) instanceof Flipper)){
             model.setSelectedGizmo(model.getGizmoByGrid(x, y));
         }
     }

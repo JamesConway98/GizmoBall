@@ -111,20 +111,6 @@ public class Model extends Observable {
 			checkWallCollision(line, 1.0, null);
 		}
 
-		//Time to collide with any absorber
-		for(Absorber absorber : abs) {
-			ArrayList<LineSegment> lines = absorber.getLineSegments();
-			for (LineSegment line : lines) {
-				if(checkWallCollision(line, 0, null)) {
-					if(time < 0.01) {
-						ball.setExactY(ball.getExactY() + (ball.getRadius() * 2));
-						ball.setExactX(absorber.getXpos2() + L - ball.getRadius());
-						ball.stop();
-					}
-				}
-			}
-		}
-
 		// Time to collide with any vertical lines
 		for (VerticalLine line : lines) {
 			LineSegment ls = line.getLineSeg();
@@ -172,7 +158,6 @@ public class Model extends Observable {
 				gizmos.get(findGizmoIndex(id2)).setGizmoActive(true);
 			}
 		}
-
 
 		return new CollisionDetails(shortestTime, newVelo);
 	}
@@ -232,6 +217,12 @@ public class Model extends Observable {
 		return false;
 	}
 
+	public void hitAbsorber(Absorber absorber) {
+		ball.stop();
+		ball.setExactY(ball.getExactY() + (ball.getRadius() * 2));
+		ball.setExactX(absorber.getXpos2() + L - ball.getRadius());
+	}
+
 	public Ball getBall() {
 		return ball;
 	}
@@ -269,6 +260,15 @@ public class Model extends Observable {
 		return gizmos;
 	}
 
+	public Gizmo getGizmoByGrid(int x, int y){
+		for(Gizmo gizmo: gizmos){
+			if(gizmo.getGridX()==x && gizmo.getGridY()==y){
+				return gizmo;
+			}
+		}
+		return null;
+	}
+
 	//Used for mapping triggers etc
 	public int findGizmoIndex(String id){
 		int index = 0;
@@ -286,15 +286,15 @@ public class Model extends Observable {
 		//TODO Make method in flipper that returns its area, all grid positions
 		clearGridSpace(g.getGridX(), g.getGridY());
 		if(g instanceof LeftFlipperGizmo){
-			for(int i =0; i<=1; i++){
-				for(int j =0;j<=1;j++){
-					clearGridSpace(g.getGridX()+i, g.getGridY()+j);
+			for(int i = 0; i <= 1; i++){
+				for(int j = 0; j <= 1; j++){
+					clearGridSpace(g.getGridX() + i, g.getGridY() + j);
 				}
 			}
 		}if(g instanceof RightFlipperGizmo){
-			for(int i =0; i<=1; i++){
-				for(int j =0;j<=1;j++){
-					clearGridSpace(g.getGridX()+i, g.getGridY()+j);
+			for(int i = -1; i <= 1; i++){
+				for(int j = 0; j <= 1; j++){
+					clearGridSpace(g.getGridX() - i, g.getGridY() + j);
 				}
 			}
 		}
@@ -420,6 +420,7 @@ public class Model extends Observable {
 	}
 
 	public void setSelectedGizmo(Gizmo selectedGizmo) {
+		System.out.println(selectedGizmo);
 		this.selectedGizmo = selectedGizmo;
 		setChanged();
 		notifyObservers();
@@ -444,6 +445,16 @@ public class Model extends Observable {
 		}
 		setChanged();
 		notifyObservers();
+	}
+
+	public void addConnection(int x, int y){
+		for(Gizmo gizmo:gizmos){
+			if(gizmo instanceof Flipper) {
+				if (gizmo.getGridX() == x && gizmo.getGridY() == y) {
+					selectedGizmo.setConnection(gizmo.getID());
+				}
+			}
+		}
 	}
 
 	public void moveFlippers(double time) {

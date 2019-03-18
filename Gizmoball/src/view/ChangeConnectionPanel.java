@@ -113,7 +113,6 @@ public class ChangeConnectionPanel extends JPanel implements Observer {
     @Override
     public void update(Observable o, Object arg) {
         if(model.getSelectedGizmo()!=null) {
-            System.out.println("TTTT");
             Gizmo gizmo = model.getSelectedGizmo();
             instructions.setText("You have selected Gizmo " + gizmo.getID());
             currentGizmoConnection.setText("Gizmo " + gizmo.getID() + " connection = \"" + gizmo.getConnection() + "\". Click on a flipper to change this.");
