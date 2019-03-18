@@ -162,10 +162,6 @@ public class EditBuildPanel extends JPanel implements Observer {
         gc.anchor = GridBagConstraints.LINE_START;
         gc.gridwidth = 2;
         gc.insets = new Insets(30,75,0,75);
-
-        gc.gridx = 1;
-        gc.anchor = GridBagConstraints.LINE_START;
-        gc.insets = new Insets(0, 0,0,0);
         add(editConnectionButton, gc);
 
         /////////////////// Next Row ////////////////////////////

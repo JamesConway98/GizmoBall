@@ -420,7 +420,6 @@ public class Model extends Observable {
 	}
 
 	public void setSelectedGizmo(Gizmo selectedGizmo) {
-		System.out.println(selectedGizmo);
 		this.selectedGizmo = selectedGizmo;
 		setChanged();
 		notifyObservers();
@@ -455,6 +454,16 @@ public class Model extends Observable {
 				}
 			}
 		}
+		setChanged();
+		notifyObservers();
+	}
+
+	public void removeConnection(Gizmo gizmo){
+		if(gizmo!=null) {
+			gizmo.setConnection(null);
+		}
+		setChanged();
+		notifyObservers();
 	}
 
 	public void moveFlippers(double time) {

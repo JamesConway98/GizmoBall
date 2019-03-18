@@ -27,6 +27,8 @@ public class EditConnectionListener implements MouseListener {
             if (x >= 0 && x <= 19 && y >= 0 && y <= 19) {
                 if(model.getGizmoByGrid(x, y)instanceof Flipper) {
                     model.addConnection(x, y);
+                }else{
+                    model.setSelectedGizmo(model.getGizmoByGrid(x, y));
                 }
             }
         }else if(!(model.getGizmoByGrid(x, y) instanceof Flipper)){
