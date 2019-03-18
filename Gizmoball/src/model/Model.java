@@ -112,20 +112,6 @@ public class Model extends Observable {
 			checkWallCollision(line, 1.0);
 		}
 
-		//Time to collide with any absorber
-		for(Absorber absorber : abs) {
-			ArrayList<LineSegment> lines = absorber.getLineSegments();
-			for (LineSegment line : lines) {
-				if(checkWallCollision(line, 0)) {
-					if(time < 0.01) {
-						ball.setExactY(ball.getExactY() + (ball.getRadius() * 2));
-						ball.setExactX(absorber.getXpos2() + L - ball.getRadius());
-						ball.stop();
-					}
-				}
-			}
-		}
-
 		// Time to collide with any vertical lines
 		for (VerticalLine line : lines) {
 			LineSegment ls = line.getLineSeg();
@@ -165,6 +151,19 @@ public class Model extends Observable {
 				}
 			}
 		}
+
+		//Time to collide with any absorber
+		for(Absorber absorber : abs) {
+			ArrayList<LineSegment> lines = absorber.getLineSegments();
+			for (LineSegment line : lines) {
+				if(checkWallCollision(line, 0.0)) {
+					if(shortestTime == 0.0) {
+						hitAbsorber(absorber);
+					}
+				}
+			}
+		}
+
 		return new CollisionDetails(shortestTime, newVelo);
 	}
 
@@ -209,6 +208,12 @@ public class Model extends Observable {
 			return true;
 		}
 		return false;
+	}
+
+	public void hitAbsorber(Absorber absorber) {
+		ball.stop();
+		ball.setExactY(ball.getExactY() + (ball.getRadius() * 2));
+		ball.setExactX(absorber.getXpos2() + L - ball.getRadius());
 	}
 
 	public Ball getBall() {
