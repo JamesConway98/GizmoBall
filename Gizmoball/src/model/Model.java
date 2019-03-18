@@ -173,17 +173,6 @@ public class Model extends Observable {
 			}
 		}
 
-		//Time to collide with any absorber
-		for(Absorber absorber : abs) {
-			ArrayList<LineSegment> lines = absorber.getLineSegments();
-			for (LineSegment line : lines) {
-				if(checkWallCollision(line,0.0, null)) {
-					if(shortestTime == 0.0) {
-						hitAbsorber(absorber);
-					}
-				}
-			}
-		}
 
 		return new CollisionDetails(shortestTime, newVelo);
 	}
