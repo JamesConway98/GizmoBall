@@ -154,7 +154,7 @@ public class Model extends Observable {
 		}
 		if (collisionGizmo != null && shortestTime < 0.05 && shortestTime > 0.00){
 			String id = collisionGizmo.getID();
-			collisionGizmo.toggleColour();
+			//collisionGizmo.toggleColour();
 			//getGizmos().get(findGizmoIndex(id)).toggleColour();
 		}
 
@@ -288,15 +288,15 @@ public class Model extends Observable {
 		//TODO Make method in flipper that returns its area, all grid positions
 		clearGridSpace(g.getGridX(), g.getGridY());
 		if(g instanceof LeftFlipperGizmo){
-			for(int i =0; i<=1; i++){
-				for(int j =0;j<=1;j++){
-					clearGridSpace(g.getGridX()+i, g.getGridY()+j);
+			for(int i = 0; i <= 1; i++){
+				for(int j = 0; j <= 1; j++){
+					clearGridSpace(g.getGridX() + i, g.getGridY() + j);
 				}
 			}
 		}if(g instanceof RightFlipperGizmo){
-			for(int i =0; i<=1; i++){
-				for(int j =0;j<=1;j++){
-					clearGridSpace(g.getGridX()+i, g.getGridY()+j);
+			for(int i = -1; i <= 1; i++){
+				for(int j = 0; j <= 1; j++){
+					clearGridSpace(g.getGridX() - i, g.getGridY() + j);
 				}
 			}
 		}
