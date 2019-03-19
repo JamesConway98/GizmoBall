@@ -16,9 +16,10 @@ public class AddKeyListener implements KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) {
-        if(model.getActiveMouseListener()instanceof EditKeyTriggerListener) {
-            model.setKeyToSelectedObject(e.getKeyChar());
-            System.out.println(model.getSelectedAbsorber().getKey());
+        if(model.getActiveMouseListener() != null) {
+            if(model.getActiveMouseListener()instanceof EditKeyTriggerListener) {
+                model.setKeyToSelectedObject(e.getKeyChar());
+            }
         }
     }
 
