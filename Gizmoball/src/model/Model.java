@@ -349,8 +349,7 @@ public class Model extends Observable {
 				}
 			}
 		}
-
-		if(ball != null)
+		if(ball != null && ball.getGridX() == x && ball.getGridY() == y)
 			ball = null;
 
 		removeGizmo(gizmoInBox);
