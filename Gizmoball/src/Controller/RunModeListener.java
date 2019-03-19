@@ -36,6 +36,7 @@ public class RunModeListener implements ActionListener {
                     break;
                 case "Build Mode":
                     timer.stop();
+                    model.loadDefault();
                     break;
         }
     }
