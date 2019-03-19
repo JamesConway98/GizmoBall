@@ -43,7 +43,7 @@ public class RunBoard extends JPanel implements Observer {
 
         g.setColor(Color.LIGHT_GRAY);
 
-        g.fillRect(50, 50, 19*L, 19*L);
+        g.fillRect(50, 50, 20*L, 20*L);
 
         g.setColor(Color.BLACK);
 

@@ -36,7 +36,7 @@ public class GameLoader {
 					by = Float.parseFloat(read.next());
 					xVelo = Double.parseDouble(read.next());
 					yVelo = Double.parseDouble(read.next());
-					Ball ball = new Ball(bx, by, xVelo, yVelo);
+					Ball ball = new Ball((bx * model.L) + 50, (by * model.L) + 50, xVelo, yVelo);
 					model.addBall(ball);
 				} else if (type.equals("Square") || type.equals("Triangle") || type.equals("Absorber") || type.equals("LeftFlipper") || type.equals("RightFlipper") || type.equals("Circle")) {
 					//We have a Gizmo
@@ -86,16 +86,12 @@ public class GameLoader {
 				} 	else if (type.equals("Connect")) {
 					id = read.next();
 					id2 = read.next();
-
 					int index = model.findGizmoIndex(id);
 					for(Gizmo gizmo: model.getGizmos()) {
 						if (gizmo.getID().equals(id)){
 							gizmo.setConnection(id2);
 						}
-						System.out.println(gizmo.getID());
 					}
-					Gizmo g = model.getGizmos().get(index);
-					g.setConnection(id2);
 				}
 
 				else {

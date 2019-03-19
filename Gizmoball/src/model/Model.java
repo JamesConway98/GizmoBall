@@ -43,7 +43,7 @@ public class Model extends Observable {
 		//ball = new Ball(500-6.25, 480-6.25, 0, 0);
 		// Wall size 500 x 500 pixels
 		//TODO change walls to match new L
-		gws = new Walls(50, 50, (L*19) + 50, (L*19) + 50);
+		gws = new Walls(50, 50, (L*20) + 50, (L*20) + 50);
 		// Lines added in Main
 		lines = new ArrayList<>();
 		// Gizmos added in Main
