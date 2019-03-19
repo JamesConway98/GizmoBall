@@ -32,8 +32,15 @@ public class ChangeConnectionPanel extends JPanel implements Observer {
         instructions = new JLabel("Click on a Gizmo to select it.");
         currentGizmoConnection = new JLabel();
 
-        backButton = new JButton("Back");
+        ImageIcon back = new ImageIcon("Gizmoball/src/icons/back.png");
+        backButton = new JButton(back);
+        backButton.setActionCommand("Back");
+        backButton.setOpaque(false);
+        backButton.setContentAreaFilled(false);
+        backButton.setBorderPainted(false);
+        backButton.setToolTipText("Back");
         buttons.add(backButton);
+
         removeButton = new JButton("Remove Connection");
         buttons.add(removeButton);
 
