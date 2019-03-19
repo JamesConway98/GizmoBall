@@ -350,6 +350,10 @@ public class Model extends Observable {
 				}
 			}
 		}
+
+		if(ball != null)
+			ball = null;
+
 		removeGizmo(gizmoInBox);
 		removeAbsorber(absorberInBox);
 	}
