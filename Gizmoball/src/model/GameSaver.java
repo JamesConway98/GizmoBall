@@ -2,6 +2,7 @@ package model;
 
 import model.Gizmos.*;
 
+import javax.swing.*;
 import java.io.*;
 import java.util.ArrayList;
 
@@ -18,37 +19,67 @@ public class GameSaver {
             clearSaveFile(file);
 
             for(Gizmo gizmo: gizmos){
+                String id;
                 if(gizmo instanceof CircleGizmo) {
-                    writer.append("\nCircle C" + i + " " + gizmo.getGridX() + " " + gizmo.getGridY());
+                    id = "C" + Integer.toString(i);
+                    writer.append("\nCircle " + id + " " + gizmo.getGridX() + " " + gizmo.getGridY());
+                    saveConnections(gizmo, id, writer);
                 }else if(gizmo instanceof TriangleGizmo){
-                    writer.append("\nTriangle T" + i + " " + gizmo.getGridX() + " " + gizmo.getGridY() + "");
+                    id = "T" + Integer.toString(i);
+                    writer.append("\nTriangle " + id + " " + gizmo.getGridX() + " " + gizmo.getGridY() + "");
+
                     int index = 0;
                     while (index < gizmo.getRotation()) {
 						 writer.append("\nRotate T" + i + "");
 						 index++;
 					}
+
+					saveConnections(gizmo, id, writer);
+
                 }else if(gizmo instanceof SquareGizmo){
-                    writer.append("\nSquare S" + i + " " + gizmo.getGridX() + " " + gizmo.getGridY());
+                    id = "S" + Integer.toString(i);
+                    writer.append("\nSquare " + id + " " + gizmo.getGridX() + " " + gizmo.getGridY());
+                    saveConnections(gizmo, id, writer);
+
                 }else if(gizmo instanceof LeftFlipperGizmo){
-                    writer.append("\nLeftFlipper LF" + i + " " + gizmo.getGridX()+ " " + gizmo.getGridY());
+                    id = "LF" + Integer.toString(i);
+                    writer.append("\nLeftFlipper " + id + " " + gizmo.getGridX()+ " " + gizmo.getGridY());
                     int index = 0;
                     while (index < gizmo.getRotation()) {
-						 writer.append("\nRotate LF" + i + "");
+						 writer.append("\nRotate " + id + "");
 						 index++;
 					}
+                    saveConnections(gizmo, id, writer);
+
                 }else if(gizmo instanceof RightFlipperGizmo){
-                    writer.append("\nRightFlipper RF" + i + " " + gizmo.getGridX() + " " + gizmo.getGridY());
+                    id = "RF" + Integer.toString(i);
+                    writer.append("\nRightFlipper " + id + " " + gizmo.getGridX() + " " + gizmo.getGridY());
                     int index = 0;
                     while (index < gizmo.getRotation()) {
-						 writer.append("\nRotate RF" + i + "");
+						 writer.append("\nRotate " + id + "");
 						 index++;
 					}
+                    saveConnections(gizmo, id, writer);
                 }
                 i++;
             }
 
         } catch(IOException io){
             io.printStackTrace();
+        }
+    }
+
+    public void saveConnections(Gizmo g, String id, Writer w) {
+        try {
+            if (g.getKey() != Character.MIN_VALUE) {
+                KeyStroke ks = KeyStroke.getKeyStroke(g.getKey(), 0);
+                w.append("\nKeyconnect key " + ks.getKeyCode() + " down " + id);
+            }
+            if (g.getConnection() != null) {
+                w.append("\nConnect " + id + " " + g.getConnection());
+            }
+        } catch(IOException io){
+        io.printStackTrace();
         }
     }
 

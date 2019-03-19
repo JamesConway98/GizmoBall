@@ -2,6 +2,8 @@ package model;
 
 import model.Gizmos.*;
 
+import javax.swing.*;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -43,12 +45,31 @@ public class GameLoader {
 					id = read.next();
 					x = Integer.parseInt(read.next());
 					y = Integer.parseInt(read.next());
+
 					if (type.equals("Square")) {
 						SquareGizmo sg = new SquareGizmo(id, x, y);
+						String cID = checkConnect(id, file);
+						char kCon = checkKeyConnect(id, file);
+						if(cID != null){
+							sg.setConnection(cID);
+						}
+						if(kCon != Character.MIN_VALUE){
+							sg.setKey(kCon);
+						}
 						model.addGizmo(sg);
+
 					} else if (type.equals("Circle")) {
 						CircleGizmo cg = new CircleGizmo(id, x, y);
+						String cID = checkConnect(id, file);
+						char kCon = checkKeyConnect(id, file);
+						if(cID != null){
+							cg.setConnection(cID);
+						}
+						if(kCon != Character.MIN_VALUE){
+							cg.setKey(kCon);
+						}
 						model.addGizmo(cg);
+
 					} else if (type.equals("Triangle")) {
 						//rotation = Integer.parseInt(read.next());
 						TriangleGizmo tg = new TriangleGizmo(id, x, y);
@@ -58,11 +79,20 @@ public class GameLoader {
 							tg.rotateClockwise();
 							i++;
 						}
+						String cID = checkConnect(id, file);
+						char kCon = checkKeyConnect(id, file);
+						if(cID != null){
+							tg.setConnection(cID);
+						}
+						if(kCon != Character.MIN_VALUE){
+							tg.setKey(kCon);
+						}
 						model.addGizmo(tg);
+
 					} else if (type.equals("Absorber")) {
 						x2 = Integer.parseInt(read.next());
 						y2 = Integer.parseInt(read.next());
-						Absorber abs = new Absorber(x, y, x2, y2);
+						Absorber abs = new Absorber(id, x, y, x2, y2);
 						model.addAbsorber(abs);
 					} else if (type.equals("LeftFlipper")) {
 						LeftFlipperGizmo lf = new LeftFlipperGizmo(id, x, y);
@@ -71,6 +101,14 @@ public class GameLoader {
 						while (i < rotationCount) {
 							lf.rotateClockwise();
 							i++;
+						}
+						String cID = checkConnect(id, file);
+						char kCon = checkKeyConnect(id, file);
+						if(cID != null){
+							lf.setConnection(cID);
+						}
+						if(kCon != Character.MIN_VALUE){
+							lf.setKey(kCon);
 						}
 						model.addGizmo(lf);
 					} else if (type.equals("RightFlipper")) {
@@ -81,9 +119,17 @@ public class GameLoader {
 							rf.rotateClockwise();
 							i++;
 						}
+						String cID = checkConnect(id, file);
+						char kCon = checkKeyConnect(id, file);
+						if(cID != null){
+							rf.setConnection(cID);
+						}
+						if(kCon != Character.MIN_VALUE){
+							rf.setKey(kCon);
+						}
 						model.addGizmo(rf);
 					}
-				} 	else if (type.equals("Connect")) {
+				} /*	else if (type.equals("Connect")) {
 					id = read.next();
 					id2 = read.next();
 					int index = model.findGizmoIndex(id);
@@ -91,12 +137,9 @@ public class GameLoader {
 						if (gizmo.getID().equals(id)){
 							gizmo.setConnection(id2);
 						}
-					}
-				}
+					}*/
+				//}
 
-				else {
-
-				}
 			}
 
 			read.close();
@@ -104,17 +147,64 @@ public class GameLoader {
 			e.printStackTrace();
 		}
     }
-    
-    public int countRotations(String name, File file) {
-		int count = 0;
-        InputStream is = getClass().getResourceAsStream(file.getName());
+
+    public String checkConnect(String name, File file){
+    	String connectID = null;
 		try {
 			Scanner read = new Scanner(file);
 			String type, id;
-			int x, y, x2 = 0, y2 = 0, rotation = 0;
-			Float bx, by;
-			double xVelo = 0, yVelo = 0, angle;
-			int L = 25;
+
+			while (read.hasNextLine()) {
+				type = read.next();
+				if (type.equals("Connect")) {
+					id = read.next();
+					if (id.equals(name)) {
+						connectID = read.next();
+					}
+				}
+			}
+			read.close();
+
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+		return connectID;
+	}
+
+	public char checkKeyConnect(String name, File file){
+		String keyID;
+		char keyCon = Character.MIN_VALUE;
+		try {
+			Scanner read = new Scanner(file);
+			String type, id, dir;
+
+			while (read.hasNextLine()) {
+				type = read.next();
+				if (type.equals("key")) {
+					keyID = read.next();
+					dir = read.next();
+					id = read.next();
+					if (id.equals(name)) {
+						KeyStroke ks = null;
+						ks.getKeyStroke(keyID);
+						keyCon = ks.getKeyChar();
+					}
+				}
+			}
+			read.close();
+
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+		return keyCon;
+	}
+
+    
+    public int countRotations(String name, File file) {
+		int count = 0;
+		try {
+			Scanner read = new Scanner(file);
+			String type, id;
 
 			while (read.hasNextLine()) {
 				type = read.next();

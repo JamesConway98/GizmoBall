@@ -66,6 +66,7 @@ public class BuildModeListener implements ActionListener {
                 break;
             case "Remove Key":
                 model.removeKey(model.getSelectedGizmo());
+                model.removeKey(model.getSelectedAbsorber());
                 break;
             case "Remove Connection":
                 model.removeConnection(model.getSelectedGizmo());
