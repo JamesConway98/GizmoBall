@@ -69,28 +69,19 @@ public class GameSaver {
         }
     }
 
-    public void saveConnections(Gizmo g, String id, Writer w) {
-        try {
-            if (g.getKey() != Character.MIN_VALUE) {
-                KeyStroke ks = KeyStroke.getKeyStroke(g.getKey(), 0);
-                w.append("\nKeyconnect key " + ks.getKeyCode() + " down " + id);
-            }
-            if (g.getConnection() != null) {
-                w.append("\nConnect " + id + " " + g.getConnection());
-            }
-        } catch(IOException io){
-        io.printStackTrace();
-        }
-    }
-
     public void saveAbsorbers(ArrayList<Absorber> absorbers, File file){
         try (
                 Writer writer = new BufferedWriter(new OutputStreamWriter(
                         new FileOutputStream(file, true), "utf-8"))) {
 
             for(int i = 0; i<absorbers.size(); i++) {
-                writer.append("\nAbsorber A" + i + " " + absorbers.get(i).getGridX1() + " " + absorbers.get(i).getGridY1()
+                String id = "A" + Integer.toString(i);
+                writer.append("\nAbsorber " + id + " " + absorbers.get(i).getGridX1() + " " + absorbers.get(i).getGridY1()
                         + " " + absorbers.get(i).getGridX2() + " " + absorbers.get(i).getGridY2());
+                if (absorbers.get(i).getKey() != Character.MIN_VALUE) {
+                    KeyStroke ks = KeyStroke.getKeyStroke(absorbers.get(i).getKey(), 0);
+                    writer.append("\nKeyConnect key " + ks.getKeyCode() + " down " + id);
+                }
             }
 
         } catch(IOException io){
@@ -98,6 +89,20 @@ public class GameSaver {
         }
 
 
+    }
+
+    public void saveConnections(Gizmo g, String id, Writer w) {
+        try {
+            if (g.getKey() != Character.MIN_VALUE) {
+                KeyStroke ks = KeyStroke.getKeyStroke(g.getKey(), 0);
+                w.append("\nKeyConnect key " + ks.getKeyCode() + " down " + id);
+            }
+            if (g.getConnection() != null) {
+                w.append("\nConnect " + id + " " + g.getConnection());
+            }
+        } catch (IOException io) {
+            io.printStackTrace();
+        }
     }
 
     public void saveBall(Ball ball, File file){
@@ -108,8 +113,11 @@ public class GameSaver {
                 Writer writer = new BufferedWriter(new OutputStreamWriter(
                         new FileOutputStream(file, true), "utf-8"))) {
 
-        	double bx = ball.getExactX();
-        	double by = ball.getExactY();
+            double bx = ball.getExactX();
+            double by = ball.getExactY();
+
+            bx = (bx / Model.L) - 1;
+            by = (by / Model.L) - 1;
         	
             writer.append("\nBall B1 " + bx + " " + by +
                     " " + ball.getVelo().x() + " " + ball.getVelo().y());

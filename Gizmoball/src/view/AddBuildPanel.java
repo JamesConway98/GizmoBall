@@ -110,6 +110,7 @@ public class AddBuildPanel extends JPanel implements Observer {
         addBallButton.setContentAreaFilled(false);
         addBallButton.setBorderPainted(false);
         addBallButton.setToolTipText("Add Ball");
+        buttons.add(addBallButton);
 
         ImageIcon absorber = new ImageIcon("Gizmoball/src/icons/absorber.png");
         addAbsorberButton = new JButton(absorber);

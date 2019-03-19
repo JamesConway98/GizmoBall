@@ -335,10 +335,18 @@ public class Model extends Observable {
 	}
 
 	public void clearGridSpace(int x, int y){
-		Gizmo gizmoInBox = null;
+		ArrayList<Gizmo> gizmosToRemove = new ArrayList<>();
 		for(Gizmo gizmo: gizmos){
 			if(gizmo.getGridX()==x && gizmo.getGridY()==y){
-				gizmoInBox = gizmo;
+				gizmosToRemove.add(gizmo);
+			} else if(gizmo instanceof Flipper) {
+				if(gizmo.getGridX() + 1 == x && gizmo.getGridY() == y) {
+					gizmosToRemove.add(gizmo);
+				} else if(gizmo.getGridX() + 1 == x && gizmo.getGridY() + 1 == y) {
+					gizmosToRemove.add(gizmo);
+				} else if(gizmo.getGridX() == x && gizmo.getGridY() + 1 == y ) {
+					gizmosToRemove.add(gizmo);
+				}
 			}
 		}
 		Absorber absorberInBox= null;
@@ -349,11 +357,13 @@ public class Model extends Observable {
 				}
 			}
 		}
+		//set ball off board
+		if(ball != null && ball.getGridX() == x && ball.getGridY() == y)
+			ball.setExactY(1000);
 
-		if(ball != null)
-			ball = null;
-
-		removeGizmo(gizmoInBox);
+		for(Gizmo gizmo : gizmosToRemove) {
+			removeGizmo(gizmo);
+		}
 		removeAbsorber(absorberInBox);
 	}
 
@@ -530,7 +540,7 @@ public class Model extends Observable {
 	}
 
 	public void fire() {
-		if(ball.stopped()) {
+        if (ball != null && ball.stopped()) {
 			ball.setExactY(getBall().getExactY() - (getBall().getRadius() * 2));
 			setBallSpeed(0, INITIAL_VELOCTIY);
 			ball.start();
