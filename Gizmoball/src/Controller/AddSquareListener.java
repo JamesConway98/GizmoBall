@@ -21,7 +21,7 @@ public class AddSquareListener implements MouseListener {
         int x = 0, y = 0;
         x = (e.getX() - 50)/ BuildBoard.L;
         y = (e.getY() - 50)/ BuildBoard.L;
-        if(x >= 0 && x <= 18 && y >= 0 && y <= 18) {
+        if(x >= 0 && x <= 19 && y >= 0 && y <= 19) {
             //TODO unique ids
             model.addGizmo(new SquareGizmo("S1", x, y));
         }
