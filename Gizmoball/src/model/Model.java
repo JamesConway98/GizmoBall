@@ -593,7 +593,7 @@ public class Model extends Observable {
 		GameLoader gl = new GameLoader();
 		clearBoard();
 		JFileChooser fileChooser = new JFileChooser(System.getProperty("user.home") + "\\Documents");
-		if (fileChooser.showOpenDialog(saveFile) == JFileChooser.APPROVE_OPTION) {
+		if (fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
 			File file = fileChooser.getSelectedFile();
 			gl.loadGame(this, file);
 		}
