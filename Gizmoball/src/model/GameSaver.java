@@ -113,8 +113,11 @@ public class GameSaver {
                 Writer writer = new BufferedWriter(new OutputStreamWriter(
                         new FileOutputStream(file, true), "utf-8"))) {
 
-            double bx = ball.getGridX();
-            double by = ball.getGridY();
+            double bx = ball.getExactX();
+            double by = ball.getExactY();
+
+            bx = (bx / Model.L) - 1;
+            by = (by / Model.L) - 1;
         	
             writer.append("\nBall B1 " + bx + " " + by +
                     " " + ball.getVelo().x() + " " + ball.getVelo().y());

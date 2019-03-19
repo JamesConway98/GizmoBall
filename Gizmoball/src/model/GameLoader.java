@@ -36,8 +36,10 @@ public class GameLoader {
 					by = Float.parseFloat(read.next());
 					xVelo = Double.parseDouble(read.next());
 					yVelo = Double.parseDouble(read.next());
-                    xVelo = xVelo / L - 50;
-                    yVelo = yVelo / L - 50;
+                    System.out.println(bx + " " + by);
+                    bx = (bx + 1) * L;
+                    by = (by + 1) * L;
+                    System.out.println(bx + " " + by);
 					Ball ball = new Ball(bx, by, xVelo, yVelo);
 					model.addBall(ball);
 				} else if (type.equals("Square") || type.equals("Triangle") || type.equals("Absorber") || type.equals("LeftFlipper") || type.equals("RightFlipper") || type.equals("Circle")) {
