@@ -22,6 +22,7 @@ public class MainFrame implements Observer {
     private SettingsBuildPanel settingsBuildPanel;
     private JFrame frame;
     private MoveMouseListener moveMouseListener;
+    private KeyPressedListener keyPressedListener;
 
     public MainFrame(Model m){
 
@@ -42,6 +43,8 @@ public class MainFrame implements Observer {
         FileMenuListener menuListener = new FileMenuListener(m);
         TabChangeListener tabListener = new TabChangeListener(m);
         moveMouseListener = new MoveMouseListener(m);
+        keyPressedListener = new KeyPressedListener(m);
+
 
         buildBoard.addMouseMotionListener(moveMouseListener);
 

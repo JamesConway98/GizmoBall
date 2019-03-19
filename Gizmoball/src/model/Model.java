@@ -150,6 +150,19 @@ public class Model extends Observable {
 				}
 			}
 		}
+
+		//Time to collide with any absorber
+        for(Absorber absorber : abs) {
+            ArrayList<LineSegment> lsList = absorber.getLineSegments();
+            for(int i = 0; i < lsList.size(); i++) {
+                if(checkWallCollision(lsList.get(i), 0.0, null)) {
+                    if(shortestTime == 0.0) {
+                        hitAbsorber(absorber);
+                    }
+                }
+            }
+        }
+
 		if (collisionGizmo != null && shortestTime < 0.05 && shortestTime > 0.00){
 			String id = collisionGizmo.getID();
 			collisionGizmo.toggleColour();
@@ -262,8 +275,17 @@ public class Model extends Observable {
 
 	public Gizmo getGizmoByGrid(int x, int y){
 		for(Gizmo gizmo: gizmos){
-			if(gizmo.getGridX()==x && gizmo.getGridY()==y){
+			if(gizmo.getGridX() == x && gizmo.getGridY() == y){
 				return gizmo;
+			}
+			if(gizmo instanceof Flipper) {
+				if(gizmo.getGridX() == x && gizmo.getGridY() + 1 == y) {
+					return gizmo;
+				} else if(gizmo.getGridX() == x - 1 && gizmo.getGridY() + 1 == y) {
+					return gizmo;
+				} else if(gizmo.getGridX() == x - 1 && gizmo.getGridY() == y) {
+					return gizmo;
+				}
 			}
 		}
 		return null;
@@ -284,19 +306,19 @@ public class Model extends Observable {
 	public void addGizmo(Gizmo g) {
 
 		//TODO Make method in flipper that returns its area, all grid positions
-		clearGridSpace(g.getGridX(), g.getGridY());
-		if(g instanceof LeftFlipperGizmo){
+		if(g instanceof Flipper){
 			for(int i = 0; i <= 1; i++){
 				for(int j = 0; j <= 1; j++){
 					clearGridSpace(g.getGridX() + i, g.getGridY() + j);
 				}
 			}
-		}if(g instanceof RightFlipperGizmo){
-			for(int i = -1; i <= 1; i++){
-				for(int j = 0; j <= 1; j++){
-					clearGridSpace(g.getGridX() - i, g.getGridY() + j);
-				}
-			}
+		} else {
+			clearGridSpace(g.getGridX(), g.getGridY());
+		}
+		Gizmo checkForFlippersToRemove = getGizmoByGrid(g.getGridX(), g.getGridY());
+		while(checkForFlippersToRemove instanceof Flipper) {
+			clearGridSpace(checkForFlippersToRemove.getGridX(), checkForFlippersToRemove.getGridY());
+			checkForFlippersToRemove = getGizmoByGrid(g.getGridX(), g.getGridY());
 		}
 		gizmos.add(g);
 		setChanged();
@@ -323,8 +345,9 @@ public class Model extends Observable {
 		Absorber absorberInBox= null;
 		for(Absorber absorber: abs){
 			if(x>=absorber.getGridX1() && x<=absorber.getGridX2()){
-				if(y>=absorber.getGridY1() && y<=absorber.getGridY2())
+				if(y>=absorber.getGridY1() && y<=absorber.getGridY2()) {
 					absorberInBox = absorber;
+				}
 			}
 		}
 		removeGizmo(gizmoInBox);
@@ -420,7 +443,6 @@ public class Model extends Observable {
 	}
 
 	public void setSelectedGizmo(Gizmo selectedGizmo) {
-		System.out.println(selectedGizmo);
 		this.selectedGizmo = selectedGizmo;
 		setChanged();
 		notifyObservers();
@@ -447,14 +469,42 @@ public class Model extends Observable {
 		notifyObservers();
 	}
 
-	public void addConnection(int x, int y){
+	//this is whenn key is pressed in run mode
+	public void keyPressed(char key){
 		for(Gizmo gizmo:gizmos){
-			if(gizmo instanceof Flipper) {
-				if (gizmo.getGridX() == x && gizmo.getGridY() == y) {
-					selectedGizmo.setConnection(gizmo.getID());
+			if(gizmo.getKey()==key){
+				if(gizmo instanceof Flipper){
+					gizmo.setGizmoActive(true);
+				}else {
+					gizmo.toggleColour();
 				}
 			}
 		}
+	}
+
+	public ArrayList<Gizmo> getAllGizmoByKey(char key){
+
+		ArrayList<Gizmo> allKeyGizmos = new ArrayList<>();
+		for(Gizmo gizmo:gizmos){
+			if(gizmo.getKey()==key){
+				allKeyGizmos.add(gizmo);
+			}
+		}
+		return allKeyGizmos;
+	}
+
+	public void addConnection(Gizmo gizmo){
+		selectedGizmo.setConnection(gizmo.getID());
+		setChanged();
+		notifyObservers();
+	}
+
+	public void removeConnection(Gizmo gizmo){
+		if(gizmo!=null) {
+			gizmo.setConnection(null);
+		}
+		setChanged();
+		notifyObservers();
 	}
 
 	public void moveFlippers(double time) {

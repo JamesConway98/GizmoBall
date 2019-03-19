@@ -1,6 +1,5 @@
 package view;
 
-import Controller.AbsorberActivateListener;
 import Controller.AddKeyListener;
 import model.*;
 import model.Gizmos.*;

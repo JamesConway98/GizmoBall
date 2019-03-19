@@ -34,7 +34,7 @@ public class ChangeConnectionPanel extends JPanel implements Observer {
 
         backButton = new JButton("Back");
         buttons.add(backButton);
-        removeButton = new JButton("Remove");
+        removeButton = new JButton("Remove Connection");
         buttons.add(removeButton);
 
         for(JButton button: buttons){
@@ -115,7 +115,9 @@ public class ChangeConnectionPanel extends JPanel implements Observer {
         if(model.getSelectedGizmo()!=null) {
             Gizmo gizmo = model.getSelectedGizmo();
             instructions.setText("You have selected Gizmo " + gizmo.getID());
-            currentGizmoConnection.setText("Gizmo " + gizmo.getID() + " connection = \"" + gizmo.getConnection() + "\". Click on a flipper to change this.");
+            currentGizmoConnection.setText("<html>Gizmo " + gizmo.getID() + " connection = \"" + gizmo.getConnection() + "\"." +
+                    "<br> Click on a flipper to change this," +
+                    "<br>Or click another gizmo to select it.</html>");
         }else{
             instructions.setText("Click on a Gizmo to select it.");
             currentGizmoConnection.setText("");
