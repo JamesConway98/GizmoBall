@@ -15,17 +15,20 @@ public class Absorber {
 
     // Walls are the enclosing Rectangle - defined by top left corner and bottom
     // right
-    public Absorber(String id, int gridX1, int gridY1, int gridX2, int gridY2) {
-        colour = Color.MAGENTA;
+    public Absorber(String id, int grdX1, int grdY1, int grdX2, int grdY2) {
         this.ID = id;
-        this.gridX1 = gridX1;
-        this.gridY1 = gridY1;
-        this.gridX2 = gridX2;
-        this.gridY2 = gridY2;
-        this.xpos1 = gridX1*Model.L+50;
-        this.ypos1 = gridY1*Model.L+50;
-        this.xpos2 = gridX2*Model.L+50;
-        this.ypos2 = gridY2*Model.L+50;
+        colour = Color.MAGENTA;
+        gridX1 = grdX1;
+        gridY1 = grdY1;
+        gridX2 = grdX2;
+        gridY2 = grdY2;
+
+        keepInBounds();
+
+        xpos1 = gridX1*Model.L+50;
+        ypos1 = gridY1*Model.L+50;
+        xpos2 = gridX2*Model.L+50;
+        ypos2 = gridY2*Model.L+50;
 
         initX = gridX1;
         initY = gridY1;
@@ -123,6 +126,8 @@ public class Absorber {
 
     public void updateXY(){
 
+        keepInBounds();
+
         xpos1 = gridX1*Model.L+50;
         ypos1 = gridY1*Model.L+50;
         xpos2 = gridX2*Model.L+50;
@@ -142,5 +147,29 @@ public class Absorber {
 
     public int getHeight() {
         return height;
+    }
+
+    private void keepInBounds(){
+        //kepp absorber in bounds
+        if(gridX2 >19){
+            gridX2 = 19;
+        }if(gridY2 > 19){
+            gridY2 = 19;
+        }if(gridX1>19){
+            gridX1 = 19;
+        }if(gridY1>19){
+            gridY1 = 19;
+        }
+
+        if(gridX2 <0){
+            gridX2 = 0;
+        }if(gridY2 < 0){
+            gridY2 = 0;
+        }if(gridX1<0){
+            gridX1 = 0;
+        }if(gridY1<0){
+            gridY1 = 0;
+        }
+
     }
 }
