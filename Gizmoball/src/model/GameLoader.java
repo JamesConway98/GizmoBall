@@ -2,8 +2,6 @@ package model;
 
 import model.Gizmos.*;
 
-import javax.swing.*;
-import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -93,6 +91,10 @@ public class GameLoader {
 						x2 = Integer.parseInt(read.next());
 						y2 = Integer.parseInt(read.next());
 						Absorber abs = new Absorber(id, x, y, x2, y2);
+                        char kCon = checkKeyConnect(id, file);
+                        if (kCon != Character.MIN_VALUE) {
+                            abs.setKey(kCon);
+                        }
 						model.addAbsorber(abs);
 					} else if (type.equals("LeftFlipper")) {
 						LeftFlipperGizmo lf = new LeftFlipperGizmo(id, x, y);
@@ -129,17 +131,7 @@ public class GameLoader {
 						}
 						model.addGizmo(rf);
 					}
-				} /*	else if (type.equals("Connect")) {
-					id = read.next();
-					id2 = read.next();
-					int index = model.findGizmoIndex(id);
-					for(Gizmo gizmo: model.getGizmos()) {
-						if (gizmo.getID().equals(id)){
-							gizmo.setConnection(id2);
-						}
-					}*/
-				//}
-
+                }
 			}
 
 			read.close();
@@ -172,7 +164,7 @@ public class GameLoader {
 	}
 
 	public char checkKeyConnect(String name, File file){
-		String keyID;
+        int keyID;
 		char keyCon = Character.MIN_VALUE;
 		try {
 			Scanner read = new Scanner(file);
@@ -181,13 +173,11 @@ public class GameLoader {
 			while (read.hasNextLine()) {
 				type = read.next();
 				if (type.equals("key")) {
-					keyID = read.next();
+                    keyID = read.nextInt();
 					dir = read.next();
 					id = read.next();
 					if (id.equals(name)) {
-						KeyStroke ks = null;
-						ks.getKeyStroke(keyID);
-						keyCon = ks.getKeyChar();
+                        keyCon = (char) keyID;
 					}
 				}
 			}
