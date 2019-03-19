@@ -530,7 +530,7 @@ public class Model extends Observable {
 	}
 
 	public void fire() {
-		if(ball.stopped()) {
+        if (ball != null && ball.stopped()) {
 			ball.setExactY(getBall().getExactY() - (getBall().getRadius() * 2));
 			setBallSpeed(0, INITIAL_VELOCTIY);
 			ball.start();
