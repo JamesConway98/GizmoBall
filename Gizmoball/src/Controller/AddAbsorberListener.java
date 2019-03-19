@@ -31,15 +31,11 @@ public class AddAbsorberListener implements MouseListener, Observer {
         dropped^= true;
 
         if(!dropped) {
-           // if (x >= 0 && x <= 18 && y >= 0 && y <= 18) {
-                initialGridX = ((e.getX() - 50) / BuildBoard.L);
-                initialGridY = (e.getY() - 50) / BuildBoard.L;
-            /*} else {
-                initialGridX = -1;
-                initialGridY = -1;
-            }*/
+            initialGridX = ((e.getX() - 50) / BuildBoard.L);
+            initialGridY = (e.getY() - 50) / BuildBoard.L;
 
-            Absorber absorber = new Absorber(initialGridX, initialGridY, initialGridX, initialGridY);
+            //TODO unique ids
+            Absorber absorber = new Absorber("A0", initialGridX, initialGridY, initialGridX, initialGridY);
             model.addPreviewAbsorber(absorber);
         }
         model.finishPreviewAbsorber();

@@ -10,11 +10,14 @@ public class Absorber {
     private int xpos1, ypos1, ypos2, xpos2, gridX1, gridY1, gridX2, gridY2, width, height;
     private int initX, initY;
     private Color colour;
+    private char key;
+    private String ID;
 
     // Walls are the enclosing Rectangle - defined by top left corner and bottom
     // right
-    public Absorber(int gridX1, int gridY1, int gridX2, int gridY2) {
+    public Absorber(String id, int gridX1, int gridY1, int gridX2, int gridY2) {
         colour = Color.MAGENTA;
+        this.ID = id;
         this.gridX1 = gridX1;
         this.gridY1 = gridY1;
         this.gridX2 = gridX2;
@@ -29,6 +32,10 @@ public class Absorber {
 
         width = gridX2 - gridX1;
         height = gridY2 - gridY1;
+    }
+
+    public String getID() {
+        return ID;
     }
 
     public ArrayList<LineSegment> getLineSegments() {
@@ -74,6 +81,14 @@ public class Absorber {
 
     public int getGridY2() {
         return gridY2;
+    }
+
+    public char getKey() {
+        return key;
+    }
+
+    public void setKey(char key) {
+        this.key = key;
     }
 
     public void setColour(Color colour){

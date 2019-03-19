@@ -1,5 +1,6 @@
 package Controller;
 
+import model.Absorber;
 import model.Gizmos.Flipper;
 import model.Gizmos.Gizmo;
 import model.Model;
@@ -29,6 +30,9 @@ public class KeyPressedListener implements KeyListener {
             }else {
                 gizmo.toggleColour();
             }
+        }
+        for(Absorber ignored : model.getAllAbsorberByKey(e.getKeyChar())) {
+            model.fire();
         }
     }
 

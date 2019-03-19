@@ -1,5 +1,6 @@
 package Controller;
 
+import model.Absorber;
 import model.Gizmos.Gizmo;
 import model.Model;
 import view.BuildBoard;
@@ -24,6 +25,11 @@ public class EditKeyTriggerListener implements MouseListener {
         for(Gizmo gizmo:model.getGizmos()){
             if(gizmo.getGridX()== x && gizmo.getGridY()== y){
                 model.setSelectedGizmo(gizmo);
+            }
+        }
+        for(Absorber absorber : model.getAbsorbers()) {
+            if(x >= absorber.getGridX1() && x <= absorber.getGridX2() && y >= absorber.getGridY1() && y <= absorber.getGridY2()) {
+                model.setSelectedAbsorber(absorber);
             }
         }
     }

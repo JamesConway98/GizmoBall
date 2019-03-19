@@ -1,6 +1,7 @@
 package view;
 
 import Controller.BuildModeListener;
+import model.Absorber;
 import model.Gizmos.Gizmo;
 import model.Model;
 
@@ -30,7 +31,7 @@ public class ChangeKeyPanel extends JPanel implements Observer {
         dim.width = 350;
         setPreferredSize(dim);
 
-        instructions = new JLabel("Click on a Gizmo to select it.");
+        instructions = new JLabel("Click on an Object to select it.");
         currentGizmoKey = new JLabel();
 
         backButton = new JButton("Back");
@@ -117,7 +118,11 @@ public class ChangeKeyPanel extends JPanel implements Observer {
             Gizmo gizmo = model.getSelectedGizmo();
             instructions.setText("You have selected Gizmo " + gizmo.getID());
             currentGizmoKey.setText("Gizmo " + gizmo.getID() + " key = \"" + gizmo.getKey() + "\". Press a key to change this.");
-        }else{
+        }else if(model.getSelectedAbsorber() != null) {
+            Absorber absorber = model.getSelectedAbsorber();
+            instructions.setText("You have selected Absorber " + absorber.getID());
+            currentGizmoKey.setText("Absorber " + absorber.getID() + " key = \"" + absorber.getKey() + "\". Press a key to change this.");
+        } else {
             instructions.setText("Click on a Gizmo to select it.");
             currentGizmoKey.setText("");
         }

@@ -183,7 +183,7 @@ public class gizmoBallTests {
         model.addGizmo(square);
         assertTrue(square.getKey()== Character.MIN_VALUE); //char equals null
         model.setSelectedGizmo(square);
-        model.setKeyToSelectedGizmo('k');
+        model.setKeyToSelectedObject('k');
         assertEquals(square.getKey(), 'k');
     }
 
@@ -193,7 +193,7 @@ public class gizmoBallTests {
         model.addGizmo(square);
         assertTrue(square.getKey()== Character.MIN_VALUE); //char equals null
         model.setSelectedGizmo(square);
-        model.setKeyToSelectedGizmo('k');
+        model.setKeyToSelectedObject('k');
         model.removeKey(square);
         assertTrue(square.getKey()== Character.MIN_VALUE); //char equals null
     }

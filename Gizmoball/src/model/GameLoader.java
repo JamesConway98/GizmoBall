@@ -62,7 +62,7 @@ public class GameLoader {
 					} else if (type.equals("Absorber")) {
 						x2 = Integer.parseInt(read.next());
 						y2 = Integer.parseInt(read.next());
-						Absorber abs = new Absorber(x, y, x2, y2);
+						Absorber abs = new Absorber(id, x, y, x2, y2);
 						model.addAbsorber(abs);
 					} else if (type.equals("LeftFlipper")) {
 						LeftFlipperGizmo lf = new LeftFlipperGizmo(id, x, y);
