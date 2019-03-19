@@ -6,6 +6,7 @@ import model.Model;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Observable;
@@ -26,10 +27,10 @@ public class AddBuildPanel extends JPanel implements Observer {
     private JButton addBallButton;
     private JButton addAbsorberButton;
 
-    private JLabel addInitialVelocityLabel;
-    private JLabel addInitialDirectionLabel;
-    private JTextField initialVelocityField;
-    private JTextField initialDirectionField;
+    private JLabel addInitialXVelocityLabel;
+    private JLabel addInitialYVelocityLabel;
+    private JTextField initialXVelocityField;
+    private JTextField initialYVelocityField;
 
     private Model model;
 
@@ -109,7 +110,6 @@ public class AddBuildPanel extends JPanel implements Observer {
         addBallButton.setContentAreaFilled(false);
         addBallButton.setBorderPainted(false);
         addBallButton.setToolTipText("Add Ball");
-        buttons.add(addBallButton);
 
         ImageIcon absorber = new ImageIcon("Gizmoball/src/icons/absorber.png");
         addAbsorberButton = new JButton(absorber);
@@ -124,13 +124,16 @@ public class AddBuildPanel extends JPanel implements Observer {
             button.addActionListener(buildListener);
         }
 
-        addInitialVelocityLabel = new JLabel("Initial Velocity:", SwingConstants.CENTER);
-        addInitialVelocityLabel.setFont(new Font(addInitialVelocityLabel.getFont().getName(), addInitialVelocityLabel.getFont().getStyle(), 15));
-        addInitialDirectionLabel = new JLabel("Initial Direction:", SwingConstants.CENTER);
-        addInitialDirectionLabel.setFont(new Font(addInitialDirectionLabel.getFont().getName(), addInitialDirectionLabel.getFont().getStyle(), 15));
+        addInitialXVelocityLabel = new JLabel("Initial X Velocity:", SwingConstants.CENTER);
+        addInitialXVelocityLabel.setFont(new Font(addInitialXVelocityLabel.getFont().getName(), addInitialXVelocityLabel.getFont().getStyle(), 15));
+        addInitialYVelocityLabel = new JLabel("Initial Y Velocity:", SwingConstants.CENTER);
+        addInitialYVelocityLabel.setFont(new Font(addInitialYVelocityLabel.getFont().getName(), addInitialYVelocityLabel.getFont().getStyle(), 15));
 
-        initialVelocityField = new JTextField(10);
-        initialDirectionField = new JTextField(10);
+        initialXVelocityField = new JTextField(10);
+        initialYVelocityField = new JTextField(10);
+
+        ActionListener ballListener = new BallButtonListener(model, initialXVelocityField, initialYVelocityField);
+        addBallButton.addActionListener(ballListener);
 
         Border innerBorder = BorderFactory.createTitledBorder("Add");
         Border outerBorder = BorderFactory.createEmptyBorder(5, 5, 5, 5);
@@ -231,7 +234,7 @@ public class AddBuildPanel extends JPanel implements Observer {
         gc.gridx = 0;
         gc.anchor = GridBagConstraints.LINE_START;
         gc.insets = new Insets(0,0,0,0);
-        add(addInitialVelocityLabel, gc);
+        add(addInitialXVelocityLabel, gc);
 
         gc.ipady = 20;
         gc.gridwidth = 2;
@@ -239,7 +242,7 @@ public class AddBuildPanel extends JPanel implements Observer {
         gc.gridx = 1;
         gc.anchor = GridBagConstraints.LINE_START;
         gc.insets = new Insets(0,0,0,0);
-        add(initialVelocityField, gc);
+        add(initialXVelocityField, gc);
 
 
 
@@ -254,7 +257,7 @@ public class AddBuildPanel extends JPanel implements Observer {
         gc.gridx = 0;
         gc.anchor = GridBagConstraints.LINE_START;
         gc.insets = new Insets(0,0,0,0);
-        add(addInitialDirectionLabel, gc);
+        add(addInitialYVelocityLabel, gc);
 
         gc.ipady = 20;
         gc.gridwidth = 2;
@@ -262,7 +265,7 @@ public class AddBuildPanel extends JPanel implements Observer {
         gc.gridx = 1;
         gc.anchor = GridBagConstraints.LINE_START;
         gc.insets = new Insets(0,0,0,0);
-        add(initialDirectionField, gc);
+        add(initialYVelocityField, gc);
 
 
 
