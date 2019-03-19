@@ -1,5 +1,7 @@
 package model.Gizmos;
 
+import java.util.ArrayList;
+
 public interface Flipper extends Gizmo {
     public double getAngle();
     public void setAngle(double angle);
