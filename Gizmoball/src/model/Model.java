@@ -43,7 +43,7 @@ public class Model extends Observable {
 		//ball = new Ball(500-6.25, 480-6.25, 0, 0);
 		// Wall size 500 x 500 pixels
 		//TODO change walls to match new L
-		gws = new Walls(50, 50, (L*19) + 50, (L*19) + 50);
+		gws = new Walls(50, 50, (L*20) + 50, (L*20) + 50);
 		// Lines added in Main
 		lines = new ArrayList<>();
 		// Gizmos added in Main
@@ -98,38 +98,23 @@ public class Model extends Observable {
 		b.setExactX(newX);
 		return b;
 	}
-
+	public Gizmo collisionGizmo;
 	private CollisionDetails timeUntilCollision() {
 		// Find Time Until Collision and also, if there is a collision, the new speed vector.
 		// Create a physics.Circle from Ball
 		newVelo = new Vect(0, 0);
 		shortestTime = Double.MAX_VALUE;
-
-
+		collisionGizmo = null;
 		// Time to collide with 4 walls
 		ArrayList<LineSegment> lss = gws.getLineSegments();
 		for (LineSegment line : lss) {
-			checkWallCollision(line, 1.0);
-		}
-
-		//Time to collide with any absorber
-		for(Absorber absorber : abs) {
-			ArrayList<LineSegment> lines = absorber.getLineSegments();
-			for (LineSegment line : lines) {
-				if(checkWallCollision(line, 0)) {
-					if(time < 0.01) {
-						ball.setExactY(ball.getExactY() + (ball.getRadius() * 2));
-						ball.setExactX(absorber.getXpos2() + L - ball.getRadius());
-						ball.stop();
-					}
-				}
-			}
+			checkWallCollision(line, 1.0, null);
 		}
 
 		// Time to collide with any vertical lines
 		for (VerticalLine line : lines) {
 			LineSegment ls = line.getLineSeg();
-			checkWallCollision(ls, 1.0);
+			checkWallCollision(ls, 1.0, null);
 		}
 
 		// Time to collide with any gizmo
@@ -137,78 +122,118 @@ public class Model extends Observable {
 			if (gizmo instanceof SquareGizmo || gizmo instanceof TriangleGizmo || gizmo instanceof CircleGizmo) {
 				ArrayList<LineSegment> lsList = gizmo.getEdges();
 				for (int i = 0; i < lsList.size(); i++) {
-					checkWallCollision(lsList.get(i), 1.0);
+					checkWallCollision(lsList.get(i), 1.0, gizmo);
 				}
 				ArrayList<Circle> cList = gizmo.getVertices();
 				for (int i = 0; i < cList.size(); i++) {
-					checkCircleCollision(cList.get(i), 1.0);
+					checkCircleCollision(cList.get(i), 1.0, gizmo);
 				}
 			} else if (gizmo instanceof Flipper) {
 				if (((Flipper) gizmo).isGizmoMoving()){
 					ArrayList<LineSegment> rlsList = ((Flipper) gizmo).getEdges();
 					for (int i = 0; i < rlsList.size(); i++) {
-						checkRotatingWallCollision(rlsList.get(i), 0.95);
+						checkRotatingWallCollision(rlsList.get(i), 0.95, gizmo);
 					}
 					ArrayList<Circle> rcList = ((Flipper) gizmo).getVertices();
 					for (int i = 0; i < rcList.size(); i++) {
-						checkRotatingCircleCollision(rcList.get(i), 0.95);
+						checkRotatingCircleCollision(rcList.get(i), 0.95, gizmo);
 					}
 				} else{
 					ArrayList<LineSegment> lsList = gizmo.getEdges();
 					for (int i = 0; i < lsList.size(); i++) {
-						checkWallCollision(lsList.get(i), 0.95);
+						checkWallCollision(lsList.get(i), 0.95, gizmo);
 					}
 					ArrayList<Circle> cList = gizmo.getVertices();
 					for (int i = 0; i < cList.size(); i++) {
-						checkCircleCollision(cList.get(i), 0.95);
+						checkCircleCollision(cList.get(i), 0.95, gizmo);
 					}
 				}
 			}
 		}
+
+		//Time to collide with any absorber
+        for(Absorber absorber : abs) {
+            ArrayList<LineSegment> lsList = absorber.getLineSegments();
+            for(int i = 0; i < lsList.size(); i++) {
+                if(checkWallCollision(lsList.get(i), 0.0, null)) {
+                    if(shortestTime == 0.0) {
+                        hitAbsorber(absorber);
+                    }
+                }
+            }
+        }
+
+		if (collisionGizmo != null && shortestTime < 0.05 && shortestTime > 0.00){
+			String id = collisionGizmo.getID();
+			collisionGizmo.toggleColour();
+			if (collisionGizmo.getConnection() != null){
+				String id2 = gizmos.get(findGizmoIndex(collisionGizmo.getID())).getConnection();
+				gizmos.get(findGizmoIndex(id2)).setGizmoActive(true);
+			}
+		}
+
 		return new CollisionDetails(shortestTime, newVelo);
 	}
 
-	public boolean checkWallCollision(LineSegment lineSegment, double reflectionCoeff){
+	public boolean checkWallCollision(LineSegment lineSegment, double reflectionCoeff, Gizmo g){
 		// Now find shortest time to hit a vertical line or a wall line
 		time = Geometry.timeUntilWallCollision(lineSegment, ball.getCircle(), ball.getVelo());
 		if (time < shortestTime) {
 			shortestTime = time;
 			newVelo = Geometry.reflectWall(lineSegment, ball.getVelo(), reflectionCoeff);
+			if (g != null){
+				collisionGizmo = g;
+			}
 			return true;
 		}
 		return false;
 	}
-	public boolean checkCircleCollision(Circle circle , double reflectionCoeff){
+	public boolean checkCircleCollision(Circle circle , double reflectionCoeff, Gizmo g){
 		// Now find shortest time to hit a vertical line or a wall line
 		time = Geometry.timeUntilCircleCollision(circle, ball.getCircle(), ball.getVelo());
 		if (time < shortestTime) {
 			shortestTime = time;
 			newVelo = Geometry.reflectCircle(circle.getCenter(), ball.getCircle().getCenter(), ball.getVelo(), reflectionCoeff);
+			if (g != null){
+				collisionGizmo = g;
+			}
 			return true;
 		}
 		return false;
 	}
 
-	public boolean checkRotatingWallCollision(LineSegment lineSegment, double reflectionCoeff){
+	public boolean checkRotatingWallCollision(LineSegment lineSegment, double reflectionCoeff, Gizmo g){
 		// Now find shortest time to hit a vertical line or a wall line
 		time = Geometry.timeUntilRotatingWallCollision(lineSegment, lineSegment.p2(), 10.0, ball.getCircle(), ball.getVelo());
 		if (time < shortestTime) {
 			shortestTime = time;
 			newVelo = Geometry.reflectRotatingWall(lineSegment, lineSegment.p2(), 10.0, ball.getCircle(), ball.getVelo(), reflectionCoeff);
+			if (g != null){
+				collisionGizmo = g;
+			}
 			return true;
 		}
 		return false;
 	}
-	public boolean checkRotatingCircleCollision(Circle circle , double reflectionCoeff){
+	public boolean checkRotatingCircleCollision(Circle circle , double reflectionCoeff, Gizmo g){
 		// Now find shortest time to hit a vertical line or a wall line
 		//we might need to change centre here
 		time = Geometry.timeUntilRotatingCircleCollision(circle, circle.getCenter(), 10.0, ball.getCircle(), ball.getVelo());
 		if (time < shortestTime) {
 			shortestTime = time;
 			newVelo = Geometry.reflectRotatingCircle(circle, circle.getCenter(), 10.0, ball.getCircle(), ball.getVelo(), reflectionCoeff);
+			if (g != null){
+				collisionGizmo = g;
+			}
 			return true;
 		}
 		return false;
+	}
+
+	public void hitAbsorber(Absorber absorber) {
+		ball.stop();
+		ball.setExactY(ball.getExactY() + (ball.getRadius() * 2));
+		ball.setExactX(absorber.getXpos2() + L - ball.getRadius());
 	}
 
 	public Ball getBall() {
@@ -248,11 +273,29 @@ public class Model extends Observable {
 		return gizmos;
 	}
 
+	public Gizmo getGizmoByGrid(int x, int y){
+		for(Gizmo gizmo: gizmos){
+			if(gizmo.getGridX() == x && gizmo.getGridY() == y){
+				return gizmo;
+			}
+			if(gizmo instanceof Flipper) {
+				if(gizmo.getGridX() == x && gizmo.getGridY() + 1 == y) {
+					return gizmo;
+				} else if(gizmo.getGridX() == x - 1 && gizmo.getGridY() + 1 == y) {
+					return gizmo;
+				} else if(gizmo.getGridX() == x - 1 && gizmo.getGridY() == y) {
+					return gizmo;
+				}
+			}
+		}
+		return null;
+	}
+
 	//Used for mapping triggers etc
 	public int findGizmoIndex(String id){
 		int index = 0;
 		for (Gizmo gizmo : gizmos) {
-			if (gizmo.getID() == id) {
+			if (gizmo.getID().equals(id)) {
 				return index;
 			}
 			index++;
@@ -263,19 +306,19 @@ public class Model extends Observable {
 	public void addGizmo(Gizmo g) {
 
 		//TODO Make method in flipper that returns its area, all grid positions
-		clearGridSpace(g.getGridX(), g.getGridY());
-		if(g instanceof LeftFlipperGizmo){
-			for(int i =0; i<=1; i++){
-				for(int j =0;j<=1;j++){
-					clearGridSpace(g.getGridX()+i, g.getGridY()+j);
+		if(g instanceof Flipper){
+			for(int i = 0; i <= 1; i++){
+				for(int j = 0; j <= 1; j++){
+					clearGridSpace(g.getGridX() + i, g.getGridY() + j);
 				}
 			}
-		}if(g instanceof RightFlipperGizmo){
-			for(int i =0; i<=1; i++){
-				for(int j =0;j<=1;j++){
-					clearGridSpace(g.getGridX()+i, g.getGridY()+j);
-				}
-			}
+		} else {
+			clearGridSpace(g.getGridX(), g.getGridY());
+		}
+		Gizmo checkForFlippersToRemove = getGizmoByGrid(g.getGridX(), g.getGridY());
+		while(checkForFlippersToRemove instanceof Flipper) {
+			clearGridSpace(checkForFlippersToRemove.getGridX(), checkForFlippersToRemove.getGridY());
+			checkForFlippersToRemove = getGizmoByGrid(g.getGridX(), g.getGridY());
 		}
 		gizmos.add(g);
 		setChanged();
@@ -302,8 +345,9 @@ public class Model extends Observable {
 		Absorber absorberInBox= null;
 		for(Absorber absorber: abs){
 			if(x>=absorber.getGridX1() && x<=absorber.getGridX2()){
-				if(y>=absorber.getGridY1() && y<=absorber.getGridY2())
+				if(y>=absorber.getGridY1() && y<=absorber.getGridY2()) {
 					absorberInBox = absorber;
+				}
 			}
 		}
 		removeGizmo(gizmoInBox);
@@ -420,6 +464,44 @@ public class Model extends Observable {
 		if(gizmo!=null) {
 			//this sets it to null basically
 			gizmo.setKey(Character.MIN_VALUE);
+		}
+		setChanged();
+		notifyObservers();
+	}
+
+	//this is whenn key is pressed in run mode
+	public void keyPressed(char key){
+		for(Gizmo gizmo:gizmos){
+			if(gizmo.getKey()==key){
+				if(gizmo instanceof Flipper){
+					gizmo.setGizmoActive(true);
+				}else {
+					gizmo.toggleColour();
+				}
+			}
+		}
+	}
+
+	public ArrayList<Gizmo> getAllGizmoByKey(char key){
+
+		ArrayList<Gizmo> allKeyGizmos = new ArrayList<>();
+		for(Gizmo gizmo:gizmos){
+			if(gizmo.getKey()==key){
+				allKeyGizmos.add(gizmo);
+			}
+		}
+		return allKeyGizmos;
+	}
+
+	public void addConnection(Gizmo gizmo){
+		selectedGizmo.setConnection(gizmo.getID());
+		setChanged();
+		notifyObservers();
+	}
+
+	public void removeConnection(Gizmo gizmo){
+		if(gizmo!=null) {
+			gizmo.setConnection(null);
 		}
 		setChanged();
 		notifyObservers();

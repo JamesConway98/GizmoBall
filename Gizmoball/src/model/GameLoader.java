@@ -15,7 +15,7 @@ public class GameLoader {
 		//Scanner read = new Scanner(is);
 		try {
             Scanner read = new Scanner(file);
-			String type, id;
+			String type, id, id2;
 			int x, y, x2 = 0, y2 = 0, rotation = 0;
 			Float bx, by;
 			double xVelo = 0, yVelo = 0, angle;
@@ -36,7 +36,7 @@ public class GameLoader {
 					by = Float.parseFloat(read.next());
 					xVelo = Double.parseDouble(read.next());
 					yVelo = Double.parseDouble(read.next());
-					Ball ball = new Ball(bx, by, xVelo, yVelo);
+					Ball ball = new Ball((bx * model.L) + 50, (by * model.L) + 50, xVelo, yVelo);
 					model.addBall(ball);
 				} else if (type.equals("Square") || type.equals("Triangle") || type.equals("Absorber") || type.equals("LeftFlipper") || type.equals("RightFlipper") || type.equals("Circle")) {
 					//We have a Gizmo
@@ -83,10 +83,22 @@ public class GameLoader {
 						}
 						model.addGizmo(rf);
 					}
-				} else {
+				} 	else if (type.equals("Connect")) {
+					id = read.next();
+					id2 = read.next();
+					int index = model.findGizmoIndex(id);
+					for(Gizmo gizmo: model.getGizmos()) {
+						if (gizmo.getID().equals(id)){
+							gizmo.setConnection(id2);
+						}
+					}
+				}
+
+				else {
 
 				}
 			}
+
 			read.close();
 		}catch(IOException e){
 			e.printStackTrace();

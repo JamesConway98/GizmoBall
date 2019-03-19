@@ -1,17 +1,20 @@
 package Controller;
 
+import model.Gizmos.Flipper;
+import model.Gizmos.Gizmo;
 import model.Gizmos.LeftFlipperGizmo;
+import model.Gizmos.RightFlipperGizmo;
 import model.Model;
 import view.BuildBoard;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class AddLeftFlipperListener implements MouseListener {
+public class EditConnectionListener implements MouseListener {
 
     private Model model;
 
-    public AddLeftFlipperListener(Model m) {
+    public EditConnectionListener(Model m) {
         model = m;
     }
 
@@ -20,9 +23,19 @@ public class AddLeftFlipperListener implements MouseListener {
         int x = 0, y = 0;
         x = (e.getX() - 50)/ BuildBoard.L;
         y = (e.getY() - 50)/ BuildBoard.L;
-        if(x >= 0 && x <= 18 && y >= 0 && y <= 18) {
-            //TODO unique ids
-            model.addGizmo(new LeftFlipperGizmo("LF1", x, y));
+
+        Gizmo gizmo = model.getGizmoByGrid(x, y);
+
+        if(model.getSelectedGizmo()!= null) {
+            if (x >= 0 && x <= 19 && y >= 0 && y <= 19) {
+                if(gizmo instanceof Flipper) {
+                    model.addConnection(gizmo);
+                }else{
+                    model.setSelectedGizmo(gizmo);
+                }
+            }
+        }else if(!(gizmo instanceof Flipper)){
+            model.setSelectedGizmo(gizmo);
         }
     }
 

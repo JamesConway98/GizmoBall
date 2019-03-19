@@ -23,6 +23,8 @@ public class SquareGizmo implements Gizmo{
     private LineSegment e1, e2, e3, e4;
     private Circle c1, c2, c3, c4;
 
+    private String connectionId = null;
+
     public SquareGizmo(String id, int gridX, int gridY){
         this.gridX = gridX;
         this.gridY = gridY;
@@ -128,6 +130,15 @@ public class SquareGizmo implements Gizmo{
         this.colour = colour;
     }
 
+    public void toggleColour() {
+        if (getColour().equals(Color.YELLOW)){
+            setColour(Color.PINK);
+        }
+        else if (getColour().equals(Color.PINK)){
+            setColour(Color.YELLOW);
+        }
+    }
+
     public int getRotation() {
         return rotation;
     }
@@ -159,4 +170,12 @@ public class SquareGizmo implements Gizmo{
         this.gizmoActive = gizmoActive;
     }
 
+
+    public void setConnection(String id) {
+        connectionId = id;
+    }
+
+    public String getConnection() {
+        return connectionId;
+    }
 }

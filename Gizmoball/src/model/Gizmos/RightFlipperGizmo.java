@@ -8,7 +8,7 @@ import physics.Vect;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class RightFlipperGizmo implements Gizmo{
+public class RightFlipperGizmo implements Flipper{
     private String ID;
     private int xpos, ypos, gridX, gridY;
     private int length = Model.L;
@@ -26,6 +26,8 @@ public class RightFlipperGizmo implements Gizmo{
     private LineSegment e1, e2;
     private Circle c1, c2, c3, c4, c5, c6;
     private double angle;
+
+    private String connectionId = null;
 
     public RightFlipperGizmo(String id, int gridX, int gridY){
         this.gridX = gridX;
@@ -57,9 +59,7 @@ public class RightFlipperGizmo implements Gizmo{
         int r = getRotation();
 
         //Get location of first large Circle
-        if (r == 0){
-            v1 = new Vect(x + 1.75*L, y + 0.25*L);
-        }
+        v1 = new Vect(x + 1.75*L, y + 0.25*L);
         if (r == 1){
             v1 = new Vect(x + 1.75*L, y + 1.75*L);
         }
@@ -112,9 +112,6 @@ public class RightFlipperGizmo implements Gizmo{
 
         getEdges().add(e1);
         getEdges().add(e2);
-
-        getEdges().add(e1);
-        getEdges().add(e2);
         getVertices().add(c1);
         getVertices().add(c2);
         getVertices().add(c3);
@@ -122,38 +119,26 @@ public class RightFlipperGizmo implements Gizmo{
         getVertices().add(c5);
     }
 
-    public int getX() {
-        return gridX*Model.L +50;
-    }
+    public int getX() { return gridX*Model.L +50; }
 
-    public int getY() {
-        return gridY*Model.L +50;
-    }
+    public int getY() { return gridY*Model.L +50; }
 
-    public int getGridX() {
-        return gridX;
-    }
+    public int getGridX() { return gridX; }
 
-    public int getGridY() {
-        return gridY;
-    }
+    public int getGridY() { return gridY; }
 
-    @Override
     public void setXpos(int xpos) {
         this.xpos = xpos;
     }
 
-    @Override
     public void setYpos(int ypos) {
         this.ypos = ypos;
     }
 
-    @Override
     public void setGridX(int gridX) {
         this.gridX = gridX;
     }
 
-    @Override
     public void setGridY(int gridY) {
         this.gridY = gridY;
     }
@@ -181,6 +166,10 @@ public class RightFlipperGizmo implements Gizmo{
 
     public void setColour(Color colour) {
         this.colour = colour;
+    }
+
+    public void toggleColour() {
+
     }
 
     public int getRotation() {
@@ -228,5 +217,13 @@ public class RightFlipperGizmo implements Gizmo{
 
     public void flipMoveToggle() {
         toggle = !toggle;
+    }
+
+    public void setConnection(String id) {
+        connectionId = id;
+    }
+
+    public String getConnection() {
+        return connectionId;
     }
 }

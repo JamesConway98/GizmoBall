@@ -1,13 +1,12 @@
 package view;
 
-import Controller.AbsorberActivateListener;
+import Controller.KeyPressedListener;
 import model.*;
 import model.Gizmos.*;
 import physics.LineSegment;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseListener;
 import java.awt.geom.RoundRectangle2D;
 import java.util.Observable;
 import java.util.Observer;
@@ -18,12 +17,17 @@ public class RunBoard extends JPanel implements Observer {
     protected int height;
     public static final int L = 40;
     protected Model model;
+    private KeyPressedListener keyPressedListener;
 
     public RunBoard(int w, int h, Model m) {
         width = w;
         height = h;
         model = m;
         m.addObserver(this);
+        keyPressedListener = new KeyPressedListener(m);
+        this.setFocusable(true);
+        this.requestFocus();
+        this.addKeyListener(keyPressedListener);
         this.setBorder(BorderFactory.createLineBorder(Color.black));
     }
 
@@ -39,7 +43,7 @@ public class RunBoard extends JPanel implements Observer {
 
         g.setColor(Color.LIGHT_GRAY);
 
-        g.fillRect(50, 50, 19*L, 19*L);
+        g.fillRect(50, 50, 20*L, 20*L);
 
         g.setColor(Color.BLACK);
 
@@ -142,14 +146,11 @@ public class RunBoard extends JPanel implements Observer {
             int width = (int) (2 * ball.getRadius());
             g2.fillOval(x, y, width, width);
         }
-
-        this.setFocusable(true);
-        this.requestFocus();
-        this.addKeyListener(new AbsorberActivateListener(model));
     }
 
     @Override
     public void update(Observable o, Object arg) {
         repaint();
+        this.requestFocus();
     }
 }

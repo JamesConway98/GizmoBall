@@ -17,10 +17,12 @@ public class MainFrame implements Observer {
     private Model model;
     private JTabbedPane tabbedPane;
     private ChangeKeyPanel changeKeyPanel;
+    private ChangeConnectionPanel changeConnectionPanel;
     private EditBuildPanel editBuildPanel;
     private SettingsBuildPanel settingsBuildPanel;
     private JFrame frame;
     private MoveMouseListener moveMouseListener;
+    private KeyPressedListener keyPressedListener;
 
     public MainFrame(Model m){
 
@@ -41,12 +43,16 @@ public class MainFrame implements Observer {
         FileMenuListener menuListener = new FileMenuListener(m);
         TabChangeListener tabListener = new TabChangeListener(m);
         moveMouseListener = new MoveMouseListener(m);
+        keyPressedListener = new KeyPressedListener(m);
+
 
         buildBoard.addMouseMotionListener(moveMouseListener);
 
         AddBuildPanel addBuildPanel = new AddBuildPanel(m);
         editBuildPanel = new EditBuildPanel(m);
         changeKeyPanel = new ChangeKeyPanel(m);
+        changeConnectionPanel = new ChangeConnectionPanel(m);
+
         AddRunPanel addRunPanel = new AddRunPanel(m);
         settingsBuildPanel = new SettingsBuildPanel(m);
 
@@ -125,6 +131,12 @@ public class MainFrame implements Observer {
         frame.repaint();
     }
 
+    public void setChangeConnectionPanel(){
+        tabbedPane.setComponentAt(1, changeConnectionPanel);
+        frame.revalidate();
+        frame.repaint();
+    }
+
     public void setDefaultEditPanel(){
         tabbedPane.setComponentAt(1, editBuildPanel);
         frame.revalidate();
@@ -135,6 +147,8 @@ public class MainFrame implements Observer {
     public void update(Observable o, Object arg) {
         if(model.getActiveMouseListener() instanceof EditKeyTriggerListener){
             setEditKeyPanel();
+        }else if(model.getActiveMouseListener() instanceof EditConnectionListener) {
+            setChangeConnectionPanel();
         }else{
             setDefaultEditPanel();
         }

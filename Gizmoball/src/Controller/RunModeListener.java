@@ -13,7 +13,7 @@ public class RunModeListener implements ActionListener {
 
     public RunModeListener(Model m) {
         model = m;
-        timer = new Timer(30, this);
+        timer = new Timer(20, this);
     }
 
     @Override
