@@ -22,10 +22,8 @@ public class Model extends Observable {
 	private ArrayList<Absorber> abs;
 
 	private float gravity, mu, mu2;
-//	private static final double MU = 0.025;
-//	private static final double MU2 = 0.025;
-//	private static final int GRAVITY = 25;
 	public static final int L = 40;
+	private static final int INITIAL_VELOCTIY = L * -50;
 
 	private double shortestTime;
 	private double time = 0.0;
@@ -34,6 +32,7 @@ public class Model extends Observable {
 	private GameSaver saver;
 	final JFileChooser saveFile = new JFileChooser();
 	private Gizmo selectedGizmo;
+	private Absorber selectedAbsorber;
 
 	private MouseListener activeMouseListener;
 
@@ -448,6 +447,14 @@ public class Model extends Observable {
 
 	public void setSelectedGizmo(Gizmo selectedGizmo) {
 		this.selectedGizmo = selectedGizmo;
+		selectedAbsorber = null;
+		setChanged();
+		notifyObservers();
+	}
+
+	public void setSelectedAbsorber(Absorber sa) {
+		selectedAbsorber = sa;
+		selectedGizmo = null;
 		setChanged();
 		notifyObservers();
 	}
@@ -456,9 +463,15 @@ public class Model extends Observable {
 		return selectedGizmo;
 	}
 
-	public void setKeyToSelectedGizmo(char key){
+	public Absorber getSelectedAbsorber() {
+		return selectedAbsorber;
+	}
+
+	public void setKeyToSelectedObject(char key){
 		if(selectedGizmo != null) {
 			selectedGizmo.setKey(key);
+		} else if(selectedAbsorber != null) {
+			selectedAbsorber.setKey(key);
 		}
 		setChanged();
 		notifyObservers();
@@ -468,6 +481,15 @@ public class Model extends Observable {
 		if(gizmo!=null) {
 			//this sets it to null basically
 			gizmo.setKey(Character.MIN_VALUE);
+		}
+		setChanged();
+		notifyObservers();
+	}
+
+	public void removeKey(Absorber absorber){
+		if(absorber != null) {
+			//this sets it to null basically
+			absorber.setKey(Character.MIN_VALUE);
 		}
 		setChanged();
 		notifyObservers();
@@ -495,6 +517,27 @@ public class Model extends Observable {
 			}
 		}
 		return allKeyGizmos;
+	}
+
+	public ArrayList<Absorber> getAllAbsorberByKey(char key){
+		ArrayList<Absorber> allKeyAbsorber = new ArrayList<>();
+		for(Absorber absorber : abs){
+			if(absorber.getKey()==key){
+				allKeyAbsorber.add(absorber);
+			}
+		}
+		return allKeyAbsorber;
+	}
+
+	public void fire() {
+		if(ball.stopped()) {
+			ball.setExactY(getBall().getExactY() - (getBall().getRadius() * 2));
+			setBallSpeed(0, INITIAL_VELOCTIY);
+			ball.start();
+			setChanged();
+			notifyObservers();
+		}
+
 	}
 
 	public void addConnection(Gizmo gizmo){
@@ -597,7 +640,7 @@ public class Model extends Observable {
 		GameLoader gl = new GameLoader();
 		clearBoard();
 		JFileChooser fileChooser = new JFileChooser(System.getProperty("user.home") + "\\Documents");
-		if (fileChooser.showOpenDialog(saveFile) == JFileChooser.APPROVE_OPTION) {
+		if (fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
 			File file = fileChooser.getSelectedFile();
 			gl.loadGame(this, file);
 		}

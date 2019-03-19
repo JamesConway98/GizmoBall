@@ -1,6 +1,7 @@
 package view;
 
 import Controller.BuildModeListener;
+import model.Absorber;
 import model.Gizmos.Gizmo;
 import model.Model;
 
@@ -30,11 +31,18 @@ public class ChangeKeyPanel extends JPanel implements Observer {
         dim.width = 350;
         setPreferredSize(dim);
 
-        instructions = new JLabel("Click on a Gizmo to select it.");
+        instructions = new JLabel("Click on an Object to select it.");
         currentGizmoKey = new JLabel();
 
-        backButton = new JButton("Back");
+        ImageIcon back = new ImageIcon("Gizmoball/src/icons/back.png");
+        backButton = new JButton(back);
+        backButton.setActionCommand("Back");
+        backButton.setOpaque(false);
+        backButton.setContentAreaFilled(false);
+        backButton.setBorderPainted(false);
+        backButton.setToolTipText("Back");
         buttons.add(backButton);
+
         removeButton = new JButton("Remove Key");
         buttons.add(removeButton);
 
@@ -86,27 +94,27 @@ public class ChangeKeyPanel extends JPanel implements Observer {
         /////////////////// Next Row ////////////////////////////
         gc.gridy++;
         gc.ipady = 40;
-        gc.gridwidth = 1;
+        gc.gridwidth = 2;
 
         gc.weightx = 0.5;
         gc.weighty = 0.5;
 
         gc.gridx = 0;
         gc.anchor = GridBagConstraints.LINE_START;
-        gc.insets = new Insets(0,10,0,10);
+        gc.insets = new Insets(0,40,0,40);
         add(removeButton, gc);
 
         /////////////////// Next Row ////////////////////////////
         gc.gridy++;
         gc.ipady = 40;
-        gc.gridwidth = 1;
+        gc.gridwidth = 2;
 
         gc.weightx = 0.5;
         gc.weighty = 0.5;
 
         gc.gridx = 0;
         gc.anchor = GridBagConstraints.LINE_START;
-        gc.insets = new Insets(0,10,0,10);
+        gc.insets = new Insets(0,40,0,40);
         add(backButton, gc);
 
     }
@@ -117,7 +125,11 @@ public class ChangeKeyPanel extends JPanel implements Observer {
             Gizmo gizmo = model.getSelectedGizmo();
             instructions.setText("You have selected Gizmo " + gizmo.getID());
             currentGizmoKey.setText("Gizmo " + gizmo.getID() + " key = \"" + gizmo.getKey() + "\". Press a key to change this.");
-        }else{
+        }else if(model.getSelectedAbsorber() != null) {
+            Absorber absorber = model.getSelectedAbsorber();
+            instructions.setText("You have selected Absorber " + absorber.getID());
+            currentGizmoKey.setText("Absorber " + absorber.getID() + " key = \"" + absorber.getKey() + "\". Press a key to change this.");
+        } else {
             instructions.setText("Click on a Gizmo to select it.");
             currentGizmoKey.setText("");
         }

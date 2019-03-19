@@ -26,10 +26,10 @@ public class AddBuildPanel extends JPanel implements Observer {
     private JButton addBallButton;
     private JButton addAbsorberButton;
 
-    private JLabel addInitialXVelocityLabel;
-    private JLabel addInitialYVelocityLabel;
-    private JTextField initialXVelocityField;
-    private JTextField initialYVelocityField;
+    private JLabel addInitialVelocityLabel;
+    private JLabel addInitialDirectionLabel;
+    private JTextField initialVelocityField;
+    private JTextField initialDirectionField;
 
     private Model model;
 
@@ -62,6 +62,7 @@ public class AddBuildPanel extends JPanel implements Observer {
         addSquareButton.setOpaque(false);
         addSquareButton.setContentAreaFilled(false);
         addSquareButton.setBorderPainted(false);
+        addSquareButton.setToolTipText("Add a Square");
         buttons.add(addSquareButton);
 
         ImageIcon circle = new ImageIcon("Gizmoball/src/icons/circle.png");
@@ -71,6 +72,7 @@ public class AddBuildPanel extends JPanel implements Observer {
         addCircleButton.setOpaque(false);
         addCircleButton.setContentAreaFilled(false);
         addCircleButton.setBorderPainted(false);
+        addCircleButton.setToolTipText("Add a Circle");
         buttons.add(addCircleButton);
 
         ImageIcon triangle = new ImageIcon("Gizmoball/src/icons/triangle.png");
@@ -79,6 +81,7 @@ public class AddBuildPanel extends JPanel implements Observer {
         addTriangleButton.setOpaque(false);
         addTriangleButton.setContentAreaFilled(false);
         addTriangleButton.setBorderPainted(false);
+        addTriangleButton.setToolTipText("Add a Triangle");
         buttons.add(addTriangleButton);
 
         ImageIcon leftFlipper = new ImageIcon("Gizmoball/src/icons/leftFlipper.png");
@@ -87,6 +90,7 @@ public class AddBuildPanel extends JPanel implements Observer {
         addLeftFlipperButton.setOpaque(false);
         addLeftFlipperButton.setContentAreaFilled(false);
         addLeftFlipperButton.setBorderPainted(false);
+        addLeftFlipperButton.setToolTipText("Add Left Flipper");
         buttons.add(addLeftFlipperButton);
 
         ImageIcon rightFlipper = new ImageIcon("Gizmoball/src/icons/rightFlipper.png");
@@ -95,6 +99,7 @@ public class AddBuildPanel extends JPanel implements Observer {
         addRightFlipperButton.setOpaque(false);
         addRightFlipperButton.setContentAreaFilled(false);
         addRightFlipperButton.setBorderPainted(false);
+        addRightFlipperButton.setToolTipText("Add Right Flipper");
         buttons.add(addRightFlipperButton);
 
         ImageIcon ball = new ImageIcon("Gizmoball/src/icons/ball.png");
@@ -103,6 +108,7 @@ public class AddBuildPanel extends JPanel implements Observer {
         addBallButton.setOpaque(false);
         addBallButton.setContentAreaFilled(false);
         addBallButton.setBorderPainted(false);
+        addBallButton.setToolTipText("Add Ball");
         buttons.add(addBallButton);
 
         ImageIcon absorber = new ImageIcon("Gizmoball/src/icons/absorber.png");
@@ -111,21 +117,20 @@ public class AddBuildPanel extends JPanel implements Observer {
         addAbsorberButton.setOpaque(false);
         addAbsorberButton.setContentAreaFilled(false);
         addAbsorberButton.setBorderPainted(false);
+        addAbsorberButton.setToolTipText("Add Absorber");
         buttons.add(addAbsorberButton);
 
         for(JButton button: buttons){
             button.addActionListener(buildListener);
         }
 
-        addInitialXVelocityLabel = new JLabel("Initial X Velocity:", SwingConstants.CENTER);
-        addInitialXVelocityLabel.setFont(new Font(addInitialXVelocityLabel.getFont().getName(), addInitialXVelocityLabel.getFont().getStyle(), 15));
-        addInitialYVelocityLabel = new JLabel("Initial Y Velocity:", SwingConstants.CENTER);
-        addInitialYVelocityLabel.setFont(new Font(addInitialYVelocityLabel.getFont().getName(), addInitialYVelocityLabel.getFont().getStyle(), 15));
+        addInitialVelocityLabel = new JLabel("Initial Velocity:", SwingConstants.CENTER);
+        addInitialVelocityLabel.setFont(new Font(addInitialVelocityLabel.getFont().getName(), addInitialVelocityLabel.getFont().getStyle(), 15));
+        addInitialDirectionLabel = new JLabel("Initial Direction:", SwingConstants.CENTER);
+        addInitialDirectionLabel.setFont(new Font(addInitialDirectionLabel.getFont().getName(), addInitialDirectionLabel.getFont().getStyle(), 15));
 
-        initialXVelocityField = new JTextField(10);
-        initialYVelocityField = new JTextField(10);
-
-        addBallButton.addActionListener(new BallButtonListener(model, initialXVelocityField, initialYVelocityField));
+        initialVelocityField = new JTextField(10);
+        initialDirectionField = new JTextField(10);
 
         Border innerBorder = BorderFactory.createTitledBorder("Add");
         Border outerBorder = BorderFactory.createEmptyBorder(5, 5, 5, 5);
@@ -226,7 +231,7 @@ public class AddBuildPanel extends JPanel implements Observer {
         gc.gridx = 0;
         gc.anchor = GridBagConstraints.LINE_START;
         gc.insets = new Insets(0,0,0,0);
-        add(addInitialXVelocityLabel, gc);
+        add(addInitialVelocityLabel, gc);
 
         gc.ipady = 20;
         gc.gridwidth = 2;
@@ -234,7 +239,7 @@ public class AddBuildPanel extends JPanel implements Observer {
         gc.gridx = 1;
         gc.anchor = GridBagConstraints.LINE_START;
         gc.insets = new Insets(0,0,0,0);
-        add(initialXVelocityField, gc);
+        add(initialVelocityField, gc);
 
 
 
@@ -249,7 +254,7 @@ public class AddBuildPanel extends JPanel implements Observer {
         gc.gridx = 0;
         gc.anchor = GridBagConstraints.LINE_START;
         gc.insets = new Insets(0,0,0,0);
-        add(addInitialYVelocityLabel, gc);
+        add(addInitialDirectionLabel, gc);
 
         gc.ipady = 20;
         gc.gridwidth = 2;
@@ -257,7 +262,7 @@ public class AddBuildPanel extends JPanel implements Observer {
         gc.gridx = 1;
         gc.anchor = GridBagConstraints.LINE_START;
         gc.insets = new Insets(0,0,0,0);
-        add(initialYVelocityField, gc);
+        add(initialDirectionField, gc);
 
 
 

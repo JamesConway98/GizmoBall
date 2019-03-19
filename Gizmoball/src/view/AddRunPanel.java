@@ -30,13 +30,20 @@ public class AddRunPanel extends JPanel {
 
         this.setFocusable(false);
 
+        ImageIcon play = new ImageIcon("Gizmoball/src/icons/play.png");
         start = new JButton("Start");
+        start.setRolloverEnabled(true);
+        start.setRolloverIcon(play);
         buttons.add(start);
         start.setFocusable(false);
-        tick = new JButton("Tick");
+
+        ImageIcon tickk = new ImageIcon("Gizmoball/src/icons/tick.png");
+        tick = new JButton("Tick", tickk);
         buttons.add(tick);
         tick.setFocusable(false);
-        stop = new JButton("Stop");
+
+        ImageIcon stopp = new ImageIcon("Gizmoball/src/icons/stop.png");
+        stop = new JButton("Stop", stopp);
         buttons.add(stop);
         stop.setFocusable(false);
 
@@ -44,7 +51,7 @@ public class AddRunPanel extends JPanel {
             button.addActionListener(runListener);
         }
 
-        Border innerBorder = BorderFactory.createTitledBorder("Add Settings");
+        Border innerBorder = BorderFactory.createTitledBorder("Run Settings");
         Border outerBorder = BorderFactory.createEmptyBorder(5, 5, 5, 5);
         setBorder(BorderFactory.createCompoundBorder(outerBorder, innerBorder));
 
@@ -59,35 +66,37 @@ public class AddRunPanel extends JPanel {
 
         //---------------- ROW 1 ------------------------------------------------>
         gc.gridy = 0;
+        gc.fill = GridBagConstraints.HORIZONTAL;
+        gc.ipady = 40;
 
-        gc.weightx = 1;
-        gc.weighty = 0.5;
+        gc.weightx = 0.5;
+        gc.weighty = 0.1;
 
         gc.gridx = 0;
         gc.anchor = GridBagConstraints.LINE_START;
-        gc.insets = new Insets(0,10,0,0);
+        gc.insets = new Insets(0,30,0,30);
         add(start, gc);
 
         /////////////////// Next Row ////////////////////////////
         gc.gridy++;
 
-        gc.weightx = 1;
-        gc.weighty = 0.5;
+        gc.weightx = 0.5;
+        gc.weighty = 0.1;
 
         gc.gridx = 0;
         gc.anchor = GridBagConstraints.LINE_START;
-        gc.insets = new Insets(0,10,0,0);
+        gc.insets = new Insets(0,30,0,30);
         add(tick, gc);
 
         /////////////////// Next Row ////////////////////////////
         gc.gridy++;
 
-        gc.weightx = 1;
-        gc.weighty = 0.5;
+        gc.weightx = 0.5;
+        gc.weighty = 0.1;
 
         gc.gridx = 0;
         gc.anchor = GridBagConstraints.LINE_START;
-        gc.insets = new Insets(0,10,0,0);
+        gc.insets = new Insets(0,30,0,30);
         add(stop, gc);
     }
 }
