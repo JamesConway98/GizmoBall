@@ -417,12 +417,12 @@ public class Model extends Observable {
 
 		if (x < 0) {
 			x = 0;
-		}if (x > 18) {
-			x = 18;
+		}if (x > 19) {
+			x = 19;
 		}if (y < 0) {
 			y = 0;
-		}if (y > 18) {
-			y = 18;
+		}if (y > 19) {
+			y = 19;
 		}
 
 		if(gizmo!= null) {

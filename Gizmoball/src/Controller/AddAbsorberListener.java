@@ -43,29 +43,7 @@ public class AddAbsorberListener implements MouseListener, Observer {
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        /*if(initialGridX != -1 && initialGridY != -1) {
-            finalGridX = (e.getX() - 50) / BuildBoard.L;
-            finalGridY = (e.getY() - 50) / BuildBoard.L;
-            if (finalGridX < 0) {
-                finalGridX = 0;
-            }
-            if (finalGridX > 18) {
-                finalGridX = 18;
-            }
-            if (finalGridY < 0) {
-                finalGridY = 0;
-            }
 
-            if (finalGridY > 18) {
-                finalGridY = 18;
-            }
-            leftX = Math.min(initialGridX, finalGridX);
-            rightX = Math.max(initialGridX, finalGridX);
-            topY = Math.min(initialGridY, finalGridY);
-            bottomY = Math.max(initialGridY, finalGridY);
-
-            model.addAbsorber(new Absorber(leftX, topY, rightX, bottomY));
-        }*/
     }
 
     @Override
@@ -91,13 +69,14 @@ public class AddAbsorberListener implements MouseListener, Observer {
         if(!dropped) {
             if (x < 0) {
                 x = 0;
-            }if (x > 18) {
-                x = 18;
+            }if (x > 19) {
+                x = 19;
             }if (y < 0) {
                 y = 0;
-            }if (y > 18) {
-                y = 18;
+            }if (y > 19) {
+                y = 19;
             }
+
             model.editPreviewAbsorber(x, y);
         }
     }
