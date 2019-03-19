@@ -95,7 +95,7 @@ public class MainFrame implements Observer {
             fileMenu.remove(5);
             fileMenu.add(changeToRunMode,5);
             addRunPanel.getRunListener().stopTimer();
-            loader.loadGame(m, file);
+            model.loadDefault();
             buildBoard.update(null, null);
         });
         JMenuItem quit = new JMenuItem("Quit");
