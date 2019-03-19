@@ -38,7 +38,7 @@ public class GameLoader {
 					by = Float.parseFloat(read.next());
 					xVelo = Double.parseDouble(read.next());
 					yVelo = Double.parseDouble(read.next());
-					Ball ball = new Ball((bx * model.L) + 50, (by * model.L) + 50, xVelo, yVelo);
+					Ball ball = new Ball(bx, by, xVelo, yVelo);
 					model.addBall(ball);
 				} else if (type.equals("Square") || type.equals("Triangle") || type.equals("Absorber") || type.equals("LeftFlipper") || type.equals("RightFlipper") || type.equals("Circle")) {
 					//We have a Gizmo

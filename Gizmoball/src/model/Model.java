@@ -602,6 +602,14 @@ public class Model extends Observable {
 		notifyObservers();
 	}
 
+	public void loadDefault(){
+		GameLoader gl = new GameLoader();
+		clearBoard();
+		gl.loadGame(this, new File("BoardSave.txt"));
+		setChanged();
+		notifyObservers();
+	}
+
 		public void clearBoard(){
 		gizmos.clear();
 		abs.clear();

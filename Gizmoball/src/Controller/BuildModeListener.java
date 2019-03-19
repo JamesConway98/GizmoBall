@@ -36,10 +36,6 @@ public class BuildModeListener implements ActionListener {
                 AddRightFlipperListener rightFlipperListener = new AddRightFlipperListener(model);
                 model.setMouseListener(rightFlipperListener);
                 break;
-            case "Ball":
-                AddBallListener ballListener = new AddBallListener(model);
-                model.setMouseListener(ballListener);
-                break;
             case "Absorber":
                 AddAbsorberListener absorberListener = new AddAbsorberListener(model);
                 model.setMouseListener(absorberListener);

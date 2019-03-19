@@ -76,6 +76,7 @@ public class MainFrame implements Observer {
         JMenuItem changeToRunMode = new JMenuItem("Run Mode");
         JMenuItem changeToBuildMode = new JMenuItem("Build Mode");
         changeToRunMode.addActionListener(actionEvent -> {
+            model.saveGame();
             frame.getContentPane().removeAll();
             frame.add(addRunPanel, BorderLayout.WEST);
             frame.add(runBoard, BorderLayout.CENTER);
