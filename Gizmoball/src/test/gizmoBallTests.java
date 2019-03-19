@@ -3,6 +3,9 @@ package test;
 import model.*;
 import model.Gizmos.*;
 
+import java.io.File;
+import java.util.Collections;
+
 import static junit.framework.TestCase.assertNotNull;
 import static model.Model.L;
 import static org.junit.Assert.*;
@@ -218,7 +221,18 @@ public class gizmoBallTests {
 
     @org.junit.Test
     public void saveTest() {
+        GameLoader gl = new GameLoader();
+        File file = new File("LoadTest.txt");
+        gl.loadGame(model, file);
+        assertTrue(model.getGizmos().size() == 13);
+        model.addGizmo(new TriangleGizmo("T77", 3, 8));
+        model.saveGame();
+        assertTrue(model.getGizmos().size() == 14);
 
+        GameLoader gl2 = new GameLoader();
+        File file2 = new File("BoardSave.txt");
+        gl.loadGame(model, file2);
+        assertTrue(model.getGizmos().size() == 14);
     }
 
     @org.junit.Test
@@ -228,12 +242,18 @@ public class gizmoBallTests {
 
     @org.junit.Test
     public void loadTest() {
-
+        GameLoader gl = new GameLoader();
+        File file = new File("LoadTest.txt");
+        gl.loadGame(model, file);
+        assertTrue(model.getGizmos().size() == 13);
     }
 
     @org.junit.Test
     public void invalidLoadTest() {
-
+        GameLoader gl = new GameLoader();
+        File file = new File("InvalidLoadTest.txt");
+        gl.loadGame(model, file);
+        assertTrue(model.getGizmos().size() == 1);
     }
 
     @org.junit.Test
