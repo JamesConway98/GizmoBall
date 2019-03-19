@@ -30,20 +30,32 @@ public class AddRunPanel extends JPanel {
 
         this.setFocusable(false);
 
-        ImageIcon play = new ImageIcon("Gizmoball/src/icons/play.png");
-        start = new JButton("Start");
+        ImageIcon playIcon = new ImageIcon("Gizmoball/src/icons/play.png");
+        ImageIcon playText = new ImageIcon("Gizmoball/src/icons/Start.png");
+        start = new JButton(playIcon);
+        start.setActionCommand("Start");
+        start.setOpaque(false);
+        start.setContentAreaFilled(false);
+        start.setBorderPainted(false);
         start.setRolloverEnabled(true);
-        start.setRolloverIcon(play);
+        start.setRolloverIcon(playText);
         buttons.add(start);
         start.setFocusable(false);
 
-        ImageIcon tickk = new ImageIcon("Gizmoball/src/icons/tick.png");
-        tick = new JButton("Tick", tickk);
+        ImageIcon tickIcon = new ImageIcon("Gizmoball/src/icons/tick.png");
+        ImageIcon tickText = new ImageIcon("Gizmoball/src/icons/tickText.png");
+        tick = new JButton(tickIcon);
+        tick.setActionCommand("Tick");
+        tick.setOpaque(false);
+        tick.setContentAreaFilled(false);
+        tick.setBorderPainted(false);
+        tick.setRolloverEnabled(true);
+        tick.setRolloverIcon(tickText);
         buttons.add(tick);
         tick.setFocusable(false);
 
         ImageIcon stopp = new ImageIcon("Gizmoball/src/icons/stop.png");
-        stop = new JButton("Stop", stopp);
+        stop = new JButton("Stop");
         buttons.add(stop);
         stop.setFocusable(false);
 
