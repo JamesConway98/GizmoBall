@@ -357,9 +357,9 @@ public class Model extends Observable {
 				}
 			}
 		}
-		if(ball != null && ball.getGridX() == x && ball.getGridY() == y) {
-			ball = null;
-		}
+		//set ball off board
+		if(ball != null && ball.getGridX() == x && ball.getGridY() == y)
+			ball.setExactY(1000);
 
 		for(Gizmo gizmo : gizmosToRemove) {
 			removeGizmo(gizmo);
