@@ -85,33 +85,35 @@ public class ChangeConnectionPanel extends JPanel implements Observer {
         /////////////////// Next Row ////////////////////////////
         gc.gridy++;
         gc.ipady = 40;
-        gc.gridwidth = 1;
+        gc.gridwidth = 2;
 
         gc.weightx = 0.5;
         gc.weighty = 0.5;
 
         gc.gridx = 0;
         gc.anchor = GridBagConstraints.LINE_START;
-        gc.insets = new Insets(0,10,0,10);
+        gc.insets = new Insets(0,40,0,40);
         add(removeButton, gc);
 
         /////////////////// Next Row ////////////////////////////
         gc.gridy++;
         gc.ipady = 40;
-        gc.gridwidth = 1;
+        gc.gridwidth = 2;
 
         gc.weightx = 0.5;
         gc.weighty = 0.5;
 
         gc.gridx = 0;
         gc.anchor = GridBagConstraints.LINE_START;
-        gc.insets = new Insets(0,10,0,10);
+        gc.insets = new Insets(0,40,0,40);
         add(backButton, gc);
 
     }
 
     @Override
     public void update(Observable o, Object arg) {
+
+
         if(model.getSelectedGizmo()!=null) {
             Gizmo gizmo = model.getSelectedGizmo();
             instructions.setText("You have selected Gizmo " + gizmo.getID());
@@ -122,6 +124,7 @@ public class ChangeConnectionPanel extends JPanel implements Observer {
             instructions.setText("Click on a Gizmo to select it.");
             currentGizmoConnection.setText("");
         }
+        
         revalidate();
         repaint();
     }

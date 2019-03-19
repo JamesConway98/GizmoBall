@@ -18,10 +18,8 @@ public class EditBuildPanel extends JPanel implements Observer {
     private JButton leftRotateButton;
     private JButton rightRotateButton;
     private JButton deleteButton;
-    private JButton addConnectionButton;
     private JButton editConnectionButton;
     private JButton editKeyConnectionButton;
-    private JButton removeKeyConnectionButton;
 
     private Model model;
 
@@ -52,6 +50,7 @@ public class EditBuildPanel extends JPanel implements Observer {
         leftRotateButton.setOpaque(false);
         leftRotateButton.setContentAreaFilled(false);
         leftRotateButton.setBorderPainted(false);
+        leftRotateButton.setToolTipText("Rotate Left");
         buttons.add(leftRotateButton);
 
         ImageIcon rightRotate = new ImageIcon("Gizmoball/src/icons/rotateRight.png");
@@ -60,6 +59,7 @@ public class EditBuildPanel extends JPanel implements Observer {
         rightRotateButton.setOpaque(false);
         rightRotateButton.setContentAreaFilled(false);
         rightRotateButton.setBorderPainted(false);
+        rightRotateButton.setToolTipText("Rotate Right");
         buttons.add(rightRotateButton);
 
         deleteButton = new JButton("Delete");
@@ -116,7 +116,7 @@ public class EditBuildPanel extends JPanel implements Observer {
 
         /////////////////// Next Row ////////////////////////////
         gc.gridy++;
-        gc.ipady = 100;
+        gc.ipady = 50;
         gc.gridwidth = 1;
 
         gc.weightx = 0.5;
@@ -145,7 +145,7 @@ public class EditBuildPanel extends JPanel implements Observer {
 
         gc.anchor = GridBagConstraints.LINE_START;
         gc.gridwidth = 2;
-        gc.insets = new Insets(25,75,0,75);
+        gc.insets = new Insets(0,75,0,75);
         add(deleteButton, gc);
 
         /////////////////// Next Row ////////////////////////////
@@ -154,14 +154,14 @@ public class EditBuildPanel extends JPanel implements Observer {
         gc.gridwidth = 1;
 
         gc.weightx = 0.5;
-        gc.weighty = 0;
+        gc.weighty = 0.1;
 
         gc.gridx = 0;
         gc.fill = GridBagConstraints.HORIZONTAL;
 
         gc.anchor = GridBagConstraints.LINE_START;
         gc.gridwidth = 2;
-        gc.insets = new Insets(30,75,0,75);
+        gc.insets = new Insets(0,75,0,75);
         add(editConnectionButton, gc);
 
         /////////////////// Next Row ////////////////////////////
@@ -170,14 +170,14 @@ public class EditBuildPanel extends JPanel implements Observer {
         gc.gridwidth = 1;
 
         gc.weightx = 0.5;
-        gc.weighty = 0;
+        gc.weighty = 0.1;
 
         gc.gridx = 0;
         gc.fill = GridBagConstraints.HORIZONTAL;
 
         gc.anchor = GridBagConstraints.LINE_START;
         gc.gridwidth = 2;
-        gc.insets = new Insets(30,75,0,75);
+        gc.insets = new Insets(0,75,0,75);
 
         add(editKeyConnectionButton, gc);
 
