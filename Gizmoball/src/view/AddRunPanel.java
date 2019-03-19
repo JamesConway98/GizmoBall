@@ -54,8 +54,15 @@ public class AddRunPanel extends JPanel {
         buttons.add(tick);
         tick.setFocusable(false);
 
-        ImageIcon stopp = new ImageIcon("Gizmoball/src/icons/stop.png");
-        stop = new JButton("Stop");
+        ImageIcon stopIcon = new ImageIcon("Gizmoball/src/icons/stop.png");
+        ImageIcon stopText = new ImageIcon("Gizmoball/src/icons/stopText.png");
+        stop = new JButton(stopIcon);
+        stop.setActionCommand("Stop");
+        stop.setOpaque(false);
+        stop.setContentAreaFilled(false);
+        stop.setBorderPainted(false);
+        stop.setRolloverEnabled(true);
+        stop.setRolloverIcon(stopText);
         buttons.add(stop);
         stop.setFocusable(false);
 
