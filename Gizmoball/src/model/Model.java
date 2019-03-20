@@ -365,6 +365,8 @@ public class Model extends Observable {
 			removeGizmo(gizmo);
 		}
 		removeAbsorber(absorberInBox);
+		setChanged();
+		notifyObservers();
 	}
 
 
