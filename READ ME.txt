@@ -1,0 +1,1 @@
+To run this program open "Gizmoball" folder and run the main class from the src folder.
